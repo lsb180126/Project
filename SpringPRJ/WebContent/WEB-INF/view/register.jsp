@@ -40,7 +40,16 @@
       				type:"POST",
       				dataType:"json",
       				success:function(data) {
-      					console.log(data);
+      					
+      					if(data==0) {
+      						alert("사용가능한 아이디입니다.");
+      					}
+      					else {
+      						alert("사용 불가능한 아이디입니다.");
+      					}
+      					
+      					
+      					
       				},
       				error:function(error) {
       					console.log(error);
