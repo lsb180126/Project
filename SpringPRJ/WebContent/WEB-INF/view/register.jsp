@@ -30,6 +30,8 @@
       <script>
       	 $(function() {
       		
+      		var check = false;
+      		 
       		$("#check").click(function(){
       			var id  = $("#idcheck").val();
       			alert (id);
@@ -43,9 +45,13 @@
       					
       					if(data==0) {
       						alert("사용 가능한 아이디입니다.");
+      						
+      						check = true;
       					}
       					else {
       						alert("중복되는 아이디입니다.");
+      						
+      						
       					}
       					
       					
@@ -62,9 +68,57 @@
       		
       	})	
       
-      
-      
-      
+      $(function() {
+      		
+      		var check=false;
+      		 
+      		$("#ok").click(function(event){
+      			var id  = $("#idcheck").val();
+      			var password  = $("#password").val();
+      			var passwordcheck  = $("#passwordcheck").val();
+      			var name  = $("#name").val();
+      			var email  = $("#email").val();
+      			var gender = $('input[name="gender"]:checked').val(); 
+      				
+      			if(id == "") {
+      				alert("아이디를 입력해주세요");
+      				return;
+      			}else if(id.length <5) {
+      				alert("id를 5자리이상 입력해주세요");
+      				return;
+      			}
+      			
+      			if(password == "") {
+      				alert("비밀번호를 입력해주세요");
+      				return;
+      			}
+      			
+      			if(passwordcheck == "") {
+      				alert("비밀번호를 확인해주세요");
+      				return;
+      			}else if(password) {
+      				alert("비밀번호가 맞지 않습니다.");
+      			}
+      			
+      			if(name == "") {
+      				alert("이름을 입력해주세요");
+      				return;
+      			}
+      			
+      			if(email == "") {
+      				alert("이메일을 입력해주세요");
+      				return;
+      			}
+      			
+      			if(gender == null) {
+      				alert("성별을 선택해주세요.");
+      				return;
+      			}
+      				
+      			$("#form").submit();	
+      		})
+      		
+      })
       </script>
       
       
@@ -103,7 +157,7 @@
 							</div>
 						</div>
 						<div class="r-form-1-bottom">
-							<form role="form" action="/rc.do" method="POST">
+							<form  action="/rc.do" method="POST" id="form">
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-first-name">id</label>
 									<input type="text" name="id" placeholder="아이디" class="r-form-1-first-name form-control" id="idcheck" >
@@ -113,26 +167,26 @@
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-last-name">password</label>
-									<input type="text" name="password" placeholder="비밀번호" class="r-form-1-last-name form-control" id="r-form-1-last-name">
+									<input type="text" name="password" placeholder="비밀번호" class="r-form-1-last-name form-control" id="password">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-last-name">passwordcheck</label>
-									<input type="text" name="passwordcheck" placeholder="비밀번호확인" class="r-form-1-last-name form-control" id="r-form-1-last-name">
+									<input type="text" name="passwordcheck" placeholder="비밀번호확인" class="r-form-1-last-name form-control" id="passwordcheck">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-email">name</label>
-									<input type="text" name="name" placeholder="이름" class="r-form-1-email form-control" id="r-form-1-email">
+									<input type="text" name="name" placeholder="이름" class="r-form-1-email form-control" id="name">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-email">email</label>
-									<input type="text" name="email" placeholder="이메일" class="r-form-1-email form-control" id="r-form-1-email">
+									<input type="text" name="email" placeholder="이메일" class="r-form-1-email form-control" id="email">
 								</div>
     							<div class="">
 									<input type="radio" name="gender" value="man">남자
 									<input type="radio" name="gender" value="woman">여자
 								</div>
 								<div class="form-group">
-									<button type="submit" class="btn">등록</button>
+									<button type="button" class="btn" id="ok">등록</button>
 									<a href="index.do">HOME</a>
 								</div>
 								
