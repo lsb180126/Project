@@ -12,7 +12,7 @@
 	    <meta name="description" content="">
 	    <meta name="author" content="">
 	
-	    <title>talk</title>
+	    <title>keyword</title>
 	
 	    <!-- Bootstrap core CSS -->
 	    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +102,7 @@
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="#">유용한 정보</a>
+              <a class="nav-link" href="useful.do">유용한 정보</a>
             </li>
             
              <li class="nav-item active">
@@ -137,16 +137,27 @@
         
 			<table class="table">
 				<tr>
-					<td></td>
-					<td>키워드</td>
-					<td>
+					
+						<td>키워드</td>
+						<td></td>
+						<td></td>
 						
-					</td>
 					
 				</tr>
 				
-			
+				<tr>
 					
+						<td><input type="button" value="간식"></td>
+						<td>input type="button" value="법"></td>
+						<td>input type="button" value="분양"></td>
+				</tr>
+				<tr>
+						<td><input type="button" value="미용""></td>
+						<td>input type="button" value="사업/취업"></td>
+						<td>input type="button" value="생활용품"></td>
+				
+				
+				</tr>
 		
 			</table>
 			<hr/>
