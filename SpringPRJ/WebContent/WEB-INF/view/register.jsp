@@ -42,10 +42,10 @@
       				success:function(data) {
       					
       					if(data==0) {
-      						alert("사용가능한 아이디입니다.");
+      						alert("사용 가능한 아이디입니다.");
       					}
       					else {
-      						alert("사용 불가능한 아이디입니다.");
+      						alert("중복되는 아이디입니다.");
       					}
       					
       					
