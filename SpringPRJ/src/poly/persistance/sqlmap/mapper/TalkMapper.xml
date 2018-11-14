@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.TalkMapper">
+
+	<select id="getMemberList" resultType="TalkDTO">
+		 SELECT TALK_SEQ_NO as talkSeqNo,
+				TITLE as title,
+				TALK_CONTENTS as talkContents,
+				FILE_NAME as fileName,
+				FILE_PATH as filePath,
+				USER_NAME as userName,
+				REG_USER_SEQ_NO as regUserSeqNo,
+				REG_DT as regDt,
+				CHG_USR_SEQ_NO as chgUsrSeqNo,
+				CHG_DT as chgDt
+		 FROM TALK_INFO
+	</select>
+	
+	<insert id="insertMember" parameterType="TalkDTO">
+		INSERT INTO TALK_INFO (
+			TALK_SEQ_NO,
+			TITLE,
+			TALK_CONTENTS,
+			FILE_NAME,
+			FILE_PATH,
+			USER_NAME,
+			REG_USER_SEQ_NO,
+			REG_DT,
+			CHG_USR_SEQ_NO,
+			CHG_DT
+		
+		)VALUES (
+			TALK_INFO_SEQ.NEXTVAL,
+			#{title},
+			#{talkContents},
+			#{fileName},
+			#{filePath},
+			#{userName},
+			#{regUserSeqNo},
+			SYSDATE,
+			#{chgUsrSeqNo},
+			SYSDATE,
+			
+			
+		)
+	</insert>
+			
+</mapper>

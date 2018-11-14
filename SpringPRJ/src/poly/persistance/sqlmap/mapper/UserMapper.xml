@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.UserMapper">
+
+	<select id="getMemberList" resultType="UserDTO">
+		 SELECT USER_NO as userNo,
+				USER_ID as userId,
+				USER_NAME as userName,
+				PASSWORD as password,
+				EMAIL as email,
+				GENDER as gender,
+				USER_AUTH as userAuth,
+				REG_DATE as regDate,
+				CHG_DATE as chgDate
+		 FROM USER_INFO
+	</select>
+	
+	<insert id="insertMember" parameterType="UserDTO">
+		INSERT INTO USER_INFO (
+			USER_NO, 
+			USER_ID, 
+			USER_NAME, 
+			PASSWORD, 
+			EMAIL,
+			GENDER,
+		
+			REG_DATE,
+			CHG_DATE
+		)VALUES (
+			USER_INFO_SEQ.NEXTVAL,
+			#{userId},
+			#{userName},
+			#{password},
+			#{email},
+			#{gender},
+
+			SYSDATE,
+			SYSDATE
+		)
+	</insert>
+	
+	<select id="checkDuplication" resultType="int" parameterType="string">
+	
+			SELECT COUNT(*)
+			FROM USER_INFO
+			WHERE USER_ID = #{id}
+	
+	
+	</select>
+	
+			
+</mapper>
