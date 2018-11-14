@@ -96,9 +96,10 @@
       			if(passwordcheck == "") {
       				alert("비밀번호를 확인해주세요");
       				return;
-      			}else if(password) {
+      			} else if(passwordcheck != password) {
       				alert("비밀번호가 맞지 않습니다.");
-      			}
+      				return;
+      			} 
       			
       			if(name == "") {
       				alert("이름을 입력해주세요");
