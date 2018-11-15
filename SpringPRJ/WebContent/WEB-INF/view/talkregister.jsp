@@ -1,5 +1,10 @@
+<%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%
+	String id = CmmUtil.nvl((String)session.getAttribute("id"));
+
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -33,20 +38,14 @@
 	<!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
-        <a class="navbar-brand" href="#">pet clinic</a>
+        <a class="navbar-brand" href="index.do">pet clinic</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
           	
-          	<li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a>
-              <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="#">회원정보</a>
-	              <a class="dropdown-item" href="#">글 작성 목록</a>
-              </div>
-            </li>
+          	
             
             <li class="nav-item">
               <a class="nav-link" href="#">병원 찾기</a>
@@ -68,18 +67,28 @@
               <a class="nav-link" href="#">유용한 정보</a>
             </li>
             
-             <li class="nav-item active">
-              <a class="nav-link" href="index.do">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            
+            <%if("".equals(id) || id == null) { %>
             <li class="nav-item active">
               <a class="nav-link" href="login.do">Login
-                <span class="sr-only">(current)</span>
+             	 <span class="sr-only">(current)</span>
               </a>
             </li>
-            
+            <%} else { %>
+             <li class="nav-item active">
+              <a class="nav-link" href="logout.do"><%=id + "님 환영합니다." %> &nbsp; Logout
+             	 <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지
+              	 <span class="sr-only">(current)</span>
+           	  </a>
+              <div class="dropdown-menu dropdown-menu-right">
+	              <a class="dropdown-item" href="#">회원정보</a>
+	              <a class="dropdown-item" href="#">글 작성 목록</a>
+              </div>
+            </li>
+             <%  }  %>
             <li class="nav-item active">
               <a class="nav-link" href="register.do">Register
                 <span class="sr-only">(current)</span>

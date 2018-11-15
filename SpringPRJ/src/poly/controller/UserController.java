@@ -88,10 +88,12 @@ public class UserController {
 		log.info(count);
 		
 		return count;
+		
 	}
 	
+	
 	@RequestMapping(value="loginProc", method=RequestMethod.POST)
-	public String loginProc(HttpServletRequest request, HttpServletResponse response, 
+	public String loginProc(HttpServletRequest request, HttpSession session,
 			ModelMap model) throws Exception {
 		
 		log.info("welcome loginProc");
@@ -105,21 +107,21 @@ public class UserController {
 		log.info("password : " + password);
 		
 		
-		UserDTO uDTO2 = new UserDTO();
+		UserDTO uDTO = new UserDTO();
 		
 
-		uDTO2.setUserId(id);
-		uDTO2.setPassword(password);
+		uDTO.setUserId(id);
+		uDTO.setPassword(password);
 		
 		
-		uDTO2 = userService.getLoginInfo(uDTO2);
+		uDTO=userService.getLoginInfo(uDTO);
 		
-		if(uDTO2 == null) {
+		if(uDTO == null) {
 			
 			model.addAttribute("msg", "로그인이 실패하였습니다.");
 			
 		} else {
-			
+			session.setAttribute("id", uDTO.getUserId());
 			model.addAttribute("msg", "로그인 되었습니다.");
 		}
 		
@@ -129,9 +131,25 @@ public class UserController {
 		
 		}
 		
+	@RequestMapping(value="/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome logout");
+		
+		session.invalidate();
+		
+		model.addAttribute("msg", "로그아웃 되었습니다.");
+		model.addAttribute("url", "/index.do");
+		
+		
+		
+		
+		return "/alert";
+		
 	}
 	
-	
+}	
 	
 	
 	
