@@ -38,6 +38,12 @@ public class UserService implements IUserService{
 		return userMapper.checkDuplication(id);
 	}
 
+	@Override
+	public UserDTO getLoginInfo(UserDTO uDTO) throws Exception {
+		
+		return userMapper.getLoginInfo(uDTO);
+	}
+
 	
 	
 	

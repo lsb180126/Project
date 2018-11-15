@@ -19,15 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.ComDTO;
-import poly.dto.MemDTO;
-import poly.dto.TalkDTO;
-import poly.dto.UserDTO;
+
+
 import poly.service.IComService;
-import poly.service.IUserService;
-import poly.service.IMemService;
-import poly.service.ITalkService;
-import poly.service.impl.UserService;
-import poly.service.impl.MemberService;
+
 import poly.util.CmmUtil;
 
 
@@ -38,14 +33,6 @@ public class ComController {
 	@Resource(name = "ComService")
 	private IComService comService;
 	
-	@Resource(name = "UserService")
-	private IUserService userService;
-	
-	@Resource(name = "MemberService")
-	private IMemService memberService;
-	
-	@Resource(name = "TalkService")
-	private ITalkService talkService;
 	
 	@RequestMapping(value="index")
 	public String Index(HttpServletRequest request, HttpServletResponse response, 
@@ -117,39 +104,7 @@ public class ComController {
 		return "/redirect";
 	}
 	
-	@RequestMapping(value="rc")
-	public String RC(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome rc");
-		
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-		String name = request.getParameter("name");
-		String email= request.getParameter("email");
-		String gender= request.getParameter("gender");
-		
-		log.info("id : " + id);
-		log.info("password : " + password);
-		log.info("name : " + name);
-		log.info("email : " + email);
-		log.info("gender : " + gender);
-		
-		UserDTO uDTO = new UserDTO();
-		uDTO.setUserId(id);
-		uDTO.setPassword(password);
-		uDTO.setUserName(name);
-		uDTO.setEmail(email);
-		uDTO.setGender(gender);
-		
-		userService.insertMember(uDTO);
-		
-		model.addAttribute("msg", "회원가입이 완료되었습니다.");
-		model.addAttribute("url", "/register.do");
-		
-
-		return "/redirect";
-	}
+	
 	
 	@RequestMapping(value="register", method=RequestMethod.GET)
 	public String Register(HttpServletRequest request, HttpServletResponse response, 
@@ -162,21 +117,7 @@ public class ComController {
 		return "/register";
 	}
 	
-	@RequestMapping(value="/ajaxTest", method=RequestMethod.POST)
-	public @ResponseBody int ajaxTest(
-			@RequestParam(value="id")String id
-			) throws Exception {
-		
-		log.info("welcome ajaxTest");
-		log.info("id :" + id);
-		
-		
-		int count = userService.checkDuplication(id);
-		
-		log.info(count);
-		
-		return count;
-	}
+	
 	
 	
 	@RequestMapping(value="review", method=RequestMethod.GET)
@@ -252,77 +193,6 @@ public class ComController {
 		
 		 
 		return "/talkregister";
-	}
-	
-	
-	
-	@RequestMapping(value="reviewlist")
-	public String Reviewlist(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome reviewlist");
-		
-		
-		
-		String name = request.getParameter("name");
-		String title = request.getParameter("title");
-		String star = request.getParameter("star");
-		String content= request.getParameter("content");
-		
-		
-		log.info("name : " + name);
-		log.info("title : " + title);
-		log.info("star : " + star);
-		log.info("content : " + content);
-		
-		MemDTO mDTO = new MemDTO();
-		
-		mDTO.setReviewName(name);
-		mDTO.setTitle(title);
-		mDTO.setReviewStar(star);
-		mDTO.setReviewContents(content);
-		
-		
-		int result = memberService.insertMember(mDTO);
-		
-		model.addAttribute("msg", "등록이 완료되었습니다.");
-		model.addAttribute("url", "/review.do");
-		 
-		return "/redirect2";
-	}
-	
-	@RequestMapping(value="talklist")
-	public String Talklist(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome talklist");
-		
-		
-		
-		
-		String title = request.getParameter("title");
-		
-		String content= request.getParameter("content");
-		
-		
-		
-		log.info("title : " + title);
-		
-		log.info("content : " + content);
-		
-		TalkDTO tDTO = new TalkDTO();
-		
-		tDTO.setTitle(title);
-		tDTO.setTalkContents(content);
-		
-		
-		int result = talkService.insertMember(tDTO);
-		
-		
-		model.addAttribute("msg", "등록이 완료되었습니다.");
-		model.addAttribute("url", "/talk.do");
-		 
-		return "/redirect2";
 	}
 	
 		

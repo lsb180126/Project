@@ -37,7 +37,9 @@
 	
 	
 		<script>
+		
 			
+		
 		
 		
 		</script>
@@ -80,7 +82,7 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="" method="GET" class="login-form" id="frm">
+			                    <form action="/loginProc.do" method="POST" id="f1">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">id</label>
 			                        	<input type="text" name="id" placeholder="아이디" class="form-username form-control" id="id">
@@ -89,7 +91,7 @@
 			                        	<label class="sr-only" for="form-password">password</label>
 			                        	<input type="password" name="password" placeholder="비밀번호" class="form-password form-control" id="password">
 			                        </div>
-			                        <a id="login_btn"><button type="button" class="btn">로그인</button></a> &nbsp;
+			                        <button type="submit" class="btn" id="hi">로그인</button> &nbsp;
 			                        <a href="idfind.do"><button type="button" class="btn">ID찾기</button></a> &nbsp;
 			                        <a href="pwfind.do"><button type="button" class="btn">PASSWORD찾기</button></a>
 			                        <a href="index.do">HOME</a>

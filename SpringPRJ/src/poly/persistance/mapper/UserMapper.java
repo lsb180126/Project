@@ -14,5 +14,7 @@ public interface UserMapper  {
 
 	int checkDuplication(String id) throws Exception;
 
+	UserDTO getLoginInfo(UserDTO uDTO) throws Exception;
+
 	
 }

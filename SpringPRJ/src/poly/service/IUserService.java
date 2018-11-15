@@ -12,8 +12,8 @@ public interface IUserService {
 	void insertMember(UserDTO uDTO) throws Exception;
 
 	int checkDuplication(String id) throws Exception;
-	
-	
+
+	UserDTO getLoginInfo(UserDTO uDTO) throws Exception;
+
 
 }
-

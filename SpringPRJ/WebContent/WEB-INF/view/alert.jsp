@@ -7,9 +7,7 @@
 	String msg = (String)request.getAttribute("msg");//경고창 문구
 	String url = (String)request.getAttribute("url");//경고창을 띄운뒤 이동할 Controller
 %>
-<script>
-	var msg = '<%=msg%>';
-	var url = '<%=url%>';
-	alert(msg);
-	location.href=url;
+<script type="text/javascript">
+	alert("<%=msg%>");
+	location.href="<%=url%>";
 </script>
