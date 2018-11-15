@@ -1,15 +1,18 @@
+<%@page import="poly.dto.UserDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-
+%>
+<%
+	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
-		<title>review register</title>
+		<title>mypage</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
@@ -22,16 +25,19 @@
 	    <link href="css/starRev.css" rel="stylesheet">
 	    
 	    <style>
-	    .my-box { border:1px solid; padding: 5px; position: fixed; }
+	    .my-box { border:1px solid; padding: 5px;  }
 	    
+		
 	    
 	    </style>
 	    
 	    <script>
+	    
 		    
 	    
 	    
 	    </script>
+	    
 	</head>
 	<body>
 	
@@ -64,10 +70,10 @@
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="useful.do">유용한 정보</a>
+              <a class="nav-link" href="#">유용한 정보</a>
             </li>
             
-            <%if("".equals(id) || id == null) { %>
+             <%if("".equals(id) || id == null) { %>
             <li class="nav-item active">
               <a class="nav-link" href="login.do">Login
              	 <span class="sr-only">(current)</span>
@@ -105,54 +111,42 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        <form action="/talklist.do" method="POST">
+        <form action="" method="POST">
         	
 			<table class="table">
+				
 				<tr>
-					<th>자유 토크 등록</th>
+					
+					<th><%=id + "님의 회원정보" %></th>
 					<td>
-						
 					</td>
-					<td></td>
-					<td>
-						
-					</td>
-					<td>
-						<input type="submit" value="등록">
-					</td>
-					<td>
-						<a href="talk.do"><input type="button" value="목록"></a>
-					</td>
+					
 				</tr>
+					
+				<tr>
+					
+					<td>아이디</td>
+					<td><%=id %></td>
+					
+					
+				</tr>
+				<tr>
 				
-				
-					<tr>
-						<td colspan="6">
-							<div class="form-group">
-				           		<label class="sr-only" for="exampletext"></label>
-				           		<input type="text" placeholder="제목을 입력해 주세요." class="form-control" id="exampletext" name="title">
-				        	</div>
-				        </td>
-				     </tr>
-				     <tr>
-				     	<td colspan="6">
-				     		<textarea class="form-control"  rows="3" placeholder="내용을 입력해 주세요." name="content"></textarea>
-				     	</td>
-			     	</tr>
-			     	<tr>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td>
-			     			<form enctype="multipart/form-data" method="post" action="">
-			     				<input type="file" name="file_input" id="f1" >
-			   			
-			     			</form>
-			     		</td>
-			     		
-		     		</tr>
+					<td>이름</td>
+					<td><%= uDTO.getUserName()%></td>
+					
+				</tr>
+				<tr>
+				     <td>성별</td>
+					 <td><%= uDTO.getGender() %></td>	
+				     	
+			    </tr>
+			    <tr>
+			     	<td>이메일</td>
+					<td><%= uDTO.getEmail() %></td>		
+		     	</tr>
+
+
 				</table>
 				
 				</form>

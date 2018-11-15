@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import poly.dto.ComDTO;
 import poly.dto.MemDTO;
 import poly.dto.UserDTO;
 
@@ -148,6 +149,27 @@ public class UserController {
 		return "/alert";
 		
 	}
+	
+	@RequestMapping(value="mylist", method=RequestMethod.GET)
+	public String mylist(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome mylist");
+		
+		String id = (String)session.getAttribute("id");
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setUserId(id);
+		
+		uDTO=userService.getmyList(uDTO);
+		
+		model.addAttribute("uDTO",uDTO);
+		
+		return "/mylist";
+		
+	}
+	
 	
 }	
 	

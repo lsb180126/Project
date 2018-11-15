@@ -46,13 +46,11 @@ public class TalkController {
 		
 		
 		String title = request.getParameter("title");
-		
 		String content= request.getParameter("content");
 		
 		
 		
 		log.info("title : " + title);
-		
 		log.info("content : " + content);
 		
 		TalkDTO tDTO = new TalkDTO();

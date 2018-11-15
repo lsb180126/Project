@@ -121,7 +121,7 @@
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="#">회원정보</a>
+	              <a class="dropdown-item" href="mylist">회원정보</a>
 	              <a class="dropdown-item" href="#">글 작성 목록</a>
               </div>
             </li>
@@ -157,13 +157,13 @@
 				<tr>
 					
 						<td><input type="button" value="간식"></td>
-						<td>input type="button" value="법"></td>
-						<td>input type="button" value="분양"></td>
+						<td><input type="button" value="법"></td>
+						<td><input type="button" value="분양"></td>
 				</tr>
 				<tr>
-						<td><input type="button" value="미용""></td>
-						<td>input type="button" value="사업/취업"></td>
-						<td>input type="button" value="생활용품"></td>
+						<td><input type="button" value="미용"></td>
+						<td><input type="button" value="사업/취업"></td>
+						<td><input type="button" value="생활용품"></td>
 				
 				
 				</tr>

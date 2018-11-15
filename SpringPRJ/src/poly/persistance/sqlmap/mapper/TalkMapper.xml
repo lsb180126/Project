@@ -7,12 +7,8 @@
 		 SELECT TALK_SEQ_NO as talkSeqNo,
 				TITLE as title,
 				TALK_CONTENTS as talkContents,
-				FILE_NAME as fileName,
-				FILE_PATH as filePath,
 				USER_NAME as userName,
-				REG_USER_SEQ_NO as regUserSeqNo,
 				REG_DT as regDt,
-				CHG_USR_SEQ_NO as chgUsrSeqNo,
 				CHG_DT as chgDt
 		 FROM TALK_INFO
 	</select>
@@ -22,27 +18,16 @@
 			TALK_SEQ_NO,
 			TITLE,
 			TALK_CONTENTS,
-			FILE_NAME,
-			FILE_PATH,
-			USER_NAME,
-			REG_USER_SEQ_NO,
+			
 			REG_DT,
-			CHG_USR_SEQ_NO,
 			CHG_DT
-		
 		)VALUES (
 			TALK_INFO_SEQ.NEXTVAL,
 			#{title},
 			#{talkContents},
-			#{fileName},
-			#{filePath},
-			#{userName},
-			#{regUserSeqNo},
-			SYSDATE,
-			#{chgUsrSeqNo},
-			SYSDATE,
 			
-			
+			SYSDATE,
+			SYSDATE
 		)
 	</insert>
 			

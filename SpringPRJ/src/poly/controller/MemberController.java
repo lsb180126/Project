@@ -48,20 +48,17 @@ public class MemberController {
 		
 		String name = request.getParameter("name");
 		String title = request.getParameter("title");
-		String star = request.getParameter("star");
 		String content= request.getParameter("content");
 		
 		
 		log.info("name : " + name);
 		log.info("title : " + title);
-		log.info("star : " + star);
 		log.info("content : " + content);
 		
 		MemDTO mDTO = new MemDTO();
 		
 		mDTO.setReviewName(name);
 		mDTO.setTitle(title);
-		mDTO.setReviewStar(star);
 		mDTO.setReviewContents(content);
 		
 		

@@ -7,12 +7,10 @@
 		 SELECT REVIEW_SEQ_NO as reviewSeqNo,
 				TITLE as title,
 				REVIEW_CONTENTS as reviewContents,
-				FILE_NAME as fileName,
 				USER_NAME as userName,
 				REG_DT as regDt,
 				CHG_DT as chgDt,
-				REVIEW_NAME as reviewName,
-				REVIEW_STAR as reviewStar
+				REVIEW_NAME as reviewName
 		 FROM REVIEW_INFO
 	</select>
 	
@@ -21,22 +19,18 @@
 			REVIEW_SEQ_NO,
 			TITLE,
 			REVIEW_CONTENTS,
-			FILE_NAME,
-			USER_NAME,
+			
 			REG_DT,
 			CHG_DT,
-			REVIEW_NAME,
-			REVIEW_STAR
+			REVIEW_NAME
 		) VALUES (
 			MEM_INFO_SEQ.NEXTVAL,
 			#{title},
 			#{reviewContents},
 			
-			
 			SYSDATE,
 			SYSDATE,
-			#{reviewName},
-			#{reviewStar}
+			#{reviewName}
 		)
 	</insert>
 			

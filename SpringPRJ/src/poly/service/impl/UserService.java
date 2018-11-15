@@ -44,6 +44,12 @@ public class UserService implements IUserService{
 		return userMapper.getLoginInfo(uDTO);
 	}
 
+	@Override
+	public UserDTO getmyList(UserDTO uDTO) throws Exception {
+		
+		return userMapper.getmyList(uDTO);
+	}
+
 	
 	
 	
