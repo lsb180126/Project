@@ -64,7 +64,62 @@
 				  display: table;
 				}
 	    
-	    
+	    		table.type01 {
+				    border-collapse: collapse;
+				    text-align: left;
+				    line-height: 1.5;
+				    margin : 20px 10px;
+				    border-top: none;
+ 				 	margin : 20px 10px;
+				}
+				table.type01 th {
+				    width: 150px;
+				    padding: 10px;
+				    font-weight: bold;
+				    vertical-align: top;
+				    border-bottom: 1px solid #ccc;
+				}
+				table.type01 td {
+				    width: 350px;
+				    padding: 10px;
+				    vertical-align: top;
+				    border-bottom: 1px solid #ccc;
+				}
+				
+				
+				
+				
+				a.animated-button.thar-two {
+					color: #fff;
+					cursor: pointer;
+					display: block;
+					position: relative;
+					border: 2px solid #F7CA18;
+					transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+				}
+				a.animated-button.thar-two:hover {
+					color: #000 !important;
+					background-color: transparent;
+					text-shadow: ntwo;
+				}
+				a.animated-button.thar-two:hover:before {
+					top: 0%;
+					bottom: auto;
+					height: 100%;
+				}
+				a.animated-button.thar-two:before {
+					display: block;
+					position: absolute;
+					left: 0px;
+					bottom: 0px;
+					height: 0px;
+					width: 100%;
+					z-index: -1;
+					content: '';
+					color: #000 !important;
+					background: #F7CA18;
+					transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+				}
 	    </style>
 	    
 	   
@@ -144,32 +199,41 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-			<table class="table">
-				<tr>
-					
-						<td>키워드</td>
-						<td></td>
-						<td></td>
-						
-					
-				</tr>
-				
-				<tr>
-					
-						<td><input type="button" value="간식"></td>
-						<td><input type="button" value="법"></td>
-						<td><input type="button" value="분양"></td>
-				</tr>
-				<tr>
-						<td><input type="button" value="미용"></td>
-						<td><input type="button" value="사업/취업"></td>
-						<td><input type="button" value="생활용품"></td>
-				
-				
-				</tr>
-		
+			<table class="type01" >
+			
+			    <tr>
+			        <th scope="row">키워드</th>
+			        <td></td>
+			        <td></td>
+			        <td></td>
+			    </tr>
+			   
+    		
+			    <tr>
+			        <th scope="row" height="300">
+			        	<div class="row">
+				        	<div class="col-md-3 col-sm-3 col-xs-6"> 
+				        		<a href="#" class="btn btn-sm animated-button thar-two">Login</a> 
+			        		</div>
+			        	</div>
+			        </th>
+			        <td></td>
+			        <td></td>
+			        <td></td>
+			    </tr>
+			    
+			   
+			    <tr>
+			        <th scope="row" height="300"></th>
+			        <td></td>
+			        <td></td>
+			        <td></td>
+			    </tr>
+			  
 			</table>
-			<hr/>
+			
+			
+			
 			
 	 	</div>
       </div>
