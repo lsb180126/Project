@@ -9,6 +9,9 @@
 		<typeAlias type="poly.dto.UserDTO" alias="UserDTO"/>
 		<typeAlias type="poly.dto.MemDTO" alias="MemDTO"/>
 		<typeAlias type="poly.dto.TalkDTO" alias="TalkDTO"/>
-		
+		<typeAlias type="poly.dto.EatDTO" alias="EatDTO"/>
+		<typeAlias type="poly.dto.SellDTO" alias="SellDTO"/>
+	    <typeAlias type="poly.dto.BeautyDTO" alias="BeautyDTO"/>
+	    <typeAlias type="poly.dto.HomegoodsDTO" alias="HomegoodsDTO"/>
     </typeAliases>
 </configuration>

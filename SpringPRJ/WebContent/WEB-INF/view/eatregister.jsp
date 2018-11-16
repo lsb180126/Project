@@ -1,18 +1,15 @@
-<%@page import="poly.dto.UserDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-%>
-<%
-	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
+
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
-		<title>mypage revise</title>
+		<title>eat register</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
@@ -25,19 +22,16 @@
 	    <link href="css/starRev.css" rel="stylesheet">
 	    
 	    <style>
-	    .my-box { border:1px solid; padding: 5px;  }
+	    .my-box { border:1px solid; padding: 5px; position: fixed; }
 	    
-		
 	    
 	    </style>
 	    
 	    <script>
-	    
 		    
 	    
 	    
 	    </script>
-	    
 	</head>
 	<body>
 	
@@ -54,26 +48,26 @@
           	
             
             <li class="nav-item">
-              <a class="nav-link" href="#">Î≥ëÏõê Ï∞æÍ∏∞</a>
+              <a class="nav-link" href="#">∫¥ø¯ √£±‚</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">ÏïΩÍµ≠Ï∞æÍ∏∞</a>
+              <a class="nav-link" href="#">æ‡±π√£±‚</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="review.do">Î¶¨Î∑∞</a>
+              <a class="nav-link" href="review.do">∏Æ∫‰</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">ÏûêÏú† ÌÜ†ÌÅ¨</a>
+              <a class="nav-link" href="talk.do">¿⁄¿Ø ≈‰≈©</a>
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="#">Ïú†Ïö©Ìïú Ï†ïÎ≥¥</a>
+              <a class="nav-link" href="useful.do">¿ØøÎ«— ¡§∫∏</a>
             </li>
             
-             <%if("".equals(id) || id == null) { %>
+            <%if("".equals(id) || id == null) { %>
             <li class="nav-item active">
               <a class="nav-link" href="login.do">Login
              	 <span class="sr-only">(current)</span>
@@ -81,17 +75,17 @@
             </li>
             <%} else { %>
              <li class="nav-item active">
-              <a class="nav-link" href="logout.do"><%=id + "Îãò ÌôòÏòÅÌï©ÎãàÎã§." %> &nbsp; Logout
+              <a class="nav-link" href="logout.do"><%=id + "¥‘ »Øøµ«’¥œ¥Ÿ." %> &nbsp; Logout
              	 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ÎßàÏù¥ÌéòÏù¥ÏßÄ
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">∏∂¿Ã∆‰¿Ã¡ˆ
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist.do">ÌöåÏõêÏ†ïÎ≥¥</a>
-	              <a class="dropdown-item" href="#">Í∏Ä ÏûëÏÑ± Î™©Î°ù</a>
+	              <a class="dropdown-item" href="mylist.do">»∏ø¯¡§∫∏</a>
+	              <a class="dropdown-item" href="#">±€ ¿€º∫ ∏Ò∑œ</a>
               </div>
             </li>
              <%  }  %>
@@ -111,44 +105,54 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        <form action="">
+        <form action="/eatlist.do" method="POST">
         	
 			<table class="table">
-				
 				<tr>
-					
-					<th><%=id + "ÎãòÏùò ÌöåÏõêÏ†ïÎ≥¥" %></th>
+					<th>∞£Ωƒ ¡§∫∏ µÓ∑œ</th>
 					<td>
+						
 					</td>
-					
+					<td></td>
+					<td>
+						
+					</td>
+					<td>
+						<input type="submit" value="µÓ∑œ">
+					</td>
+					<td>
+						<a href="eat.do"><input type="button" value="∏Ò∑œ"></a>
+					</td>
 				</tr>
-					
-				<tr>
-					
-					<td>ÏïÑÏù¥Îîî</td>
-					<td><%=id %></td>
-					
-					
-				</tr>
-				<tr>
 				
-					<td>Ïù¥Î¶Ñ</td>
-					<td><%=uDTO.getUserName()%></td>
-					
-				</tr>
-				<tr>
-				     <td>ÏÑ±Î≥Ñ</td>
-					 <td><%=uDTO.getGender()%></td>	
-				     	
-			    </tr>
-			    <tr>
-			     	<td>Ïù¥Î©îÏùº</td>
-					<td><%=uDTO.getEmail()%></td>		
-		     	</tr>
-		     	<tr>
-					<td><a href="/mylistrevise.do"><input type="button" value="ÏàòÏ†ï"></td></a>
-					<td><input type="button" value="ÌÉàÌá¥"></td>
-				</tr>
+				
+					<tr>
+						<td colspan="6">
+							<div class="form-group">
+				           		<label class="sr-only" for="exampletext"></label>
+				           		<input type="text" placeholder="¡¶∏Ò¿ª ¿‘∑¬«ÿ ¡÷ººø‰." class="form-control" id="exampletext" name="title">
+				        	</div>
+				        </td>
+				     </tr>
+				     <tr>
+				     	<td colspan="6">
+				     		<textarea class="form-control"  rows="20" cols="100" placeholder="≥ªøÎ¿ª ¿‘∑¬«ÿ ¡÷ººø‰." name="content"></textarea>
+				     	</td>
+			     	</tr>
+			     	<tr>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td>
+			     			<form enctype="multipart/form-data" method="post" action="">
+			     				<input type="file" name="file_input" id="f1" >
+			   			
+			     			</form>
+			     		</td>
+			     		
+		     		</tr>
 				</table>
 				
 				</form>

@@ -64,7 +64,7 @@ public class UserController {
 		uDTO.setEmail(email);
 		uDTO.setGender(gender);
 		
-		userService.insertMember(uDTO);
+		int result = userService.insertMember(uDTO);
 		
 		model.addAttribute("msg", "회원가입이 완료되었습니다.");
 		model.addAttribute("url", "/register.do");
@@ -167,6 +167,23 @@ public class UserController {
 		model.addAttribute("uDTO",uDTO);
 		
 		return "/mylist";
+		
+	}
+	
+	@RequestMapping(value="/mylistrevise")
+	public String mylistrevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws Exception {
+		
+		log.info("welcome mylistrevise");
+		
+		String id = (String)session.getAttribute("id");
+		
+		UserDTO uDTO =userService.getmylistrevise(id);
+		
+		model.addAttribute("uDTO",uDTO);
+		
+		
+		return "/mylistrevise";
 		
 	}
 	

@@ -9,7 +9,7 @@ public interface IUserService {
 
 	List<UserDTO> getMemberList() throws Exception;
 
-	void insertMember(UserDTO uDTO) throws Exception;
+	int insertMember(UserDTO uDTO) throws Exception;
 
 	int checkDuplication(String id) throws Exception;
 
@@ -17,5 +17,8 @@ public interface IUserService {
 
 	UserDTO getmyList(UserDTO uDTO) throws Exception;
 
+	UserDTO getmylistrevise(String id) throws Exception;
+
+	
 
 }

@@ -24,6 +24,8 @@
 	    
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	    
+	    
+	    
 	    <style>
 	    	
 	    	* {
@@ -35,8 +37,7 @@
 				  padding: 10px;
 				  font-size: 17px;
 				  border: 1px solid grey;
-				  float: left;
-				  width: 80%;
+				  
 				  background: #f1f1f1;
 				}
 				
@@ -77,25 +78,59 @@
 				    padding: 10px;
 				    font-weight: bold;
 				    vertical-align: top;
-				    border-bottom: 1px solid #ccc;
+				    border-bottom: none;
 				}
 				table.type01 td {
 				    width: 350px;
 				    padding: 10px;
 				    vertical-align: top;
-				    border-bottom: 1px solid #ccc;
+				    border-bottom: none;
 				}
 				
 				.wrap {
 				    position: absolute;
 				    top: 40%;
-				    left: 12%;
+				    left: 16%;
 				    margin-top: -86px;
 				    margin-left: -89px;
 				    text-align: center;
 				}
 				
-				a {
+				a.button1 {
+				    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    display: block;
+				    margin: 20px auto;
+				    max-width: 180px;
+				    text-decoration: none;
+				    border-radius: 4px;
+				    padding: 20px 30px;
+				}
+				
+				
+				a.button1 {
+				    color: rgba(30, 22, 54, 0.6);
+				    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+				}
+				
+				a.button1:hover {
+				    color: rgba(255, 255, 255, 0.85);
+				    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+				}
+				
+				.wrap2 {
+				    position: absolute;
+				    top: 40%;
+				    left: 50%;
+				    margin-top: -86px;
+				    margin-left: -89px;
+				    text-align: center;
+				}
+				
+				a.button2 {
 				    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
 				    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
 				    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
@@ -118,6 +153,74 @@
 				    color: rgba(255, 255, 255, 0.85);
 				    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
 				}
+				
+				.wrap3 {
+				    position: absolute;
+				    top: 80%;
+				    left: 16%;
+				    margin-top: -86px;
+				    margin-left: -89px;
+				    text-align: center;
+				}
+				
+				a.button3 {
+				    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    display: block;
+				    margin: 20px auto;
+				    max-width: 180px;
+				    text-decoration: none;
+				    border-radius: 4px;
+				    padding: 20px 30px;
+				}
+				
+				a.button3 {
+				    color: rgba(30, 22, 54, 0.6);
+				    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+				}
+				
+				a.button3:hover {
+				    color: rgba(255, 255, 255, 0.85);
+				    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+				}
+				
+				.wrap4 {
+				    position: absolute;
+				    top: 80%;
+				    left: 50%;
+				    margin-top: -86px;
+				    margin-left: -89px;
+				    text-align: center;
+				}
+				
+				a.button4 {
+				    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    display: block;
+				    margin: 20px auto;
+				    max-width: 180px;
+				    text-decoration: none;
+				    border-radius: 4px;
+				    padding: 20px 30px;
+				}
+				
+				a.button4 {
+				    color: rgba(30, 22, 54, 0.6);
+				    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+				}
+				
+				a.button4:hover {
+				    color: rgba(255, 255, 255, 0.85);
+				    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+				}
+
+				
 				
 	    </style>
 	    
@@ -207,29 +310,34 @@
 			        <td></td>
 			    </tr>
 			   
-    		
+    			
+    			
 			    <tr>
-			        <th scope="row">
+			    	
+			        <th scope="row" height="300">
 			        	<div class="wrap">
-			        		<a href="#" class="button2">간식</a>
+			        		<a href="eat.do" class="button1">&nbsp;&nbsp;&nbsp;간식&nbsp;&nbsp;&nbsp;</a>
 		        		</div>
 			        </th>
-			        <td></td>
-			        <td></td>
-			        <td></td>
+			        <th scope="row">
+			        	<div class="wrap2">
+			        		<a href="sell.do" class="button2">&nbsp;&nbsp;&nbsp;분양&nbsp;&nbsp;&nbsp;</a>
+		        		</div>
+			        </th>
+			        <th scope="row">
+			        	<div class="wrap3">
+			        		<a href="beauty.do" class="button3">&nbsp;&nbsp;&nbsp;미용&nbsp;&nbsp;&nbsp;</a>
+		        		</div>
+			        </th>
+			        <th scope="row">
+			        	<div class="wrap4">
+			        		<a href="homegoods.do" class="button4">생활용품</a>
+		        		</div>
+			        </th>
 			    </tr>
 			    
 			   
-			    <tr>
-			        <th scope="row" height="300">
-			        	<div class="wrap">
-			        		<a href="#" class="button2">간식</a>
-		        		</div>
-			        </th>
-			        <td></td>
-			        <td></td>
-			        <td></td>
-			    </tr>
+			    
 			  
 			</table>
 			

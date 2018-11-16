@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.BeautyMapper">
+
+	<select id="getMemberList" resultType="BeautyDTO">
+		 SELECT BEAUTY_SEQ_NO as beautySeqNo,
+				TITLE as title,
+				BEAUTY_CONTENTS as beautyContents,
+				USER_NAME as userName,
+				REG_DT as regDt,
+				CHG_DT as chgDt
+		 FROM BEAUTY_INFO
+	</select>
+	
+	<insert id="insertMember" parameterType="BeautyDTO">
+		INSERT INTO BEAUTY_INFO (
+			BEAUTY_SEQ_NO,
+			TITLE,
+			BEAUTY_CONTENTS,
+			
+			REG_DT,
+			CHG_DT
+		)VALUES (
+			BEAUTY_INFO_SEQ.NEXTVAL,
+			#{title},
+			#{beautyContents},
+			
+			SYSDATE,
+			SYSDATE
+		)
+	</insert>
+			
+</mapper>

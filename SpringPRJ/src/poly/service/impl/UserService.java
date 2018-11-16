@@ -25,15 +25,13 @@ public class UserService implements IUserService{
 	}
 
 	@Override
-	public void insertMember(UserDTO uDTO) throws Exception {
+	public int insertMember(UserDTO uDTO) throws Exception {
 		
-		userMapper.insertMember(uDTO);
+		return userMapper.insertMember(uDTO);
 	}
 
 	@Override
 	public int checkDuplication(String id) throws Exception {
-		
-		
 		
 		return userMapper.checkDuplication(id);
 	}
@@ -50,10 +48,12 @@ public class UserService implements IUserService{
 		return userMapper.getmyList(uDTO);
 	}
 
-	
-	
-	
-	
+	@Override
+	public UserDTO getmylistrevise(String id) throws Exception {
+		
+		return userMapper.getmylistrevise(id);
+	}
+
 	
 
 }

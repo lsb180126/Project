@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.HomegoodsMapper">
+
+	<select id="getMemberList" resultType="HomegoodsDTO">
+		 SELECT HOMEGOODS_SEQ_NO as homegoodsSeqNo,
+				TITLE as title,
+				HOMEGOODS_CONTENTS as homegoodsContents,
+				USER_NAME as userName,
+				REG_DT as regDt,
+				CHG_DT as chgDt
+		 FROM HOMEGOODS_INFO
+	</select>
+	
+	<insert id="insertMember" parameterType="HomegoodsDTO">
+		INSERT INTO HOMEGOODS_INFO (
+			HOMEGOODS_SEQ_NO,
+			TITLE,
+			HOMEGOODS_CONTENTS,
+			
+			REG_DT,
+			CHG_DT
+		)VALUES (
+			HOMEGOODS_INFO_SEQ.NEXTVAL,
+			#{title},
+			#{homegoodsContents},
+			
+			SYSDATE,
+			SYSDATE
+		)
+	</insert>
+			
+</mapper>

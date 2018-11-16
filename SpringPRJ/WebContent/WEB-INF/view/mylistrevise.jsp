@@ -54,23 +54,23 @@
           	
             
             <li class="nav-item">
-              <a class="nav-link" href="#">ë³‘ì› ì°¾ê¸°</a>
+              <a class="nav-link" href="#">º´¿ø Ã£±â</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">ì•½êµ­ì°¾ê¸°</a>
+              <a class="nav-link" href="#">¾à±¹Ã£±â</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="review.do">ë¦¬ë·°</a>
+              <a class="nav-link" href="review.do">¸®ºä</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">ìžìœ  í† í¬</a>
+              <a class="nav-link" href="talk.do">ÀÚÀ¯ ÅäÅ©</a>
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="#">ìœ ìš©í•œ ì •ë³´</a>
+              <a class="nav-link" href="#">À¯¿ëÇÑ Á¤º¸</a>
             </li>
             
              <%if("".equals(id) || id == null) { %>
@@ -81,17 +81,17 @@
             </li>
             <%} else { %>
              <li class="nav-item active">
-              <a class="nav-link" href="logout.do"><%=id + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤." %> &nbsp; Logout
+              <a class="nav-link" href="logout.do"><%=id + "´Ô È¯¿µÇÕ´Ï´Ù." %> &nbsp; Logout
              	 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë§ˆì´íŽ˜ì´ì§€
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">¸¶ÀÌÆäÀÌÁö
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist.do">íšŒì›ì •ë³´</a>
-	              <a class="dropdown-item" href="#">ê¸€ ìž‘ì„± ëª©ë¡</a>
+	              <a class="dropdown-item" href="mylist.do">È¸¿øÁ¤º¸</a>
+	              <a class="dropdown-item" href="#">±Û ÀÛ¼º ¸ñ·Ï</a>
               </div>
             </li>
              <%  }  %>
@@ -117,7 +117,7 @@
 				
 				<tr>
 					
-					<th><%=id + "ë‹˜ì˜ íšŒì›ì •ë³´" %></th>
+					<th><%=id + "´ÔÀÇ È¸¿øÁ¤º¸" %></th>
 					<td>
 					</td>
 					
@@ -125,29 +125,29 @@
 					
 				<tr>
 					
-					<td>ì•„ì´ë””</td>
+					<td>¾ÆÀÌµð</td>
 					<td><%=id %></td>
 					
 					
 				</tr>
 				<tr>
 				
-					<td>ì´ë¦„</td>
-					<td><%=uDTO.getUserName()%></td>
+					<td>ÀÌ¸§</td>
+					<td><input type="text" name="name" value="<%=uDTO.getUserName()%>" readonly></td>
 					
 				</tr>
 				<tr>
-				     <td>ì„±ë³„</td>
-					 <td><%=uDTO.getGender()%></td>	
+				     <td>¼ºº°</td>
+					 <td><input type="text" name="gender" value="<%=uDTO.getGender()%>"readonly></td>	
 				     	
 			    </tr>
 			    <tr>
-			     	<td>ì´ë©”ì¼</td>
-					<td><%=uDTO.getEmail()%></td>		
+			     	<td>ÀÌ¸ÞÀÏ</td>
+					<td><input type="text" name="email" value="<%=uDTO.getEmail()%>"></td>		
 		     	</tr>
 		     	<tr>
-					<td><a href="/mylistrevise.do"><input type="button" value="ìˆ˜ì •"></td></a>
-					<td><input type="button" value="íƒˆí‡´"></td>
+					<td><input type="submit" value="¼öÁ¤"></td>
+					<td><input type="button" value="ÀÌÀü"></td>
 				</tr>
 				</table>
 				

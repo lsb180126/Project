@@ -18,9 +18,9 @@ public class CmmUtil {
 		return nvl(str,"");
 	}
 	
-	public static String zero(String str){
+	/* public static String zero(String str){
 		return nvl(str,"0");
-	}
+	} */
 	
 	public static String checked(String str, String com_str){
 		if(str.equals(com_str)){
