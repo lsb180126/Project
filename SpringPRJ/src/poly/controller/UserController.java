@@ -178,7 +178,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="/mylistrevise")
+	@RequestMapping(value="mylistrevise")
 	public String mylistrevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
 		

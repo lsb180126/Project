@@ -150,6 +150,7 @@
 						<a href="mylistrevise.do"><input type="button" value="수정"></a>
 						
 					</td>
+					<td></td>
 				</tr>
 				</table>
 				
