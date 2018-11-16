@@ -86,40 +86,39 @@
 				    border-bottom: 1px solid #ccc;
 				}
 				
+				.wrap {
+				    position: absolute;
+				    top: 40%;
+				    left: 12%;
+				    margin-top: -86px;
+				    margin-left: -89px;
+				    text-align: center;
+				}
 				
+				a {
+				    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+				    display: block;
+				    margin: 20px auto;
+				    max-width: 180px;
+				    text-decoration: none;
+				    border-radius: 4px;
+				    padding: 20px 30px;
+				}
 				
+				a.button2 {
+				    color: rgba(30, 22, 54, 0.6);
+				    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+				}
 				
-				a.animated-button.thar-two {
-					color: #fff;
-					cursor: pointer;
-					display: block;
-					position: relative;
-					border: 2px solid #F7CA18;
-					transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+				a.button2:hover {
+				    color: rgba(255, 255, 255, 0.85);
+				    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
 				}
-				a.animated-button.thar-two:hover {
-					color: #000 !important;
-					background-color: transparent;
-					text-shadow: ntwo;
-				}
-				a.animated-button.thar-two:hover:before {
-					top: 0%;
-					bottom: auto;
-					height: 100%;
-				}
-				a.animated-button.thar-two:before {
-					display: block;
-					position: absolute;
-					left: 0px;
-					bottom: 0px;
-					height: 0px;
-					width: 100%;
-					z-index: -1;
-					content: '';
-					color: #000 !important;
-					background: #F7CA18;
-					transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-				}
+				
 	    </style>
 	    
 	   
@@ -210,12 +209,10 @@
 			   
     		
 			    <tr>
-			        <th scope="row" height="300">
-			        	<div class="row">
-				        	<div class="col-md-3 col-sm-3 col-xs-6"> 
-				        		<a href="#" class="btn btn-sm animated-button thar-two">Login</a> 
-			        		</div>
-			        	</div>
+			        <th scope="row">
+			        	<div class="wrap">
+			        		<a href="#" class="button2">간식</a>
+		        		</div>
 			        </th>
 			        <td></td>
 			        <td></td>
@@ -224,7 +221,11 @@
 			    
 			   
 			    <tr>
-			        <th scope="row" height="300"></th>
+			        <th scope="row" height="300">
+			        	<div class="wrap">
+			        		<a href="#" class="button2">간식</a>
+		        		</div>
+			        </th>
 			        <td></td>
 			        <td></td>
 			        <td></td>
