@@ -48,11 +48,11 @@ public class UserService implements IUserService{
 		return userMapper.getmyList(uDTO);
 	}
 
-//	@Override
-//	public UserDTO getmylistrevise(UserDTO uDTO) throws Exception {
-//		
-//		return userMapper.getmylistrevise(uDTO);
-//	}
+	@Override
+	public int mylistrevise(UserDTO uDTO) throws Exception {
+		
+		return userMapper.mylistrevise(uDTO);
+	}
 
 
 	

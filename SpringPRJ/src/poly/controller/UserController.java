@@ -123,6 +123,8 @@ public class UserController {
 			
 		} else {
 			session.setAttribute("id", uDTO.getUserId());
+			session.setAttribute("name", uDTO.getUserName());
+			session.setAttribute("gender", uDTO.getGender());
 			model.addAttribute("msg", "로그인 되었습니다.");
 		}
 		
@@ -150,7 +152,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="mylist", method=RequestMethod.GET)
+	@RequestMapping(value="mylist")
 	public String mylist(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
 		
@@ -176,31 +178,47 @@ public class UserController {
 		
 	}
 	
-//	@RequestMapping(value="/mylistrevise")
-//	public String mylistrevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-//			Model model) throws Exception {
-//		
-//		log.info("welcome mylistrevise");
-//		
-//		String id = (String)request.getAttribute("id");
-//		log.info(id);
-//		
-//		String email = (String)request.getAttribute("email");
-//		log.info(email);
-//		
-//		UserDTO uDTO = new UserDTO();
-//		
-//		uDTO.setUserId(id);
-//		uDTO.setEmail(email);
-//		
-//		
-//		
-//		
-//		
-//		
-//		return "/alert";
-//		
-//	}
+	@RequestMapping(value="/mylistrevise")
+	public String mylistrevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome mylistrevise");
+		
+		String id = (String)session.getAttribute("id");
+		log.info(id);
+		
+		String name = (String)session.getAttribute("name");
+		log.info(name);
+		
+		String gender = (String)session.getAttribute("gender");
+		log.info(gender);
+		
+		String email = request.getParameter("email");
+		log.info(email);
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setUserId(id);
+		uDTO.setUserName(name);
+		uDTO.setGender(gender);
+		uDTO.setEmail(email);
+		
+		int result = userService.mylistrevise(uDTO);
+		
+		log.info(uDTO.getEmail());
+		
+		if(result == 1) {
+			model.addAttribute("msg", "수정되었습니다.");
+			model.addAttribute("url", "/index.do");
+		}else {
+			model.addAttribute("msg", "수정하지 않았습니다.");
+			model.addAttribute("url", "/index.do");
+		}
+		
+		
+		return "/alert";
+		
+	}
 	
 	
 }	

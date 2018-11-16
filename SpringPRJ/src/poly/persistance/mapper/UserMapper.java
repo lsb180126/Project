@@ -18,7 +18,7 @@ public interface UserMapper  {
 
 	UserDTO getmyList(UserDTO uDTO) throws Exception;
 
-//	UserDTO getmylistrevise(UserDTO uDTO) throws Exception;
+	int mylistrevise(UserDTO uDTO) throws Exception;
 
 	
 

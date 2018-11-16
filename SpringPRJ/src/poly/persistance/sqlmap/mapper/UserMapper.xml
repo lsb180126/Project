@@ -4,7 +4,7 @@
 <mapper namespace="poly.persistance.mapper.UserMapper">
 
 	<select id="getMemberList" resultType="UserDTO">
-		 SELECT USER_NO as userNo,
+		 SELECT USER_SEQ_NO as userSeqNo,
 				USER_ID as userId,
 				USER_NAME as userName,
 				PASSWORD as password,
@@ -18,7 +18,7 @@
 	
 	<insert id="insertMember" parameterType="UserDTO">
 		INSERT INTO USER_INFO (
-			USER_NO, 
+			USER_SEQ_NO, 
 			USER_ID, 
 			USER_NAME, 
 			PASSWORD, 
@@ -50,7 +50,7 @@
 	</select>
 	
 	<select id="getLoginInfo" parameterType="UserDTO" resultType="UserDTO">
-		SELECT  USER_NO as userNo,
+		SELECT  USER_SEQ_NO as userSeqNo,
 				USER_ID as userId,
 				USER_NAME as userName,
 				PASSWORD as password,
@@ -65,7 +65,7 @@
 	</select>
 	
 	<select id="getmyList" parameterType="UserDTO" resultType="UserDTO">
-		SELECT  USER_NO as userNo,
+		SELECT  USER_SEQ_NO as userSeqNo,
 				USER_ID as userId,
 				USER_NAME as userName,
 				PASSWORD as password,
@@ -78,12 +78,9 @@
 		 WHERE USER_ID = #{userId}
 	</select>
 	
-	<update id="getmylistrevise" parameterType="UserDTO" >
+	<update id="mylistrevise" parameterType="UserDTO" >
 		UPDATE USER_INFO
-		SET USER_ID = #{userId}, 
-			USER_NAME = #{userName}, 
-			GENDER = #{gender}, 
-			EMAIL = #{email}
+		SET EMAIL = #{email}
 		WHERE USER_ID = #{userId}
 	</update>
 	

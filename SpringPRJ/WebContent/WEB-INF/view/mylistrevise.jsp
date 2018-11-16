@@ -4,6 +4,9 @@
     pageEncoding="EUC-KR"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
+	String name = CmmUtil.nvl((String)session.getAttribute("name"));
+	String gender = CmmUtil.nvl((String)session.getAttribute("gender"));
+	
 %>
 <%
 	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
@@ -32,7 +35,11 @@
 	    </style>
 	    
 	    <script>
-	    
+	    $("#coffee").click(function(event){
+    		
+    		
+    		$("#cup").submit();
+    	})
 		    
 	    
 	    
@@ -111,7 +118,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        <form action="">
+        <form action="/mylistrevise.do" method="POST" id="cup">
         	
 			<table class="table">
 				
@@ -133,12 +140,12 @@
 				<tr>
 				
 					<td>이름</td>
-					<td><input type="text" name="name" value="<%=uDTO.getUserName()%>" readonly></td>
+					<td><input type="text" name="name" value="<%=name%>" readonly></td>
 					
 				</tr>
 				<tr>
 				     <td>성별</td>
-					 <td><input type="text" name="gender" value="<%=uDTO.getGender()%>" readonly></td>	
+					 <td><input type="text" name="gender" value="<%=gender%>" readonly></td>	
 				     	
 			    </tr>
 			    <tr>
@@ -146,8 +153,8 @@
 					<td><input type="text" name="email" value="<%=uDTO.getEmail()%>"></td>		
 		     	</tr>
 		     	<tr>
-					<td><input type="submit" value="수정"></td>
-					<td><input type="button" value="이전"></td>
+					<td><input type="button" id="coffee" value="수정"></td>
+					<td></td>
 				</tr>
 				</table>
 				

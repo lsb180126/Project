@@ -32,8 +32,7 @@
 	    </style>
 	    
 	    <script>
-	    
-		    
+	    	
 	    
 	    
 	    </script>
@@ -111,7 +110,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        <form action="">
+        
         	
 			<table class="table">
 				
@@ -145,13 +144,17 @@
 			     	<td>이메일</td>
 					<td><%=uDTO.getEmail()%></td>		
 		     	</tr>
+		     	
 		     	<tr>
-					<td><a href="/mylistrevise.do"><input type="button" value="수정"></a></td>
-					<td><input type="button" value="탈퇴"></td>
+					<td>
+						<a href="mylistrevise.do"><input type="button" value="수정"></a>
+						
+					</td>
 				</tr>
 				</table>
 				
-				</form>
+				
+					
 			</div>
 		</div>
 	</div>

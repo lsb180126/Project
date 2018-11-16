@@ -1,7 +1,7 @@
 package poly.dto;
 
 public class UserDTO {
-	private String userNo;
+	private String userSeqNo;
 	private String userId;
 	private String userName;
 	private String password;
@@ -11,11 +11,11 @@ public class UserDTO {
 	private String regDate;
 	private String chgDate;
 	
-	public String getUserNo() {
-		return userNo;
+	public String getUserSeqNo() {
+		return userSeqNo;
 	}
-	public void setUserNo(String userNo) {
-		this.userNo = userNo;
+	public void setUserSeqNo(String userSeqNo) {
+		this.userSeqNo = userSeqNo;
 	}
 	public String getUserId() {
 		return userId;
