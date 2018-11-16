@@ -1,7 +1,7 @@
 <%@page import="poly.dto.UserDTO"%>
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% UserDTO uDTO = (UserDTO)request.getAttribute("uDTO"); %>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 	String name = CmmUtil.nvl((String)session.getAttribute("name"));
@@ -9,7 +9,7 @@
 	
 %>
 <%
-	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
+	String email = (String) request.getAttribute("email");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,11 +35,7 @@
 	    </style>
 	    
 	    <script>
-	    $("#coffee").click(function(event){
-    		
-    		
-    		$("#cup").submit();
-    	})
+	    
 		    
 	    
 	    
@@ -61,23 +57,23 @@
           	
             
             <li class="nav-item">
-              <a class="nav-link" href="#">∫¥ø¯ √£±‚</a>
+              <a class="nav-link" href="#">Î≥ëÏõê Ï∞æÍ∏∞</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">æ‡±π√£±‚</a>
+              <a class="nav-link" href="#">ÏïΩÍµ≠Ï∞æÍ∏∞</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="review.do">∏Æ∫‰</a>
+              <a class="nav-link" href="review.do">Î¶¨Î∑∞</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">¿⁄¿Ø ≈‰≈©</a>
+              <a class="nav-link" href="talk.do">ÏûêÏú† ÌÜ†ÌÅ¨</a>
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="#">¿ØøÎ«— ¡§∫∏</a>
+              <a class="nav-link" href="#">Ïú†Ïö©Ìïú Ï†ïÎ≥¥</a>
             </li>
             
              <%if("".equals(id) || id == null) { %>
@@ -88,17 +84,17 @@
             </li>
             <%} else { %>
              <li class="nav-item active">
-              <a class="nav-link" href="logout.do"><%=id + "¥‘ »Øøµ«’¥œ¥Ÿ." %> &nbsp; Logout
+              <a class="nav-link" href="logout.do"><%=id + "Îãò ÌôòÏòÅÌï©ÎãàÎã§." %> &nbsp; Logout
              	 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">∏∂¿Ã∆‰¿Ã¡ˆ
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ÎßàÏù¥ÌéòÏù¥ÏßÄ
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist.do">»∏ø¯¡§∫∏</a>
-	              <a class="dropdown-item" href="#">±€ ¿€º∫ ∏Ò∑œ</a>
+	              <a class="dropdown-item" href="mylist.do">ÌöåÏõêÏ†ïÎ≥¥</a>
+	              <a class="dropdown-item" href="#">Í∏Ä ÏûëÏÑ± Î™©Î°ù</a>
               </div>
             </li>
              <%  }  %>
@@ -118,13 +114,13 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        <form action="/mylistrevise.do" method="POST" id="cup">
+        <form action="/mylistrevise2.do" method="POST" id="cup">
         	
 			<table class="table">
 				
 				<tr>
 					
-					<th><%=id + "¥‘¿« »∏ø¯¡§∫∏" %></th>
+					<th><%=id + "ÎãòÏùò ÌöåÏõêÏ†ïÎ≥¥" %></th>
 					<td>
 					</td>
 					
@@ -132,28 +128,28 @@
 					
 				<tr>
 					
-					<td>æ∆¿Ãµ</td>
+					<td>ÏïÑÏù¥Îîî</td>
 					<td><%=id %></td>
 					
 					
 				</tr>
 				<tr>
 				
-					<td>¿Ã∏ß</td>
-					<td><input type="text" name="name" value="<%=name%>" readonly></td>
+					<td>Ïù¥Î¶Ñ</td>
+					<td><%=name%></td>
 					
 				</tr>
 				<tr>
-				     <td>º∫∫∞</td>
-					 <td><input type="text" name="gender" value="<%=gender%>" readonly></td>	
+				     <td>ÏÑ±Î≥Ñ</td>
+					 <td><%=gender%></td>	
 				     	
 			    </tr>
 			    <tr>
-			     	<td>¿Ã∏ﬁ¿œ</td>
-					<td><input type="text" name="email" value="<%=uDTO.getEmail()%>"></td>		
+			     	<td>Ïù¥Î©îÏùº</td>
+					<td><input type="text" name="email" value="<%=email%>"></td>		
 		     	</tr>
 		     	<tr>
-					<td><input type="button" id="coffee" value="ºˆ¡§"></td>
+					<td><input type = "submit" value = "ÏàòÏ†ï"/></td>
 					<td></td>
 				</tr>
 				</table>

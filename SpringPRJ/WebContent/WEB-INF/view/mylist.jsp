@@ -111,7 +111,7 @@
         <div class="col-lg-12 text-center">
         
         
-        	
+        	<form>
 			<table class="table">
 				
 				<tr>
@@ -147,13 +147,12 @@
 		     	
 		     	<tr>
 					<td>
-						<a href="mylistrevise.do"><input type="button" value="수정"></a>
-						
+						<a href="/mylistrevise.do?email=<%=uDTO.getEmail()%>"><input type="button" value="수정"></a>
 					</td>
 					<td></td>
 				</tr>
 				</table>
-				
+				</form>
 				
 					
 			</div>

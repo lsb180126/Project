@@ -184,36 +184,47 @@ public class UserController {
 		
 		log.info("welcome mylistrevise");
 		
-		String id = (String)session.getAttribute("id");
-		log.info(id);
+		String email = request.getParameter("email");
+		log.info(email);
 		
-		String name = (String)session.getAttribute("name");
-		log.info(name);
+		/*int result = userService.mylistrevise(uDTO);*/
+		model.addAttribute("email", email);
 		
-		String gender = (String)session.getAttribute("gender");
-		log.info(gender);
+		return "/mylistrevise";
+		
+	}
+	
+	@RequestMapping(value="mylistrevise2")
+	public String mylistrevise2(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome mylistrevise2");
 		
 		String email = request.getParameter("email");
+		String userId = (String)session.getAttribute("id");
 		log.info(email);
 		
 		UserDTO uDTO = new UserDTO();
 		
-		uDTO.setUserId(id);
-		uDTO.setUserName(name);
-		uDTO.setGender(gender);
 		uDTO.setEmail(email);
+		uDTO.setUserId(userId);
 		
 		int result = userService.mylistrevise(uDTO);
-		
-		log.info(uDTO.getEmail());
-		
+		log.info(result);
+
+
+		String url;
+		String msg;
 		if(result == 1) {
 			model.addAttribute("msg", "수정되었습니다.");
-			model.addAttribute("url", "/index.do");
-		}else {
-			model.addAttribute("msg", "수정하지 않았습니다.");
+			model.addAttribute("url", "/mylist.do");
+		} else {
+			model.addAttribute("msg", "실패하였습니다.");
 			model.addAttribute("url", "/index.do");
 		}
+		
+		model.addAttribute("email", email);
+		
 		
 		
 		return "/alert";
