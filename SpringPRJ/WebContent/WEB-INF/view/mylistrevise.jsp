@@ -138,7 +138,7 @@
 				</tr>
 				<tr>
 				     <td>¼ºº°</td>
-					 <td><input type="text" name="gender" value="<%=uDTO.getGender()%>"readonly></td>	
+					 <td><input type="text" name="gender" value="<%=uDTO.getGender()%>" readonly></td>	
 				     	
 			    </tr>
 			    <tr>

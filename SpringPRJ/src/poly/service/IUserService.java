@@ -17,7 +17,7 @@ public interface IUserService {
 
 	UserDTO getmyList(UserDTO uDTO) throws Exception;
 
-	UserDTO getmylistrevise(String id) throws Exception;
+//	UserDTO getmylistrevise(UserDTO uDTO) throws Exception;
 
 	
 

@@ -1,7 +1,7 @@
 <%@page import="poly.dto.UserDTO"%>
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 %>
@@ -146,7 +146,7 @@
 					<td><%=uDTO.getEmail()%></td>		
 		     	</tr>
 		     	<tr>
-					<td><a href="/mylistrevise.do"><input type="button" value="수정"></td></a>
+					<td><a href="/mylistrevise.do"><input type="button" value="수정"></a></td>
 					<td><input type="button" value="탈퇴"></td>
 				</tr>
 				</table>

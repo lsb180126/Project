@@ -3,6 +3,7 @@ package poly.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
+import poly.dto.ComDTO;
 import poly.dto.MemDTO;
 
 
@@ -26,6 +31,7 @@ import poly.service.IMemService;
 
 import poly.service.impl.MemberService;
 import poly.util.CmmUtil;
+import poly.util.FileUpload;
 
 
 @Controller
@@ -38,37 +44,81 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping(value="reviewlist")
+	@RequestMapping(value="reviewlist", method=RequestMethod.POST)
 	public String Reviewlist(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
+			ModelMap model, @RequestParam("file") MultipartFile file,
+			MultipartHttpServletRequest mhsr) throws Exception {
 		
 		log.info("welcome reviewlist");
 		
 		
+//		
+//		String name = request.getParameter("name");
+//		String title = request.getParameter("title");
+//		String content= request.getParameter("content");
+//		
+//		
+//		log.info("name : " + name);
+//		log.info("title : " + title);
+//		log.info("content : " + content);
+//		
+//		MemDTO mDTO = new MemDTO();
+//		
+//		mDTO.setReviewName(name);
+//		mDTO.setTitle(title);
+//		mDTO.setReviewContents(content);
+//		
+//		
+//		int result = memberService.insertMember(mDTO);
+//		
+//		model.addAttribute("msg", "등록이 완료되었습니다.");
+//		model.addAttribute("url", "/review.do");
 		
-		String name = request.getParameter("name");
-		String title = request.getParameter("title");
-		String content= request.getParameter("content");
 		
 		
-		log.info("name : " + name);
-		log.info("title : " + title);
-		log.info("content : " + content);
+		log.info("welcome to fileUpload");
 		
-		MemDTO mDTO = new MemDTO();
+		log.info("------file info------");
+		log.info(file);
 		
-		mDTO.setReviewName(name);
-		mDTO.setTitle(title);
-		mDTO.setReviewContents(content);
+		FileUpload fileUpload = new FileUpload();
+		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
 		
-		
-		int result = memberService.insertMember(mDTO);
+		for( String key : fileInfo.keySet() ){
+            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+        }
 		
 		model.addAttribute("msg", "등록이 완료되었습니다.");
 		model.addAttribute("url", "/review.do");
-		 
+		
 		return "/redirect2";
 	}
+	
+//	@RequestMapping(value="reviewlist2")
+//	public String Reviewlist2(HttpServletRequest request, HttpServletResponse response, 
+//			ModelMap model) throws Exception {
+//		
+//		log.info("welcome reviewlist2");
+//		
+//		List<MemDTO> mList = memberService.getMemberList();
+//		
+//		for(MemDTO m : mList) {
+//			log.info("memberId : " +m.getMemberID());
+//		}
+//		
+//		model.addAttribute("rList", rList);
+//		
+//		
+//		 
+//		return "/redirect2";
+//	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 		

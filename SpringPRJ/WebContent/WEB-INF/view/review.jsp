@@ -5,6 +5,7 @@
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 
 %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -182,9 +183,18 @@
 					<th>ÀÛ¼ºÀÚ</th>
 				</tr>
 				
-			
+				<tr>
+					<td><input type="checkbox"></td>
+					<td></td>
+					<td></td>
+					<td colspan="2"></td>
+					<td></td>
+					<td></td>
+				</tr>
+				
+				
 					
-		
+				
 			</table>
 			<hr/>
 			<nav aria-label="Page navigation example">

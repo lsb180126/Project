@@ -164,28 +164,43 @@ public class UserController {
 		
 		uDTO=userService.getmyList(uDTO);
 		
+		log.info(uDTO.getUserId());
+		log.info(uDTO.getEmail());
+		log.info(uDTO.getGender());
+		log.info(uDTO.getUserName());
+		
+		
 		model.addAttribute("uDTO",uDTO);
 		
 		return "/mylist";
 		
 	}
 	
-	@RequestMapping(value="/mylistrevise")
-	public String mylistrevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			Model model) throws Exception {
-		
-		log.info("welcome mylistrevise");
-		
-		String id = (String)session.getAttribute("id");
-		
-		UserDTO uDTO =userService.getmylistrevise(id);
-		
-		model.addAttribute("uDTO",uDTO);
-		
-		
-		return "/mylistrevise";
-		
-	}
+//	@RequestMapping(value="/mylistrevise")
+//	public String mylistrevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+//			Model model) throws Exception {
+//		
+//		log.info("welcome mylistrevise");
+//		
+//		String id = (String)request.getAttribute("id");
+//		log.info(id);
+//		
+//		String email = (String)request.getAttribute("email");
+//		log.info(email);
+//		
+//		UserDTO uDTO = new UserDTO();
+//		
+//		uDTO.setUserId(id);
+//		uDTO.setEmail(email);
+//		
+//		
+//		
+//		
+//		
+//		
+//		return "/alert";
+//		
+//	}
 	
 	
 }	

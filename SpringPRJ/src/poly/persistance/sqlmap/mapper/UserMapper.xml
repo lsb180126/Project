@@ -78,7 +78,7 @@
 		 WHERE USER_ID = #{userId}
 	</select>
 	
-	<update id="getmylistrevise" parameterType="string" >
+	<update id="getmylistrevise" parameterType="UserDTO" >
 		UPDATE USER_INFO
 		SET USER_ID = #{userId}, 
 			USER_NAME = #{userName}, 
