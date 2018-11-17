@@ -150,7 +150,7 @@
 		     	</tr>
 		     	<tr>
 					<td><input type = "submit" value = "수정"/></td>
-					<td></td>
+					<td><a href="/mylist.do"><input type = "button" value = "이전"/></a></td>
 				</tr>
 				</table>
 				

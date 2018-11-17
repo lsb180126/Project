@@ -187,7 +187,7 @@ public class UserController {
 		String email = request.getParameter("email");
 		log.info(email);
 		
-		/*int result = userService.mylistrevise(uDTO);*/
+	
 		model.addAttribute("email", email);
 		
 		return "/mylistrevise";
@@ -231,6 +231,43 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="mylistdelete")
+	public String mylistdelete(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome mylistdelete");
+		
+		
+		String userId = (String)session.getAttribute("id");
+		log.info(userId);
+		
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setUserId(userId);
+		
+		int result = userService.mylistdelete(uDTO);
+		log.info(result);
+
+
+		String url;
+		String msg;
+		if(result == 1) {
+			model.addAttribute("msg", "탈퇴되었습니다.");
+			model.addAttribute("url", "/index.do");
+			session.invalidate();
+		} else {
+			model.addAttribute("msg", "실패하였습니다.");
+			model.addAttribute("url", "/mylist.do?userId=" +uDTO.getUserId());
+		}
+		
+		
+		
+		
+		
+		return "/alert";
+		
+	}
 	
 }	
 	

@@ -25,7 +25,7 @@ public class MemberService implements IMemService{
 
 	@Override
 	public int insertMember(MemDTO mDTO) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return memMapper.insertMember(mDTO);
 	}
 

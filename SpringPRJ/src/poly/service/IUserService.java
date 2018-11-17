@@ -19,6 +19,8 @@ public interface IUserService {
 
 	int mylistrevise(UserDTO uDTO) throws Exception;
 
+	int mylistdelete(UserDTO uDTO) throws Exception;
+
 	
 
 }

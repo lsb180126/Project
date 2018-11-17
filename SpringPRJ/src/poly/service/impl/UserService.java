@@ -54,7 +54,13 @@ public class UserService implements IUserService{
 		return userMapper.mylistrevise(uDTO);
 	}
 
+	@Override
+	public int mylistdelete(UserDTO uDTO) throws Exception {
+		
+		return userMapper.mylistdelete(uDTO);
+	}
 
+	
 	
 
 }

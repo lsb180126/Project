@@ -43,74 +43,117 @@ public class MemberController {
 	private IMemService memberService;
 	
 	
+	@RequestMapping(value="review")
+	public String Review(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome review");
+		
+		List<MemDTO> mList = memberService.getMemberList();
+		
+		for(MemDTO m : mList) {
+			log.info("reviewSeqNo : " +m.getReviewSeqNo());
+			log.info("reviewName : " +m.getReviewName());
+			log.info("title : " +m.getTitle());
+			log.info("userId : " +m.getUserId());
+		}
+		
+		model.addAttribute("mList", mList);
+		 
+		return "/review";
+	}
 	
-	@RequestMapping(value="reviewlist", method=RequestMethod.POST)
-	public String Reviewlist(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model, @RequestParam("file") MultipartFile file,
-			MultipartHttpServletRequest mhsr) throws Exception {
+	@RequestMapping(value="reviewregister")
+	public String Reviewregister(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome reviewregister");
+		
+		 
+		return "/reviewregister";
+	}
+	
+	@RequestMapping(value="/reviewlist", method=RequestMethod.POST)
+	public String Reviewlist(HttpServletRequest request, HttpServletResponse response, ModelMap model
+//			, @RequestParam("file") MultipartFile file,
+//			MultipartHttpServletRequest mhsr
+			) throws Exception {
 		
 		log.info("welcome reviewlist");
 		
 		
+		
+		String name = request.getParameter("name");
+		String title = request.getParameter("title");
+		String content= request.getParameter("content");
+		
+		
+		log.info("name : " + name);
+		log.info("title : " + title);
+		log.info("content : " + content);
+		
+		MemDTO mDTO = new MemDTO();
+		
+		mDTO.setReviewName(name);
+		mDTO.setTitle(title);
+		mDTO.setReviewContents(content);
+		
+		
+		int result = memberService.insertMember(mDTO);
+		
+		log.info(result);
+		
+		String msg;
+		String url;
+		if(result==1) {
+			model.addAttribute("msg", "등록이 완료되었습니다.");
+			model.addAttribute("url", "/review.do");
+		} else {
+			model.addAttribute("msg", "등록이 되지않았습니다.");
+			model.addAttribute("url", "/index.do");
+		}
+		
+		
+		
+		
+//		log.info("welcome to fileUpload");
 //		
-//		String name = request.getParameter("name");
-//		String title = request.getParameter("title");
-//		String content= request.getParameter("content");
+//		log.info("------file info------");
+//		log.info(file);
 //		
+//		FileUpload fileUpload = new FileUpload();
+//		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
 //		
-//		log.info("name : " + name);
-//		log.info("title : " + title);
-//		log.info("content : " + content);
-//		
-//		MemDTO mDTO = new MemDTO();
-//		
-//		mDTO.setReviewName(name);
-//		mDTO.setTitle(title);
-//		mDTO.setReviewContents(content);
-//		
-//		
-//		int result = memberService.insertMember(mDTO);
+//		for( String key : fileInfo.keySet() ){
+//            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+//        }
 //		
 //		model.addAttribute("msg", "등록이 완료되었습니다.");
 //		model.addAttribute("url", "/review.do");
-		
-		
-		
-		log.info("welcome to fileUpload");
-		
-		log.info("------file info------");
-		log.info(file);
-		
-		FileUpload fileUpload = new FileUpload();
-		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
-		
-		for( String key : fileInfo.keySet() ){
-            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
-        }
-		
-		model.addAttribute("msg", "등록이 완료되었습니다.");
-		model.addAttribute("url", "/review.do");
-		
-		return "/redirect2";
+//		
+		return "/alert";
 	}
 	
-//	@RequestMapping(value="reviewlist2")
-//	public String Reviewlist2(HttpServletRequest request, HttpServletResponse response, 
+//	@RequestMapping(value="/Memberlist", method=RequestMethod.POST)
+//	public String memberlist(HttpServletRequest request, HttpServletResponse response, 
 //			ModelMap model) throws Exception {
 //		
-//		log.info("welcome reviewlist2");
+//		log.info("welcome memberlist");
 //		
 //		List<MemDTO> mList = memberService.getMemberList();
 //		
 //		for(MemDTO m : mList) {
-//			log.info("memberId : " +m.getMemberID());
+//			log.info("reviewSeqNo : " +m.getReviewSeqNo());
+//			log.info("reviewName : " +m.getReviewName());
+//			log.info("title : " +m.getTitle());
+//			log.info("userId : " +m.getUserId());
 //		}
 //		
-//		model.addAttribute("rList", rList);
+//		model.addAttribute("mList", mList);
 //		
 //		
 //		 
-//		return "/redirect2";
+//		return "/Memberlist";
 //	}
 	
 	

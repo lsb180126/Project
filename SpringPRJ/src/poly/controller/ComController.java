@@ -105,7 +105,6 @@ public class ComController {
 	}
 	
 	
-	
 	@RequestMapping(value="register", method=RequestMethod.GET)
 	public String Register(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
@@ -120,15 +119,7 @@ public class ComController {
 	
 	
 	
-	@RequestMapping(value="review", method=RequestMethod.GET)
-	public String Review(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome review");
-		
-		 
-		return "/review";
-	}
+	
 	
 	@RequestMapping(value="talk", method=RequestMethod.GET)
 	public String Talk(HttpServletRequest request, HttpServletResponse response, 
@@ -175,15 +166,7 @@ public class ComController {
 	
 	
 	
-	@RequestMapping(value="reviewregister", method=RequestMethod.GET)
-	public String Reviewregister(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome reviewregister");
-		
-		 
-		return "/reviewregister";
-	}
+	
 	
 	@RequestMapping(value="talkregister", method=RequestMethod.GET)
 	public String Talkregister(HttpServletRequest request, HttpServletResponse response, 

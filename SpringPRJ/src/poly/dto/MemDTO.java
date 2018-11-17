@@ -8,6 +8,7 @@ public class MemDTO {
 	private String regDt;
 	private String chgDt;
 	private String reviewName;
+	private String userId;
 	
 	public String getReviewSeqNo() {
 		return reviewSeqNo;
@@ -50,6 +51,12 @@ public class MemDTO {
 	}
 	public void setReviewName(String reviewName) {
 		this.reviewName = reviewName;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 	

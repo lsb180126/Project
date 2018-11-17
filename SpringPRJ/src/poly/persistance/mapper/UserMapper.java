@@ -20,6 +20,8 @@ public interface UserMapper  {
 
 	int mylistrevise(UserDTO uDTO) throws Exception;
 
+	int mylistdelete(UserDTO uDTO) throws Exception;
+
 	
 
 	

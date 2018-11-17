@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="poly.dto.MemDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -5,7 +8,15 @@
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 
 %>
+<%
 
+	List<MemDTO> mList = (List<MemDTO>)request.getAttribute("mList");
+	
+	if (mList==null){
+		mList = new ArrayList<MemDTO>();
+		
+	}
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -145,7 +156,7 @@
 	<div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-        
+        	
 			<table class="table">
 				<tr>
 					<td><input type="checkbox"></td>
@@ -170,7 +181,7 @@
 					</td>
 					
 					<td>
-						<a href="reviewregister.do"><input type="button" value="등록"></a>
+						<a href="reviewregister.do"><input type="submit" value="등록"></a>
 					</td>
 				</tr>
 			
@@ -183,14 +194,16 @@
 					<th>작성자</th>
 				</tr>
 				
+				<% for(MemDTO m : mList) { %>
 				<tr>
 					<td><input type="checkbox"></td>
+					<td><%=m.getReviewSeqNo() %></td>
+					<td><%=m.getReviewName() %></td>
+					<td colspan="2"><%=m.getTitle() %></td>
 					<td></td>
-					<td></td>
-					<td colspan="2"></td>
-					<td></td>
-					<td></td>
+					<td><%=m.getUserId() %></td>
 				</tr>
+				<% } %>
 				
 				
 					
@@ -217,6 +230,7 @@
 		    		</li>
 				</ul>
 			</nav>
+			
 	 	</div>
       </div>
     </div>

@@ -3,17 +3,6 @@
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
 <mapper namespace="poly.persistance.mapper.MemMapper">
 
-	<select id="getMemberList" resultType="MemDTO">
-		 SELECT REVIEW_SEQ_NO as reviewSeqNo,
-				TITLE as title,
-				REVIEW_CONTENTS as reviewContents,
-				USER_NAME as userName,
-				REG_DT as regDt,
-				CHG_DT as chgDt,
-				REVIEW_NAME as reviewName
-		 FROM REVIEW_INFO
-	</select>
-	
 	<insert id="insertMember" parameterType="MemDTO">
 		INSERT INTO REVIEW_INFO (
 			REVIEW_SEQ_NO,
@@ -23,6 +12,7 @@
 			REG_DT,
 			CHG_DT,
 			REVIEW_NAME
+			
 		) VALUES (
 			MEM_INFO_SEQ.NEXTVAL,
 			#{title},
@@ -31,7 +21,21 @@
 			SYSDATE,
 			SYSDATE,
 			#{reviewName}
+			
 		)
 	</insert>
-			
+	
+	
+	<select id="getMemberList" resultType="MemDTO">
+		 SELECT REVIEW_SEQ_NO as reviewSeqNo,
+				TITLE as title,
+				REVIEW_CONTENTS as reviewContents,
+				USER_NAME as userName,
+				REG_DT as regDt,
+				CHG_DT as chgDt,
+				REVIEW_NAME as reviewName,
+				USER_ID as userId
+		 FROM REVIEW_INFO
+	</select>	
+		
 </mapper>

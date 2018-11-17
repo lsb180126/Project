@@ -32,8 +32,7 @@
 	    </style>
 	    
 	    <script>
-	    	
-	    
+		   
 	    
 	    </script>
 	    
@@ -149,7 +148,9 @@
 					<td>
 						<a href="/mylistrevise.do?email=<%=uDTO.getEmail()%>"><input type="button" value="수정"></a>
 					</td>
-					<td></td>
+					<td>
+						<a href="/mylistdelete.do?userId=<%=uDTO.getUserId()%>"><input type="button" value="탈퇴"></a>
+					</td>
 				</tr>
 				</table>
 				</form>
