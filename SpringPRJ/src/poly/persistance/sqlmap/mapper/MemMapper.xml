@@ -51,4 +51,11 @@
 		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
 		 WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
 	</select>	
+	
+	<update id="writerevise" parameterType="MemDTO" >
+		UPDATE REVIEW_INFO RI
+		SET RI.TITLE = #{title}, RI.REVIEW_CONTENTS = #{content}, RI.REVIEW_NAME = #{name}
+		WHERE USER_INFO.USER_ID = #{userId}
+	</update>
+	
 </mapper>

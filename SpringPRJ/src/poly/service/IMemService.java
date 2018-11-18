@@ -11,6 +11,8 @@ public interface IMemService {
 	int insertMember(MemDTO mDTO) throws Exception;
 
 	MemDTO getMemberdetail(MemDTO mDTO) throws Exception;
+
+	int writerevise(MemDTO mDTO) throws Exception;
 	
 	
 

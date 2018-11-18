@@ -1,6 +1,7 @@
-<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="poly.dto.MemDTO"%>
+<%@page import="poly.dto.UserDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -17,69 +18,40 @@
 		
 	}
 %> 
+<%
+	String name = (String) request.getAttribute("name");
+	String title = (String) request.getAttribute("title");
+	String content = (String) request.getAttribute("content");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
+		<title>review revise</title>
 		
-		
-
-
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-	
-	    <title>write list</title>
-	
-	    <!-- Bootstrap core CSS -->
+	    
+	     <!-- Bootstrap core CSS -->
 	    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	    
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <!-- starRev CSS -->
+	    <link href="css/starRev.css" rel="stylesheet">
 	    
 	    <style>
-	    	
-	    	* {
-				  box-sizing: border-box;
-				}
-				
-				/* Style the search field */
-				form.example input[type=text] {
-				  padding: 10px;
-				  font-size: 17px;
-				  border: 1px solid grey;
-				  float: left;
-				  width: 80%;
-				  background: #f1f1f1;
-				}
-				
-				/* Style the submit button */
-				form.example button {
-				  float: left;
-				  width: 20%;
-				  padding: 10px;
-				  background: #2196F3;
-				  color: white;
-				  font-size: 17px;
-				  border: 1px solid grey;
-				  border-left: none; /* Prevent double borders */
-				  cursor: pointer;
-				}
-				
-				form.example button:hover {
-				  background: #0b7dda;
-				}
-				
-				/* Clear floats */
-				form.example::after {
-				  content: "";
-				  clear: both;
-				  display: table;
-				}
+	    .my-box { border:1px solid; padding: 5px;  }
 	    
+		
 	    
 	    </style>
 	    
-	   
+	    <script>
+	    
+		    
+	    
+	    
+	    </script>
 	    
 	</head>
 	<body>
@@ -95,6 +67,7 @@
           <ul class="navbar-nav ml-auto">
           	
           	
+            
             <li class="nav-item">
               <a class="nav-link" href="#">병원 찾기</a>
             </li>
@@ -115,7 +88,7 @@
               <a class="nav-link" href="useful.do">유용한 정보</a>
             </li>
             
-            <%if("".equals(id) || id == null) { %>
+             <%if("".equals(id) || id == null) { %>
             <li class="nav-item active">
               <a class="nav-link" href="login.do">Login
              	 <span class="sr-only">(current)</span>
@@ -133,7 +106,7 @@
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
 	              <a class="dropdown-item" href="mylist.do">회원정보</a>
-	              <a class="dropdown-item" href="writelist.do">글 작성 목록</a>
+	              <a class="dropdown-item" href="#">글 작성 목록</a>
               </div>
             </li>
              <%  }  %>
@@ -149,77 +122,121 @@
     </nav>
 	
 	
-	<br/>
-	
 	<div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
         
+        	<form action="/writerevise2.do" method="POST">
+        	
 			<table class="table">
+				
 				<tr>
-					<td><input type="checkbox"></td>
-					<td>작성 목록</td>
+					
+					<th>리뷰 수정</th>
 					<td>
 						
 					</td>
-					
 					<td></td>
 					<td>
 						
 					</td>
 					<td>
-						<a href="/writerevise.do?reviewSeqNo=<%=m.getReviewSeqNo() %>"><input type="button" value="수정"></a>
+						<input type="submit" value="수정">
 					</td>
+					<td>
+						<a href="writelist.do"><input type="button" value="이전"></a>
+					</td>
+					
+					
+				</tr>
+				
+				<tr>
 					
 					<td>
-						<a href=""><input type="button" value="삭제"></a>
-					</td>
-				</tr>
-				
-				<% for(MemDTO m : mList) { %>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><%=m.getReviewSeqNo() %></td>
-					<td><%=m.getReviewName() %></a></td>
-					<td colspan="2"><%=m.getTitle() %></td>
-					<td></td>
-					<td><%=m.getUserName() %></td>
-				</tr>
-				<% } %> 
-				
-			
 					
-		
-			</table>
-			<hr/>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-				 <li class="page-item">
-		      		<a class="page-link" href="#" aria-label="Previous" >
-		        		<span aria-hidden="true">&laquo;</span>
-		        		<span class="sr-only">Previous</span>
-		      		</a>
-		   		 </li> 
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item">
-		      			<a class="page-link" href="#" aria-label="Next">
-		        			<span aria-hidden="true">&raquo;</span>
-		        			<span class="sr-only">Next</span>
-		      			</a>
-		    		</li>
-				</ul>
-			</nav>
-	 	</div>
-      </div>
-    </div>
-    
+						<div class="form-group">
+				           		<label class="sr-only" for="examplename"></label>
+				           		<input type="text" class="form-control" id="examplename" name="name" value="<%=mDTO.getReviewName%>">
+				        </div>
+				           
+				           
+					</td>
+					<td></td>
+					
+					<td>
+						<div class="my-box">
+						별점
+						</div>
+					</td>
+					
+					<td></td>
+				
+					<td colspan="2">
+						<span class="star-input">
+						  <span class="input">
+						    <input type="radio" name="star" id="p1" value="1"><label for="p1">1</label>
+						    <input type="radio" name="star" id="p2" value="2"><label for="p2">2</label>
+						    <input type="radio" name="star" id="p3" value="3"><label for="p3">3</label>
+						    <input type="radio" name="star" id="p4" value="4"><label for="p4">4</label>
+						    <input type="radio" name="star" id="p5" value="5"><label for="p5">5</label>
+						    <input type="radio" name="star" id="p6" value="6"><label for="p6">6</label>
+						    <input type="radio" name="star" id="p7" value="7"><label for="p7">7</label>
+						    <input type="radio" name="star" id="p8" value="8"><label for="p8">8</label>
+						    <input type="radio" name="star" id="p9" value="9"><label for="p9">9</label>
+						    <input type="radio" name="star" id="p10" value="10"><label for="p10">10</label>
+						  </span>
+					</td>
+					
+					
+					</tr>
+					<tr>
+						<td colspan="6">
+							<div class="form-group">
+				           		<label class="sr-only" for="exampletext"></label>
+				           		<input type="text" class="form-control" id="exampletext" name="title" value="<%=mDTO.getTitle%>">
+				        	</div>
+				        </td>
+				     </tr>
+				     <tr>
+				     	<td colspan="6">
+				     		<textarea class="form-control"  rows="20" cols="100" name="content" value="<%=mDTO.getReviewContents%>"></textarea>
+				     	</td>
+			     	</tr>
+			     	<tr>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td>
+			     			
+			     		</td>
+		     		</tr>
 
-    <!-- Bootstrap core JavaScript -->
+
+				</table>
+					
+				</form>
+				<form enctype="multipart/form-data" method="POST" action="/reviewlist.do">
+				     		<input type="file" name="file" id="file" >
+				     		<input type="submit" value="파일 업로드">
+				     	</form>
+			     	<br/>
+			     	<br/>
+			     	<br/>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  </body>
+    
+    <!--starRev JavaScript -->
+    <script type="text/javascript" src="javascript/starRev.jsp"></script>
+    
+    
+	
+	</body>
 </html>

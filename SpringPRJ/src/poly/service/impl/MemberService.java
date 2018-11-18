@@ -35,4 +35,10 @@ public class MemberService implements IMemService{
 		return memMapper.getMemberdetail(mDTO);
 	}
 
+	@Override
+	public int writerevise(MemDTO mDTO) throws Exception {
+		
+		return memMapper.writerevise(mDTO);
+	}
+
 }
