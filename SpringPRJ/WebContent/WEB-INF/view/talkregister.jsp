@@ -146,16 +146,19 @@
 			     		<td></td>
 			     		<td></td>
 			     		<td>
-			     			<form enctype="multipart/form-data" method="post" action="">
-			     				<input type="file" name="file_input" id="f1" >
-			   			
-			     			</form>
+			     			
 			     		</td>
 			     		
 		     		</tr>
 				</table>
-				
 				</form>
+				<form enctype="multipart/form-data" method="POST" action="/reviewlist.do">
+				     			<input type="file" name="file" id="file" >
+				     			<input type="submit" value="파일 업로드">
+				     		</form>
+				    <br/>
+			     	<br/>
+			     	<br/>
 			</div>
 		</div>
 	</div>

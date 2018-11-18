@@ -30,4 +30,10 @@ public class EatService implements IEatService{
 		
 	}
 
+	@Override
+	public EatDTO getEatdetail(EatDTO eDTO) throws Exception {
+		
+		return eatMapper.getEatdetail(eDTO);
+	}
+
 }

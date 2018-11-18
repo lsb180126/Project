@@ -8,34 +8,47 @@
 			REVIEW_SEQ_NO,
 			TITLE,
 			REVIEW_CONTENTS,
-			
 			REG_DT,
 			CHG_DT,
-			REVIEW_NAME
-			
+			REVIEW_NAME,
+			USER_ID
 		) VALUES (
 			MEM_INFO_SEQ.NEXTVAL,
 			#{title},
 			#{reviewContents},
-			
 			SYSDATE,
 			SYSDATE,
-			#{reviewName}
-			
-		)
+			#{reviewName},
+			#{userId}
+		) 
 	</insert>
 	
 	
+	
 	<select id="getMemberList" resultType="MemDTO">
-		 SELECT REVIEW_SEQ_NO as reviewSeqNo,
-				TITLE as title,
-				REVIEW_CONTENTS as reviewContents,
-				USER_NAME as userName,
-				REG_DT as regDt,
-				CHG_DT as chgDt,
-				REVIEW_NAME as reviewName,
-				USER_ID as userId
-		 FROM REVIEW_INFO
+		 SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM REVIEW_INFO RI
+		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
 	</select>	
-		
+	
+	<select id="getMemberdetail" resultType="MemDTO">
+		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM REVIEW_INFO RI
+		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
+		 WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
+	</select>	
 </mapper>

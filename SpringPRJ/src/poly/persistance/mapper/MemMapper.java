@@ -12,5 +12,7 @@ public interface MemMapper  {
 	
 	int insertMember(MemDTO mDTO) throws Exception;
 
+	MemDTO getMemberdetail(MemDTO mDTO) throws Exception;
+
 	
 }

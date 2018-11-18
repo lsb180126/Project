@@ -30,4 +30,10 @@ public class TalkService implements ITalkService{
 		
 	}
 
+	@Override
+	public TalkDTO getTalkdetail(TalkDTO tDTO) throws Exception {
+		
+		return talkMapper.getTalkdetail(tDTO);
+	}
+
 }

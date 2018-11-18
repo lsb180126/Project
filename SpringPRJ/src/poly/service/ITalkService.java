@@ -9,6 +9,8 @@ public interface ITalkService {
 	List<TalkDTO> getMemberList() throws Exception;
 
 	int insertMember(TalkDTO tDTO) throws Exception;
+
+	TalkDTO getTalkdetail(TalkDTO tDTO) throws Exception;
 	
 	
 

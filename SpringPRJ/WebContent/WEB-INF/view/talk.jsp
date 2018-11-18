@@ -1,9 +1,21 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="poly.dto.TalkDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 
+%>
+<%
+
+	List<TalkDTO> tList = (List<TalkDTO>)request.getAttribute("tList");
+	
+	if (tList==null){
+		tList = new ArrayList<TalkDTO>();
+		
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -171,17 +183,24 @@
 				</tr>
 				
 				<tr>
-				<div>
-					<th><input type="checkbox"></th>
-					<th>锅龋</th>
-					<th colspan="3">力格</th>
-					<th>累己磊</th>
-					<th></th>
-					<th>累己老</th>
-				</div>
+					<div>
+						<th><input type="checkbox"></th>
+						<th>锅龋</th>
+						<th colspan="3">力格</th>
+						<th>累己磊</th>
+						<th>累己老</th>
+					</div>
 				</tr>
 				
-			
+				<% for(TalkDTO t : tList) { %>
+				<tr>
+					<td><input type="checkbox"></td>
+					<td><%=t.getTalkSeqNo() %></td>
+					<td colspan="3"><a href="/talkdetail.do?talkSeqNo=<%=t.getTalkSeqNo() %>"><%=t.getTitle() %></a></td>
+					<td><%=t.getUserName() %></td>
+					<td><%=t.getChgDt() %></td>
+				</tr>
+				<% } %>
 					
 		
 			</table>

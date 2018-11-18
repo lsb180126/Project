@@ -39,6 +39,16 @@ public class EatController {
 		
 		log.info("welcome eat");
 		
+		List<EatDTO> eList = eatService.getMemberList();
+		
+		for(EatDTO e : eList) {
+			log.info("eatSeqNo : " +e.getEatSeqNo());
+			log.info("title : " +e.getTitle());
+			log.info("userId : " +e.getUserId());
+			log.info("chgDt : " +e.getChgDt());
+		}
+		
+		model.addAttribute("eList", eList);
 		 
 		return "/eat";
 	}
@@ -54,9 +64,33 @@ public class EatController {
 		return "/eatregister";
 	}
 	
-	@RequestMapping(value="eatlist")
-	public String Eatlist(HttpServletRequest request, HttpServletResponse response, 
+	@RequestMapping(value="eatdetail")
+	public String Eatdetail(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
+		
+		log.info("welcome eatdetail");
+		
+		EatDTO eDTO = new EatDTO();
+		
+		String eatSeqNo = request.getParameter("eatSeqNo");
+		
+		eDTO.setEatSeqNo(eatSeqNo);
+		
+		eDTO=eatService.getEatdetail(eDTO);
+		
+		
+		log.info(eDTO.getTitle());
+		log.info(eDTO.getEatContents());
+		
+		
+		model.addAttribute("eDTO",eDTO); 
+		
+		return "/eatdetail";
+	}
+	
+	@RequestMapping(value="/eatlist", method=RequestMethod.POST)
+	public String Eatlist(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model, HttpSession session) throws Exception {
 		
 		log.info("welcome eatlist");
 		
@@ -65,7 +99,7 @@ public class EatController {
 		
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
-		
+		String userId= (String)session.getAttribute("id");
 		
 		
 		log.info("title : " + title);
@@ -75,15 +109,23 @@ public class EatController {
 		
 		eDTO.setTitle(title);
 		eDTO.setEatContents(content);
-		
+		eDTO.setUserId(userId);
 		
 		int result = eatService.insertMember(eDTO);
 		
+		log.info(result);
 		
-		model.addAttribute("msg", "등록이 완료되었습니다.");
-		model.addAttribute("url", "/eat.do");
+		String msg;
+		String url;
+		if(result==1) {
+			model.addAttribute("msg", "등록이 완료되었습니다.");
+			model.addAttribute("url", "/eat.do");
+		} else {
+			model.addAttribute("msg", "등록이 되지않았습니다.");
+			model.addAttribute("url", "/index.do");
+		}
 		 
-		return "/redirect2";
+		return "/alert";
 	}
 		
 }

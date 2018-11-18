@@ -1,5 +1,3 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <%@page import="poly.dto.MemDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -9,77 +7,37 @@
 
 %>
 <%
-
-	List<MemDTO> mList = (List<MemDTO>)request.getAttribute("mList");
-	
-	if (mList==null){
-		mList = new ArrayList<MemDTO>();
-		
-	}
-%> 
+	MemDTO mDTO = (MemDTO)request.getAttribute("mDTO");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
+		<title>review detail</title>
 		
-		
-
-
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-	
-	    <title>review</title>
-	
-	    <!-- Bootstrap core CSS -->
+	    
+	     <!-- Bootstrap core CSS -->
 	    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	    
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <!-- starRev CSS -->
+	    <link href="css/starRev.css" rel="stylesheet">
 	    
 	    <style>
-	    	
-	    	* {
-				  box-sizing: border-box;
-				}
-				
-				/* Style the search field */
-				form.example input[type=text] {
-				  padding: 10px;
-				  font-size: 17px;
-				  border: 1px solid grey;
-				  float: left;
-				  width: 80%;
-				  background: #f1f1f1;
-				}
-				
-				/* Style the submit button */
-				form.example button {
-				  float: left;
-				  width: 20%;
-				  padding: 10px;
-				  background: #2196F3;
-				  color: white;
-				  font-size: 17px;
-				  border: 1px solid grey;
-				  border-left: none; /* Prevent double borders */
-				  cursor: pointer;
-				}
-				
-				form.example button:hover {
-				  background: #0b7dda;
-				}
-				
-				/* Clear floats */
-				form.example::after {
-				  content: "";
-				  clear: both;
-				  display: table;
-				}
+	    .my-box { border:1px solid; padding: 5px;  }
 	    
+		
 	    
 	    </style>
 	    
-	   
+	    <script>
+	    
+		    
+	    
+	    
+	    </script>
 	    
 	</head>
 	<body>
@@ -94,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
           	
-          
+          	
             
             <li class="nav-item">
               <a class="nav-link" href="#">병원 찾기</a>
@@ -116,8 +74,7 @@
               <a class="nav-link" href="useful.do">유용한 정보</a>
             </li>
             
-              
-           <%if("".equals(id) || id == null) { %>
+             <%if("".equals(id) || id == null) { %>
             <li class="nav-item active">
               <a class="nav-link" href="login.do">Login
              	 <span class="sr-only">(current)</span>
@@ -151,94 +108,127 @@
     </nav>
 	
 	
-	<br/>
-	
 	<div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
+        
+        	<form action="/reviewlist.do" method="POST">
         	
 			<table class="table">
+				
 				<tr>
-					<td><input type="checkbox"></td>
-					<td>리뷰 정보</td>
+					
+					<th>리뷰</th>
 					<td>
-						<select>
-							<option>이름</option>
-							<option>제목</option>
-							<option>별점</option>
-							<option>작성자</option>
-						</select>
+						
+					</td>
+					<td></td>
+					<td>
+						
+					</td>
+					<td>
+						
+					</td>
+					<td>
+						<a href="review.do"><input type="button" value="목록"></a>
+					</td>
+					
+					
+				</tr>
+				
+				<tr>
+					<td>
+						<div class="my-box">
+							이름(병원/약국)
+						</div>	
+					</td>
+					<td>
+					
+						<div class="my-box">
+				           		<%=mDTO.getReviewName() %>
+				        </div>
+				           
+				           
+					</td>
+					
+					
+					<td>
+						<div class="my-box">
+						별점
+						</div>
 					</td>
 					
 					<td></td>
-					<td>
-						<form class="example" action="action_page.php">
-						  <input type="text" placeholder="Search.." name="search">
-						  <button type="submit"><i class="fa fa-search"></i></button>
-						</form>
-					</td>
-					<td>
+				
+					<td colspan="2">
+						<span class="star-input">
+						  <span class="input">
+						    <input type="radio" name="star" id="p1" value="1"><label for="p1">1</label>
+						    <input type="radio" name="star" id="p2" value="2"><label for="p2">2</label>
+						    <input type="radio" name="star" id="p3" value="3"><label for="p3">3</label>
+						    <input type="radio" name="star" id="p4" value="4"><label for="p4">4</label>
+						    <input type="radio" name="star" id="p5" value="5"><label for="p5">5</label>
+						    <input type="radio" name="star" id="p6" value="6"><label for="p6">6</label>
+						    <input type="radio" name="star" id="p7" value="7"><label for="p7">7</label>
+						    <input type="radio" name="star" id="p8" value="8"><label for="p8">8</label>
+						    <input type="radio" name="star" id="p9" value="9"><label for="p9">9</label>
+						    <input type="radio" name="star" id="p10" value="10"><label for="p10">10</label>
+						  </span>
 					</td>
 					
-					<td>
-						<a href="reviewregister.do"><input type="submit" value="등록"></a>
-					</td>
-				</tr>
-			
-				<tr>
-					<th><input type="checkbox"></th>
-					<th>번호</th>
-					<th>이름(병원/약국)</th>
-					<th colspan="2">제목</th>
-					<th>별점</th>
-					<th>작성자</th>
-				</tr>
-				
-				<% for(MemDTO m : mList) { %>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><%=m.getReviewSeqNo() %></td>
-					<td><%=m.getReviewName() %></a></td>
-					<td colspan="2"><a href="/reviewdetail.do?reviewSeqNo=<%=m.getReviewSeqNo() %>"><%=m.getTitle() %></a></td>
-					<td></td>
-					<td><%=m.getUserName() %></td>
-				</tr>
-				<% } %> 
-			
-				
 					
-				
-			</table>
-			<hr/>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-				 <li class="page-item">
-		      		<a class="page-link" href="#" aria-label="Previous" >
-		        		<span aria-hidden="true">&laquo;</span>
-		        		<span class="sr-only">Previous</span>
-		      		</a>
-		   		 </li> 
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item">
-		      			<a class="page-link" href="#" aria-label="Next">
-		        			<span aria-hidden="true">&raquo;</span>
-		        			<span class="sr-only">Next</span>
-		      			</a>
-		    		</li>
-				</ul>
-			</nav>
-			
-	 	</div>
-      </div>
-    </div>
-    
+					</tr>
+					<tr>
+						<td>
+							<div class="my-box">
+								제목
+							</div>
+						</td>
+						<td colspan="5">
+							<div class="my-box">
+				           		<%=mDTO.getTitle() %>
+				        	</div>
+				        </td>
+				     </tr>
+				     <tr>
+				     	<td colspan="6" height="500px">
+				     		<div class="my-box">
+				     			<%=mDTO.getReviewContents() %>
+				     		</div>	
+				     	</td>
+			     	</tr>
+			     	<tr>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td>
+			     			
+			     		</td>
+		     		</tr>
 
-    <!-- Bootstrap core JavaScript -->
+
+				</table>
+					
+				</form>
+				
+			     	<br/>
+			     	<br/>
+			     	<br/>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  </body>
+    
+    <!--starRev JavaScript -->
+    <script type="text/javascript" src="javascript/starRev.jsp"></script>
+    
+    
+	
+	</body>
 </html>

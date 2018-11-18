@@ -3,32 +3,46 @@
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
 <mapper namespace="poly.persistance.mapper.EatMapper">
 
-	<select id="getMemberList" resultType="EatDTO">
-		 SELECT EAT_SEQ_NO as eatSeqNo,
-				TITLE as title,
-				EAT_CONTENTS as eatContents,
-				USER_NAME as userName,
-				REG_DT as regDt,
-				CHG_DT as chgDt
-		 FROM EAT_INFO
-	</select>
-	
 	<insert id="insertMember" parameterType="EatDTO">
 		INSERT INTO EAT_INFO (
 			EAT_SEQ_NO,
 			TITLE,
 			EAT_CONTENTS,
-			
 			REG_DT,
-			CHG_DT
+			CHG_DT,
+			USER_ID
 		)VALUES (
 			EAT_INFO_SEQ.NEXTVAL,
 			#{title},
 			#{eatContents},
-			
 			SYSDATE,
-			SYSDATE
+			SYSDATE,
+			#{userId}
 		)
 	</insert>
-			
+	
+	<select id="getMemberList" resultType="EatDTO">
+		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
+				EI.TITLE as title,
+				EI.EAT_CONTENTS as eatContents,
+				EI.REG_DT as regDt,
+				EI.CHG_DT as chgDt,
+				EI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM EAT_INFO EI
+		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
+	</select>
+	
+	<select id="getEatdetail" resultType="EatDTO">
+		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
+				EI.TITLE as title,
+				EI.EAT_CONTENTS as eatContents,
+				EI.REG_DT as regDt,
+				EI.CHG_DT as chgDt,
+				EI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM EAT_INFO EI
+		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
+		 WHERE EI.EAT_SEQ_NO = #{eatSeqNo}
+	</select>		
 </mapper>

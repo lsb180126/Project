@@ -9,6 +9,8 @@ public interface IEatService {
 	List<EatDTO> getMemberList() throws Exception;
 
 	int insertMember(EatDTO uDTO) throws Exception;
+
+	EatDTO getEatdetail(EatDTO eDTO) throws Exception;
 	
 	
 

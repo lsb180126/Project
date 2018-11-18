@@ -121,16 +121,6 @@ public class ComController {
 	
 	
 	
-	@RequestMapping(value="talk", method=RequestMethod.GET)
-	public String Talk(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome talk");
-		
-		
-		 
-		return "/talk";
-	}
 	
 	
 	@RequestMapping(value="useful", method=RequestMethod.GET)
@@ -167,16 +157,6 @@ public class ComController {
 	
 	
 	
-	
-	@RequestMapping(value="talkregister", method=RequestMethod.GET)
-	public String Talkregister(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome talkregister");
-		
-		 
-		return "/talkregister";
-	}
 	
 	
 	

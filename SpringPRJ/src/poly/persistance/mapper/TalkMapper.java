@@ -12,5 +12,7 @@ public interface TalkMapper  {
 	
 	int insertMember(TalkDTO tDTO) throws Exception;
 
+	TalkDTO getTalkdetail(TalkDTO tDTO) throws Exception;
+
 	
 }

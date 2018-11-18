@@ -3,32 +3,47 @@
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
 <mapper namespace="poly.persistance.mapper.TalkMapper">
 
-	<select id="getMemberList" resultType="TalkDTO">
-		 SELECT TALK_SEQ_NO as talkSeqNo,
-				TITLE as title,
-				TALK_CONTENTS as talkContents,
-				USER_NAME as userName,
-				REG_DT as regDt,
-				CHG_DT as chgDt
-		 FROM TALK_INFO
-	</select>
-	
 	<insert id="insertMember" parameterType="TalkDTO">
 		INSERT INTO TALK_INFO (
 			TALK_SEQ_NO,
 			TITLE,
 			TALK_CONTENTS,
-			
 			REG_DT,
-			CHG_DT
+			CHG_DT,
+			USER_ID
 		)VALUES (
 			TALK_INFO_SEQ.NEXTVAL,
 			#{title},
 			#{talkContents},
-			
 			SYSDATE,
-			SYSDATE
+			SYSDATE,
+			#{userId}
 		)
 	</insert>
+	
+	<select id="getMemberList" resultType="TalkDTO">
+		 SELECT TI.TALK_SEQ_NO as talkSeqNo,
+				TI.TITLE as title,
+				TI.TALK_CONTENTS as talkContents,
+				TI.REG_DT as regDt,
+				TI.CHG_DT as chgDt,
+				TI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM TALK_INFO TI
+		 INNER JOIN USER_INFO UI ON TI.USER_ID = UI.USER_ID
+	</select>
+	
+	<select id="getTalkdetail" resultType="TalkDTO">
+		 SELECT TI.TALK_SEQ_NO as talkSeqNo,
+				TI.TITLE as title,
+				TI.TALK_CONTENTS as talkContents,
+				TI.REG_DT as regDt,
+				TI.CHG_DT as chgDt,
+				TI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM TALK_INFO TI
+		 INNER JOIN USER_INFO UI ON TI.USER_ID = UI.USER_ID
+		 WHERE TI.TALK_SEQ_NO = #{talkSeqNo}
+	</select>
 			
 </mapper>

@@ -4,11 +4,11 @@ public class MemDTO {
 	private String reviewSeqNo;
 	private String title;
 	private String reviewContents;
-	private String userName;
 	private String regDt;
 	private String chgDt;
 	private String reviewName;
 	private String userId;
+	private String userName;
 	
 	public String getReviewSeqNo() {
 		return reviewSeqNo;
@@ -27,12 +27,6 @@ public class MemDTO {
 	}
 	public void setReviewContents(String reviewContents) {
 		this.reviewContents = reviewContents;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 	public String getRegDt() {
 		return regDt;
@@ -57,6 +51,12 @@ public class MemDTO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	

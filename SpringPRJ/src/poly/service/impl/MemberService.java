@@ -29,4 +29,10 @@ public class MemberService implements IMemService{
 		return memMapper.insertMember(mDTO);
 	}
 
+	@Override
+	public MemDTO getMemberdetail(MemDTO mDTO) throws Exception {
+		
+		return memMapper.getMemberdetail(mDTO);
+	}
+
 }

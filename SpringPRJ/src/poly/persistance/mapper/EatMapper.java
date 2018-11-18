@@ -12,5 +12,7 @@ public interface EatMapper  {
 	
 	int insertMember(EatDTO eDTO) throws Exception;
 
+	EatDTO getEatdetail(EatDTO eDTO) throws Exception;
+
 	
 }

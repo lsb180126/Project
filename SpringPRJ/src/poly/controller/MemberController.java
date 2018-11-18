@@ -25,8 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import poly.dto.ComDTO;
 import poly.dto.MemDTO;
-
-
+import poly.dto.UserDTO;
 import poly.service.IMemService;
 
 import poly.service.impl.MemberService;
@@ -73,8 +72,35 @@ public class MemberController {
 		return "/reviewregister";
 	}
 	
+	@RequestMapping(value="reviewdetail")
+	public String Reviewdetail(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome reviewdetail");
+		
+		
+		
+		MemDTO mDTO = new MemDTO();
+		
+		String reviewSeqNo = request.getParameter("reviewSeqNo");
+		
+		mDTO.setReviewSeqNo(reviewSeqNo);
+		
+		mDTO=memberService.getMemberdetail(mDTO);
+		
+		log.info(mDTO.getReviewName());
+		log.info(mDTO.getTitle());
+		log.info(mDTO.getReviewContents());
+		
+		
+		model.addAttribute("mDTO",mDTO);
+		
+		
+		return "/reviewdetail";
+	}
+	
 	@RequestMapping(value="/reviewlist", method=RequestMethod.POST)
-	public String Reviewlist(HttpServletRequest request, HttpServletResponse response, ModelMap model
+	public String Reviewlist(HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session
 //			, @RequestParam("file") MultipartFile file,
 //			MultipartHttpServletRequest mhsr
 			) throws Exception {
@@ -86,7 +112,7 @@ public class MemberController {
 		String name = request.getParameter("name");
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
-		
+		String userId= (String)session.getAttribute("id");
 		
 		log.info("name : " + name);
 		log.info("title : " + title);
@@ -97,7 +123,7 @@ public class MemberController {
 		mDTO.setReviewName(name);
 		mDTO.setTitle(title);
 		mDTO.setReviewContents(content);
-		
+		mDTO.setUserId(userId);
 		
 		int result = memberService.insertMember(mDTO);
 		
@@ -134,27 +160,7 @@ public class MemberController {
 		return "/alert";
 	}
 	
-//	@RequestMapping(value="/Memberlist", method=RequestMethod.POST)
-//	public String memberlist(HttpServletRequest request, HttpServletResponse response, 
-//			ModelMap model) throws Exception {
-//		
-//		log.info("welcome memberlist");
-//		
-//		List<MemDTO> mList = memberService.getMemberList();
-//		
-//		for(MemDTO m : mList) {
-//			log.info("reviewSeqNo : " +m.getReviewSeqNo());
-//			log.info("reviewName : " +m.getReviewName());
-//			log.info("title : " +m.getTitle());
-//			log.info("userId : " +m.getUserId());
-//		}
-//		
-//		model.addAttribute("mList", mList);
-//		
-//		
-//		 
-//		return "/Memberlist";
-//	}
+
 	
 	
 	
