@@ -14,5 +14,11 @@ public interface BeautyMapper  {
 
 	BeautyDTO getBeautydetail(BeautyDTO bDTO) throws Exception;
 
+	List<BeautyDTO> getBeautyList2(BeautyDTO bDTO) throws Exception;
+
+	int beautyrevise(BeautyDTO bDTO) throws Exception;
+
+	int beautydelete(BeautyDTO bDTO) throws Exception;
+
 	
 }

@@ -36,4 +36,22 @@ public class SellService implements ISellService{
 		return sellMapper.getSelldetail(sDTO);
 	}
 
+	@Override
+	public List<SellDTO> getSellList2(SellDTO sDTO) throws Exception {
+		
+		return sellMapper.getSellList2(sDTO);
+	}
+
+	@Override
+	public int sellrevise(SellDTO sDTO) throws Exception {
+		
+		return sellMapper.sellrevise(sDTO);
+	}
+
+	@Override
+	public int selldelete(SellDTO sDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sellMapper.selldelete(sDTO);
+	}
+
 }

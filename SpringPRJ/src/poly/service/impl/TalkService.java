@@ -36,4 +36,31 @@ public class TalkService implements ITalkService{
 		return talkMapper.getTalkdetail(tDTO);
 	}
 
+	@Override
+	public List<TalkDTO> getTalkList2(TalkDTO tDTO) throws Exception {
+		
+		return talkMapper.getTalkList2(tDTO);
+	}
+
+	@Override
+	public TalkDTO getTalkdetail2(TalkDTO tDTO) throws Exception {
+		
+		return talkMapper.getTalkdetail2(tDTO);
+	}
+
+	@Override
+	public int talkrevise(TalkDTO tDTO) throws Exception {
+		
+		return talkMapper.talkrevise(tDTO);
+	}
+
+	@Override
+	public int talkdelete(TalkDTO tDTO) throws Exception {
+		
+		return talkMapper.talkdelete(tDTO);
+	}
+
+	
+	
+
 }

@@ -14,5 +14,11 @@ public interface EatMapper  {
 
 	EatDTO getEatdetail(EatDTO eDTO) throws Exception;
 
+	List<EatDTO> getEatList2(EatDTO eDTO) throws Exception;
+
+	int eatrevise(EatDTO eDTO) throws Exception;
+
+	int eatdelete(EatDTO eDTO) throws Exception;
+
 	
 }

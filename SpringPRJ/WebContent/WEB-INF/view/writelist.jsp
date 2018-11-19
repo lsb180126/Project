@@ -1,3 +1,7 @@
+<%@page import="poly.dto.BeautyDTO"%>
+<%@page import="poly.dto.SellDTO"%>
+<%@page import="poly.dto.EatDTO"%>
+<%@page import="poly.dto.TalkDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="poly.dto.MemDTO"%>
@@ -17,6 +21,42 @@
 		
 	}
 %> 
+<%
+
+	List<TalkDTO> tList = (List<TalkDTO>)request.getAttribute("tList");
+	
+	if (tList==null){
+		tList = new ArrayList<TalkDTO>();
+		
+	}
+%>
+<%
+
+	List<EatDTO> eList = (List<EatDTO>)request.getAttribute("eList");
+	
+	if (eList==null){
+		eList = new ArrayList<EatDTO>();
+		
+	}
+%>
+<%
+
+	List<SellDTO> sList = (List<SellDTO>)request.getAttribute("sList");
+	
+	if (sList==null){
+		sList = new ArrayList<SellDTO>();
+		
+	}
+%>
+<%
+
+	List<BeautyDTO> bList = (List<BeautyDTO>)request.getAttribute("bList");
+	
+	if (bList==null){
+		bList = new ArrayList<BeautyDTO>();
+		
+	}
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -192,9 +232,53 @@
 				</tr>
 				<% } %> 
 				
-			
+				<% for(TalkDTO t : tList) { %>
+				<tr>
+					<th>锅龋</th>
+					<th colspan="3">力格</th>
+					<th>累己磊</th>
+					<th>累己老</th>
+				</tr>
+				<tr>
 					
-		
+					<td><%=t.getTalkSeqNo() %></td>
+					<td colspan="3"><a href="/talkdetail2.do?talkSeqNo=<%=t.getTalkSeqNo() %>"><%=t.getTitle() %></a></td>
+					<td><%=t.getUserName() %></td>
+					<td><%=t.getChgDt() %></td>
+				</tr>
+				<% } %>
+				
+				<% for(EatDTO e : eList) { %>
+				
+				<tr>
+					
+					<td><%=e.getEatSeqNo() %></td>
+					<td colspan="3"><a href="/eatdetail2.do?eatSeqNo=<%=e.getEatSeqNo() %>"><%=e.getTitle() %></a></td>
+					<td><%=e.getUserName() %></td>
+					<td><%=e.getChgDt() %></td>
+				</tr>
+				<% } %>	
+				
+				<% for(SellDTO s : sList) { %>
+				<tr>
+					
+					<td><%=s.getSellSeqNo() %></td>
+					<td colspan="3"><a href="/selldetail2.do?sellSeqNo=<%=s.getSellSeqNo() %>"><%=s.getTitle() %></a></td>
+					<td><%=s.getUserName() %></td>
+					<td><%=s.getChgDt() %></td>
+				</tr>
+				<% } %>
+				
+				<% for(BeautyDTO b : bList) { %>
+				<tr>
+					
+					<td><%=b.getBeautySeqNo() %></td>
+					<td colspan="3"><a href="/beautydetail2.do?beautySeqNo=<%=b.getBeautySeqNo() %>"><%=b.getTitle() %></a></td>
+					<td><%=b.getUserName() %></td>
+					<td><%=b.getChgDt() %></td>
+				</tr>
+				<% } %>
+				
 			</table>
 			<hr/>
 			<nav aria-label="Page navigation example">

@@ -36,4 +36,22 @@ public class BeautyService implements IBeautyService{
 		return beautyMapper.getBeautydetail(bDTO);
 	}
 
+	@Override
+	public List<BeautyDTO> getBeautyList2(BeautyDTO bDTO) throws Exception {
+		
+		return beautyMapper.getBeautyList2(bDTO);
+	}
+
+	@Override
+	public int beautyrevise(BeautyDTO bDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return beautyMapper.beautyrevise(bDTO);
+	}
+
+	@Override
+	public int beautydelete(BeautyDTO bDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return beautyMapper.beautydelete(bDTO);
+	}
+
 }

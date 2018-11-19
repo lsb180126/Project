@@ -3,6 +3,7 @@ package poly.service;
 import java.util.List;
 
 import poly.dto.MemDTO;
+import poly.dto.TalkDTO;
 
 public interface IMemService {
 
@@ -19,5 +20,7 @@ public interface IMemService {
 	List<MemDTO> getReviewList() throws Exception;
 
 	int writedelete(MemDTO mDTO) throws Exception;
+
+	
 
 }

@@ -45,5 +45,42 @@
 		 INNER JOIN USER_INFO UI ON TI.USER_ID = UI.USER_ID
 		 WHERE TI.TALK_SEQ_NO = #{talkSeqNo}
 	</select>
+	
+	<select id="getTalkList2" resultType="TalkDTO" parameterType="TalkDTO">
+		 SELECT TI.TALK_SEQ_NO as talkSeqNo,
+				TI.TITLE as title,
+				TI.TALK_CONTENTS as talkContents,
+				TI.REG_DT as regDt,
+				TI.CHG_DT as chgDt,
+				TI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM TALK_INFO TI
+		 INNER JOIN USER_INFO UI ON TI.USER_ID = UI.USER_ID
+		 WHERE TI.USER_ID = #{userId}
+	</select>
+	
+	<select id="getTalkdetail2" resultType="TalkDTO">
+		 SELECT TI.TALK_SEQ_NO as talkSeqNo,
+				TI.TITLE as title,
+				TI.TALK_CONTENTS as talkContents,
+				TI.REG_DT as regDt,
+				TI.CHG_DT as chgDt,
+				TI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM TALK_INFO TI
+		 INNER JOIN USER_INFO UI ON TI.USER_ID = UI.USER_ID
+		 WHERE TI.TALK_SEQ_NO = #{talkSeqNo}
+	</select>
+	
+	<update id="talkrevise" parameterType="TalkDTO">
+		UPDATE TALK_INFO 
+		SET TITLE = #{title}, TALK_CONTENTS = #{talkContents}
+		WHERE TALK_SEQ_NO = #{talkSeqNo}
+	</update>
+	
+	<delete id="talkdelete" parameterType="TalkDTO">
+		DELETE FROM TALK_INFO
+		WHERE TALK_SEQ_NO = #{talkSeqNo}
+	</delete>
 			
 </mapper>

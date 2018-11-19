@@ -14,5 +14,11 @@ public interface SellMapper  {
 
 	SellDTO getSelldetail(SellDTO sDTO) throws Exception;
 
+	List<SellDTO> getSellList2(SellDTO sDTO) throws Exception;
+
+	int sellrevise(SellDTO sDTO) throws Exception;
+
+	int selldelete(SellDTO sDTO) throws Exception;
+
 	
 }

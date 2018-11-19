@@ -1,5 +1,3 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <%@page import="poly.dto.EatDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -9,77 +7,37 @@
 
 %>
 <%
-
-	List<EatDTO> eList = (List<EatDTO>)request.getAttribute("eList");
-	
-	if (eList==null){
-		eList = new ArrayList<EatDTO>();
-		
-	}
+	EatDTO eDTO = (EatDTO)request.getAttribute("eDTO");
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
+		<title>eat revise</title>
 		
-		
-
-
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-	
-	    <title>eat</title>
-	
-	    <!-- Bootstrap core CSS -->
+	    
+	     <!-- Bootstrap core CSS -->
 	    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	    
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <!-- starRev CSS -->
+	    <link href="css/starRev.css" rel="stylesheet">
 	    
 	    <style>
-	    	
-	    	* {
-				  box-sizing: border-box;
-				}
-				
-				/* Style the search field */
-				form.example input[type=text] {
-				  padding: 10px;
-				  font-size: 17px;
-				  border: 1px solid grey;
-				  float: left;
-				  width: 80%;
-				  background: #f1f1f1;
-				}
-				
-				/* Style the submit button */
-				form.example button {
-				  float: left;
-				  width: 20%;
-				  padding: 10px;
-				  background: #2196F3;
-				  color: white;
-				  font-size: 17px;
-				  border: 1px solid grey;
-				  border-left: none; /* Prevent double borders */
-				  cursor: pointer;
-				}
-				
-				form.example button:hover {
-				  background: #0b7dda;
-				}
-				
-				/* Clear floats */
-				form.example::after {
-				  content: "";
-				  clear: both;
-				  display: table;
-				}
+	    .my-box { border:1px solid; padding: 5px;  }
 	    
+		
 	    
 	    </style>
 	    
-	   
+	    <script>
+	    	
+		    
+	    
+	    
+	    </script>
 	    
 	</head>
 	<body>
@@ -95,6 +53,7 @@
           <ul class="navbar-nav ml-auto">
           	
           	
+            
             <li class="nav-item">
               <a class="nav-link" href="#">병원 찾기</a>
             </li>
@@ -115,7 +74,7 @@
               <a class="nav-link" href="useful.do">유용한 정보</a>
             </li>
             
-            <%if("".equals(id) || id == null) { %>
+             <%if("".equals(id) || id == null) { %>
             <li class="nav-item active">
               <a class="nav-link" href="login.do">Login
              	 <span class="sr-only">(current)</span>
@@ -149,91 +108,82 @@
     </nav>
 	
 	
-	<br/>
-	
 	<div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
         
+        	<form action="/eatrevise2.do" method="POST">
+        	
 			<table class="table">
+				
 				<tr>
 					
-					<td>간식 정보</td>
+					<th>간식 정보 수정</th>
 					<td>
-						<select>
-							<option>제목</option>
-							<option>작성자</option>
-							<option>작성일</option>
-						</select>
+						
 					</td>
-					
 					<td></td>
-					<td>
-						<form class="example" action="action_page.php">
-						  <input type="text" placeholder="Search.." name="search">
-						  <button type="submit"><i class="fa fa-search"></i></button>
-						</form>
-					</td>
-					<td>
-					</td>
 					
 					<td>
-						<a href="eatregister.do"><input type="button" value="등록"></a>
+						
 					</td>
+					<td>
+						<input type="hidden" value="<%=eDTO.getEatSeqNo()%>" name="eatSeqNo">
+						<input type="submit" value="수정">
+					</td>
+					<td>
+						<a href="/eatdetail2.do?eatSeqNo=<%=eDTO.getEatSeqNo() %>"><input type="button" value="이전"></a>
+					</td>
+					
+					
 				</tr>
 				
 				<tr>
-				<div>
-					
-					<th>번호</th>
-					<th colspan="3">제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</div>
-				</tr>
-				
-				<% for(EatDTO e : eList) { %>
-				<tr>
-					
-					<td><%=e.getEatSeqNo() %></td>
-					<td colspan="3"><a href="/eatdetail.do?eatSeqNo=<%=e.getEatSeqNo() %>"><%=e.getTitle() %></a></td>
-					<td><%=e.getUserName() %></td>
-					<td><%=e.getChgDt() %></td>
-				</tr>
-				<% } %>
-			
-					
-		
-			</table>
-			<hr/>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-				 <li class="page-item">
-		      		<a class="page-link" href="#" aria-label="Previous" >
-		        		<span aria-hidden="true">&laquo;</span>
-		        		<span class="sr-only">Previous</span>
-		      		</a>
-		   		 </li> 
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item">
-		      			<a class="page-link" href="#" aria-label="Next">
-		        			<span aria-hidden="true">&raquo;</span>
-		        			<span class="sr-only">Next</span>
-		      			</a>
-		    		</li>
-				</ul>
-			</nav>
-	 	</div>
-      </div>
-    </div>
-    
-
-    <!-- Bootstrap core JavaScript -->
+						<td colspan="6">
+							<div class="form-group">
+				           		<label class="sr-only" for="exampletext"></label>
+				           		<input type="text" class="form-control" id="exampletext" name="title" value="<%=eDTO.getTitle()%>">
+				        	</div>
+				        </td>
+				     </tr>
+				     <tr>
+				     	<td colspan="6">
+				     		<textarea class="form-control"  rows="20" cols="100" name="content"><%=eDTO.getEatContents() %></textarea>
+				     	</td>
+			     	</tr>
+			     	<tr>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td></td>
+			     		<td>
+			     			
+			     		</td>
+			     		
+		     		</tr>
+				</table>
+				</form>
+				<form enctype="multipart/form-data" method="POST" action="/reviewlist.do">
+				     			<input type="file" name="file" id="file" >
+				     			<input type="submit" value="파일 업로드">
+				     		</form>
+				    <br/>
+			     	<br/>
+			     	<br/>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  </body>
+    
+    <!--starRev JavaScript -->
+    <script type="text/javascript" src="javascript/starRev.jsp"></script>
+    
+    
+	
+	</body>
 </html>

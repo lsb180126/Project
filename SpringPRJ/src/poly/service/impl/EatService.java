@@ -36,4 +36,22 @@ public class EatService implements IEatService{
 		return eatMapper.getEatdetail(eDTO);
 	}
 
+	@Override
+	public List<EatDTO> getEatList2(EatDTO eDTO) throws Exception {
+		
+		return eatMapper.getEatList2(eDTO);
+	}
+
+	@Override
+	public int eatrevise(EatDTO eDTO) throws Exception {
+		
+		return eatMapper.eatrevise(eDTO);
+	}
+
+	@Override
+	public int eatdelete(EatDTO eDTO) throws Exception {
+		
+		return eatMapper.eatdelete(eDTO);
+	}
+
 }

@@ -44,5 +44,30 @@
 		 FROM EAT_INFO EI
 		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
 		 WHERE EI.EAT_SEQ_NO = #{eatSeqNo}
-	</select>		
+	</select>	
+	
+	<select id="getEatList2" resultType="EatDTO">
+		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
+				EI.TITLE as title,
+				EI.EAT_CONTENTS as eatContents,
+				EI.REG_DT as regDt,
+				EI.CHG_DT as chgDt,
+				EI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM EAT_INFO EI
+		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
+		 WHERE EI.USER_ID = #{userId}
+	</select>
+	
+	<update id="eatrevise" parameterType="EatDTO">
+		UPDATE EAT_INFO 
+		SET TITLE = #{title}, EAT_CONTENTS = #{eatContents}
+		WHERE EAT_SEQ_NO = #{eatSeqNo}
+	</update>
+	
+	<delete id="eatdelete" parameterType="EatDTO">
+		DELETE FROM EAT_INFO
+		WHERE EAT_SEQ_NO = #{eatSeqNo}
+	</delete>
+		
 </mapper>

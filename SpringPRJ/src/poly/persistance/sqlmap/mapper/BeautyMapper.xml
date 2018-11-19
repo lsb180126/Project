@@ -45,5 +45,29 @@
 		 INNER JOIN USER_INFO UI ON BI.USER_ID = UI.USER_ID
 		 WHERE BI.BEAUTY_SEQ_NO = #{beautySeqNo}
 	</select>
+	
+	<select id="getBeautyList2" resultType="BeautyDTO" parameterType="BeautyDTO">
+		 SELECT BI.BEAUTY_SEQ_NO as beautySeqNo,
+				BI.TITLE as title,
+				BI.BEAUTY_CONTENTS as beautyContents,
+				BI.REG_DT as regDt,
+				BI.CHG_DT as chgDt,
+				BI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM BEAUTY_INFO BI
+		 INNER JOIN USER_INFO UI ON BI.USER_ID = UI.USER_ID
+		 WHERE BI.USER_ID = #{userId}
+	</select>
+	
+	<update id="beautyrevise" parameterType="BeautyDTO">
+		UPDATE BEAUTY_INFO
+		SET TITLE = #{title}, BEAUTY_CONTENTS = #{beautyContents}
+		WHERE BEAUTY_SEQ_NO = #{beautySeqNo}
+	</update>
+	
+	<delete id="beautydelete" parameterType="BeautyDTO">
+		DELETE FROM BEAUTY_INFO
+		WHERE BEAUTY_SEQ_NO = #{beautySeqNo}
+	</delete>
 			
 </mapper>
