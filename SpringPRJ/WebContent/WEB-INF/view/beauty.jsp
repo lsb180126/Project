@@ -1,9 +1,21 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="poly.dto.BeautyDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 
+%>
+<%
+
+	List<BeautyDTO> bList = (List<BeautyDTO>)request.getAttribute("bList");
+	
+	if (bList==null){
+		bList = new ArrayList<BeautyDTO>();
+		
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -121,7 +133,7 @@
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
 	              <a class="dropdown-item" href="mylist.do">회원정보</a>
-	              <a class="dropdown-item" href="#">글 작성 목록</a>
+	              <a class="dropdown-item" href="writelist.do">글 작성 목록</a>
               </div>
             </li>
              <%  }  %>
@@ -145,7 +157,7 @@
         
 			<table class="table">
 				<tr>
-					<td><input type="checkbox"></td>
+					
 					<td>미용 정보</td>
 					<td>
 						<select>
@@ -172,16 +184,23 @@
 				
 				<tr>
 				<div>
-					<th><input type="checkbox"></th>
+					
 					<th>번호</th>
 					<th colspan="3">제목</th>
 					<th>작성자</th>
-					<th></th>
 					<th>작성일</th>
 				</div>
 				</tr>
 				
-			
+				<% for(BeautyDTO b : bList) { %>
+				<tr>
+					
+					<td><%=b.getBeautySeqNo() %></td>
+					<td colspan="3"><a href="/beautydetail.do?beautySeqNo=<%=b.getBeautySeqNo() %>"><%=b.getTitle() %></a></td>
+					<td><%=b.getUserName() %></td>
+					<td><%=b.getChgDt() %></td>
+				</tr>
+				<% } %>
 					
 		
 			</table>

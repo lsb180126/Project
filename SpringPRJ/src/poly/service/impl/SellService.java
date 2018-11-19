@@ -18,9 +18,9 @@ public class SellService implements ISellService{
 	private SellMapper sellMapper;
 
 	@Override
-	public List<SellDTO> getMemberList() throws Exception {
+	public List<SellDTO> getSellList() throws Exception {
 		
-		return sellMapper.getMemberList();
+		return sellMapper.getSellList();
 	}
 
 	@Override
@@ -28,6 +28,12 @@ public class SellService implements ISellService{
 		
 		return sellMapper.insertMember(sDTO);
 		
+	}
+
+	@Override
+	public SellDTO getSelldetail(SellDTO sDTO) throws Exception {
+		
+		return sellMapper.getSelldetail(sDTO);
 	}
 
 }

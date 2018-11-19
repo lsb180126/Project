@@ -6,7 +6,7 @@ import poly.dto.TalkDTO;
 
 public interface ITalkService {
 
-	List<TalkDTO> getMemberList() throws Exception;
+	List<TalkDTO> getTalkList() throws Exception;
 
 	int insertMember(TalkDTO tDTO) throws Exception;
 

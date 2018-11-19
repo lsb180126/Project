@@ -39,7 +39,7 @@ public class EatController {
 		
 		log.info("welcome eat");
 		
-		List<EatDTO> eList = eatService.getMemberList();
+		List<EatDTO> eList = eatService.getEatList();
 		
 		for(EatDTO e : eList) {
 			log.info("eatSeqNo : " +e.getEatSeqNo());

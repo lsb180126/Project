@@ -92,7 +92,7 @@
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
 	              <a class="dropdown-item" href="mylist.do">회원정보</a>
-	              <a class="dropdown-item" href="#">글 작성 목록</a>
+	              <a class="dropdown-item" href="writelist.do">글 작성 목록</a>
               </div>
             </li>
              <%  }  %>
@@ -161,7 +161,9 @@
 					<td></td>
 				
 					<td colspan="2">
-						<%=tDTO.getChgDt() %>
+						<div class="my-box">
+							<%=tDTO.getChgDt() %>
+						</div>
 					</td>
 					
 					
@@ -180,7 +182,7 @@
 				     </tr>
 				     <tr>
 				     	<td colspan="6" height="500px">
-				     		<div class="my-box">
+				     		<div class="my-box" style="height:600px;">
 				     			<%=tDTO.getTalkContents() %>
 				     		</div>	
 				     	</td>

@@ -23,9 +23,7 @@
 		) 
 	</insert>
 	
-	
-	
-	<select id="getMemberList" resultType="MemDTO">
+	<select id="getMemberList" parameterType="MemDTO" resultType="MemDTO">
 		 SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
 				RI.TITLE as title,
 				RI.REVIEW_CONTENTS as reviewContents,
@@ -36,6 +34,8 @@
 				UI.USER_NAME as userName
 		 FROM REVIEW_INFO RI
 		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
+		 WHERE RI.USER_ID = #{userId}
+		 
 	</select>	
 	
 	<select id="getMemberdetail" resultType="MemDTO">
@@ -52,10 +52,44 @@
 		 WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
 	</select>	
 	
-	<update id="writerevise" parameterType="MemDTO" >
-		UPDATE REVIEW_INFO RI
-		SET RI.TITLE = #{title}, RI.REVIEW_CONTENTS = #{content}, RI.REVIEW_NAME = #{name}
-		WHERE USER_INFO.USER_ID = #{userId}
+	<select id="getReviewList" resultType="MemDTO">
+		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM REVIEW_INFO RI
+		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
+	</select>
+	
+	<select id="getWritedetail" resultType="MemDTO">
+		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM REVIEW_INFO RI
+		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
+		 WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
+	</select>	
+	
+	
+	<update id="writerevise" parameterType="MemDTO">
+		UPDATE REVIEW_INFO 
+		SET TITLE = #{title}, REVIEW_CONTENTS = #{reviewContents}, REVIEW_NAME = #{reviewName}
+		WHERE REVIEW_SEQ_NO = #{reviewSeqNo}
 	</update>
+	
+	<delete id="writedelete" parameterType="MemDTO">
+		DELETE FROM REVIEW_INFO
+		WHERE REVIEW_SEQ_NO = #{reviewSeqNo}
+	</delete>
+	
 	
 </mapper>

@@ -2,33 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
 <mapper namespace="poly.persistance.mapper.SellMapper">
-
-	<select id="getMemberList" resultType="SellDTO">
-		 SELECT SELL_SEQ_NO as sellSeqNo,
-				TITLE as title,
-				SELL_CONTENTS as sellContents,
-				USER_NAME as userName,
-				REG_DT as regDt,
-				CHG_DT as chgDt
-		 FROM SELL_INFO
-	</select>
 	
 	<insert id="insertMember" parameterType="SellDTO">
 		INSERT INTO SELL_INFO (
 			SELL_SEQ_NO,
 			TITLE,
 			SELL_CONTENTS,
-			
 			REG_DT,
-			CHG_DT
+			CHG_DT,
+			USER_ID
 		)VALUES (
 			SELL_INFO_SEQ.NEXTVAL,
 			#{title},
 			#{sellContents},
-			
 			SYSDATE,
-			SYSDATE
+			SYSDATE,
+			#{userId}
 		)
 	</insert>
-			
+	
+	<select id="getSellList" resultType="SellDTO">
+		 SELECT SI.SELL_SEQ_NO as sellSeqNo,
+				SI.TITLE as title,
+				SI.SELL_CONTENTS as sellContents,
+				SI.REG_DT as regDt,
+				SI.CHG_DT as chgDt,
+				SI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM SELL_INFO SI
+		 INNER JOIN USER_INFO UI ON SI.USER_ID = UI.USER_ID
+	</select>
+	
+	<select id="getSelldetail" resultType="SellDTO">
+		 SELECT SI.SELL_SEQ_NO as sellSeqNo,
+				SI.TITLE as title,
+				SI.SELL_CONTENTS as sellContents,
+				SI.REG_DT as regDt,
+				SI.CHG_DT as chgDt,
+				SI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM SELL_INFO SI
+		 INNER JOIN USER_INFO UI ON SI.USER_ID = UI.USER_ID
+		 WHERE SI.SELL_SEQ_NO = #{sellSeqNo}
+	</select>
+	
 </mapper>

@@ -278,8 +278,8 @@
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist">회원정보</a>
-	              <a class="dropdown-item" href="#">글 작성 목록</a>
+	              <a class="dropdown-item" href="mylist.do">회원정보</a>
+	              <a class="dropdown-item" href="writelist.do">글 작성 목록</a>
               </div>
             </li>
              <%  }  %>

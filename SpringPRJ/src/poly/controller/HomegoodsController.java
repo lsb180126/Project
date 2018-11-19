@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.BeautyDTO;
 import poly.dto.HomegoodsDTO;
+import poly.dto.SellDTO;
 import poly.dto.TalkDTO;
 import poly.service.IBeautyService;
 import poly.service.IHomegoodsService;
@@ -41,12 +42,23 @@ public class HomegoodsController {
 		
 		log.info("welcome homegoods");
 		
-		 
+		List<HomegoodsDTO> hList = homegoodsService.getHomegoodsList();
+		
+		for(HomegoodsDTO h : hList) {
+			log.info("homegoodsSeqNo : " +h.getHomegoodsSeqNo());
+			log.info("title : " +h.getTitle());
+			log.info("userId : " +h.getUserId());
+			log.info("chgDt : " +h.getChgDt());
+		}
+		
+		model.addAttribute("hList", hList); 
+		
+		
 		return "/homegoods";
 	}
 	
 	
-	@RequestMapping(value="homegoodsregister", method=RequestMethod.GET)
+	@RequestMapping(value="homegoodsregister")
 	public String Homegoodsregisterr(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -56,37 +68,65 @@ public class HomegoodsController {
 		return "/homegoodsregister";
 	}
 	
-	@RequestMapping(value="homegoodslist") 
+	@RequestMapping(value="homegoodslist", method=RequestMethod.POST) 
 	public String Homegoodslist(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
+			ModelMap model, HttpSession session) throws Exception {
 		
 		log.info("welcome homegoodslist");
 		
-		
-		
-		
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
-		
-		
+		String userId= (String)session.getAttribute("id");
 		
 		log.info("title : " + title);
 		log.info("content : " + content);
 		
 		HomegoodsDTO hDTO = new HomegoodsDTO();
 		
-		hDTO .setTitle(title);
-		hDTO .setHomegoodsContents(content);
-		
+		hDTO.setTitle(title);
+		hDTO.setHomegoodsContents(content);
+		hDTO.setUserId(userId);
 		
 		int result = homegoodsService.insertMember(hDTO);
+		log.info(result);
 		
-		
-		model.addAttribute("msg", "등록이 완료되었습니다.");
-		model.addAttribute("url", "/homegoods.do");
+		String msg;
+		String url;
+		if(result==1) {
+			model.addAttribute("msg", "등록이 완료되었습니다.");
+			model.addAttribute("url", "/homegoods.do");
+		} else {
+			model.addAttribute("msg", "등록이 되지않았습니다.");
+			model.addAttribute("url", "/index.do");
+		}
 		 
-		return "/redirect2";
+		return "/alert";
 	}
+	
+	@RequestMapping(value="homegoodsdetail")
+	public String Homegoodsdetail(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome homegoodsdetail");
+		
+		HomegoodsDTO hDTO = new HomegoodsDTO();
+		
+		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
+		
+		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
+		
+		hDTO=homegoodsService.getHomegoodsdetail(hDTO);
+		
+		
+		log.info(hDTO.getTitle());
+		log.info(hDTO.getHomegoodsContents());
+		
+		
+		model.addAttribute("hDTO",hDTO); 
+		
+		return "/homegoodsdetail";
+	}
+	
 	
 	
 }

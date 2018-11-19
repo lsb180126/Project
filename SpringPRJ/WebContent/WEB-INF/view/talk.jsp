@@ -133,7 +133,7 @@
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
 	              <a class="dropdown-item" href="mylist.do">회원정보</a>
-	              <a class="dropdown-item" href="#">글 작성 목록</a>
+	              <a class="dropdown-item" href="writelist.do">글 작성 목록</a>
               </div>
             </li>
              <%  }  %>
@@ -157,7 +157,7 @@
         
 			<table class="table">
 				<tr>
-					<td><input type="checkbox"></td>
+					
 					<td>자유 토크</td>
 					<td>
 						<select>
@@ -184,7 +184,7 @@
 				
 				<tr>
 					<div>
-						<th><input type="checkbox"></th>
+						
 						<th>번호</th>
 						<th colspan="3">제목</th>
 						<th>작성자</th>
@@ -194,7 +194,7 @@
 				
 				<% for(TalkDTO t : tList) { %>
 				<tr>
-					<td><input type="checkbox"></td>
+					
 					<td><%=t.getTalkSeqNo() %></td>
 					<td colspan="3"><a href="/talkdetail.do?talkSeqNo=<%=t.getTalkSeqNo() %>"><%=t.getTitle() %></a></td>
 					<td><%=t.getUserName() %></td>

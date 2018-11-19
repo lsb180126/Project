@@ -6,9 +6,11 @@ import poly.dto.BeautyDTO;
 
 public interface IBeautyService {
 
-	List<BeautyDTO> getMemberList() throws Exception;
-
 	int insertMember(BeautyDTO bDTO) throws Exception;
+
+	List<BeautyDTO> getBeautyList() throws Exception;
+
+	BeautyDTO getBeautydetail(BeautyDTO bDTO) throws Exception;
 	
 	
 

@@ -41,12 +41,22 @@ public class BeautyController {
 		
 		log.info("welcome beauty");
 		
-		 
+		List<BeautyDTO> bList = beautyService.getBeautyList();
+		
+		for(BeautyDTO b : bList) {
+			log.info("beautySeqNo : " +b.getBeautySeqNo());
+			log.info("title : " +b.getTitle());
+			log.info("userId : " +b.getUserId());
+			log.info("chgDt : " +b.getChgDt());
+		}
+		
+		model.addAttribute("bList", bList);
+		
 		return "/beauty";
 	}
 	
 	
-	@RequestMapping(value="beautyregister", method=RequestMethod.GET)
+	@RequestMapping(value="beautyregister")
 	public String Beautyregister(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -56,36 +66,64 @@ public class BeautyController {
 		return "/beautyregister";
 	}
 	
-	@RequestMapping(value="beautylist") 
+	@RequestMapping(value="beautylist", method=RequestMethod.POST) 
 	public String Beautylist(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
+			ModelMap model, HttpSession session) throws Exception {
 		
 		log.info("welcome beautylist");
 		
-		
-		
-		
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
-		
-		
+		String userId= (String)session.getAttribute("id");
 		
 		log.info("title : " + title);
 		log.info("content : " + content);
 		
 		BeautyDTO bDTO = new BeautyDTO();
 		
-		bDTO .setTitle(title);
-		bDTO .setBeautyContents(content);
-		
+		bDTO.setTitle(title);
+		bDTO.setBeautyContents(content);
+		bDTO.setUserId(userId);
 		
 		int result = beautyService.insertMember(bDTO);
+		log.info(result);
 		
+		String msg;
+		String url;
+		if(result==1) {
+			model.addAttribute("msg", "등록이 완료되었습니다.");
+			model.addAttribute("url", "/beauty.do");
+		} else {
+			model.addAttribute("msg", "등록이 되지않았습니다.");
+			model.addAttribute("url", "/index.do");
+		}
 		
-		model.addAttribute("msg", "등록이 완료되었습니다.");
-		model.addAttribute("url", "/beauty.do");
 		 
-		return "/redirect2";
+		return "/alert";
 	}
+	
+	@RequestMapping(value="beautydetail")
+	public String Beautydetail(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
 		
+		log.info("welcome beautydetail");
+		
+		BeautyDTO bDTO = new BeautyDTO();
+		
+		String beautySeqNo = request.getParameter("beautySeqNo");
+		
+		bDTO.setBeautySeqNo(beautySeqNo);
+		
+		bDTO=beautyService.getBeautydetail(bDTO);
+		
+		
+		log.info(bDTO.getTitle());
+		log.info(bDTO.getBeautyContents());
+		
+		
+		model.addAttribute("bDTO",bDTO); 
+		
+		return "/beautydetail";
+	}
+	
 }

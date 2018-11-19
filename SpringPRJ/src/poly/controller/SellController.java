@@ -41,12 +41,22 @@ public class SellController {
 		
 		log.info("welcome sell");
 		
-		 
+		List<SellDTO> sList = sellService.getSellList();
+		
+		for(SellDTO s : sList) {
+			log.info("sellSeqNo : " +s.getSellSeqNo());
+			log.info("title : " +s.getTitle());
+			log.info("userId : " +s.getUserId());
+			log.info("chgDt : " +s.getChgDt());
+		}
+		
+		model.addAttribute("sList", sList);
+		
 		return "/sell";
 	}
 	
 	
-	@RequestMapping(value="sellregister", method=RequestMethod.GET)
+	@RequestMapping(value="sellregister")
 	public String Sellregister(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -56,37 +66,63 @@ public class SellController {
 		return "/sellregister";
 	}
 	
-	@RequestMapping(value="selllist") 
+	@RequestMapping(value="selllist", method=RequestMethod.POST) 
 	public String Selllist(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
+			ModelMap model, HttpSession session) throws Exception {
 		
 		log.info("welcome selllist");
 		
-		
-		
-		
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
-		
-		
+		String userId= (String)session.getAttribute("id");
 		
 		log.info("title : " + title);
 		log.info("content : " + content);
 		
 		SellDTO sDTO = new SellDTO();
 		
-		sDTO .setTitle(title);
-		sDTO .setSellContents(content);
-		
+		sDTO.setTitle(title);
+		sDTO.setSellContents(content);
+		sDTO.setUserId(userId);
 		
 		int result = sellService.insertMember(sDTO);
+		log.info(result);
 		
-		
-		model.addAttribute("msg", "등록이 완료되었습니다.");
-		model.addAttribute("url", "/sell.do");
+		String msg;
+		String url;
+		if(result==1) {
+			model.addAttribute("msg", "등록이 완료되었습니다.");
+			model.addAttribute("url", "/sell.do");
+		} else {
+			model.addAttribute("msg", "등록이 되지않았습니다.");
+			model.addAttribute("url", "/index.do");
+		}
 		 
-		return "/redirect2";
+		return "/alert";
 	}
 	
+	@RequestMapping(value="selldetail")
+	public String Talkdetail(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome selldetail");
+		
+		SellDTO sDTO = new SellDTO();
+		
+		String sellSeqNo = request.getParameter("sellSeqNo");
+		
+		sDTO.setSellSeqNo(sellSeqNo);
+		
+		sDTO=sellService.getSelldetail(sDTO);
+		
+		
+		log.info(sDTO.getTitle());
+		log.info(sDTO.getSellContents());
+		
+		
+		model.addAttribute("sDTO",sDTO); 
+		
+		return "/selldetail";
+	}
 		
 }

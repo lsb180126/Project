@@ -1,9 +1,21 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="poly.dto.SellDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 
+%>
+<%
+
+	List<SellDTO> sList = (List<SellDTO>)request.getAttribute("sList");
+	
+	if (sList==null){
+		sList = new ArrayList<SellDTO>();
+		
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -121,7 +133,7 @@
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
 	              <a class="dropdown-item" href="mylist.do">회원정보</a>
-	              <a class="dropdown-item" href="#">글 작성 목록</a>
+	              <a class="dropdown-item" href="writelist.do">글 작성 목록</a>
               </div>
             </li>
              <%  }  %>
@@ -145,7 +157,7 @@
         
 			<table class="table">
 				<tr>
-					<td><input type="checkbox"></td>
+					
 					<td>분양 정보</td>
 					<td>
 						<select>
@@ -172,15 +184,23 @@
 				
 				<tr>
 				<div>
-					<th><input type="checkbox"></th>
+					
 					<th>번호</th>
 					<th colspan="3">제목</th>
 					<th>작성자</th>
-					<th></th>
 					<th>작성일</th>
 				</div>
 				</tr>
 				
+				<% for(SellDTO s : sList) { %>
+				<tr>
+					
+					<td><%=s.getSellSeqNo() %></td>
+					<td colspan="3"><a href="/selldetail.do?sellSeqNo=<%=s.getSellSeqNo() %>"><%=s.getTitle() %></a></td>
+					<td><%=s.getUserName() %></td>
+					<td><%=s.getChgDt() %></td>
+				</tr>
+				<% } %>
 			
 					
 		

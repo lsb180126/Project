@@ -36,20 +36,16 @@ public class WriteController {
 	
 	
 	@RequestMapping(value="writelist")
-	public String Writelist(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model, HttpSession session) throws Exception {
+	public String Writelist(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
 		
 		log.info("welcome writelist");
 		
-		String id = (String)session.getAttribute("id");
+		MemDTO mDTO = new MemDTO();
+		String userId = (String)session.getAttribute("id");
+		mDTO.setUserId(userId);
 		
-		UserDTO uDTO = new UserDTO();
-		
-		uDTO.setUserId(id);
-		
-		
-		
-		List<MemDTO> mList = memberService.getMemberList();
+		List<MemDTO> mList = memberService.getMemberList(mDTO);
 		
 		for(MemDTO m : mList) {
 			log.info("reviewSeqNo : " +m.getReviewSeqNo());
@@ -65,36 +61,76 @@ public class WriteController {
 		return "/writelist";
 	}
 	
-	@RequestMapping(value="writerevise")
-	public String writerevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	@RequestMapping(value="writedetail")
+	public String writedetail(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
 		
-		log.info("welcome writerevise");
+		log.info("welcome writedetail");
 		
-		String id = (String)session.getAttribute("id");
 		
 		MemDTO mDTO = new MemDTO();
 		
-		mDTO.setUserId(id);
+		String reviewSeqNo = request.getParameter("reviewSeqNo");
+
+		mDTO.setReviewSeqNo(reviewSeqNo);
 		
-		mDTO=memberService.getMemberList(mDTO);
+		
+		mDTO=memberService.getWritedetail(mDTO);
 		
 		log.info(mDTO.getReviewName());
 		log.info(mDTO.getTitle());
 		log.info(mDTO.getReviewContents());
-		log.info(mDTO.getUserName());
+		
 		
 		
 		model.addAttribute("mDTO",mDTO);
 		
 		
 		
-		return "/mylistrevise";
+		return "/writedetail";
+		
 		
 	}
 	
+	@RequestMapping(value="writerevise")
+	public String writerevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome writerevise");
+		
+		
+		MemDTO mDTO = new MemDTO();
+		
+		String reviewSeqNo = request.getParameter("reviewSeqNo");
+		
+		
+		log.info(reviewSeqNo);
+		
+		
+		mDTO.setReviewSeqNo(reviewSeqNo);
+		
+		mDTO=memberService.getWritedetail(mDTO);
+		
+		log.info(mDTO.getReviewName());
+		log.info(mDTO.getTitle());
+		log.info(mDTO.getReviewContents());
+		
+		
+		
+		model.addAttribute("mDTO",mDTO);
+		
+		
+		
+		return "/writerevise";
+		
+		
+	}
+	
+	
+	
+	
 	@RequestMapping(value="writerevise2")
-	public String writerevise2(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public String writerevise2(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception {
 		
 		log.info("welcome writerevise2");
@@ -102,18 +138,18 @@ public class WriteController {
 		String name = request.getParameter("name");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String userId = (String)session.getAttribute("id");
+		String reviewSeqNo = request.getParameter("reviewSeqNo");
 		
 		log.info(name);
 		log.info(title);
 		log.info(content);
+		log.info(reviewSeqNo);
 		
-		UserDTO uDTO = new UserDTO();
 		MemDTO mDTO = new MemDTO();
 		mDTO.setReviewName(name);
 		mDTO.setTitle(title);
 		mDTO.setReviewContents(content);
-		uDTO.setUserId(userId);
+		mDTO.setReviewSeqNo(reviewSeqNo);
 		
 		int result = memberService.writerevise(mDTO);
 		log.info(result);
@@ -136,5 +172,40 @@ public class WriteController {
 		return "/alert";
 		
 	}
+	
+	@RequestMapping(value="writedelete")
+	public String writedelete(HttpServletRequest request, HttpServletResponse response,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome writedelte");
+		
+		
+		String reviewSeqNo = request.getParameter("reviewSeqNo");
+		log.info(reviewSeqNo);
+		
+		MemDTO mDTO = new MemDTO();
+		
+		mDTO.setReviewSeqNo(reviewSeqNo);
+		
+		int result = memberService.writedelete(mDTO);
+		log.info(result);
+		
+		String url;
+		String msg;
+		if(result == 1) {
+			model.addAttribute("msg", "삭제되었습니다.");
+			model.addAttribute("url", "/index.do");
+		} else {
+			model.addAttribute("msg", "실패하였습니다.");
+			model.addAttribute("url", "/writelist.do");
+		}
+		
+		
+		
+		
+		return "/alert";
+		
+	}
+	
 		
 }

@@ -8,7 +8,7 @@ import poly.dto.TalkDTO;
 @Mapper("TalkMapper")
 public interface TalkMapper  {
 
-	List<TalkDTO> getMemberList()throws Exception;
+	List<TalkDTO> getTalkList()throws Exception;
 	
 	int insertMember(TalkDTO tDTO) throws Exception;
 

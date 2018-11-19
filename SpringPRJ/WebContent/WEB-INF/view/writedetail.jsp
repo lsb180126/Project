@@ -1,7 +1,4 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <%@page import="poly.dto.MemDTO"%>
-<%@page import="poly.dto.UserDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -10,24 +7,13 @@
 
 %>
 <%
-	
-	List<MemDTO> mList = (List<MemDTO>)request.getAttribute("mList");
-	
-	if (mList==null){
-		mList = new ArrayList<MemDTO>();
-		
-	}
-%> 
-<%
-	String name = (String) request.getAttribute("name");
-	String title = (String) request.getAttribute("title");
-	String content = (String) request.getAttribute("content");
+	MemDTO mDTO = (MemDTO)request.getAttribute("mDTO");
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
-		<title>review revise</title>
+		<title>write detail</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
@@ -106,7 +92,7 @@
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
 	              <a class="dropdown-item" href="mylist.do">회원정보</a>
-	              <a class="dropdown-item" href="#">글 작성 목록</a>
+	              <a class="dropdown-item" href="writelist.do">글 작성 목록</a>
               </div>
             </li>
              <%  }  %>
@@ -126,42 +112,46 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        	<form action="/writerevise2.do" method="POST">
+        	<form action="/writelist.do" method="POST">
         	
 			<table class="table">
 				
 				<tr>
 					
-					<th>리뷰 수정</th>
+					<th>리뷰</th>
 					<td>
 						
 					</td>
 					<td></td>
+					
 					<td>
-						
+						<a href="/writerevise.do?reviewSeqNo=<%=mDTO.getReviewSeqNo() %>"><input type="button" value="수정"></a>
 					</td>
 					<td>
-						<input type="submit" value="수정">
-					</td>
+						<a href="/writedelete.do?reviewSeqNo=<%=mDTO.getReviewSeqNo() %>"><input type="button" value="삭제"></a>
+					</td> 
 					<td>
-						<a href="writelist.do"><input type="button" value="이전"></a>
+						<a href="writelist.do"><input type="button" value="목록"></a>
 					</td>
 					
 					
 				</tr>
 				
 				<tr>
-					
+					<td>
+						<div class="my-box">
+							이름(병원/약국)
+						</div>	
+					</td>
 					<td>
 					
-						<div class="form-group">
-				           		<label class="sr-only" for="examplename"></label>
-				           		<input type="text" class="form-control" id="examplename" name="name" value="<%=mDTO.getReviewName%>">
+						<div class="my-box">
+				           		<%=mDTO.getReviewName() %>
 				        </div>
 				           
 				           
 					</td>
-					<td></td>
+					
 					
 					<td>
 						<div class="my-box">
@@ -190,16 +180,22 @@
 					
 					</tr>
 					<tr>
-						<td colspan="6">
-							<div class="form-group">
-				           		<label class="sr-only" for="exampletext"></label>
-				           		<input type="text" class="form-control" id="exampletext" name="title" value="<%=mDTO.getTitle%>">
+						<td>
+							<div class="my-box">
+								제목
+							</div>
+						</td>
+						<td colspan="5">
+							<div class="my-box">
+				           		<%=mDTO.getTitle() %>
 				        	</div>
 				        </td>
 				     </tr>
 				     <tr>
-				     	<td colspan="6">
-				     		<textarea class="form-control"  rows="20" cols="100" name="content" value="<%=mDTO.getReviewContents%>"></textarea>
+				     	<td colspan="6" height="500px">
+				     		<div class="my-box" style="height:600px;">
+				     			<%=mDTO.getReviewContents() %>
+				     		</div>	
 				     	</td>
 			     	</tr>
 			     	<tr>
@@ -217,10 +213,7 @@
 				</table>
 					
 				</form>
-				<form enctype="multipart/form-data" method="POST" action="/reviewlist.do">
-				     		<input type="file" name="file" id="file" >
-				     		<input type="submit" value="파일 업로드">
-				     	</form>
+				
 			     	<br/>
 			     	<br/>
 			     	<br/>

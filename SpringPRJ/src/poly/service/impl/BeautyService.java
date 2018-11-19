@@ -18,16 +18,22 @@ public class BeautyService implements IBeautyService{
 	private BeautyMapper beautyMapper;
 
 	@Override
-	public List<BeautyDTO> getMemberList() throws Exception {
-		
-		return beautyMapper.getMemberList();
-	}
-
-	@Override
 	public int insertMember(BeautyDTO bDTO) throws Exception {
 		
 		return beautyMapper.insertMember(bDTO);
 		
+	}
+
+	@Override
+	public List<BeautyDTO> getBeautyList() throws Exception {
+		
+		return beautyMapper.getBeautyList();
+	}
+
+	@Override
+	public BeautyDTO getBeautydetail(BeautyDTO bDTO) throws Exception {
+		
+		return beautyMapper.getBeautydetail(bDTO);
 	}
 
 }

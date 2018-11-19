@@ -8,9 +8,11 @@ import poly.dto.BeautyDTO;
 @Mapper("BeautyMapper")
 public interface BeautyMapper  {
 
-	List<BeautyDTO> getMemberList()throws Exception;
-	
 	int insertMember(BeautyDTO bDTO) throws Exception;
+
+	List<BeautyDTO> getBeautyList() throws Exception;
+
+	BeautyDTO getBeautydetail(BeautyDTO bDTO) throws Exception;
 
 	
 }

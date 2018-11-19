@@ -8,7 +8,7 @@ import poly.dto.EatDTO;
 @Mapper("EatMapper")
 public interface EatMapper  {
 
-	List<EatDTO> getMemberList()throws Exception;
+	List<EatDTO> getEatList()throws Exception;
 	
 	int insertMember(EatDTO eDTO) throws Exception;
 

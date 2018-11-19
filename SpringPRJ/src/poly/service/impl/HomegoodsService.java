@@ -18,9 +18,9 @@ public class HomegoodsService implements IHomegoodsService{
 	private HomegoodsMapper homegoodsMapper;
 
 	@Override
-	public List<HomegoodsDTO> getMemberList() throws Exception {
+	public List<HomegoodsDTO> getHomegoodsList() throws Exception {
 		
-		return homegoodsMapper.getMemberList();
+		return homegoodsMapper.getHomegoodsList();
 	}
 
 	@Override
@@ -28,6 +28,12 @@ public class HomegoodsService implements IHomegoodsService{
 		
 		return homegoodsMapper.insertMember(hDTO);
 		
+	}
+
+	@Override
+	public HomegoodsDTO getHomegoodsdetail(HomegoodsDTO hDTO) throws Exception {
+		
+		return homegoodsMapper.getHomegoodsdetail(hDTO);
 	}
 
 }

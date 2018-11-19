@@ -42,7 +42,7 @@ public class TalkController {
 		
 		log.info("welcome talk");
 		
-		List<TalkDTO> tList = talkService.getMemberList();
+		List<TalkDTO> tList = talkService.getTalkList();
 		
 		for(TalkDTO t : tList) {
 			log.info("talkSeqNo : " +t.getTalkSeqNo());

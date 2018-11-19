@@ -1,4 +1,4 @@
-<%@page import="poly.dto.EatDTO"%>
+<%@page import="poly.dto.BeautyDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -7,13 +7,13 @@
 
 %>
 <%
-	EatDTO eDTO = (EatDTO)request.getAttribute("eDTO");
+	BeautyDTO bDTO = (BeautyDTO)request.getAttribute("bDTO");
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
-		<title>eat detail</title>
+		<title>beauty detail</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
@@ -112,13 +112,13 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        	<form action="/eatlist.do" method="POST">
+        	<form action="/beautylist.do" method="POST">
         	
 			<table class="table">
 				
 				<tr>
 					
-					<th>간식 정보</th>
+					<th>미용 정보</th>
 					<td>
 						
 					</td>
@@ -130,7 +130,7 @@
 						
 					</td>
 					<td>
-						<a href="eat.do"><input type="button" value="목록"></a>
+						<a href="beauty.do"><input type="button" value="목록"></a>
 					</td>
 					
 					
@@ -145,7 +145,7 @@
 					<td>
 					
 						<div class="my-box">
-				           		<%=eDTO.getUserName() %>
+				           		<%=bDTO.getUserName() %>
 				        </div>
 				           
 				           
@@ -162,7 +162,7 @@
 				
 					<td colspan="2">
 						<div class="my-box">
-							<%=eDTO.getChgDt() %>
+							<%=bDTO.getChgDt() %>
 						</div>
 					</td>
 					
@@ -176,14 +176,14 @@
 						</td>
 						<td colspan="5">
 							<div class="my-box">
-				           		<%=eDTO.getTitle() %>
+				           		<%=bDTO.getTitle() %>
 				        	</div>
 				        </td>
 				     </tr>
 				     <tr>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
-				     			<%=eDTO.getEatContents() %>
+				     			<%=bDTO.getBeautyContents() %>
 				     		</div>	
 				     	</td>
 			     	</tr>

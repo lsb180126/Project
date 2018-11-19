@@ -6,9 +6,11 @@ import poly.dto.HomegoodsDTO;
 
 public interface IHomegoodsService {
 
-	List<HomegoodsDTO> getMemberList() throws Exception;
+	List<HomegoodsDTO> getHomegoodsList() throws Exception;
 
 	int insertMember(HomegoodsDTO hDTO) throws Exception;
+
+	HomegoodsDTO getHomegoodsdetail(HomegoodsDTO hDTO) throws Exception;
 	
 	
 

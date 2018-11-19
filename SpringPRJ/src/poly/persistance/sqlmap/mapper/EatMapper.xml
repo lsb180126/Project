@@ -21,7 +21,7 @@
 		)
 	</insert>
 	
-	<select id="getMemberList" resultType="EatDTO">
+	<select id="getEatList" resultType="EatDTO">
 		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
 				EI.TITLE as title,
 				EI.EAT_CONTENTS as eatContents,

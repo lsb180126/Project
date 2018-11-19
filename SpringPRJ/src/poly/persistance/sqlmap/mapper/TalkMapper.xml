@@ -21,7 +21,7 @@
 		)
 	</insert>
 	
-	<select id="getMemberList" resultType="TalkDTO">
+	<select id="getTalkList" resultType="TalkDTO">
 		 SELECT TI.TALK_SEQ_NO as talkSeqNo,
 				TI.TITLE as title,
 				TI.TALK_CONTENTS as talkContents,

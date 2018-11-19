@@ -8,13 +8,21 @@ import poly.dto.MemDTO;
 @Mapper("MemMapper")
 public interface MemMapper  {
 
-	List<MemDTO> getMemberList()throws Exception;
+	List<MemDTO> getMemberList(MemDTO mDTO)throws Exception;
 	
 	int insertMember(MemDTO mDTO) throws Exception;
 
 	MemDTO getMemberdetail(MemDTO mDTO) throws Exception;
 
+	MemDTO getWritedetail(MemDTO mDTO) throws Exception;
+
 	int writerevise(MemDTO mDTO) throws Exception;
+
+	List<MemDTO> getReviewList() throws Exception;
+
+	int writedelete(MemDTO mDTO) throws Exception;
+
+	
 
 	
 }

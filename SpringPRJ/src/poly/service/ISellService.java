@@ -6,9 +6,11 @@ import poly.dto.SellDTO;
 
 public interface ISellService {
 
-	List<SellDTO> getMemberList() throws Exception;
+	List<SellDTO> getSellList() throws Exception;
 
 	int insertMember(SellDTO sDTO) throws Exception;
+
+	SellDTO getSelldetail(SellDTO sDTO) throws Exception;
 	
 	
 

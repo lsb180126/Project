@@ -18,9 +18,9 @@ public class TalkService implements ITalkService{
 	private TalkMapper talkMapper;
 
 	@Override
-	public List<TalkDTO> getMemberList() throws Exception {
+	public List<TalkDTO> getTalkList() throws Exception {
 		
-		return talkMapper.getMemberList();
+		return talkMapper.getTalkList();
 	}
 
 	@Override

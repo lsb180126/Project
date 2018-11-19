@@ -17,11 +17,6 @@ public class MemberService implements IMemService{
 	@Resource(name="MemMapper")
 	private MemMapper memMapper;
 
-	@Override
-	public List<MemDTO> getMemberList() throws Exception {
-		
-		return memMapper.getMemberList();
-	}
 
 	@Override
 	public int insertMember(MemDTO mDTO) throws Exception {
@@ -36,9 +31,35 @@ public class MemberService implements IMemService{
 	}
 
 	@Override
+	public MemDTO getWritedetail(MemDTO mDTO) throws Exception {
+		
+		return memMapper.getWritedetail(mDTO);
+	}
+
+	@Override
 	public int writerevise(MemDTO mDTO) throws Exception {
 		
 		return memMapper.writerevise(mDTO);
 	}
 
+	@Override
+	public List<MemDTO> getMemberList(MemDTO mDTO) throws Exception {
+		return memMapper.getMemberList(mDTO);
+	}
+
+	@Override
+	public List<MemDTO> getReviewList() throws Exception {
+		
+		return memMapper.getReviewList();
+	}
+
+	@Override
+	public int writedelete(MemDTO mDTO) throws Exception {
+		
+		return memMapper.writedelete(mDTO);
+	}
+
+	
+
+	
 }

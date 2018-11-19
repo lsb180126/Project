@@ -4,9 +4,10 @@ public class BeautyDTO {
 	private String beautySeqNo;
 	private String title;
 	private String beautyContents;
-	private String userName;
 	private String regDt;
 	private String chgDt;
+	private String userId;
+	private String userName;
 	
 	public String getBeautySeqNo() {
 		return beautySeqNo;
@@ -26,12 +27,6 @@ public class BeautyDTO {
 	public void setBeautyContents(String beautyContents) {
 		this.beautyContents = beautyContents;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 	public String getRegDt() {
 		return regDt;
 	}
@@ -44,7 +39,18 @@ public class BeautyDTO {
 	public void setChgDt(String chgDt) {
 		this.chgDt = chgDt;
 	}
-	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	
 	
 	

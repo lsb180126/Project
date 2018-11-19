@@ -18,9 +18,9 @@ public class EatService implements IEatService{
 	private EatMapper eatMapper;
 
 	@Override
-	public List<EatDTO> getMemberList() throws Exception {
+	public List<EatDTO> getEatList() throws Exception {
 		
-		return eatMapper.getMemberList();
+		return eatMapper.getEatList();
 	}
 
 	@Override

@@ -48,7 +48,7 @@ public class MemberController {
 		
 		log.info("welcome review");
 		
-		List<MemDTO> mList = memberService.getMemberList();
+		List<MemDTO> mList = memberService.getReviewList();
 		
 		for(MemDTO m : mList) {
 			log.info("reviewSeqNo : " +m.getReviewSeqNo());

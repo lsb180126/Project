@@ -3,32 +3,47 @@
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
 <mapper namespace="poly.persistance.mapper.BeautyMapper">
 
-	<select id="getMemberList" resultType="BeautyDTO">
-		 SELECT BEAUTY_SEQ_NO as beautySeqNo,
-				TITLE as title,
-				BEAUTY_CONTENTS as beautyContents,
-				USER_NAME as userName,
-				REG_DT as regDt,
-				CHG_DT as chgDt
-		 FROM BEAUTY_INFO
-	</select>
-	
 	<insert id="insertMember" parameterType="BeautyDTO">
 		INSERT INTO BEAUTY_INFO (
 			BEAUTY_SEQ_NO,
 			TITLE,
 			BEAUTY_CONTENTS,
-			
 			REG_DT,
-			CHG_DT
+			CHG_DT,
+			USER_ID
 		)VALUES (
 			BEAUTY_INFO_SEQ.NEXTVAL,
 			#{title},
 			#{beautyContents},
-			
 			SYSDATE,
-			SYSDATE
+			SYSDATE,
+			#{userId}
 		)
 	</insert>
+		
+	<select id="getBeautyList" resultType="BeautyDTO">
+		 SELECT BI.BEAUTY_SEQ_NO as beautySeqNo,
+				BI.TITLE as title,
+				BI.BEAUTY_CONTENTS as beautyContents,
+				BI.REG_DT as regDt,
+				BI.CHG_DT as chgDt,
+				BI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM BEAUTY_INFO BI
+		 INNER JOIN USER_INFO UI ON BI.USER_ID = UI.USER_ID
+	</select>
+		
+	<select id="getBeautydetail" resultType="BeautyDTO">
+		 SELECT BI.BEAUTY_SEQ_NO as beautySeqNo,
+				BI.TITLE as title,
+				BI.BEAUTY_CONTENTS as beautyContents,
+				BI.REG_DT as regDt,
+				BI.CHG_DT as chgDt,
+				BI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM BEAUTY_INFO BI
+		 INNER JOIN USER_INFO UI ON BI.USER_ID = UI.USER_ID
+		 WHERE BI.BEAUTY_SEQ_NO = #{beautySeqNo}
+	</select>
 			
 </mapper>

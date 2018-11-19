@@ -4,9 +4,10 @@ public class HomegoodsDTO {
 	private String homegoodsSeqNo;
 	private String title;
 	private String homegoodsContents;
-	private String userName;
 	private String regDt;
 	private String chgDt;
+	private String userId;
+	private String userName;
 	
 	public String getHomegoodsSeqNo() {
 		return homegoodsSeqNo;
@@ -26,12 +27,6 @@ public class HomegoodsDTO {
 	public void setHomegoodsContents(String homegoodsContents) {
 		this.homegoodsContents = homegoodsContents;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 	public String getRegDt() {
 		return regDt;
 	}
@@ -43,6 +38,18 @@ public class HomegoodsDTO {
 	}
 	public void setChgDt(String chgDt) {
 		this.chgDt = chgDt;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	

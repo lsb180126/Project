@@ -3,32 +3,47 @@
 <!-- JAVA와 연결할 Mapper 파일 설정 -->
 <mapper namespace="poly.persistance.mapper.HomegoodsMapper">
 
-	<select id="getMemberList" resultType="HomegoodsDTO">
-		 SELECT HOMEGOODS_SEQ_NO as homegoodsSeqNo,
-				TITLE as title,
-				HOMEGOODS_CONTENTS as homegoodsContents,
-				USER_NAME as userName,
-				REG_DT as regDt,
-				CHG_DT as chgDt
-		 FROM HOMEGOODS_INFO
-	</select>
-	
 	<insert id="insertMember" parameterType="HomegoodsDTO">
 		INSERT INTO HOMEGOODS_INFO (
 			HOMEGOODS_SEQ_NO,
 			TITLE,
 			HOMEGOODS_CONTENTS,
-			
 			REG_DT,
-			CHG_DT
+			CHG_DT,
+			USER_ID
 		)VALUES (
 			HOMEGOODS_INFO_SEQ.NEXTVAL,
 			#{title},
 			#{homegoodsContents},
-			
 			SYSDATE,
-			SYSDATE
+			SYSDATE,
+			#{userId}
 		)
 	</insert>
+	
+	<select id="getHomegoodsList" resultType="HomegoodsDTO">
+		 SELECT HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
+				HI.TITLE as title,
+				HI.HOMEGOODS_CONTENTS as homegoodsContents,
+				HI.REG_DT as regDt,
+				HI.CHG_DT as chgDt,
+				HI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM HOMEGOODS_INFO HI
+		 INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
+	</select>
+	
+	<select id="getHomegoodsdetail" resultType="HomegoodsDTO">
+		 SELECT HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
+				HI.TITLE as title,
+				HI.HOMEGOODS_CONTENTS as homegoodsContents,
+				HI.REG_DT as regDt,
+				HI.CHG_DT as chgDt,
+				HI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM HOMEGOODS_INFO HI
+		 INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
+		 WHERE HI.HOMEGOODS_SEQ_NO = #{homegoodsSeqNo}
+	</select>
 			
 </mapper>

@@ -8,9 +8,11 @@ import poly.dto.SellDTO;
 @Mapper("SellMapper")
 public interface SellMapper  {
 
-	List<SellDTO> getMemberList()throws Exception;
+	List<SellDTO> getSellList()throws Exception;
 	
 	int insertMember(SellDTO uDTO) throws Exception;
+
+	SellDTO getSelldetail(SellDTO sDTO) throws Exception;
 
 	
 }

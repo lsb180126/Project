@@ -1,4 +1,4 @@
-<%@page import="poly.dto.EatDTO"%>
+<%@page import="poly.dto.MemDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
@@ -7,13 +7,13 @@
 
 %>
 <%
-	EatDTO eDTO = (EatDTO)request.getAttribute("eDTO");
+	MemDTO mDTO = (MemDTO)request.getAttribute("mDTO");
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
-		<title>eat detail</title>
+		<title>write revise</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
@@ -33,7 +33,7 @@
 	    </style>
 	    
 	    <script>
-	    
+	    	
 		    
 	    
 	    
@@ -112,25 +112,27 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        	<form action="/eatlist.do" method="POST">
+        	<form action="/writerevise2.do" method="POST">
         	
 			<table class="table">
 				
 				<tr>
 					
-					<th>간식 정보</th>
+					<th>리뷰 수정</th>
 					<td>
 						
 					</td>
 					<td></td>
+					
 					<td>
 						
 					</td>
 					<td>
-						
+						<input type="hidden" value="<%=mDTO.getReviewSeqNo()%>" name="reviewSeqNo">
+						<input type="submit" value="수정">
 					</td>
 					<td>
-						<a href="eat.do"><input type="button" value="목록"></a>
+						<a href="/writedetail.do?reviewSeqNo=<%=mDTO.getReviewSeqNo() %>"><input type="button" value="이전"></a>
 					</td>
 					
 					
@@ -139,31 +141,39 @@
 				<tr>
 					<td>
 						<div class="my-box">
-							작성자
+							이름(병원/약국)
 						</div>	
 					</td>
 					<td>
 					
-						<div class="my-box">
-				           		<%=eDTO.getUserName() %>
-				        </div>
-				           
+				         <input type="text" class="form-control" id="examplename" name="name" value="<%=mDTO.getReviewName() %>">
+				     
 				           
 					</td>
 					
 					
 					<td>
 						<div class="my-box">
-						작성일
+						별점
 						</div>
 					</td>
 					
 					<td></td>
 				
 					<td colspan="2">
-						<div class="my-box">
-							<%=eDTO.getChgDt() %>
-						</div>
+						<span class="star-input">
+						  <span class="input">
+						    <input type="radio" name="star" id="p1" value="1"><label for="p1">1</label>
+						    <input type="radio" name="star" id="p2" value="2"><label for="p2">2</label>
+						    <input type="radio" name="star" id="p3" value="3"><label for="p3">3</label>
+						    <input type="radio" name="star" id="p4" value="4"><label for="p4">4</label>
+						    <input type="radio" name="star" id="p5" value="5"><label for="p5">5</label>
+						    <input type="radio" name="star" id="p6" value="6"><label for="p6">6</label>
+						    <input type="radio" name="star" id="p7" value="7"><label for="p7">7</label>
+						    <input type="radio" name="star" id="p8" value="8"><label for="p8">8</label>
+						    <input type="radio" name="star" id="p9" value="9"><label for="p9">9</label>
+						    <input type="radio" name="star" id="p10" value="10"><label for="p10">10</label>
+						  </span>
 					</td>
 					
 					
@@ -175,16 +185,16 @@
 							</div>
 						</td>
 						<td colspan="5">
-							<div class="my-box">
-				           		<%=eDTO.getTitle() %>
-				        	</div>
+							
+				           		<input type="text" class="form-control" id="exampletext" name="title" value="<%=mDTO.getTitle() %>">
+				        	
 				        </td>
 				     </tr>
 				     <tr>
-				     	<td colspan="6" height="500px">
-				     		<div class="my-box" style="height:600px;">
-				     			<%=eDTO.getEatContents() %>
-				     		</div>	
+				     	<td colspan="6">
+				     		
+				     		<textarea class="form-control"  rows="20" cols="100" name="content"><%=mDTO.getReviewContents() %></textarea>
+				     		
 				     	</td>
 			     	</tr>
 			     	<tr>
