@@ -26,6 +26,8 @@ public interface UserMapper  {
 
 	UserDTO getmylist2(UserDTO uDTO) throws Exception;
 
+	UserDTO getPWfind(UserDTO uDTO) throws Exception;
+
 	
 
 	

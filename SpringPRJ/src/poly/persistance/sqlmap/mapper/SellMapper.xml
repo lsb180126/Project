@@ -70,4 +70,9 @@
 		WHERE SELL_SEQ_NO = #{sellSeqNo}
 	</delete>
 	
+	<delete id="mylistdelete" parameterType="SellDTO">
+		DELETE FROM SELL_INFO
+		WHERE USER_ID = #{userId}
+	</delete>
+	
 </mapper>

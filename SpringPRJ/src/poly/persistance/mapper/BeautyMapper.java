@@ -20,5 +20,7 @@ public interface BeautyMapper  {
 
 	int beautydelete(BeautyDTO bDTO) throws Exception;
 
+	int mylistdelete(String userId) throws Exception;
+
 	
 }

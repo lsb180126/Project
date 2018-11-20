@@ -70,5 +70,10 @@
 		DELETE FROM TALK_INFO
 		WHERE TALK_SEQ_NO = #{talkSeqNo}
 	</delete>
+	
+	<delete id="mylistdelete" parameterType="TalkDTO">
+		DELETE FROM TALK_INFO
+		WHERE USER_ID = #{userId}
+	</delete>
 			
 </mapper>

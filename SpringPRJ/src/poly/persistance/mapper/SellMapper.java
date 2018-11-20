@@ -20,5 +20,7 @@ public interface SellMapper  {
 
 	int selldelete(SellDTO sDTO) throws Exception;
 
+	int mylistdelete(String userId) throws Exception;
+
 	
 }

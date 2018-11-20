@@ -21,6 +21,8 @@ public interface IMemService {
 
 	int writedelete(MemDTO mDTO) throws Exception;
 
+	int mylistdelete(String userId) throws Exception;
+
 	
 
 }

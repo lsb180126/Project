@@ -69,5 +69,10 @@
 		DELETE FROM BEAUTY_INFO
 		WHERE BEAUTY_SEQ_NO = #{beautySeqNo}
 	</delete>
+	
+	<delete id="mylistdelete" parameterType="BeautyDTO">
+		DELETE FROM BEAUTY_INFO
+		WHERE USER_ID = #{userId}
+	</delete>
 			
 </mapper>

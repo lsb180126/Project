@@ -54,4 +54,10 @@ public class HomegoodsService implements IHomegoodsService{
 		return homegoodsMapper.getHomegoodsList2(hDTO);
 	}
 
+	@Override
+	public int mylistdelete(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return homegoodsMapper.mylistdelete(userId);
+	}
+
 }

@@ -91,5 +91,10 @@
 		WHERE REVIEW_SEQ_NO = #{reviewSeqNo}
 	</delete>
 	
+	<delete id="mylistdelete" parameterType="MemDTO">
+		DELETE FROM REVIEW_INFO
+		WHERE USER_ID = #{userId}
+	</delete>
+	
 	
 </mapper>

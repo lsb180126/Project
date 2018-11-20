@@ -69,5 +69,10 @@
 		DELETE FROM EAT_INFO
 		WHERE EAT_SEQ_NO = #{eatSeqNo}
 	</delete>
+	
+	<delete id="mylistdelete" parameterType="EatDTO">
+		DELETE FROM EAT_INFO
+		WHERE USER_ID = #{userId}
+	</delete>
 		
 </mapper>

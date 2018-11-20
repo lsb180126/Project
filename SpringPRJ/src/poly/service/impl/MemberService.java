@@ -59,6 +59,12 @@ public class MemberService implements IMemService{
 		return memMapper.writedelete(mDTO);
 	}
 
+	@Override
+	public int mylistdelete(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return memMapper.mylistdelete(userId);
+	}
+
 	
 
 	

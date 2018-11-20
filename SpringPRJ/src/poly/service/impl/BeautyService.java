@@ -54,4 +54,10 @@ public class BeautyService implements IBeautyService{
 		return beautyMapper.beautydelete(bDTO);
 	}
 
+	@Override
+	public int mylistdelete(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return beautyMapper.mylistdelete(userId);
+	}
+
 }

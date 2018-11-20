@@ -28,6 +28,10 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+        
+        
+        
+        
 	</head>
 	<body>
 		<!-- Top content -->
@@ -57,6 +61,7 @@
                         			<i class="fa fa-lock"></i>
                         		</div>
                             </div>
+                            
                             <div class="form-bottom">
 			                    <form role="form" action="/idfind2.do" method="POST" class="login-form">
 			                    	<div class="form-group">
@@ -71,6 +76,7 @@
 			                        <a href="login.do"><button type="button" class="btn">·Î±×ÀÎ</button></a>
 			                    </form>
 		                    </div>
+		                    
                         </div>
                     </div>
                     

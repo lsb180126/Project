@@ -58,15 +58,13 @@
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3><%=uDTO.getUserName() %> 님의 아이디는</h3>
-                            		<p></p>
+                            		<h3>"<%=uDTO.getUserId() %>" 입니다.</h3>s
                         		</div>
                             </div>
                             <div class="form-bottom">
 			                    <form role="form" action="" method="POST" class="login-form">
-			                    	<div class="form-group">
-			                    		"<%=id %>" 입니다.
-		                    		</div>
-			                        <button type="button" class="btn">PASSWORD 찾기</button> &nbsp;
+			                    	
+			                        <a href="pwfind.do"><button type="button" class="btn">PASSWORD 찾기</button></a> &nbsp;
 			                        <a href="login.do"><button type="button" class="btn">로그인</button></a>
 			                    </form>
 		                    </div>

@@ -54,4 +54,10 @@ public class EatService implements IEatService{
 		return eatMapper.eatdelete(eDTO);
 	}
 
+	@Override
+	public int mylistdelete(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return eatMapper.mylistdelete(userId);
+	}
+
 }

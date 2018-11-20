@@ -17,6 +17,8 @@ public interface ISellService {
 	int sellrevise(SellDTO sDTO) throws Exception;
 
 	int selldelete(SellDTO sDTO) throws Exception;
+
+	int mylistdelete(String userId) throws Exception;
 	
 	
 

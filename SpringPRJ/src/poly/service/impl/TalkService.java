@@ -55,6 +55,12 @@ public class TalkService implements ITalkService{
 		return talkMapper.talkdelete(tDTO);
 	}
 
+	@Override
+	public int mylistdelete(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return talkMapper.mylistdelete(userId);
+	}
+
 	
 	
 

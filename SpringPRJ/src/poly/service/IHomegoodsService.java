@@ -17,6 +17,8 @@ public interface IHomegoodsService {
 	int homegoodsdelete(HomegoodsDTO hDTO) throws Exception;
 
 	List<HomegoodsDTO> getHomegoodsList2(HomegoodsDTO hDTO) throws Exception;
+
+	int mylistdelete(String userId) throws Exception;
 	
 	
 

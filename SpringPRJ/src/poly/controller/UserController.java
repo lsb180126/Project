@@ -21,7 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import poly.dto.ComDTO;
 import poly.dto.MemDTO;
 import poly.dto.UserDTO;
-
+import poly.service.IBeautyService;
+import poly.service.IEatService;
+import poly.service.IHomegoodsService;
+import poly.service.IMemService;
+import poly.service.ISellService;
+import poly.service.ITalkService;
 import poly.service.IUserService;
 
 
@@ -37,7 +42,23 @@ public class UserController {
 	@Resource(name = "UserService")
 	private IUserService userService;
 	
+	@Resource(name = "TalkService")
+	private ITalkService talkService;
 	
+	@Resource(name = "SellService")
+	private ISellService sellService;
+	
+	@Resource(name = "MemberService")
+	private IMemService memberService;
+	
+	@Resource(name = "HomegoodsService")
+	private IHomegoodsService homegoodsService;
+	
+	@Resource(name = "EatService")
+	private IEatService eatService;
+	
+	@Resource(name = "BeautyService")
+	private IBeautyService beautyService;
 	
 	@RequestMapping(value="rc")
 	public String RC(HttpServletRequest request, HttpServletResponse response, 
@@ -247,7 +268,20 @@ public class UserController {
 		uDTO.setUserId(userId);
 		
 		int result = userService.mylistdelete(uDTO);
+		int result2 = talkService.mylistdelete(userId);
+		int result3 = sellService.mylistdelete(userId);
+		int result4 = memberService.mylistdelete(userId);
+		int result5 = homegoodsService.mylistdelete(userId);
+		int result6 = eatService.mylistdelete(userId);
+		int result7 = beautyService.mylistdelete(userId);
+		
 		log.info(result);
+		log.info(result2);
+		log.info(result3);
+		log.info(result4);
+		log.info(result5);
+		log.info(result6);
+		log.info(result7);
 
 
 		String url;
@@ -280,8 +314,10 @@ public class UserController {
 		
 	}
 	
+	
+	
 	@RequestMapping(value="idfind2", method=RequestMethod.POST)
-	public String IDfind2(HttpServletRequest request, HttpServletResponse response, 
+	public String Idfind2(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
 		log.info("welcome idfind2");
@@ -302,19 +338,55 @@ public class UserController {
 		
 		String msg;
 		String url;
-		if(uDTO.getUserName() == name && uDTO.getEmail() == email) {
-			/*model.addAttribute("msg", "로그인 되었습니다.");*/
-			model.addAttribute("url", "/idfindview.do");
-			
-		} else {
+		if(uDTO == null) {
 			model.addAttribute("msg", "올바른 정보를 입력해 주세요.");
 			model.addAttribute("url", "/idfind.do");
-		}
+			
+			return "/alert";
+		} 
+			
 		
-		return "/alert";
+		model.addAttribute("uDTO",uDTO);
+		
+		return "/idfindview";
 	}
 	
-	@RequestMapping(value="pwfind", method=RequestMethod.GET)
+	@RequestMapping(value="pwfind2", method=RequestMethod.POST)
+	public String pwfind2(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome pwfind2");
+		
+		String name = request.getParameter("name");
+		String id = request.getParameter("id");
+		
+		log.info("name : " + name);
+		log.info("id : " + id);
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setUserName(name);
+		uDTO.setUserId(id);
+		
+		uDTO=userService.getPWfind(uDTO);
+		
+		
+		String msg;
+		String url;
+		if(uDTO == null) {
+			model.addAttribute("msg", "올바른 정보를 입력해 주세요.");
+			model.addAttribute("url", "/pwfind.do");
+			
+			return "/alert";
+		} 
+			
+		
+		model.addAttribute("uDTO",uDTO);
+		
+		return "/pwfindview";
+	}
+	
+	@RequestMapping(value="pwfind")
 	public String PWfind(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -324,31 +396,7 @@ public class UserController {
 		return "/pwfind";
 	}
 	
-	@RequestMapping(value="idfindview", method=RequestMethod.POST)
-	public String idfindview(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model, HttpSession session) throws Exception {
-		
-		log.info("welcome idfindview");
-		
-		String id = (String)session.getAttribute("id");
-		String name = request.getParameter("name");
-		
-		UserDTO uDTO = new UserDTO();
-		
-		uDTO.setUserId(id);
-		uDTO.setUserName(name);
-		
-		uDTO=userService.getmylist2(uDTO);
-		
-		log.info(uDTO.getUserId());
-		log.info(uDTO.getUserName());
-		
-		
-		model.addAttribute("uDTO",uDTO); 
-		
-		
-		return "/idfindview";
-	}
+	
 	
 }	
 	

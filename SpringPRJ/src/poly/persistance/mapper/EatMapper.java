@@ -20,5 +20,7 @@ public interface EatMapper  {
 
 	int eatdelete(EatDTO eDTO) throws Exception;
 
+	int mylistdelete(String userId) throws Exception;
+
 	
 }

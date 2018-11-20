@@ -109,7 +109,19 @@
 		   AND EMAIL = #{email}
 	</select>
 	
-	
+	<select id="getPWfind" parameterType="UserDTO" resultType="UserDTO">
+		SELECT  USER_SEQ_NO as userSeqNo,
+				USER_ID as userId,
+				USER_NAME as userName,
+				PASSWORD as password,
+				EMAIL as email,
+				GENDER as gender,
+				REG_DATE as regDate,
+				CHG_DATE as chgDate
+		 FROM USER_INFO
+		 WHERE USER_NAME = #{userName}
+		   AND USER_ID = #{userId}
+	</select>
 	
 			
 </mapper>
