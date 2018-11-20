@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.ComDTO;
-
-
+import poly.dto.UserDTO;
 import poly.service.IComService;
 
 import poly.util.CmmUtil;
@@ -134,25 +133,9 @@ public class ComController {
 		return "/useful";
 	}
 	
-	@RequestMapping(value="idfind", method=RequestMethod.GET)
-	public String IDfind(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome idfind");
-		
-		 
-		return "/idfind";
-	}
 	
-	@RequestMapping(value="pwfind", method=RequestMethod.GET)
-	public String PWfind(HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
-		
-		log.info("welcome pwfind");
-		
-		 
-		return "/pwfind";
-	}
+	
+	
 	
 	
 	

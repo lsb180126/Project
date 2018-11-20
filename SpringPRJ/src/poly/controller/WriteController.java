@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.BeautyDTO;
 import poly.dto.EatDTO;
+import poly.dto.HomegoodsDTO;
 import poly.dto.MemDTO;
 import poly.dto.SellDTO;
 import poly.dto.TalkDTO;
 import poly.dto.UserDTO;
 import poly.service.IBeautyService;
 import poly.service.IEatService;
+import poly.service.IHomegoodsService;
 import poly.service.IMemService;
 import poly.service.ISellService;
 import poly.service.ITalkService;
@@ -52,6 +54,9 @@ public class WriteController {
 	@Resource(name = "BeautyService")
 	private IBeautyService beautyService;
 	
+	@Resource(name = "HomegoodsService")
+	private IHomegoodsService homegoodsService;
+	
 	@RequestMapping(value="writelist")
 	public String Writelist(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
@@ -63,6 +68,7 @@ public class WriteController {
 		EatDTO eDTO = new EatDTO();
 		SellDTO sDTO = new SellDTO();
 		BeautyDTO bDTO = new BeautyDTO();
+		HomegoodsDTO hDTO = new HomegoodsDTO();
 		
 		String userId = (String)session.getAttribute("id");
 		mDTO.setUserId(userId);
@@ -70,12 +76,14 @@ public class WriteController {
 		eDTO.setUserId(userId);
 		sDTO.setUserId(userId);
 		bDTO.setUserId(userId);
+		hDTO.setUserId(userId);
 		
 		List<MemDTO> mList = memberService.getMemberList(mDTO);
 		List<TalkDTO> tList = talkService.getTalkList2(tDTO);
 		List<EatDTO> eList = eatService.getEatList2(eDTO);
 		List<SellDTO> sList = sellService.getSellList2(sDTO);
 		List<BeautyDTO> bList = beautyService.getBeautyList2(bDTO);
+		List<HomegoodsDTO> hList = homegoodsService.getHomegoodsList2(hDTO);
 		
 		for(MemDTO m : mList) {
 			log.info("reviewSeqNo : " +m.getReviewSeqNo());
@@ -112,11 +120,19 @@ public class WriteController {
 			log.info("chgDt : " +b.getChgDt());
 		}
 		
+		for(HomegoodsDTO h : hList) {
+			log.info("homegoodsSeqNo : " +h.getHomegoodsSeqNo());
+			log.info("title : " +h.getTitle());
+			log.info("userId : " +h.getUserId());
+			log.info("chgDt : " +h.getChgDt());
+		}
+		
 		model.addAttribute("mList", mList);
 		model.addAttribute("tList", tList);
 		model.addAttribute("eList", eList);
 		model.addAttribute("sList", sList); 
 		model.addAttribute("bList", bList);
+		model.addAttribute("hList", hList);
 		
 		return "/writelist";
 	}
@@ -165,7 +181,7 @@ public class WriteController {
 		
 		tDTO.setTalkSeqNo(talkSeqNo);
 		
-		tDTO=talkService.getTalkdetail2(tDTO);
+		tDTO=talkService.getTalkdetail(tDTO);
 		
 		
 		log.info(tDTO.getTitle());
@@ -266,6 +282,34 @@ public class WriteController {
 		
 	}
 	
+	@RequestMapping(value="homegoodsdetail2")
+	public String homegoodsdetail2(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome homegoodsdetail2");
+		
+		HomegoodsDTO hDTO = new HomegoodsDTO();
+		
+		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
+		
+		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
+		
+		hDTO=homegoodsService.getHomegoodsdetail(hDTO);
+		
+		
+		log.info(hDTO.getTitle());
+		log.info(hDTO.getHomegoodsContents());
+		
+		
+		model.addAttribute("hDTO",hDTO);  
+		
+		
+		
+		return "/homegoodsdetail2";
+		
+		
+	}
+	
 	@RequestMapping(value="writerevise")
 	public String writerevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
@@ -317,7 +361,7 @@ public class WriteController {
 		
 		tDTO.setTalkSeqNo(talkSeqNo);
 		
-		tDTO=talkService.getTalkdetail2(tDTO);
+		tDTO=talkService.getTalkdetail(tDTO);
 		
 		log.info(tDTO.getTitle());
 		log.info(tDTO.getTalkContents());
@@ -428,6 +472,39 @@ public class WriteController {
 		
 		
 		return "/beautyrevise";
+		
+		
+	}
+	
+	@RequestMapping(value="homegoodsrevise")
+	public String homegoodsrevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome homegoodsrevise");
+		
+		
+		HomegoodsDTO hDTO = new HomegoodsDTO();
+		
+		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
+		
+		
+		log.info(homegoodsSeqNo);
+		
+		
+		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
+		
+		hDTO=homegoodsService.getHomegoodsdetail(hDTO);
+		
+		log.info(hDTO.getTitle());
+		log.info(hDTO.getHomegoodsContents());
+		
+		
+		
+		model.addAttribute("hDTO",hDTO);
+		
+		
+		
+		return "/homegoodsrevise";
 		
 		
 	}
@@ -636,6 +713,46 @@ public class WriteController {
 		
 	}
 	
+	@RequestMapping(value="homegoodsrevise2")
+	public String homegoodsrevise2(HttpServletRequest request, HttpServletResponse response,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome homegoodsrevise2");
+		
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
+		
+		log.info(title);
+		log.info(content);
+		log.info(homegoodsSeqNo);
+		
+		HomegoodsDTO hDTO = new HomegoodsDTO();
+		hDTO.setTitle(title);
+		hDTO.setHomegoodsContents(content);
+		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
+		
+		int result = homegoodsService.homegoodsrevise(hDTO);
+		log.info(result);
+		
+		String url;
+		String msg;
+		if(result == 1) {
+			model.addAttribute("msg", "수정되었습니다.");
+			model.addAttribute("url", "/writelist.do");
+		} else {
+			model.addAttribute("msg", "실패하였습니다.");
+			model.addAttribute("url", "/index.do");
+		}
+		
+		model.addAttribute("title", title);
+		model.addAttribute("content", content);
+		
+		
+		return "/alert";
+		
+	}
+	
 	@RequestMapping(value="writedelete")
 	public String writedelete(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception {
@@ -787,6 +904,40 @@ public class WriteController {
 		bDTO.setBeautySeqNo(beautySeqNo);
 		
 		int result = beautyService.beautydelete(bDTO);
+		log.info(result);
+		
+		String url;
+		String msg;
+		if(result == 1) {
+			model.addAttribute("msg", "삭제되었습니다.");
+			model.addAttribute("url", "/index.do");
+		} else {
+			model.addAttribute("msg", "실패하였습니다.");
+			model.addAttribute("url", "/writelist.do");
+		}
+		
+		
+		
+		
+		return "/alert";
+		
+	}
+	
+	@RequestMapping(value="homegoodsdelete")
+	public String homegoodsdelete(HttpServletRequest request, HttpServletResponse response,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome homegoodsdelete");
+		
+		
+		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
+		log.info(homegoodsSeqNo);
+		
+		HomegoodsDTO hDTO = new HomegoodsDTO();
+		
+		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
+		
+		int result = homegoodsService.homegoodsdelete(hDTO);
 		log.info(result);
 		
 		String url;

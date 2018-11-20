@@ -59,12 +59,12 @@
                             <div class="form-bottom">
 			                    <form role="form" action="" method="GET" class="login-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="form-username">name</label>
-			                        	<input type="text" name="form-username" placeholder="이름" class="form-username form-control" id="form-username">
+			                    		<label class="sr-only" for="r-form-1-email">name</label>
+			                        	<input type="text" name="name" placeholder="이름" class="r-form-1-email form-control" id="name">
 			                        </div>
 			                        <div class="form-group">
-			                        	<label class="sr-only" for="form-password">id</label>
-			                        	<input type="password" name="form-password" placeholder="아이디" class="form-password form-control" id="form-password">
+			                        	<label class="sr-only" for="r-form-1-first-name">id</label>
+			                        	<input type="text" name="id" placeholder="아이디" class="r-form-1-first-name form-control" id="id" >
 			                        </div>
 			                        <button type="button" class="btn">PASSWORD 찾기</button> &nbsp;
 			                        <a href="login.do"><button type="button" class="btn">로그인</button></a>

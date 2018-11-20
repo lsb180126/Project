@@ -14,5 +14,11 @@ public interface HomegoodsMapper  {
 
 	HomegoodsDTO getHomegoodsdetail(HomegoodsDTO hDTO) throws Exception;
 
+	int homegoodsrevise(HomegoodsDTO hDTO) throws Exception;
+
+	int homegoodsdelete(HomegoodsDTO hDTO) throws Exception;
+
+	List<HomegoodsDTO> getHomegoodsList2(HomegoodsDTO hDTO) throws Exception;
+
 	
 }

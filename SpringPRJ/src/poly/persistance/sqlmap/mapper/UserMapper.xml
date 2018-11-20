@@ -78,6 +78,21 @@
 		 WHERE USER_ID = #{userId}
 	</select>
 	
+	<select id="getmylist2" parameterType="UserDTO" resultType="UserDTO">
+		SELECT  USER_SEQ_NO as userSeqNo,
+				USER_ID as userId,
+				USER_NAME as userName,
+				PASSWORD as password,
+				EMAIL as email,
+				GENDER as gender,
+				USER_AUTH as userAuth,
+				REG_DATE as regDate,
+				CHG_DATE as chgDate
+		 FROM USER_INFO
+		 WHERE USER_ID = #{userId}
+		 AND USER_NAME = #{userName}
+	</select>
+	
 	<update id="mylistrevise" parameterType="UserDTO" >
 		UPDATE USER_INFO
 		SET EMAIL = #{email}
@@ -87,12 +102,22 @@
 	<delete id="mylistdelete" parameterType="UserDTO">
 		DELETE FROM USER_INFO
 		WHERE USER_ID = #{userId}
-		
-	
-	
 	</delete>
 	
-	
+	<select id="getIdfind" parameterType="UserDTO" resultType="UserDTO">
+		SELECT  USER_SEQ_NO as userSeqNo,
+				USER_ID as userId,
+				USER_NAME as userName,
+				PASSWORD as password,
+				EMAIL as email,
+				GENDER as gender,
+				USER_AUTH as userAuth,
+				REG_DATE as regDate,
+				CHG_DATE as chgDate
+		 FROM USER_INFO
+		 WHERE USER_NAME = #{userName}
+		   AND EMAIL = #{email}
+	</select>
 	
 	
 	

@@ -21,6 +21,10 @@ public interface IUserService {
 
 	int mylistdelete(UserDTO uDTO) throws Exception;
 
+	UserDTO getIdfind(UserDTO uDTO) throws Exception;
+
+	UserDTO getmylist2(UserDTO uDTO) throws Exception;
+
 	
 
 }

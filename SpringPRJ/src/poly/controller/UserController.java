@@ -269,6 +269,89 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="idfind")
+	public String idfind(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome idfind");
+		
+				
+		return "/idfind";
+		
+	}
+	
+	@RequestMapping(value="idfind2", method=RequestMethod.POST)
+	public String IDfind2(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome idfind2");
+		
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		
+		log.info("name : " + name);
+		log.info("email : " + email);
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setUserName(name);
+		uDTO.setEmail(email);
+		
+		uDTO=userService.getIdfind(uDTO);
+		
+		
+		String url;
+		String msg;
+		if(uDTO.getUserName() == name && uDTO.getEmail() == email) {
+			/*model.addAttribute("msg", "로그인 되었습니다.");*/
+			model.addAttribute("url", "/idfindview.do");
+			
+		} else {
+			model.addAttribute("msg", "올바른 정보를 입력해 주세요.");
+			model.addAttribute("url", "/idfind.do");
+		}
+		
+		
+		
+		return "/alert";
+	}
+	
+	@RequestMapping(value="pwfind", method=RequestMethod.GET)
+	public String PWfind(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome pwfind");
+		
+		 
+		return "/pwfind";
+	}
+	
+	@RequestMapping(value="idfindview", method=RequestMethod.POST)
+	public String idfindview(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model, HttpSession session) throws Exception {
+		
+		log.info("welcome idfindview");
+		
+		String id = (String)session.getAttribute("id");
+		String name = request.getParameter("name");
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setUserId(id);
+		uDTO.setUserName(name);
+		
+		uDTO=userService.getmylist2(uDTO);
+		
+		log.info(uDTO.getUserId());
+		log.info(uDTO.getUserName());
+		
+		
+		model.addAttribute("uDTO",uDTO); 
+		
+		
+		return "/idfindview";
+	}
+	
 }	
 	
 	

@@ -1,12 +1,20 @@
+<%@page import="poly.util.CmmUtil"%>
+<%@page import="poly.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%
+	String id = CmmUtil.nvl((String)session.getAttribute("id"));
+%>
+<%
+	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ID 찾기</title>
+        <title>ID 찾기 화면</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -45,29 +53,20 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>ID 찾기</h3>
-                            		<p>Enter your name and email to find id:</p>
-                        		</div>
-                        		<div class="form-top-right">
-                        			<i class="fa fa-lock"></i>
+                        			<h3><%=uDTO.getUserName() %> 님의 아이디는 </h3>
+                            		<p></p>
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" action="/idfind2.do" method="POST" class="login-form">
+			                    <form role="form" action="" method="POST" class="login-form">
 			                    	<div class="form-group">
-			                    		<label class="sr-only" for="r-form-1-email">name</label>
-			                        	<input type="text" name="name" placeholder="이름" class="r-form-1-email form-control" id="name">
-			                        </div>
-			                        <div class="form-group">
-			                        	<label class="sr-only" for="r-form-1-email">email</label>
-			                        	<input type="text" name="email" placeholder="이메일" class="r-form-1-email form-control" id="email">
-			                        </div>
-			                        <button type="submit" class="btn">ID 찾기</button> &nbsp;
+			                    		"<%=id %>" 입니다.
+		                    		</div>
+			                        <button type="button" class="btn">PASSWORD 찾기</button> &nbsp;
 			                        <a href="login.do"><button type="button" class="btn">로그인</button></a>
 			                    </form>
 		                    </div>

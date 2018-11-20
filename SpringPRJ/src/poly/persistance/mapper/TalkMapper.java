@@ -16,7 +16,6 @@ public interface TalkMapper  {
 
 	List<TalkDTO> getTalkList2(TalkDTO tDTO) throws Exception;
 
-	TalkDTO getTalkdetail2(TalkDTO tDTO) throws Exception;
 
 	int talkrevise(TalkDTO tDTO) throws Exception;
 

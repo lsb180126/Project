@@ -182,6 +182,9 @@
 									<label class="sr-only" for="r-form-1-email">email</label>
 									<input type="text" name="email" placeholder="이메일" class="r-form-1-email form-control" id="email">
 								</div>
+								<div class="form-group">
+									<button type="button" class="btn" id="emailcheck">이메일 인증</button>
+								</div>
     							<div class="">
 									<input type="radio" name="gender" value="man">남자
 									<input type="radio" name="gender" value="woman">여자

@@ -1,3 +1,4 @@
+<%@page import="poly.dto.HomegoodsDTO"%>
 <%@page import="poly.dto.BeautyDTO"%>
 <%@page import="poly.dto.SellDTO"%>
 <%@page import="poly.dto.EatDTO"%>
@@ -54,6 +55,15 @@
 	
 	if (bList==null){
 		bList = new ArrayList<BeautyDTO>();
+		
+	}
+%>
+<%
+
+	List<HomegoodsDTO> hList = (List<HomegoodsDTO>)request.getAttribute("hList");
+	
+	if (hList==null){
+		hList = new ArrayList<HomegoodsDTO>();
 		
 	}
 %>
@@ -276,6 +286,16 @@
 					<td colspan="3"><a href="/beautydetail2.do?beautySeqNo=<%=b.getBeautySeqNo() %>"><%=b.getTitle() %></a></td>
 					<td><%=b.getUserName() %></td>
 					<td><%=b.getChgDt() %></td>
+				</tr>
+				<% } %>
+				
+				<% for(HomegoodsDTO h : hList) { %>
+				<tr>
+					
+					<td><%=h.getHomegoodsSeqNo() %></td>
+					<td colspan="3"><a href="/homegoodsdetail2.do?homegoodsSeqNo=<%=h.getHomegoodsSeqNo() %>"><%=h.getTitle() %></a></td>
+					<td><%=h.getUserName() %></td>
+					<td><%=h.getChgDt() %></td>
 				</tr>
 				<% } %>
 				

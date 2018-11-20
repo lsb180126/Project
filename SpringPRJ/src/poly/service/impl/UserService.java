@@ -60,6 +60,18 @@ public class UserService implements IUserService{
 		return userMapper.mylistdelete(uDTO);
 	}
 
+	@Override
+	public UserDTO getIdfind(UserDTO uDTO) throws Exception {
+		
+		return userMapper.getIdfind(uDTO);
+	}
+
+	@Override
+	public UserDTO getmylist2(UserDTO uDTO) throws Exception {
+		
+		return userMapper.getmylist2(uDTO);
+	}
+
 	
 	
 

@@ -36,4 +36,22 @@ public class HomegoodsService implements IHomegoodsService{
 		return homegoodsMapper.getHomegoodsdetail(hDTO);
 	}
 
+	@Override
+	public int homegoodsrevise(HomegoodsDTO hDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return homegoodsMapper.homegoodsrevise(hDTO);
+	}
+
+	@Override
+	public int homegoodsdelete(HomegoodsDTO hDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return homegoodsMapper.homegoodsdelete(hDTO);
+	}
+
+	@Override
+	public List<HomegoodsDTO> getHomegoodsList2(HomegoodsDTO hDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return homegoodsMapper.getHomegoodsList2(hDTO);
+	}
+
 }

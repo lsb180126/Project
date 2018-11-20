@@ -45,5 +45,30 @@
 		 INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
 		 WHERE HI.HOMEGOODS_SEQ_NO = #{homegoodsSeqNo}
 	</select>
-			
+	
+	<update id="homegoodsrevise" parameterType="HomegoodsDTO">
+		UPDATE HOMEGOODS_INFO
+		SET TITLE = #{title}, HOMEGOODS_CONTENTS = #{homegoodsContents}
+		WHERE HOMEGOODS_SEQ_NO = #{homegoodsSeqNo}
+	</update>
+		
+	
+	<delete id="homegoodsdelete" parameterType="HomegoodsDTO">
+		DELETE FROM HOMEGOODS_INFO
+		WHERE HOMEGOODS_SEQ_NO = #{homegoodsSeqNo}
+	</delete>	
+	
+	<select id="getHomegoodsList2" resultType="HomegoodsDTO" parameterType="HomegoodsDTO">
+		 SELECT HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
+				HI.TITLE as title,
+				HI.HOMEGOODS_CONTENTS as homegoodsContents,
+				HI.REG_DT as regDt,
+				HI.CHG_DT as chgDt,
+				HI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM HOMEGOODS_INFO HI
+		 INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
+		 WHERE HI.USER_ID = #{userId}
+	</select>
+		
 </mapper>
