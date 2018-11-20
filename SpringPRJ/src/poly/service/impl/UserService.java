@@ -72,7 +72,4 @@ public class UserService implements IUserService{
 		return userMapper.getmylist2(uDTO);
 	}
 
-	
-	
-
 }

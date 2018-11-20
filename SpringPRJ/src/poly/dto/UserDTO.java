@@ -7,7 +7,6 @@ public class UserDTO {
 	private String password;
 	private String email;
 	private String gender;
-	private String userAuth;
 	private String regDate;
 	private String chgDate;
 	
@@ -47,12 +46,6 @@ public class UserDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getUserAuth() {
-		return userAuth;
-	}
-	public void setUserAuth(String userAuth) {
-		this.userAuth = userAuth;
-	}
 	public String getRegDate() {
 		return regDate;
 	}
@@ -65,6 +58,7 @@ public class UserDTO {
 	public void setChgDate(String chgDate) {
 		this.chgDate = chgDate;
 	}
+	
 	
 	
 	

@@ -300,8 +300,8 @@ public class UserController {
 		uDTO=userService.getIdfind(uDTO);
 		
 		
-		String url;
 		String msg;
+		String url;
 		if(uDTO.getUserName() == name && uDTO.getEmail() == email) {
 			/*model.addAttribute("msg", "로그인 되었습니다.");*/
 			model.addAttribute("url", "/idfindview.do");
@@ -310,8 +310,6 @@ public class UserController {
 			model.addAttribute("msg", "올바른 정보를 입력해 주세요.");
 			model.addAttribute("url", "/idfind.do");
 		}
-		
-		
 		
 		return "/alert";
 	}

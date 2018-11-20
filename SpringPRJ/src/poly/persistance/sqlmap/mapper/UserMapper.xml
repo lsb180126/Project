@@ -10,7 +10,6 @@
 				PASSWORD as password,
 				EMAIL as email,
 				GENDER as gender,
-				USER_AUTH as userAuth,
 				REG_DATE as regDate,
 				CHG_DATE as chgDate
 		 FROM USER_INFO
@@ -24,7 +23,6 @@
 			PASSWORD, 
 			EMAIL,
 			GENDER,
-		
 			REG_DATE,
 			CHG_DATE
 		)VALUES (
@@ -34,19 +32,15 @@
 			#{password},
 			#{email},
 			#{gender},
-
 			SYSDATE,
 			SYSDATE
 		)
 	</insert>
 	
 	<select id="checkDuplication" resultType="int" parameterType="string">
-	
 			SELECT COUNT(*)
 			FROM USER_INFO
 			WHERE USER_ID = #{id}
-	
-	
 	</select>
 	
 	<select id="getLoginInfo" parameterType="UserDTO" resultType="UserDTO">
@@ -56,7 +50,6 @@
 				PASSWORD as password,
 				EMAIL as email,
 				GENDER as gender,
-				USER_AUTH as userAuth,
 				REG_DATE as regDate,
 				CHG_DATE as chgDate
 		 FROM USER_INFO
@@ -71,7 +64,6 @@
 				PASSWORD as password,
 				EMAIL as email,
 				GENDER as gender,
-				USER_AUTH as userAuth,
 				REG_DATE as regDate,
 				CHG_DATE as chgDate
 		 FROM USER_INFO
@@ -85,7 +77,6 @@
 				PASSWORD as password,
 				EMAIL as email,
 				GENDER as gender,
-				USER_AUTH as userAuth,
 				REG_DATE as regDate,
 				CHG_DATE as chgDate
 		 FROM USER_INFO
@@ -111,7 +102,6 @@
 				PASSWORD as password,
 				EMAIL as email,
 				GENDER as gender,
-				USER_AUTH as userAuth,
 				REG_DATE as regDate,
 				CHG_DATE as chgDate
 		 FROM USER_INFO

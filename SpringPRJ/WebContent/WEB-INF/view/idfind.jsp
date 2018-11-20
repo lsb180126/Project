@@ -51,7 +51,7 @@
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3>ID Ã£±â</h3>
-                            		<p>Enter your name and email to find id:</p>
+                            		<p>Enter your name and email to find id:</p>       
                         		</div>
                         		<div class="form-top-right">
                         			<i class="fa fa-lock"></i>
