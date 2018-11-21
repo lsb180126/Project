@@ -146,6 +146,7 @@ public class UserController {
 			session.setAttribute("id", uDTO.getUserId());
 			session.setAttribute("name", uDTO.getUserName());
 			session.setAttribute("gender", uDTO.getGender());
+			session.setAttribute("userSeqNo", uDTO.getUserSeqNo());
 			model.addAttribute("msg", "로그인 되었습니다.");
 		}
 		

@@ -78,9 +78,29 @@
 	    
 	    
 	    </style>
+	    <script src="vendor/jquery/jquery.min.js"></script>
 	    
+	    <script>
 	   
-	    
+		   $(function(){
+			   
+			   $("#search").click(function() {
+				   
+				   var keyword = $("#keyword").val();
+				   
+				   console.log(keyword);
+				   location.href="reviewsearch.do?keyword=" + keyword;
+			   })
+			   
+		   })
+	   
+	   
+	   
+	   
+	   
+	   
+	   </script>
+	   
 	</head>
 	<body>
 	
@@ -173,8 +193,8 @@
 					<td></td>
 					<td>
 						<form class="example" action="action_page.php">
-						  <input type="text" placeholder="Search.." name="search">
-						  <button type="submit"><i class="fa fa-search"></i></button>
+						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
+						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
 					</td>
 					<td>
@@ -239,6 +259,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+	
+	
+	
   </body>
 </html>

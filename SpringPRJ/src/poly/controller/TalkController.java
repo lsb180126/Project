@@ -3,6 +3,7 @@ package poly.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import poly.dto.FileDTO;
 import poly.dto.MemDTO;
 import poly.dto.TalkDTO;
 
@@ -25,6 +29,7 @@ import poly.dto.TalkDTO;
 import poly.service.ITalkService;
 
 import poly.util.CmmUtil;
+import poly.util.FileUpload;
 
 
 @Controller
@@ -92,7 +97,9 @@ public class TalkController {
 	
 	
 	@RequestMapping(value="/talklist", method=RequestMethod.POST)
-	public String Talklist(HttpServletRequest request, HttpServletResponse response, 
+	public String Talklist(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("file") MultipartFile file,
+			MultipartHttpServletRequest mhsr,
 			ModelMap model, HttpSession session) throws Exception {
 		
 		log.info("welcome talklist");
@@ -101,6 +108,8 @@ public class TalkController {
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
 		String userId= (String)session.getAttribute("id");
+		String userSeqNo = (String)session.getAttribute("userSeqNo");
+		String kind = request.getParameter("kind");
 		
 		
 		log.info("title : " + title);
@@ -112,7 +121,32 @@ public class TalkController {
 		tDTO.setTalkContents(content);
 		tDTO.setUserId(userId);
 		
-		int result = talkService.insertMember(tDTO);
+		log.info("welcome to fileUpload");
+		
+		log.info("------file info------");
+		log.info(file);
+		
+		FileUpload fileUpload = new FileUpload();
+		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
+		
+		for( String key : fileInfo.keySet() ){
+            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+        }
+		
+		String path = fileInfo.get("path").toString();
+		String fileSize = fileInfo.get("fileSize").toString();
+		
+		FileDTO fDTO = new FileDTO();
+		
+		fDTO.setOriName((String)fileInfo.get("originalFileName"));
+		fDTO.setChgName((String)fileInfo.get("fileName"));
+		fDTO.setExtension((String)fileInfo.get("extension"));
+		fDTO.setFilePath(path);
+		fDTO.setFileSize(fileSize);
+		fDTO.setUserNo(userSeqNo);
+		fDTO.setBrdKind(kind);
+		
+		int result = talkService.insertMember(tDTO, fDTO);
 		
 		log.info(result);
 		

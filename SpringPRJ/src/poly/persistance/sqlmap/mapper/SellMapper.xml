@@ -21,6 +21,32 @@
 		)
 	</insert>
 	
+	<insert id="insertFile" parameterType="FileDTO">
+		INSERT INTO FILE_INFO (
+			FILE_SEQ,
+			BRD_SEQ_NO,
+			USER_NO,
+			ORI_NAME,
+			CHG_NAME,
+			FILE_SIZE,
+			FILE_PATH,
+			EXTENSION,
+			REG_DT,
+			BRD_KIND
+		) VALUES (
+			FILE_SEQ.NEXTVAL,
+			(SELECT MAX(SELL_SEQ_NO) FROM SELL_INFO),
+			#{userNo},
+			#{oriName},
+			#{chgName},
+			#{fileSize},
+			#{filePath},
+			#{extension},
+			SYSDATE,
+			#{brdKind}
+		) 
+	</insert>
+	
 	<select id="getSellList" resultType="SellDTO">
 		 SELECT SI.SELL_SEQ_NO as sellSeqNo,
 				SI.TITLE as title,
@@ -61,7 +87,7 @@
 	
 	<update id="sellrevise" parameterType="SellDTO">
 		UPDATE SELL_INFO 
-		SET TITLE = #{title}, SELL_CONTENTS = #{sellContents}
+		SET TITLE = #{title}, SELL_CONTENTS = #{sellContents}, CHG_DT = SYSDATE
 		WHERE SELL_SEQ_NO = #{sellSeqNo}
 	</update>
 	

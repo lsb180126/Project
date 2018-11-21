@@ -2,13 +2,14 @@ package poly.service;
 
 import java.util.List;
 
+import poly.dto.FileDTO;
 import poly.dto.TalkDTO;
 
 public interface ITalkService {
 
 	List<TalkDTO> getTalkList() throws Exception;
 
-	int insertMember(TalkDTO tDTO) throws Exception;
+	int insertMember(TalkDTO tDTO, FileDTO fDTO) throws Exception;
 
 	TalkDTO getTalkdetail(TalkDTO tDTO) throws Exception;
 

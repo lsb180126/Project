@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import poly.dto.FileDTO;
 import poly.dto.MemDTO;
 import poly.persistance.mapper.MemMapper;
 
@@ -19,9 +20,12 @@ public class MemberService implements IMemService{
 
 
 	@Override
-	public int insertMember(MemDTO mDTO) throws Exception {
+	public int insertMember(MemDTO mDTO, FileDTO fDTO) throws Exception {
 		
-		return memMapper.insertMember(mDTO);
+		
+		int a = memMapper.insertMember(mDTO);
+		int b = memMapper.insertFile(fDTO);
+		return a*b;
 	}
 
 	@Override
@@ -64,6 +68,14 @@ public class MemberService implements IMemService{
 		// TODO Auto-generated method stub
 		return memMapper.mylistdelete(userId);
 	}
+
+	@Override
+	public List<MemDTO> getReviewList2() throws Exception {
+		// TODO Auto-generated method stub
+		return memMapper.getReviewList2();
+	}
+
+	
 
 	
 

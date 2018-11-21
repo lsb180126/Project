@@ -193,7 +193,9 @@
 				     <tr>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
+				     			<img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200">
 				     			<%=mDTO.getReviewContents() %>
+				     			
 				     		</div>	
 				     	</td>
 			     	</tr>
@@ -211,8 +213,9 @@
 
 				</table>
 					
+					
 				</form>
-				
+					
 			     	<br/>
 			     	<br/>
 			     	<br/>

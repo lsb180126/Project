@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import poly.dto.FileDTO;
 import poly.dto.TalkDTO;
 import poly.persistance.mapper.TalkMapper;
 
@@ -24,10 +25,11 @@ public class TalkService implements ITalkService{
 	}
 
 	@Override
-	public int insertMember(TalkDTO tDTO) throws Exception {
+	public int insertMember(TalkDTO tDTO, FileDTO fDTO) throws Exception {
 		
-		return talkMapper.insertMember(tDTO);
-		
+		int a = talkMapper.insertMember(tDTO);
+		int b = talkMapper.insertFile(fDTO);
+		return a*b;
 	}
 
 	@Override

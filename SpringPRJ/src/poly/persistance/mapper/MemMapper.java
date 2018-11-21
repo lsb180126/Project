@@ -3,6 +3,7 @@ package poly.persistance.mapper;
 import java.util.List;
 
 import config.Mapper;
+import poly.dto.FileDTO;
 import poly.dto.MemDTO;
 
 @Mapper("MemMapper")
@@ -23,6 +24,10 @@ public interface MemMapper  {
 	int writedelete(MemDTO mDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	int insertFile(FileDTO fDTO) throws Exception;
+
+	List<MemDTO> getReviewList2() throws Exception;
 
 	
 

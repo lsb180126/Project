@@ -21,6 +21,32 @@
 		)
 	</insert>
 	
+	<insert id="insertFile" parameterType="FileDTO">
+		INSERT INTO FILE_INFO (
+			FILE_SEQ,
+			BRD_SEQ_NO,
+			USER_NO,
+			ORI_NAME,
+			CHG_NAME,
+			FILE_SIZE,
+			FILE_PATH,
+			EXTENSION,
+			REG_DT,
+			BRD_KIND
+		) VALUES (
+			FILE_SEQ.NEXTVAL,
+			(SELECT MAX(HOMEGOODS_SEQ_NO) FROM HOMEGOODS_INFO),
+			#{userNo},
+			#{oriName},
+			#{chgName},
+			#{fileSize},
+			#{filePath},
+			#{extension},
+			SYSDATE,
+			#{brdKind}
+		) 
+	</insert>
+	
 	<select id="getHomegoodsList" resultType="HomegoodsDTO">
 		 SELECT HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
 				HI.TITLE as title,
@@ -48,7 +74,7 @@
 	
 	<update id="homegoodsrevise" parameterType="HomegoodsDTO">
 		UPDATE HOMEGOODS_INFO
-		SET TITLE = #{title}, HOMEGOODS_CONTENTS = #{homegoodsContents}
+		SET TITLE = #{title}, HOMEGOODS_CONTENTS = #{homegoodsContents}, CHG_DT = SYSDATE
 		WHERE HOMEGOODS_SEQ_NO = #{homegoodsSeqNo}
 	</update>
 		

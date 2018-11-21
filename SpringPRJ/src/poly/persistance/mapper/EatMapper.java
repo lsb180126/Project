@@ -4,6 +4,7 @@ import java.util.List;
 
 import config.Mapper;
 import poly.dto.EatDTO;
+import poly.dto.FileDTO;
 
 @Mapper("EatMapper")
 public interface EatMapper  {
@@ -21,6 +22,8 @@ public interface EatMapper  {
 	int eatdelete(EatDTO eDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	int insertFile(FileDTO fDTO) throws Exception;
 
 	
 }

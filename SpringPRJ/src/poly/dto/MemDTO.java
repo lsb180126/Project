@@ -9,6 +9,8 @@ public class MemDTO {
 	private String reviewName;
 	private String userId;
 	private String userName;
+	private String chgName;
+	private String fileSeq;
 	
 	public String getReviewSeqNo() {
 		return reviewSeqNo;
@@ -57,6 +59,18 @@ public class MemDTO {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getChgName() {
+		return chgName;
+	}
+	public void setChgName(String chgName) {
+		this.chgName = chgName;
+	}
+	public String getFileSeq() {
+		return fileSeq;
+	}
+	public void setFileSeq(String fileSeq) {
+		this.fileSeq = fileSeq;
 	}
 	
 	

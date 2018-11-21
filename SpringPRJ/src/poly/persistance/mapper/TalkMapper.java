@@ -3,6 +3,7 @@ package poly.persistance.mapper;
 import java.util.List;
 
 import config.Mapper;
+import poly.dto.FileDTO;
 import poly.dto.TalkDTO;
 
 @Mapper("TalkMapper")
@@ -22,6 +23,8 @@ public interface TalkMapper  {
 	int talkdelete(TalkDTO tDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	int insertFile(FileDTO fDTO) throws Exception;
 
 	
 

@@ -3,6 +3,7 @@ package poly.persistance.mapper;
 import java.util.List;
 
 import config.Mapper;
+import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
 
 @Mapper("HomegoodsMapper")
@@ -21,6 +22,8 @@ public interface HomegoodsMapper  {
 	List<HomegoodsDTO> getHomegoodsList2(HomegoodsDTO hDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	int insertFile(FileDTO fDTO) throws Exception;
 
 	
 }

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import poly.dto.EatDTO;
+import poly.dto.FileDTO;
 import poly.persistance.mapper.EatMapper;
 
 import poly.service.IEatService;
@@ -24,10 +25,11 @@ public class EatService implements IEatService{
 	}
 
 	@Override
-	public int insertMember(EatDTO eDTO) throws Exception {
+	public int insertMember(EatDTO eDTO, FileDTO fDTO) throws Exception {
 		
-		return eatMapper.insertMember(eDTO);
-		
+		int a = eatMapper.insertMember(eDTO);
+		int b = eatMapper.insertFile(fDTO);
+		return a*b;
 	}
 
 	@Override

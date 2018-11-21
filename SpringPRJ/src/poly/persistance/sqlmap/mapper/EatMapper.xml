@@ -21,6 +21,32 @@
 		)
 	</insert>
 	
+	<insert id="insertFile" parameterType="FileDTO">
+		INSERT INTO FILE_INFO (
+			FILE_SEQ,
+			BRD_SEQ_NO,
+			USER_NO,
+			ORI_NAME,
+			CHG_NAME,
+			FILE_SIZE,
+			FILE_PATH,
+			EXTENSION,
+			REG_DT,
+			BRD_KIND
+		) VALUES (
+			FILE_SEQ.NEXTVAL,
+			(SELECT MAX(EAT_SEQ_NO) FROM EAT_INFO),
+			#{userNo},
+			#{oriName},
+			#{chgName},
+			#{fileSize},
+			#{filePath},
+			#{extension},
+			SYSDATE,
+			#{brdKind}
+		) 
+	</insert>
+	
 	<select id="getEatList" resultType="EatDTO">
 		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
 				EI.TITLE as title,
@@ -61,7 +87,7 @@
 	
 	<update id="eatrevise" parameterType="EatDTO">
 		UPDATE EAT_INFO 
-		SET TITLE = #{title}, EAT_CONTENTS = #{eatContents}
+		SET TITLE = #{title}, EAT_CONTENTS = #{eatContents}, CHG_DT = SYSDATE
 		WHERE EAT_SEQ_NO = #{eatSeqNo}
 	</update>
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import config.Mapper;
 import poly.dto.BeautyDTO;
+import poly.dto.FileDTO;
 
 @Mapper("BeautyMapper")
 public interface BeautyMapper  {
@@ -21,6 +22,8 @@ public interface BeautyMapper  {
 	int beautydelete(BeautyDTO bDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	int insertFile(FileDTO fDTO) throws Exception;
 
 	
 }

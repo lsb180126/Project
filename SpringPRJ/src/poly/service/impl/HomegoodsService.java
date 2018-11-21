@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
 import poly.persistance.mapper.HomegoodsMapper;
 
@@ -24,10 +25,11 @@ public class HomegoodsService implements IHomegoodsService{
 	}
 
 	@Override
-	public int insertMember(HomegoodsDTO hDTO) throws Exception {
+	public int insertMember(HomegoodsDTO hDTO, FileDTO fDTO) throws Exception {
 		
-		return homegoodsMapper.insertMember(hDTO);
-		
+		int a = homegoodsMapper.insertMember(hDTO);
+		int b = homegoodsMapper.insertFile(fDTO);
+		return a*b;
 	}
 
 	@Override

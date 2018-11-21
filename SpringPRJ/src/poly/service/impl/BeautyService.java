@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import poly.dto.BeautyDTO;
+import poly.dto.FileDTO;
 import poly.persistance.mapper.BeautyMapper;
 
 import poly.service.IBeautyService;
@@ -18,10 +19,11 @@ public class BeautyService implements IBeautyService{
 	private BeautyMapper beautyMapper;
 
 	@Override
-	public int insertMember(BeautyDTO bDTO) throws Exception {
+	public int insertMember(BeautyDTO bDTO, FileDTO fDTO) throws Exception {
 		
-		return beautyMapper.insertMember(bDTO);
-		
+		int a = beautyMapper.insertMember(bDTO);
+		int b = beautyMapper.insertFile(fDTO);
+		return a*b;
 	}
 
 	@Override

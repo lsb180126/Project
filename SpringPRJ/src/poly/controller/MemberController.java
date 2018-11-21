@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 import poly.dto.ComDTO;
+import poly.dto.FileDTO;
 import poly.dto.MemDTO;
 import poly.dto.UserDTO;
 import poly.service.IMemService;
@@ -62,6 +63,31 @@ public class MemberController {
 		return "/review";
 	}
 	
+	@RequestMapping(value="reviewsearch")
+	public String Reviewsearch(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		log.info("welcome reviewsearch");
+		
+		String keyword = request.getParameter("keyword");
+		
+		log.info(keyword);
+		
+		List<MemDTO> mList = memberService.getReviewList2();
+		
+		for(MemDTO m : mList) {
+			log.info("reviewSeqNo : " +m.getReviewSeqNo());
+			log.info("reviewName : " +m.getReviewName());
+			log.info("title : " +m.getTitle());
+			log.info("userId : " +m.getUserId());
+		}
+		
+		model.addAttribute("mList", mList);
+		 
+		return "/review";
+	}
+	
+	
 	@RequestMapping(value="reviewregister")
 	public String Reviewregister(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
@@ -74,6 +100,7 @@ public class MemberController {
 	
 	@RequestMapping(value="reviewdetail")
 	public String Reviewdetail(HttpServletRequest request, HttpServletResponse response, 
+			
 			ModelMap model) throws Exception {
 		
 		log.info("welcome reviewdetail");
@@ -83,6 +110,9 @@ public class MemberController {
 		MemDTO mDTO = new MemDTO();
 		
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
+		
+		log.info(mDTO.getChgDt());
+		log.info(mDTO.getFileSeq());
 		
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		
@@ -101,8 +131,8 @@ public class MemberController {
 	
 	@RequestMapping(value="/reviewlist", method=RequestMethod.POST)
 	public String Reviewlist(HttpServletRequest request, HttpServletResponse response, ModelMap model, HttpSession session
-//			, @RequestParam("file") MultipartFile file,
-//			MultipartHttpServletRequest mhsr
+			, @RequestParam("file") MultipartFile file,
+			MultipartHttpServletRequest mhsr
 			) throws Exception {
 		
 		log.info("welcome reviewlist");
@@ -113,6 +143,8 @@ public class MemberController {
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
 		String userId= (String)session.getAttribute("id");
+		String userSeqNo = (String)session.getAttribute("userSeqNo");
+		String kind = request.getParameter("kind");
 		
 		log.info("name : " + name);
 		log.info("title : " + title);
@@ -125,7 +157,33 @@ public class MemberController {
 		mDTO.setReviewContents(content);
 		mDTO.setUserId(userId);
 		
-		int result = memberService.insertMember(mDTO);
+		
+		
+		log.info("welcome to fileUpload");
+		
+		log.info("------file info------");
+		log.info(file);
+		
+		FileUpload fileUpload = new FileUpload();
+		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
+		
+		for( String key : fileInfo.keySet() ){
+            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+        }
+		
+		String path = fileInfo.get("path").toString();
+		String fileSize = fileInfo.get("fileSize").toString();
+		
+		FileDTO fDTO = new FileDTO();
+		fDTO.setOriName((String)fileInfo.get("originalFileName"));
+		fDTO.setChgName((String)fileInfo.get("fileName"));
+		fDTO.setExtension((String)fileInfo.get("extension"));
+		fDTO.setFilePath(path);
+		fDTO.setFileSize(fileSize);
+		fDTO.setUserNo(userSeqNo);
+		fDTO.setBrdKind(kind);
+		
+		int result = memberService.insertMember(mDTO, fDTO);
 		
 		log.info(result);
 		
@@ -141,22 +199,7 @@ public class MemberController {
 		
 		
 		
-		
-//		log.info("welcome to fileUpload");
-//		
-//		log.info("------file info------");
-//		log.info(file);
-//		
-//		FileUpload fileUpload = new FileUpload();
-//		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
-//		
-//		for( String key : fileInfo.keySet() ){
-//            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
-//        }
-//		
-//		model.addAttribute("msg", "등록이 완료되었습니다.");
-//		model.addAttribute("url", "/review.do");
-//		
+	
 		return "/alert";
 	}
 	

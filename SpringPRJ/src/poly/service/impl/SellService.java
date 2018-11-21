@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import poly.dto.FileDTO;
 import poly.dto.SellDTO;
 import poly.persistance.mapper.SellMapper;
 
@@ -24,10 +25,11 @@ public class SellService implements ISellService{
 	}
 
 	@Override
-	public int insertMember(SellDTO sDTO) throws Exception {
+	public int insertMember(SellDTO sDTO, FileDTO fDTO) throws Exception {
 		
-		return sellMapper.insertMember(sDTO);
-		
+		int a = sellMapper.insertMember(sDTO);
+		int b = sellMapper.insertFile(fDTO);
+		return a*b;
 	}
 
 	@Override

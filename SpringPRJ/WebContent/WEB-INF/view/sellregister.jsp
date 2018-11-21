@@ -105,7 +105,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        <form action="/selllist.do" method="POST">
+        <form action="/selllist.do" method="POST" enctype="multipart/form-data">
         	
 			<table class="table">
 				<tr>
@@ -146,14 +146,14 @@
 			     		<td></td>
 			     		<td></td>
 			     		<td>
-			     			<form enctype="multipart/form-data" method="post" action="">
-			     				<input type="file" name="file_input" id="f1" >
-			   			
-			     			</form>
+			     
 			     		</td>
 			     		
 		     		</tr>
+		     		
 				</table>
+					<input type="file" name="file" id="file" >
+					<input type="hidden" value="sell" name="kind">
 				
 				</form>
 			</div>

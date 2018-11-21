@@ -108,7 +108,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        	<form action="/reviewlist.do" method="POST">
+        	<form action="/reviewlist.do" method="POST" enctype="multipart/form-data">
         	
 			<table class="table">
 				
@@ -194,15 +194,17 @@
 			     			
 			     		</td>
 		     		</tr>
-
+						
 
 				</table>
+					<input type="file" name="file" id="file" >
+					<input type="hidden" value="review" name="kind">
 					
 				</form>
-				<form enctype="multipart/form-data" method="POST" action="/reviewlist.do">
-				     		<input type="file" name="file" id="file" >
-				     		<input type="submit" value="파일 업로드">
-				     	</form>
+				
+				     		
+				     		
+				     	
 			     	<br/>
 			     	<br/>
 			     	<br/>

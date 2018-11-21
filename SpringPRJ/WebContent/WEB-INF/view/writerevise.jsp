@@ -112,7 +112,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        	<form action="/writerevise2.do" method="POST">
+        	<form action="/writerevise2.do" method="POST" enctype="multipart/form-data">
         	
 			<table class="table">
 				
@@ -128,6 +128,8 @@
 						
 					</td>
 					<td>
+						<input type="hidden" value="<%=mDTO.getChgName()%>" name="chgName">
+						<input type="hidden" value="<%=mDTO.getFileSeq()%>" name="fileSeq">
 						<input type="hidden" value="<%=mDTO.getReviewSeqNo()%>" name="reviewSeqNo">
 						<input type="submit" value="¼öÁ¤">
 					</td>
@@ -145,7 +147,7 @@
 						</div>	
 					</td>
 					<td>
-					
+						 
 				         <input type="text" class="form-control" id="examplename" name="name" value="<%=mDTO.getReviewName() %>">
 				     
 				           
@@ -211,8 +213,10 @@
 
 				</table>
 					
+					<input type="file" name="file" id="file" >
+					<input type="hidden" value="review" name="kind">
 				</form>
-				
+					
 			     	<br/>
 			     	<br/>
 			     	<br/>

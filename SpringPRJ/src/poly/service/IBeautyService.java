@@ -3,10 +3,11 @@ package poly.service;
 import java.util.List;
 
 import poly.dto.BeautyDTO;
+import poly.dto.FileDTO;
 
 public interface IBeautyService {
 
-	int insertMember(BeautyDTO bDTO) throws Exception;
+	int insertMember(BeautyDTO bDTO, FileDTO fDTO) throws Exception;
 
 	List<BeautyDTO> getBeautyList() throws Exception;
 

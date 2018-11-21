@@ -327,6 +327,7 @@ public class WriteController {
 		
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		
+		
 		mDTO=memberService.getWritedetail(mDTO);
 		
 		log.info(mDTO.getReviewName());
@@ -519,17 +520,25 @@ public class WriteController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
+		String fileSeq = request.getParameter("fileSeq");
+		String chgName = request.getParameter("chgName");
+		
 		
 		log.info(name);
 		log.info(title);
 		log.info(content);
 		log.info(reviewSeqNo);
+		log.info(fileSeq);
+		log.info(chgName);
 		
 		MemDTO mDTO = new MemDTO();
 		mDTO.setReviewName(name);
 		mDTO.setTitle(title);
 		mDTO.setReviewContents(content);
 		mDTO.setReviewSeqNo(reviewSeqNo);
+		mDTO.setFileSeq(fileSeq);
+		mDTO.setChgName(chgName);
+		
 		
 		int result = memberService.writerevise(mDTO);
 		log.info(result);
