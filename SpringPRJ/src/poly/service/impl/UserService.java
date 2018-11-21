@@ -78,4 +78,10 @@ public class UserService implements IUserService{
 		return userMapper.getPWfind(uDTO);
 	}
 
+	@Override
+	public int pwrevise(UserDTO uDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.pwrevise(uDTO);
+	}
+
 }

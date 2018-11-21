@@ -123,5 +123,11 @@
 		   AND USER_ID = #{userId}
 	</select>
 	
+	
+	<update id="pwrevise" parameterType="UserDTO" >
+		UPDATE USER_INFO
+		SET PASSWORD = #{password}
+		WHERE USER_ID = #{userId}
+	</update>
 			
 </mapper>

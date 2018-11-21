@@ -1,20 +1,23 @@
 <%@page import="poly.util.CmmUtil"%>
-<%@page import="poly.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
+	String password = (String) request.getAttribute("password");
+	String pwid = (String) request.getAttribute("pwid");
+	
 %>
-<%
-	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
-%>
+
+
+
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="EUC-KR">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>PW 찾기 화면</title>
+        <title>PASSWORD 변경</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -36,6 +39,8 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+        
+        
 	</head>
 	<body>
 		<!-- Top content -->
@@ -57,14 +62,25 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3><%=uDTO.getUserName() %> 님의 비밀번호는</h3>
-                            		<h3>"<%=uDTO.getPassword() %>" 입니다.</h3>
+                        			<h3>PASSWORD 변경</h3>
+                            		<p>Enter your new password and new password check:</p>
                         		</div>
-                            </div>
+                        		<div class="form-top-right">
+                        			<i class="fa fa-lock"></i>
+                        		</div>
+                            </div>      
                             <div class="form-bottom">
-			                    <form role="form" action="" method="POST" class="login-form">
-			                    	
-			                        <a href="/pwrevise.do?userId=<%=uDTO.getUserId() %>"><button type="button" class="btn">PASSWORD 변경</button></a> &nbsp;
+			                    <form role="form" action="/pwrevise2.do" method="POST" class="login-form" >
+			                    	<div class="form-group">
+			                    		<label class="sr-only" for="form-password">new password</label>
+			                        	<input type="password" name="password" placeholder="새 비밀번호" class="form-password form-control" id="password" >
+			                        </div>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-password">new password check</label>
+			                        	<input type="password" name="passwordcheck" placeholder="새 비밀번호 확인" class="form-password form-control" id="passwordcheck">
+			                        </div>
+			                        <input type="hidden" name="userId" value="<%=pwid%>">
+			                        <button type="submit" class="btn" id="ok">PASSWORD 변경</button> &nbsp;
 			                        <a href="login.do"><button type="button" class="btn">로그인</button></a>
 			                    </form>
 		                    </div>
@@ -82,6 +98,36 @@
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/jquery.backstretch.min.js"></script>
         <script src="assets/js/scripts.js"></script>
+        
+        <script>
+        	
+			$(function() {
+		      		
+		      		
+		      		 
+		      		$("#ok").click(function(){
+		      	
+		      			var password  = $("#password").val();
+		      			var passwordcheck  = $("#passwordcheck").val();
+		      			
+		      			if(password == "") {
+		      				alert("비밀번호를 입력해주세요");
+		      				return false;
+		      			}
+		      			
+		      			if(passwordcheck == "") {
+		      				alert("비밀번호를 확인해주세요");
+		      				return false;
+		      			} else if(passwordcheck != password) {
+		      				alert("비밀번호가 맞지 않습니다.");
+		      				return false;
+		      			} 
+		      		})
+		      		})
+        
+        
+        
+        </script>
         
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

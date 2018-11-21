@@ -392,10 +392,64 @@ public class UserController {
 		
 		log.info("welcome pwfind");
 		
+		
 		 
 		return "/pwfind";
 	}
 	
+	@RequestMapping(value="pwrevise")
+	public String pwrevise(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model, HttpSession session) throws Exception {
+		
+		log.info("welcome pwrevise");
+		
+		String pwid = request.getParameter("userId");
+		log.info("406" +pwid);
+		
+		model.addAttribute("pwid",pwid);
+		
+		return "/pwrevise";
+	}
+	
+	@RequestMapping(value="pwrevise2")
+	public String pwrevise2(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome pwrevise2");
+		
+		String password = request.getParameter("password");
+		String userId = request.getParameter("userId");
+		
+		log.info(password);
+		log.info(userId);
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setPassword(password);
+		uDTO.setUserId(userId);
+		
+		int result = userService.pwrevise(uDTO);
+		log.info(result);
+
+		
+		
+		String url;
+		String msg;
+		if(result == 1) {
+			model.addAttribute("msg", "변경되었습니다.");
+			model.addAttribute("url", "/login.do");
+		} else {
+			model.addAttribute("msg", "올바르지 않습니다.");
+			model.addAttribute("url", "/pwrevise.do");
+		}
+		
+		model.addAttribute("password", password);
+		
+		
+		
+		return "/alert";
+		
+	}
 	
 	
 }	

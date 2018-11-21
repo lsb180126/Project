@@ -28,6 +28,8 @@ public interface UserMapper  {
 
 	UserDTO getPWfind(UserDTO uDTO) throws Exception;
 
+	int pwrevise(UserDTO uDTO) throws Exception;
+
 	
 
 	
