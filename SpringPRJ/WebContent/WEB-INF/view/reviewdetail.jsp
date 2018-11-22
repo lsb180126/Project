@@ -142,7 +142,7 @@
 							이름(병원/약국)
 						</div>	
 					</td>
-					<td>
+					<td colspan="5">
 					
 						<div class="my-box">
 				           		<%=mDTO.getReviewName() %>
@@ -152,16 +152,16 @@
 					</td>
 					
 					
-					<td>
+					<!-- <td>
 						<div class="my-box">
 						별점
-						</div>
+						</div> 
 					</td>
 					
 					<td></td>
 				
 					<td colspan="2">
-						<span class="star-input">
+						 <span class="star-input">
 						  <span class="input">
 						    <input type="radio" name="star" id="p1" value="1"><label for="p1">1</label>
 						    <input type="radio" name="star" id="p2" value="2"><label for="p2">2</label>
@@ -173,8 +173,8 @@
 						    <input type="radio" name="star" id="p8" value="8"><label for="p8">8</label>
 						    <input type="radio" name="star" id="p9" value="9"><label for="p9">9</label>
 						    <input type="radio" name="star" id="p10" value="10"><label for="p10">10</label>
-						  </span>
-					</td>
+						  </span> 
+					</td> -->
 					
 					
 					</tr>

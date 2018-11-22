@@ -26,6 +26,8 @@ public interface TalkMapper  {
 
 	int insertFile(FileDTO fDTO) throws Exception;
 
+	int filerevise(FileDTO fDTO) throws Exception;
+
 	
 
 	

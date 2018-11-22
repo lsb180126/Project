@@ -47,7 +47,7 @@
 		) 
 	</insert>
 	
-	<select id="getTalkList" resultType="TalkDTO">
+	<select id="getTalkList" resultType="TalkDTO" >
 		 SELECT TI.TALK_SEQ_NO as talkSeqNo,
 				TI.TITLE as title,
 				TI.TALK_CONTENTS as talkContents,
@@ -66,10 +66,14 @@
 				TI.REG_DT as regDt,
 				TI.CHG_DT as chgDt,
 				TI.USER_ID as userId,
-				UI.USER_NAME as userName
-		 FROM TALK_INFO TI
-		 INNER JOIN USER_INFO UI ON TI.USER_ID = UI.USER_ID
-		 WHERE TI.TALK_SEQ_NO = #{talkSeqNo}
+				UI.USER_NAME as userName,
+				FI.CHG_NAME as chgName,
+				FI.FILE_SEQ as fileSeq
+		 FROM TALK_INFO TI, FILE_INFO FI, USER_INFO UI
+		 WHERE TI.USER_ID = UI.USER_ID
+		 AND TI.TALK_SEQ_NO = #{talkSeqNo}
+		 AND TI.TALK_SEQ_NO = FI.BRD_SEQ_NO
+		 AND FI.BRD_KIND = 'talk'
 	</select>
 	
 	<select id="getTalkList2" resultType="TalkDTO" parameterType="TalkDTO">
@@ -90,6 +94,16 @@
 		UPDATE TALK_INFO 
 		SET TITLE = #{title}, TALK_CONTENTS = #{talkContents}, CHG_DT = SYSDATE
 		WHERE TALK_SEQ_NO = #{talkSeqNo}
+	</update>
+	
+	<update id="filerevise" parameterType="FileDTO">
+		UPDATE FILE_INFO 
+		SET CHG_NAME = #{chgName}, 
+			ORI_NAME = #{oriName}, 
+			FILE_SIZE = #{fileSize}, 
+			FILE_PATH = #{filePath},
+			EXTENSION = #{extension}
+		WHERE FILE_SEQ = #{fileSeq}
 	</update>
 	
 	<delete id="talkdelete" parameterType="TalkDTO">

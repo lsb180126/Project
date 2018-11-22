@@ -1,3 +1,4 @@
+<%@page import="poly.dto.FileDTO"%>
 <%@page import="poly.dto.EatDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -8,6 +9,9 @@
 %>
 <%
 	EatDTO eDTO = (EatDTO)request.getAttribute("eDTO");
+%>
+<%
+	FileDTO fDTO = (FileDTO)request.getAttribute("fDTO");
 %>
 <!DOCTYPE html>
 <html>
@@ -112,7 +116,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        	<form action="/eatrevise2.do" method="POST">
+        	<form action="/eatrevise2.do" method="POST" enctype="multipart/form-data">
         	
 			<table class="table">
 				
@@ -163,11 +167,17 @@
 			     		
 		     		</tr>
 				</table>
+				<img src="/upload/<%=eDTO.getChgName()%>" height="200" width="200" id="chgName">
+					<input type="file" name="file" id="file" >
+					<input type="hidden" value="eat" name="kind">
+					<input type="hidden" value="<%=eDTO.getOriName()%>" name="oriName">
+					<input type="hidden" value="<%=eDTO.getFileSize()%>" name="fileSize">
+					<input type="hidden" value="<%=eDTO.getFileSeq()%>" name="fileSeq">
+				    <input type="hidden" value="<%=eDTO.getChgName()%>" name="chgName">
+				    <input type="hidden" value="<%=eDTO.getFilePath()%>" name="path">
+				    <input type="hidden" value="<%=eDTO.getExtension()%>" name="extension"> 
 				</form>
-				<form enctype="multipart/form-data" method="POST" action="/reviewlist.do">
-				     			<input type="file" name="file" id="file" >
-				     			<input type="submit" value="파일 업로드">
-				     		</form>
+				
 				    <br/>
 			     	<br/>
 			     	<br/>

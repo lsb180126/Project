@@ -197,7 +197,8 @@ public class WriteController {
 		
 		log.info(tDTO.getTitle());
 		log.info(tDTO.getTalkContents());
-		
+		log.info(tDTO.getChgName());
+		log.info(tDTO.getFileSeq());
 		
 		model.addAttribute("tDTO",tDTO); 
 		
@@ -226,7 +227,8 @@ public class WriteController {
 		
 		log.info(eDTO.getTitle());
 		log.info(eDTO.getEatContents());
-		
+		log.info(eDTO.getChgName());
+		log.info(eDTO.getFileSeq());
 		
 		model.addAttribute("eDTO",eDTO);
 		
@@ -347,6 +349,9 @@ public class WriteController {
 		log.info(mDTO.getReviewContents());
 		log.info(mDTO.getChgName());
 		log.info(mDTO.getFileSeq());
+		log.info(mDTO.getFilePath());
+		log.info(mDTO.getFileSize());
+		log.info(mDTO.getOriName());
 		
 		
 		model.addAttribute("mDTO",mDTO);
@@ -379,6 +384,11 @@ public class WriteController {
 		
 		log.info(tDTO.getTitle());
 		log.info(tDTO.getTalkContents());
+		log.info(tDTO.getChgName());
+		log.info(tDTO.getFileSeq());
+		log.info(tDTO.getFilePath());
+		log.info(tDTO.getFileSize());
+		log.info(tDTO.getOriName());
 		
 		
 		
@@ -412,7 +422,11 @@ public class WriteController {
 		
 		log.info(eDTO.getTitle());
 		log.info(eDTO.getEatContents());
-		
+		log.info(eDTO.getChgName());
+		log.info(eDTO.getFileSeq());
+		log.info(eDTO.getFilePath());
+		log.info(eDTO.getFileSize());
+		log.info(eDTO.getOriName());
 		
 		
 		model.addAttribute("eDTO",eDTO);
@@ -537,8 +551,13 @@ public class WriteController {
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
 		String fileSeq = request.getParameter("fileSeq");
 		String chgName = request.getParameter("chgName");
+		String oriName = request.getParameter("oriName");
+		String fileSize = request.getParameter("fileSize");
 		String userSeqNo = (String)session.getAttribute("userSeqNo");
 		String kind = request.getParameter("kind");
+		String extension = request.getParameter("extension");
+		String path = request.getParameter("path");
+		
 		
 		log.info(name);
 		log.info(title);
@@ -548,43 +567,68 @@ public class WriteController {
 		log.info(fileSeq);
 		log.info(userSeqNo);
 		log.info(kind);
+		log.info(oriName);
+		log.info(fileSize);
+		log.info(extension);
+		log.info(path);
 		
 		
+		log.info("".equals(file.getOriginalFilename()));
+		
+		log.info(file);
 		
 		MemDTO mDTO = new MemDTO();
+		
 		
 		mDTO.setReviewName(name);
 		mDTO.setTitle(title);
 		mDTO.setReviewContents(content);
 		mDTO.setReviewSeqNo(reviewSeqNo);
-		
-		
-		log.info("welcome to fileUpload");
-		
-		log.info("------file info------");
-		log.info(file);
-		
-		FileUpload fileUpload = new FileUpload();
-		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
-		
-		for( String key : fileInfo.keySet() ){//파일 정보 로그
-            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
-        }
-		
-		String path = fileInfo.get("path").toString();
-		String fileSize = fileInfo.get("fileSize").toString();
-		
-		FileDTO fDTO = new FileDTO();//DTO에 파일 정보 담기
-		fDTO.setOriName((String)fileInfo.get("originalFileName"));
-		fDTO.setChgName((String)fileInfo.get("fileName"));
-		fDTO.setExtension((String)fileInfo.get("extension"));
-		fDTO.setFilePath(path);
-		fDTO.setFileSize(fileSize);
+		FileDTO fDTO = new FileDTO();
 		fDTO.setUserNo(userSeqNo);
+		fDTO.setFileSeq(fileSeq);
 		fDTO.setBrdKind(kind);
 		
+		if(!"".equals(file.getOriginalFilename())) {
+		//
+			log.info("welcome to fileUpload");
+			
+			log.info("------file info------");
+			log.info(file);
+			
+			FileUpload fileUpload = new FileUpload();
+			Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
+			
+			for( String key : fileInfo.keySet() ){//파일 정보 로그
+	            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+	        }
+			
+			path = fileInfo.get("path").toString();
+			fileSize = fileInfo.get("fileSize").toString();
+			
+			
+			//DTO에 파일 정보 담기
+			fDTO.setOriName((String)fileInfo.get("originalFileName"));
+			fDTO.setChgName((String)fileInfo.get("fileName"));
+			fDTO.setExtension((String)fileInfo.get("extension"));
+			fDTO.setFilePath(path);
+			fDTO.setFileSize(fileSize);
+			
+		//
+		}else {
+			fDTO.setOriName(oriName);
+			fDTO.setChgName(chgName);
+			fDTO.setExtension(extension);
+			fDTO.setFilePath(path);
+			fDTO.setFileSize(fileSize);
+			
+			
+		}
 		
-		int result = memberService.writerevise(mDTO);
+		
+		
+		
+		int result = memberService.writerevise(mDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -608,6 +652,8 @@ public class WriteController {
 	
 	@RequestMapping(value="talkrevise2")
 	public String talkrevise2(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("file") MultipartFile file, HttpSession session,
+			MultipartHttpServletRequest mhsr,
 			ModelMap model) throws Exception {
 		
 		log.info("welcome talkrevise2");
@@ -615,17 +661,81 @@ public class WriteController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String talkSeqNo = request.getParameter("talkSeqNo");
+		String fileSeq = request.getParameter("fileSeq");
+		String chgName = request.getParameter("chgName");
+		String oriName = request.getParameter("oriName");
+		String fileSize = request.getParameter("fileSize");
+		String userSeqNo = (String)session.getAttribute("userSeqNo");
+		String kind = request.getParameter("kind");
+		String extension = request.getParameter("extension");
+		String path = request.getParameter("path");
+		
+		
 		
 		log.info(title);
 		log.info(content);
 		log.info(talkSeqNo);
+		log.info(chgName);
+		log.info(fileSeq);
+		log.info(userSeqNo);
+		log.info(kind);
+		log.info(oriName);
+		log.info(fileSize);
+		log.info(extension);
+		log.info(path);
+		
+		log.info("".equals(file.getOriginalFilename()));
+		
+		log.info(file);
 		
 		TalkDTO tDTO = new TalkDTO();
 		tDTO.setTitle(title);
 		tDTO.setTalkContents(content);
 		tDTO.setTalkSeqNo(talkSeqNo);
 		
-		int result = talkService.talkrevise(tDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setUserNo(userSeqNo);
+		fDTO.setFileSeq(fileSeq);
+		fDTO.setBrdKind(kind);
+		
+		
+		if(!"".equals(file.getOriginalFilename())) {
+			//
+				log.info("welcome to fileUpload");
+				
+				log.info("------file info------");
+				log.info(file);
+				
+				FileUpload fileUpload = new FileUpload();
+				Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
+				
+				for( String key : fileInfo.keySet() ){//파일 정보 로그
+		            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+		        }
+				
+				path = fileInfo.get("path").toString();
+				fileSize = fileInfo.get("fileSize").toString();
+				
+				
+				//DTO에 파일 정보 담기
+				fDTO.setOriName((String)fileInfo.get("originalFileName"));
+				fDTO.setChgName((String)fileInfo.get("fileName"));
+				fDTO.setExtension((String)fileInfo.get("extension"));
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+			//
+			}else {
+				fDTO.setOriName(oriName);
+				fDTO.setChgName(chgName);
+				fDTO.setExtension(extension);
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+				
+			}
+		
+		int result = talkService.talkrevise(tDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -648,6 +758,8 @@ public class WriteController {
 	
 	@RequestMapping(value="eatrevise2")
 	public String eatrevise2(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("file") MultipartFile file, HttpSession session,
+			MultipartHttpServletRequest mhsr,
 			ModelMap model) throws Exception {
 		
 		log.info("welcome eatrevise2");
@@ -655,17 +767,77 @@ public class WriteController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String eatSeqNo = request.getParameter("eatSeqNo");
+		String fileSeq = request.getParameter("fileSeq");
+		String chgName = request.getParameter("chgName");
+		String oriName = request.getParameter("oriName");
+		String fileSize = request.getParameter("fileSize");
+		String userSeqNo = (String)session.getAttribute("userSeqNo");
+		String kind = request.getParameter("kind");
+		String extension = request.getParameter("extension");
+		String path = request.getParameter("path");
 		
 		log.info(title);
 		log.info(content);
 		log.info(eatSeqNo);
+		log.info(fileSeq);
+		log.info(userSeqNo);
+		log.info(kind);
+		log.info(oriName);
+		log.info(fileSize);
+		log.info(extension);
+		log.info(path);
+		
+		log.info("".equals(file.getOriginalFilename()));
+		
+		log.info(file);
 		
 		EatDTO eDTO = new EatDTO();
 		eDTO.setTitle(title);
 		eDTO.setEatContents(content);
 		eDTO.setEatSeqNo(eatSeqNo);
 		
-		int result = eatService.eatrevise(eDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setUserNo(userSeqNo);
+		fDTO.setFileSeq(fileSeq);
+		fDTO.setBrdKind(kind);
+		
+		if(!"".equals(file.getOriginalFilename())) {
+			//
+				log.info("welcome to fileUpload");
+				
+				log.info("------file info------");
+				log.info(file);
+				
+				FileUpload fileUpload = new FileUpload();
+				Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
+				
+				for( String key : fileInfo.keySet() ){//파일 정보 로그
+		            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+		        }
+				
+				path = fileInfo.get("path").toString();
+				fileSize = fileInfo.get("fileSize").toString();
+				
+				
+				//DTO에 파일 정보 담기
+				fDTO.setOriName((String)fileInfo.get("originalFileName"));
+				fDTO.setChgName((String)fileInfo.get("fileName"));
+				fDTO.setExtension((String)fileInfo.get("extension"));
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+			//
+			}else {
+				fDTO.setOriName(oriName);
+				fDTO.setChgName(chgName);
+				fDTO.setExtension(extension);
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+				
+			}
+		
+		int result = eatService.eatrevise(eDTO, fDTO);
 		log.info(result);
 		
 		String url;

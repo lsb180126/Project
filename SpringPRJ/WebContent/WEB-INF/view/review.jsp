@@ -206,8 +206,8 @@
 					
 					<th>번호</th>
 					<th>이름(병원/약국)</th>
-					<th colspan="2">제목</th>
-					<th>별점</th>
+					<th colspan="3">제목</th>
+					
 					<th>작성자</th>
 				</tr>
 				
@@ -218,9 +218,9 @@
 					
 					<td><%=m.getReviewName() %></td>
 					
-					<td colspan="2"><a href="/reviewdetail.do?reviewSeqNo=<%=m.getReviewSeqNo() %>"><%=m.getTitle() %></a></td>
+					<td colspan="3"><a href="/reviewdetail.do?reviewSeqNo=<%=m.getReviewSeqNo() %>"><%=m.getTitle() %></a></td>
 					
-					<td></td>
+					
 					
 					<td><%=m.getUserName() %></td>
 					

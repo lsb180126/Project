@@ -95,7 +95,7 @@
 		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
 	</select>
 	
-	<select id="getReviewList2" resultType="MemDTO" >
+	<select id="getReviewList2" resultType="MemDTO" parameterType="string" >
 		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
 				RI.TITLE as title,
 				RI.REVIEW_CONTENTS as reviewContents,
@@ -107,9 +107,9 @@
 		 FROM REVIEW_INFO RI, USER_INFO UI
 		 WHERE RI.USER_ID = UI.USER_ID
 		 AND RI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 AND RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 AND RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
-		 AND UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<select id="getWritedetail" resultType="MemDTO">
@@ -122,7 +122,12 @@
 				RI.USER_ID as userId,
 				UI.USER_NAME as userName,
 				FI.CHG_NAME as chgName,
-				FI.FILE_SEQ as fileSeq
+				FI.FILE_SEQ as fileSeq,
+				FI.ORI_NAME as oriName,
+				FI.CHG_NAME as chgName,
+				FI.FILE_SIZE as fileSize,
+				FI.FILE_PATH as filePath,
+				FI.EXTENSION as extension
 		 FROM REVIEW_INFO RI, FILE_INFO FI, USER_INFO UI
 		 WHERE RI.USER_ID = UI.USER_ID
 		 AND RI.REVIEW_SEQ_NO = #{reviewSeqNo}
@@ -132,12 +137,23 @@
 	
 	
 	<update id="writerevise" parameterType="MemDTO">
-		UPDATE REVIEW_INFO RI, FILE_INFO FI
-		SET RI.TITLE = #{title}, RI.REVIEW_CONTENTS = #{reviewContents}, RI.REVIEW_NAME = #{reviewName}, RI.CHG_DT = SYSDATE, FI.CHG_NAME = #{chgName} 
-		WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
-		AND FI.FILE_SEQ = #{fileSeq}
+		UPDATE REVIEW_INFO 
+		SET TITLE = #{title}, 
+			REVIEW_CONTENTS = #{reviewContents}, 
+			REVIEW_NAME = #{reviewName}, 
+			CHG_DT = SYSDATE
+		WHERE REVIEW_SEQ_NO = #{reviewSeqNo}
 	</update>
 	
+	<update id="filerevise" parameterType="FileDTO">
+		UPDATE FILE_INFO 
+		SET CHG_NAME = #{chgName}, 
+			ORI_NAME = #{oriName}, 
+			FILE_SIZE = #{fileSize}, 
+			FILE_PATH = #{filePath},
+			EXTENSION = #{extension}
+		WHERE FILE_SEQ = #{fileSeq}
+	</update>
 	
 	
 	<delete id="writedelete" parameterType="MemDTO">

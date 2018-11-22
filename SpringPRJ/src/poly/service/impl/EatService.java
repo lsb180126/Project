@@ -45,9 +45,11 @@ public class EatService implements IEatService{
 	}
 
 	@Override
-	public int eatrevise(EatDTO eDTO) throws Exception {
+	public int eatrevise(EatDTO eDTO, FileDTO fDTO) throws Exception {
 		
-		return eatMapper.eatrevise(eDTO);
+		int a = eatMapper.eatrevise(eDTO);
+		int b = eatMapper.filerevise(fDTO);
+		return a*b;
 	}
 
 	@Override

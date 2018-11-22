@@ -183,6 +183,7 @@
 				     <tr>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
+				     		<img src="/upload/<%=eDTO.getChgName()%>" height="200" width="200" >
 				     			<%=eDTO.getEatContents() %>
 				     		</div>	
 				     	</td>

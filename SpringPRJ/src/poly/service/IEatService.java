@@ -15,7 +15,7 @@ public interface IEatService {
 
 	List<EatDTO> getEatList2(EatDTO eDTO) throws Exception;
 
-	int eatrevise(EatDTO eDTO) throws Exception;
+	int eatrevise(EatDTO eDTO, FileDTO fDTO) throws Exception;
 
 	int eatdelete(EatDTO eDTO) throws Exception;
 

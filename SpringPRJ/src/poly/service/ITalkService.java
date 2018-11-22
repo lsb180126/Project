@@ -16,7 +16,7 @@ public interface ITalkService {
 	List<TalkDTO> getTalkList2(TalkDTO tDTO) throws Exception;
 
 
-	int talkrevise(TalkDTO tDTO) throws Exception;
+	int talkrevise(TalkDTO tDTO, FileDTO fDTO) throws Exception;
 
 	int talkdelete(TalkDTO tDTO) throws Exception;
 

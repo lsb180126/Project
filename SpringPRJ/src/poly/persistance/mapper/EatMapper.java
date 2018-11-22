@@ -25,5 +25,7 @@ public interface EatMapper  {
 
 	int insertFile(FileDTO fDTO) throws Exception;
 
+	int filerevise(FileDTO fDTO) throws Exception;
+
 	
 }

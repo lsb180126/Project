@@ -150,7 +150,7 @@
 							이름(병원/약국)
 						</div>	
 					</td>
-					<td>
+					<td colspan="5">
 						 
 				         <input type="text" class="form-control" id="examplename" name="name" value="<%=mDTO.getReviewName() %>">
 				     
@@ -158,7 +158,7 @@
 					</td>
 					
 					
-					<td>
+					<!-- <td>
 						<div class="my-box">
 						별점
 						</div>
@@ -180,7 +180,7 @@
 						    <input type="radio" name="star" id="p9" value="9"><label for="p9">9</label>
 						    <input type="radio" name="star" id="p10" value="10"><label for="p10">10</label>
 						  </span>
-					</td>
+					</td> -->
 					
 					
 					</tr>
@@ -219,8 +219,12 @@
 					<img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200" id="chgName">
 					<input type="file" name="file" id="file" >
 					<input type="hidden" value="review" name="kind">
+					<input type="hidden" value="<%=mDTO.getOriName()%>" name="oriName">
+					<input type="hidden" value="<%=mDTO.getFileSize()%>" name="fileSize">
 					<input type="hidden" value="<%=mDTO.getFileSeq()%>" name="fileSeq">
-				    <input type="hidden" value="<%=mDTO.getChgName()%>" name="chgName"> 
+				    <input type="hidden" value="<%=mDTO.getChgName()%>" name="chgName">
+				    <input type="hidden" value="<%=mDTO.getFilePath()%>" name="path">
+				    <input type="hidden" value="<%=mDTO.getExtension()%>" name="extension"> 
 				</form>
 					
 			     	<br/>

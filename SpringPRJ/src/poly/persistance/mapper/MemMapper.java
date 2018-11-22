@@ -27,7 +27,9 @@ public interface MemMapper  {
 
 	int insertFile(FileDTO fDTO) throws Exception;
 
-	List<MemDTO> getReviewList2() throws Exception;
+	List<MemDTO> getReviewList2(String keyword) throws Exception;
+
+	int filerevise(FileDTO fDTO) throws Exception;
 
 	
 

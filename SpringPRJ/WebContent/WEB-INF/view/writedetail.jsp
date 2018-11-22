@@ -144,7 +144,7 @@
 							이름(병원/약국)
 						</div>	
 					</td>
-					<td>
+					<td colspan="5">
 					
 						<div class="my-box">
 				           		<%=mDTO.getReviewName() %>
@@ -154,7 +154,7 @@
 					</td>
 					
 					
-					<td>
+					<!-- <td>
 						<div class="my-box">
 						별점
 						</div>
@@ -176,7 +176,7 @@
 						    <input type="radio" name="star" id="p9" value="9"><label for="p9">9</label>
 						    <input type="radio" name="star" id="p10" value="10"><label for="p10">10</label>
 						  </span>
-					</td>
+					</td> -->
 					
 					
 					</tr>

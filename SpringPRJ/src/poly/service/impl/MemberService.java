@@ -41,9 +41,11 @@ public class MemberService implements IMemService{
 	}
 
 	@Override
-	public int writerevise(MemDTO mDTO) throws Exception {
+	public int writerevise(MemDTO mDTO, FileDTO fDTO) throws Exception {
 		
-		return memMapper.writerevise(mDTO);
+		int a = memMapper.writerevise(mDTO);
+		int b = memMapper.filerevise(fDTO);
+		return a*b;
 	}
 
 	@Override
@@ -70,9 +72,9 @@ public class MemberService implements IMemService{
 	}
 
 	@Override
-	public List<MemDTO> getReviewList2() throws Exception {
+	public List<MemDTO> getReviewList2(String keyword) throws Exception {
 		// TODO Auto-generated method stub
-		return memMapper.getReviewList2();
+		return memMapper.getReviewList2(keyword);
 	}
 
 	

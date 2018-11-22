@@ -16,7 +16,7 @@ public interface IMemService {
 
 	MemDTO getWritedetail(MemDTO mDTO) throws Exception;
 
-	int writerevise(MemDTO mDTO) throws Exception;
+	int writerevise(MemDTO mDTO, FileDTO fDTO) throws Exception;
 
 	List<MemDTO> getReviewList() throws Exception;
 
@@ -24,7 +24,7 @@ public interface IMemService {
 
 	int mylistdelete(String userId) throws Exception;
 
-	List<MemDTO> getReviewList2() throws Exception;
+	List<MemDTO> getReviewList2(String keyword) throws Exception;
 
 	
 

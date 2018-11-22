@@ -74,7 +74,7 @@ public class MemberController {
 		
 		log.info(keyword);
 		
-		List<MemDTO> mList = memberService.getReviewList2();
+		List<MemDTO> mList = memberService.getReviewList2(keyword);
 		
 		for(MemDTO m : mList) {
 			log.info("reviewSeqNo : " +m.getReviewSeqNo());

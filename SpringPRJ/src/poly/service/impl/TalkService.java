@@ -46,9 +46,11 @@ public class TalkService implements ITalkService{
 
 
 	@Override
-	public int talkrevise(TalkDTO tDTO) throws Exception {
+	public int talkrevise(TalkDTO tDTO, FileDTO fDTO) throws Exception {
 		
-		return talkMapper.talkrevise(tDTO);
+		int a = talkMapper.talkrevise(tDTO);
+		int b = talkMapper.filerevise(fDTO);
+		return a*b;
 	}
 
 	@Override
