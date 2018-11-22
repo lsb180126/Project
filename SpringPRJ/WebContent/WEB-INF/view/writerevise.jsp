@@ -1,3 +1,4 @@
+<%@page import="poly.dto.FileDTO"%>
 <%@page import="poly.dto.MemDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -8,6 +9,9 @@
 %>
 <%
 	MemDTO mDTO = (MemDTO)request.getAttribute("mDTO");
+%>
+<%
+	FileDTO fDTO = (FileDTO)request.getAttribute("fDTO");
 %>
 <!DOCTYPE html>
 <html>
@@ -128,8 +132,8 @@
 						
 					</td>
 					<td>
-						<input type="hidden" value="<%=mDTO.getChgName()%>" name="chgName">
-						<input type="hidden" value="<%=mDTO.getFileSeq()%>" name="fileSeq">
+						
+						
 						<input type="hidden" value="<%=mDTO.getReviewSeqNo()%>" name="reviewSeqNo">
 						<input type="submit" value="¼öÁ¤">
 					</td>
@@ -212,9 +216,11 @@
 
 
 				</table>
-					
+					<img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200" id="chgName">
 					<input type="file" name="file" id="file" >
 					<input type="hidden" value="review" name="kind">
+					<input type="hidden" value="<%=mDTO.getFileSeq()%>" name="fileSeq">
+				    <input type="hidden" value="<%=mDTO.getChgName()%>" name="chgName"> 
 				</form>
 					
 			     	<br/>

@@ -71,7 +71,13 @@ public class MemberController {
 		
 		String keyword = request.getParameter("keyword");
 		
+		
 		log.info(keyword);
+		
+		
+		
+		MemDTO mDTO = new MemDTO();
+		
 		
 		List<MemDTO> mList = memberService.getReviewList2();
 		
@@ -165,16 +171,16 @@ public class MemberController {
 		log.info(file);
 		
 		FileUpload fileUpload = new FileUpload();
-		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
+		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
 		
-		for( String key : fileInfo.keySet() ){
+		for( String key : fileInfo.keySet() ){//파일 정보 로그
             log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
         }
 		
 		String path = fileInfo.get("path").toString();
 		String fileSize = fileInfo.get("fileSize").toString();
 		
-		FileDTO fDTO = new FileDTO();
+		FileDTO fDTO = new FileDTO();//DTO에 파일 정보 담기
 		fDTO.setOriName((String)fileInfo.get("originalFileName"));
 		fDTO.setChgName((String)fileInfo.get("fileName"));
 		fDTO.setExtension((String)fileInfo.get("extension"));
@@ -183,7 +189,7 @@ public class MemberController {
 		fDTO.setUserNo(userSeqNo);
 		fDTO.setBrdKind(kind);
 		
-		int result = memberService.insertMember(mDTO, fDTO);
+		int result = memberService.insertMember(mDTO, fDTO);//파일 등서비스
 		
 		log.info(result);
 		

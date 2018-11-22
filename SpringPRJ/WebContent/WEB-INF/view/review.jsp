@@ -9,7 +9,7 @@
 
 %>
 <%
-
+	
 	List<MemDTO> mList = (List<MemDTO>)request.getAttribute("mList");
 	
 	if (mList==null){
@@ -182,17 +182,12 @@
 					
 					<td>리뷰 정보</td>
 					<td>
-						<select>
-							<option>이름</option>
-							<option>제목</option>
-							<option>별점</option>
-							<option>작성자</option>
-						</select>
+						
 					</td>
 					
 					<td></td>
 					<td>
-						<form class="example" action="action_page.php">
+						<form class="example" action="/reviewsearch.do">
 						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
 						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
@@ -218,10 +213,15 @@
 				<tr>
 					
 					<td><%=m.getReviewSeqNo() %></td>
-					<td><%=m.getReviewName() %></a></td>
+					
+					<td><%=m.getReviewName() %></td>
+					
 					<td colspan="2"><a href="/reviewdetail.do?reviewSeqNo=<%=m.getReviewSeqNo() %>"><%=m.getTitle() %></a></td>
+					
 					<td></td>
+					
 					<td><%=m.getUserName() %></td>
+					
 				</tr>
 				<% } %> 
 			
@@ -257,7 +257,7 @@
     
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	
 	

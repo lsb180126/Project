@@ -30,7 +30,7 @@ public class FileUpload {
             fileName = uploadFile.getOriginalFilename();
             byte[] bytes = uploadFile.getBytes();
 //            String uploadPath = request.getSession().getServletContext().getRealPath("/");  // 현재 프로젝트 위치
-            String uploadPath = "C:\\Users\\Data8311-03\\git2\\SpringPRJ\\WebContent\\WEB-INF";
+            String uploadPath = "C:\\Users\\data21\\git\\Project\\SpringPRJ\\WebContent\\WEB-INF";
             String attachPath = "\\upload\\";
             path = uploadPath+attachPath;
             

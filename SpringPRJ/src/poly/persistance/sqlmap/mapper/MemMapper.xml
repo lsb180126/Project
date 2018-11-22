@@ -95,7 +95,7 @@
 		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
 	</select>
 	
-	<select id="getReviewList2" resultType="MemDTO">
+	<select id="getReviewList2" resultType="MemDTO" >
 		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
 				RI.TITLE as title,
 				RI.REVIEW_CONTENTS as reviewContents,
@@ -107,6 +107,9 @@
 		 FROM REVIEW_INFO RI, USER_INFO UI
 		 WHERE RI.USER_ID = UI.USER_ID
 		 AND RI.TITLE LIKE '%' || #{keyword} || '%'
+		 AND RI.REVIEW_SEQ_NO LIKE '%' || #{keyword} || '%'
+		 AND RI.REVIEW_NAME LIKE '%' || #{keyword} || '%'
+		 AND RI.USER_ID '%' || #{keyword} || '%'
 	</select>
 	
 	<select id="getWritedetail" resultType="MemDTO">
@@ -129,11 +132,13 @@
 	
 	
 	<update id="writerevise" parameterType="MemDTO">
-		UPDATE REVIEW_INFO 
-		SET TITLE = #{title}, REVIEW_CONTENTS = #{reviewContents}, REVIEW_NAME = #{reviewName}, CHG_DT = SYSDATE, CHG_NAME = #{chgName}
-		WHERE REVIEW_SEQ_NO = #{reviewSeqNo}
-		AND FILE_SEQ = #{fileSeq}
+		UPDATE REVIEW_INFO RI, FILE_INFO FI
+		SET RI.TITLE = #{title}, RI.REVIEW_CONTENTS = #{reviewContents}, RI.REVIEW_NAME = #{reviewName}, RI.CHG_DT = SYSDATE, FI.CHG_NAME = #{chgName} 
+		WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
+		AND FI.FILE_SEQ = #{fileSeq}
 	</update>
+	
+	
 	
 	<delete id="writedelete" parameterType="MemDTO">
 		DELETE FROM REVIEW_INFO

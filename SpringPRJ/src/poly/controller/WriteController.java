@@ -3,6 +3,7 @@ package poly.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import poly.dto.BeautyDTO;
 import poly.dto.EatDTO;
+import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
 import poly.dto.MemDTO;
 import poly.dto.SellDTO;
@@ -33,6 +37,7 @@ import poly.service.ISellService;
 import poly.service.ITalkService;
 
 import poly.util.CmmUtil;
+import poly.util.FileUpload;
 
 
 @Controller
@@ -147,7 +152,11 @@ public class WriteController {
 		MemDTO mDTO = new MemDTO();
 		
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
-
+		
+		
+		log.info(reviewSeqNo);
+		
+		
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		
 		
@@ -156,6 +165,8 @@ public class WriteController {
 		log.info(mDTO.getReviewName());
 		log.info(mDTO.getTitle());
 		log.info(mDTO.getReviewContents());
+		log.info(mDTO.getChgName());
+		log.info(mDTO.getFileSeq());
 		
 		
 		
@@ -322,6 +333,7 @@ public class WriteController {
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
 		
 		
+		
 		log.info(reviewSeqNo);
 		
 		
@@ -333,7 +345,8 @@ public class WriteController {
 		log.info(mDTO.getReviewName());
 		log.info(mDTO.getTitle());
 		log.info(mDTO.getReviewContents());
-		
+		log.info(mDTO.getChgName());
+		log.info(mDTO.getFileSeq());
 		
 		
 		model.addAttribute("mDTO",mDTO);
@@ -512,6 +525,8 @@ public class WriteController {
 	
 	@RequestMapping(value="writerevise2")
 	public String writerevise2(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("file") MultipartFile file, HttpSession session,
+			MultipartHttpServletRequest mhsr,
 			ModelMap model) throws Exception {
 		
 		log.info("welcome writerevise2");
@@ -522,22 +537,51 @@ public class WriteController {
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
 		String fileSeq = request.getParameter("fileSeq");
 		String chgName = request.getParameter("chgName");
-		
+		String userSeqNo = (String)session.getAttribute("userSeqNo");
+		String kind = request.getParameter("kind");
 		
 		log.info(name);
 		log.info(title);
 		log.info(content);
 		log.info(reviewSeqNo);
-		log.info(fileSeq);
 		log.info(chgName);
+		log.info(fileSeq);
+		log.info(userSeqNo);
+		log.info(kind);
+		
+		
 		
 		MemDTO mDTO = new MemDTO();
+		
 		mDTO.setReviewName(name);
 		mDTO.setTitle(title);
 		mDTO.setReviewContents(content);
 		mDTO.setReviewSeqNo(reviewSeqNo);
-		mDTO.setFileSeq(fileSeq);
-		mDTO.setChgName(chgName);
+		
+		
+		log.info("welcome to fileUpload");
+		
+		log.info("------file info------");
+		log.info(file);
+		
+		FileUpload fileUpload = new FileUpload();
+		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
+		
+		for( String key : fileInfo.keySet() ){//파일 정보 로그
+            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+        }
+		
+		String path = fileInfo.get("path").toString();
+		String fileSize = fileInfo.get("fileSize").toString();
+		
+		FileDTO fDTO = new FileDTO();//DTO에 파일 정보 담기
+		fDTO.setOriName((String)fileInfo.get("originalFileName"));
+		fDTO.setChgName((String)fileInfo.get("fileName"));
+		fDTO.setExtension((String)fileInfo.get("extension"));
+		fDTO.setFilePath(path);
+		fDTO.setFileSize(fileSize);
+		fDTO.setUserNo(userSeqNo);
+		fDTO.setBrdKind(kind);
 		
 		
 		int result = memberService.writerevise(mDTO);
