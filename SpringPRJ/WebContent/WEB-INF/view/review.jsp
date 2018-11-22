@@ -90,6 +90,8 @@
 				   
 				   console.log(keyword);
 				   location.href="reviewsearch.do?keyword=" + keyword;
+				   
+				   
 			   })
 			   
 		   })

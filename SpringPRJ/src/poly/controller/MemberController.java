@@ -74,11 +74,6 @@ public class MemberController {
 		
 		log.info(keyword);
 		
-		
-		
-		MemDTO mDTO = new MemDTO();
-		
-		
 		List<MemDTO> mList = memberService.getReviewList2();
 		
 		for(MemDTO m : mList) {
@@ -117,8 +112,7 @@ public class MemberController {
 		
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
 		
-		log.info(mDTO.getChgDt());
-		log.info(mDTO.getFileSeq());
+		
 		
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		

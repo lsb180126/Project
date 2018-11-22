@@ -106,10 +106,10 @@
 				UI.USER_NAME as userName
 		 FROM REVIEW_INFO RI, USER_INFO UI
 		 WHERE RI.USER_ID = UI.USER_ID
-		 AND RI.TITLE LIKE '%' || #{keyword} || '%'
-		 AND RI.REVIEW_SEQ_NO LIKE '%' || #{keyword} || '%'
-		 AND RI.REVIEW_NAME LIKE '%' || #{keyword} || '%'
-		 AND RI.USER_ID '%' || #{keyword} || '%'
+		 AND RI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 AND RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 AND RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
+		 AND UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<select id="getWritedetail" resultType="MemDTO">
