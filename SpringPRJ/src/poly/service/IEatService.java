@@ -17,7 +17,7 @@ public interface IEatService {
 
 	int eatrevise(EatDTO eDTO, FileDTO fDTO) throws Exception;
 
-	int eatdelete(EatDTO eDTO) throws Exception;
+	int eatdelete(EatDTO eDTO, FileDTO fDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
 	

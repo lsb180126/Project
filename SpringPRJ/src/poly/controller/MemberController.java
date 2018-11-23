@@ -56,6 +56,7 @@ public class MemberController {
 			log.info("reviewName : " +m.getReviewName());
 			log.info("title : " +m.getTitle());
 			log.info("userId : " +m.getUserId());
+			log.info("chgDt : " +m.getChgDt());
 		}
 		
 		model.addAttribute("mList", mList);

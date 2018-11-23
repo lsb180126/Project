@@ -127,7 +127,7 @@
 						<a href="/eatrevise.do?eatSeqNo=<%=eDTO.getEatSeqNo() %>"><input type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/eatdelete.do?eatSeqNo=<%=eDTO.getEatSeqNo() %>"><input type="button" value="삭제"></a>
+						<a href="/eatdelete.do?eatSeqNo=<%=eDTO.getEatSeqNo() %>&fileSeq=<%=eDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
 					</td> 
 					<td>
 						<a href="writelist.do"><input type="button" value="목록"></a>

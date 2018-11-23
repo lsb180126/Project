@@ -118,7 +118,7 @@
 				
 				<tr>
 					
-					<th>간식 정보</th>
+					<th>분양 정보</th>
 					<td>
 						
 					</td>
@@ -183,6 +183,7 @@
 				     <tr>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
+				     		<img src="/upload/<%=sDTO.getChgName()%>" height="200" width="200" >
 				     			<%=sDTO.getSellContents() %>
 				     		</div>	
 				     	</td>

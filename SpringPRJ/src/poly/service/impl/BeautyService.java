@@ -45,15 +45,19 @@ public class BeautyService implements IBeautyService{
 	}
 
 	@Override
-	public int beautyrevise(BeautyDTO bDTO) throws Exception {
+	public int beautyrevise(BeautyDTO bDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return beautyMapper.beautyrevise(bDTO);
+		int a = beautyMapper.beautyrevise(bDTO);
+		int b = beautyMapper.filerevise(fDTO);
+		return a*b;
 	}
 
 	@Override
-	public int beautydelete(BeautyDTO bDTO) throws Exception {
+	public int beautydelete(BeautyDTO bDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return beautyMapper.beautydelete(bDTO);
+		int a = beautyMapper.beautydelete(bDTO);
+		int b = beautyMapper.filedelete(fDTO);
+		return a*b;
 	}
 
 	@Override

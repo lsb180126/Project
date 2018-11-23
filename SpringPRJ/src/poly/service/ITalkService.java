@@ -18,7 +18,7 @@ public interface ITalkService {
 
 	int talkrevise(TalkDTO tDTO, FileDTO fDTO) throws Exception;
 
-	int talkdelete(TalkDTO tDTO) throws Exception;
+	int talkdelete(TalkDTO tDTO, FileDTO fDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
 

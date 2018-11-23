@@ -112,28 +112,7 @@
 		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
-	<select id="getWritedetail" resultType="MemDTO">
-		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
-				RI.TITLE as title,
-				RI.REVIEW_CONTENTS as reviewContents,
-				RI.REG_DT as regDt,
-				RI.CHG_DT as chgDt,
-				RI.REVIEW_NAME as reviewName,
-				RI.USER_ID as userId,
-				UI.USER_NAME as userName,
-				FI.CHG_NAME as chgName,
-				FI.FILE_SEQ as fileSeq,
-				FI.ORI_NAME as oriName,
-				FI.CHG_NAME as chgName,
-				FI.FILE_SIZE as fileSize,
-				FI.FILE_PATH as filePath,
-				FI.EXTENSION as extension
-		 FROM REVIEW_INFO RI, FILE_INFO FI, USER_INFO UI
-		 WHERE RI.USER_ID = UI.USER_ID
-		 AND RI.REVIEW_SEQ_NO = #{reviewSeqNo}
-		 AND RI.REVIEW_SEQ_NO = FI.BRD_SEQ_NO
-		 AND FI.BRD_KIND = 'review'
-	</select>	
+	
 	
 	
 	<update id="writerevise" parameterType="MemDTO">
@@ -159,6 +138,11 @@
 	<delete id="writedelete" parameterType="MemDTO">
 		DELETE FROM REVIEW_INFO
 		WHERE REVIEW_SEQ_NO = #{reviewSeqNo}
+	</delete>
+	
+	<delete id="filedelete" parameterType="FileDTO">
+		DELETE FROM FILE_INFO
+		WHERE FILE_SEQ = #{fileSeq}
 	</delete>
 	
 	<delete id="mylistdelete" parameterType="MemDTO">

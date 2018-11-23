@@ -95,6 +95,7 @@ public class WriteController {
 			log.info("reviewName : " +m.getReviewName());
 			log.info("title : " +m.getTitle());
 			log.info("userId : " +m.getUserId());
+			log.info("chgDt : " +m.getChgDt());
 		}
 		
 		for(TalkDTO t : tList) {
@@ -160,7 +161,7 @@ public class WriteController {
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		
 		
-		mDTO=memberService.getWritedetail(mDTO);
+		mDTO=memberService.getMemberdetail(mDTO);
 		
 		log.info(mDTO.getReviewName());
 		log.info(mDTO.getTitle());
@@ -256,6 +257,8 @@ public class WriteController {
 		
 		log.info(sDTO.getTitle());
 		log.info(sDTO.getSellContents());
+		log.info(sDTO.getChgName());
+		log.info(sDTO.getFileSeq());
 		
 		
 		model.addAttribute("sDTO",sDTO); 
@@ -284,6 +287,8 @@ public class WriteController {
 		
 		log.info(bDTO.getTitle());
 		log.info(bDTO.getBeautyContents());
+		log.info(bDTO.getChgName());
+		log.info(bDTO.getFileSeq());
 		
 		
 		model.addAttribute("bDTO",bDTO);  
@@ -312,6 +317,8 @@ public class WriteController {
 		
 		log.info(hDTO.getTitle());
 		log.info(hDTO.getHomegoodsContents());
+		log.info(hDTO.getChgName());
+		log.info(hDTO.getFileSeq());
 		
 		
 		model.addAttribute("hDTO",hDTO);  
@@ -342,7 +349,7 @@ public class WriteController {
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		
 		
-		mDTO=memberService.getWritedetail(mDTO);
+		mDTO=memberService.getMemberdetail(mDTO);
 		
 		log.info(mDTO.getReviewName());
 		log.info(mDTO.getTitle());
@@ -459,6 +466,12 @@ public class WriteController {
 		
 		log.info(sDTO.getTitle());
 		log.info(sDTO.getSellContents());
+		log.info(sDTO.getChgName());
+		log.info(sDTO.getFileSeq());
+		log.info(sDTO.getFilePath());
+		log.info(sDTO.getFileSize());
+		log.info(sDTO.getOriName());
+		
 		
 		
 		
@@ -492,6 +505,11 @@ public class WriteController {
 		
 		log.info(bDTO.getTitle());
 		log.info(bDTO.getBeautyContents());
+		log.info(bDTO.getChgName());
+		log.info(bDTO.getFileSeq());
+		log.info(bDTO.getFilePath());
+		log.info(bDTO.getFileSize());
+		log.info(bDTO.getOriName());
 		
 		
 		
@@ -525,6 +543,11 @@ public class WriteController {
 		
 		log.info(hDTO.getTitle());
 		log.info(hDTO.getHomegoodsContents());
+		log.info(hDTO.getChgName());
+		log.info(hDTO.getFileSeq());
+		log.info(hDTO.getFilePath());
+		log.info(hDTO.getFileSize());
+		log.info(hDTO.getOriName());
 		
 		
 		
@@ -780,6 +803,7 @@ public class WriteController {
 		log.info(content);
 		log.info(eatSeqNo);
 		log.info(fileSeq);
+		log.info(chgName);
 		log.info(userSeqNo);
 		log.info(kind);
 		log.info(oriName);
@@ -860,6 +884,8 @@ public class WriteController {
 	
 	@RequestMapping(value="sellrevise2")
 	public String sellrevise2(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("file") MultipartFile file, HttpSession session,
+			MultipartHttpServletRequest mhsr,
 			ModelMap model) throws Exception {
 		
 		log.info("welcome sellrevise2");
@@ -867,17 +893,78 @@ public class WriteController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String sellSeqNo = request.getParameter("sellSeqNo");
+		String fileSeq = request.getParameter("fileSeq");
+		String chgName = request.getParameter("chgName");
+		String oriName = request.getParameter("oriName");
+		String fileSize = request.getParameter("fileSize");
+		String userSeqNo = (String)session.getAttribute("userSeqNo");
+		String kind = request.getParameter("kind");
+		String extension = request.getParameter("extension");
+		String path = request.getParameter("path");
 		
 		log.info(title);
 		log.info(content);
 		log.info(sellSeqNo);
+		log.info(fileSeq);
+		log.info(chgName);
+		log.info(userSeqNo);
+		log.info(kind);
+		log.info(oriName);
+		log.info(fileSize);
+		log.info(extension);
+		log.info(path);
+		
+		log.info("".equals(file.getOriginalFilename()));
+		
+		log.info(file);
 		
 		SellDTO sDTO = new SellDTO();
 		sDTO.setTitle(title);
 		sDTO.setSellContents(content);
 		sDTO.setSellSeqNo(sellSeqNo);
 		
-		int result = sellService.sellrevise(sDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setUserNo(userSeqNo);
+		fDTO.setFileSeq(fileSeq);
+		fDTO.setBrdKind(kind);
+		
+		if(!"".equals(file.getOriginalFilename())) {
+			//
+				log.info("welcome to fileUpload");
+				
+				log.info("------file info------");
+				log.info(file);
+				
+				FileUpload fileUpload = new FileUpload();
+				Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
+				
+				for( String key : fileInfo.keySet() ){//파일 정보 로그
+		            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+		        }
+				
+				path = fileInfo.get("path").toString();
+				fileSize = fileInfo.get("fileSize").toString();
+				
+				
+				//DTO에 파일 정보 담기
+				fDTO.setOriName((String)fileInfo.get("originalFileName"));
+				fDTO.setChgName((String)fileInfo.get("fileName"));
+				fDTO.setExtension((String)fileInfo.get("extension"));
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+			//
+			}else {
+				fDTO.setOriName(oriName);
+				fDTO.setChgName(chgName);
+				fDTO.setExtension(extension);
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+				
+			}
+		
+		int result = sellService.sellrevise(sDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -900,6 +987,8 @@ public class WriteController {
 	
 	@RequestMapping(value="beautyrevise2")
 	public String beautyrevise2(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("file") MultipartFile file, HttpSession session,
+			MultipartHttpServletRequest mhsr,
 			ModelMap model) throws Exception {
 		
 		log.info("welcome beautyrevise2");
@@ -907,17 +996,78 @@ public class WriteController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String beautySeqNo = request.getParameter("beautySeqNo");
+		String fileSeq = request.getParameter("fileSeq");
+		String chgName = request.getParameter("chgName");
+		String oriName = request.getParameter("oriName");
+		String fileSize = request.getParameter("fileSize");
+		String userSeqNo = (String)session.getAttribute("userSeqNo");
+		String kind = request.getParameter("kind");
+		String extension = request.getParameter("extension");
+		String path = request.getParameter("path");
 		
 		log.info(title);
 		log.info(content);
 		log.info(beautySeqNo);
+		log.info(fileSeq);
+		log.info(chgName);
+		log.info(userSeqNo);
+		log.info(kind);
+		log.info(oriName);
+		log.info(fileSize);
+		log.info(extension);
+		log.info(path);
+		
+		log.info("".equals(file.getOriginalFilename()));
+		
+		log.info(file);
 		
 		BeautyDTO bDTO = new BeautyDTO();
 		bDTO.setTitle(title);
 		bDTO.setBeautyContents(content);
 		bDTO.setBeautySeqNo(beautySeqNo);
 		
-		int result = beautyService.beautyrevise(bDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setUserNo(userSeqNo);
+		fDTO.setFileSeq(fileSeq);
+		fDTO.setBrdKind(kind);
+		
+		if(!"".equals(file.getOriginalFilename())) {
+			//
+				log.info("welcome to fileUpload");
+				
+				log.info("------file info------");
+				log.info(file);
+				
+				FileUpload fileUpload = new FileUpload();
+				Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
+				
+				for( String key : fileInfo.keySet() ){//파일 정보 로그
+		            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+		        }
+				
+				path = fileInfo.get("path").toString();
+				fileSize = fileInfo.get("fileSize").toString();
+				
+				
+				//DTO에 파일 정보 담기
+				fDTO.setOriName((String)fileInfo.get("originalFileName"));
+				fDTO.setChgName((String)fileInfo.get("fileName"));
+				fDTO.setExtension((String)fileInfo.get("extension"));
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+			//
+			}else {
+				fDTO.setOriName(oriName);
+				fDTO.setChgName(chgName);
+				fDTO.setExtension(extension);
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+				
+			}
+		
+		int result = beautyService.beautyrevise(bDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -940,6 +1090,8 @@ public class WriteController {
 	
 	@RequestMapping(value="homegoodsrevise2")
 	public String homegoodsrevise2(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("file") MultipartFile file, HttpSession session,
+			MultipartHttpServletRequest mhsr,
 			ModelMap model) throws Exception {
 		
 		log.info("welcome homegoodsrevise2");
@@ -947,17 +1099,78 @@ public class WriteController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
+		String fileSeq = request.getParameter("fileSeq");
+		String chgName = request.getParameter("chgName");
+		String oriName = request.getParameter("oriName");
+		String fileSize = request.getParameter("fileSize");
+		String userSeqNo = (String)session.getAttribute("userSeqNo");
+		String kind = request.getParameter("kind");
+		String extension = request.getParameter("extension");
+		String path = request.getParameter("path");
 		
 		log.info(title);
 		log.info(content);
 		log.info(homegoodsSeqNo);
+		log.info(fileSeq);
+		log.info(chgName);
+		log.info(userSeqNo);
+		log.info(kind);
+		log.info(oriName);
+		log.info(fileSize);
+		log.info(extension);
+		log.info(path);
+		
+		log.info("".equals(file.getOriginalFilename()));
+		
+		log.info(file);
 		
 		HomegoodsDTO hDTO = new HomegoodsDTO();
 		hDTO.setTitle(title);
 		hDTO.setHomegoodsContents(content);
 		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
 		
-		int result = homegoodsService.homegoodsrevise(hDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setUserNo(userSeqNo);
+		fDTO.setFileSeq(fileSeq);
+		fDTO.setBrdKind(kind);
+		
+		if(!"".equals(file.getOriginalFilename())) {
+			//
+				log.info("welcome to fileUpload");
+				
+				log.info("------file info------");
+				log.info(file);
+				
+				FileUpload fileUpload = new FileUpload();
+				Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
+				
+				for( String key : fileInfo.keySet() ){//파일 정보 로그
+		            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+		        }
+				
+				path = fileInfo.get("path").toString();
+				fileSize = fileInfo.get("fileSize").toString();
+				
+				
+				//DTO에 파일 정보 담기
+				fDTO.setOriName((String)fileInfo.get("originalFileName"));
+				fDTO.setChgName((String)fileInfo.get("fileName"));
+				fDTO.setExtension((String)fileInfo.get("extension"));
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+			//
+			}else {
+				fDTO.setOriName(oriName);
+				fDTO.setChgName(chgName);
+				fDTO.setExtension(extension);
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				
+				
+			}
+		
+		int result = homegoodsService.homegoodsrevise(hDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -978,6 +1191,7 @@ public class WriteController {
 		
 	}
 	
+	//게시판 삭제
 	@RequestMapping(value="writedelete")
 	public String writedelete(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception {
@@ -986,13 +1200,20 @@ public class WriteController {
 		
 		
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
-		log.info(reviewSeqNo);
+		String fileSeq = request.getParameter("fileSeq");
+		
+		log.info("reviewSeqNo :"+reviewSeqNo);
+		log.info("fileSeq :"+fileSeq);
+		
 		
 		MemDTO mDTO = new MemDTO();
-		
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		
-		int result = memberService.writedelete(mDTO);
+		
+		FileDTO fDTO = new FileDTO();
+		fDTO.setFileSeq(fileSeq);
+		
+		int result = memberService.writedelete(mDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -1020,13 +1241,19 @@ public class WriteController {
 		
 		
 		String talkSeqNo = request.getParameter("talkSeqNo");
-		log.info(talkSeqNo);
+		String fileSeq = request.getParameter("fileSeq");
+		
+		log.info("talkSeqNo :" + talkSeqNo);
+		log.info("fileSeq :"+fileSeq);
 		
 		TalkDTO tDTO = new TalkDTO();
 		
 		tDTO.setTalkSeqNo(talkSeqNo);
 		
-		int result = talkService.talkdelete(tDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setFileSeq(fileSeq);
+		
+		int result = talkService.talkdelete(tDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -1054,13 +1281,19 @@ public class WriteController {
 		
 		
 		String eatSeqNo = request.getParameter("eatSeqNo");
-		log.info(eatSeqNo);
+		String fileSeq = request.getParameter("fileSeq");
+		
+		log.info("eatSeqNo :" +eatSeqNo);
+		log.info("fileSeq :"+fileSeq);
 		
 		EatDTO eDTO = new EatDTO();
 		
 		eDTO.setEatSeqNo(eatSeqNo);
 		
-		int result = eatService.eatdelete(eDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setFileSeq(fileSeq);
+		
+		int result = eatService.eatdelete(eDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -1088,13 +1321,19 @@ public class WriteController {
 		
 		
 		String sellSeqNo = request.getParameter("sellSeqNo");
-		log.info(sellSeqNo);
+		String fileSeq = request.getParameter("fileSeq");
+		
+		log.info("sellSeqNo :" +sellSeqNo);
+		log.info("fileSeq :"+fileSeq);
 		
 		SellDTO sDTO = new SellDTO();
 		
 		sDTO.setSellSeqNo(sellSeqNo);
 		
-		int result = sellService.selldelete(sDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setFileSeq(fileSeq);
+		
+		int result = sellService.selldelete(sDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -1122,13 +1361,20 @@ public class WriteController {
 		
 		
 		String beautySeqNo = request.getParameter("beautySeqNo");
-		log.info(beautySeqNo);
+		String fileSeq = request.getParameter("fileSeq");
+		
+		log.info("beautySeqNo :" +beautySeqNo);
+		log.info("fileSeq :"+fileSeq);
+		
 		
 		BeautyDTO bDTO = new BeautyDTO();
 		
 		bDTO.setBeautySeqNo(beautySeqNo);
 		
-		int result = beautyService.beautydelete(bDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setFileSeq(fileSeq);
+		
+		int result = beautyService.beautydelete(bDTO, fDTO);
 		log.info(result);
 		
 		String url;
@@ -1156,13 +1402,19 @@ public class WriteController {
 		
 		
 		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
-		log.info(homegoodsSeqNo);
+		String fileSeq = request.getParameter("fileSeq");
+		
+		log.info("homegoodsSeqNo :" +homegoodsSeqNo);
+		log.info("fileSeq :"+fileSeq);
 		
 		HomegoodsDTO hDTO = new HomegoodsDTO();
 		
 		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
 		
-		int result = homegoodsService.homegoodsdelete(hDTO);
+		FileDTO fDTO = new FileDTO();
+		fDTO.setFileSeq(fileSeq);
+		
+		int result = homegoodsService.homegoodsdelete(hDTO, fDTO);
 		log.info(result);
 		
 		String url;

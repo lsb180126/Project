@@ -127,7 +127,7 @@
 						<a href="/sellrevise.do?sellSeqNo=<%=sDTO.getSellSeqNo() %>"><input type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/selldelete.do?sellSeqNo=<%=sDTO.getSellSeqNo() %>"><input type="button" value="삭제"></a>
+						<a href="/selldelete.do?sellSeqNo=<%=sDTO.getSellSeqNo() %>&fileSeq=<%=sDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
 					</td> 
 					<td>
 						<a href="writelist.do"><input type="button" value="목록"></a>
@@ -183,6 +183,7 @@
 				     <tr>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
+				     		<img src="/upload/<%=sDTO.getChgName()%>" height="200" width="200" >
 				     			<%=sDTO.getSellContents() %>
 				     		</div>	
 				     	</td>

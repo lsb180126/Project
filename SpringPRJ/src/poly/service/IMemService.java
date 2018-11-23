@@ -14,13 +14,11 @@ public interface IMemService {
 
 	MemDTO getMemberdetail(MemDTO mDTO) throws Exception;
 
-	MemDTO getWritedetail(MemDTO mDTO) throws Exception;
-
 	int writerevise(MemDTO mDTO, FileDTO fDTO) throws Exception;
 
 	List<MemDTO> getReviewList() throws Exception;
 
-	int writedelete(MemDTO mDTO) throws Exception;
+	int writedelete(MemDTO mDTO, FileDTO fDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
 

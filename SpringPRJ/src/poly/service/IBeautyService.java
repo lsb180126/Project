@@ -15,9 +15,9 @@ public interface IBeautyService {
 
 	List<BeautyDTO> getBeautyList2(BeautyDTO bDTO) throws Exception;
 
-	int beautyrevise(BeautyDTO bDTO) throws Exception;
+	int beautyrevise(BeautyDTO bDTO, FileDTO fDTO) throws Exception;
 
-	int beautydelete(BeautyDTO bDTO) throws Exception;
+	int beautydelete(BeautyDTO bDTO, FileDTO fDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
 	

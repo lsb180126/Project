@@ -34,11 +34,7 @@ public class MemberService implements IMemService{
 		return memMapper.getMemberdetail(mDTO);
 	}
 
-	@Override
-	public MemDTO getWritedetail(MemDTO mDTO) throws Exception {
-		
-		return memMapper.getWritedetail(mDTO);
-	}
+	
 
 	@Override
 	public int writerevise(MemDTO mDTO, FileDTO fDTO) throws Exception {
@@ -60,9 +56,11 @@ public class MemberService implements IMemService{
 	}
 
 	@Override
-	public int writedelete(MemDTO mDTO) throws Exception {
+	public int writedelete(MemDTO mDTO, FileDTO fDTO) throws Exception {
 		
-		return memMapper.writedelete(mDTO);
+		int a = memMapper.writedelete(mDTO);
+		int b = memMapper.filedelete(fDTO);
+		return a*b;
 	}
 
 	@Override

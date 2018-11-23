@@ -15,8 +15,6 @@ public interface MemMapper  {
 
 	MemDTO getMemberdetail(MemDTO mDTO) throws Exception;
 
-	MemDTO getWritedetail(MemDTO mDTO) throws Exception;
-
 	int writerevise(MemDTO mDTO) throws Exception;
 
 	List<MemDTO> getReviewList() throws Exception;
@@ -30,6 +28,8 @@ public interface MemMapper  {
 	List<MemDTO> getReviewList2(String keyword) throws Exception;
 
 	int filerevise(FileDTO fDTO) throws Exception;
+
+	int filedelete(FileDTO fDTO) throws Exception;
 
 	
 

@@ -1,3 +1,4 @@
+<%@page import="poly.dto.FileDTO"%>
 <%@page import="poly.dto.SellDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -8,6 +9,9 @@
 %>
 <%
 	SellDTO sDTO = (SellDTO)request.getAttribute("sDTO");
+%>
+<%
+	FileDTO fDTO = (FileDTO)request.getAttribute("fDTO");
 %>
 <!DOCTYPE html>
 <html>
@@ -112,7 +116,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        	<form action="/sellrevise2.do" method="POST">
+        	<form action="/sellrevise2.do" method="POST" enctype="multipart/form-data">
         	
 			<table class="table">
 				
@@ -163,11 +167,17 @@
 			     		
 		     		</tr>
 				</table>
+				<img src="/upload/<%=sDTO.getChgName()%>" height="200" width="200" id="chgName">
+					<input type="file" name="file" id="file" >
+					<input type="hidden" value="sell" name="kind">
+					<input type="hidden" value="<%=sDTO.getOriName()%>" name="oriName">
+					<input type="hidden" value="<%=sDTO.getFileSize()%>" name="fileSize">
+					<input type="hidden" value="<%=sDTO.getFileSeq()%>" name="fileSeq">
+				    <input type="hidden" value="<%=sDTO.getChgName()%>" name="chgName">
+				    <input type="hidden" value="<%=sDTO.getFilePath()%>" name="path">
+				    <input type="hidden" value="<%=sDTO.getExtension()%>" name="extension">
 				</form>
-				<form enctype="multipart/form-data" method="POST" action="/reviewlist.do">
-				     			<input type="file" name="file" id="file" >
-				     			<input type="submit" value="파일 업로드">
-				     		</form>
+				
 				    <br/>
 			     	<br/>
 			     	<br/>

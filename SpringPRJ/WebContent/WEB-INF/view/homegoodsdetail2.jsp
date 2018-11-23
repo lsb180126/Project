@@ -126,7 +126,7 @@
 						<a href="/homegoodsrevise.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo() %>"><input type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/homegoodsdelete.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo() %>"><input type="button" value="삭제"></a>
+						<a href="/homegoodsdelete.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo() %>&fileSeq=<%=hDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
 					</td> 
 					<td>
 						<a href="writelist.do"><input type="button" value="목록"></a>
@@ -182,6 +182,7 @@
 				     <tr>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
+				     		<img src="/upload/<%=hDTO.getChgName()%>" height="200" width="200" >
 				     			<%=hDTO.getHomegoodsContents() %>
 				     		</div>	
 				     	</td>

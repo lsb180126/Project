@@ -54,9 +54,11 @@ public class TalkService implements ITalkService{
 	}
 
 	@Override
-	public int talkdelete(TalkDTO tDTO) throws Exception {
+	public int talkdelete(TalkDTO tDTO, FileDTO fDTO) throws Exception {
 		
-		return talkMapper.talkdelete(tDTO);
+		int a = talkMapper.talkdelete(tDTO);
+		int b = talkMapper.filedelete(fDTO);
+		return a*b;
 	}
 
 	@Override

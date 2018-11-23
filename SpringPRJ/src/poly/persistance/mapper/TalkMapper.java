@@ -28,6 +28,8 @@ public interface TalkMapper  {
 
 	int filerevise(FileDTO fDTO) throws Exception;
 
+	int filedelete(FileDTO fDTO) throws Exception;
+
 	
 
 	

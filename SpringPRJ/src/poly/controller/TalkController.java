@@ -90,6 +90,8 @@ public class TalkController {
 		log.info(tDTO.getTalkContents());
 		
 		
+		
+		
 		model.addAttribute("tDTO",tDTO); 
 		
 		return "/talkdetail";

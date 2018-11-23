@@ -204,11 +204,12 @@
 			
 				<tr>
 					
-					<th>번호</th>
-					<th>이름(병원/약국)</th>
-					<th colspan="3">제목</th>
+						<th>번호</th>
+						<th>이름(병원/약국)</th>
+						<th colspan="2">제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
 					
-					<th>작성자</th>
 				</tr>
 				
 				<% for(MemDTO m : mList) { %>
@@ -218,11 +219,10 @@
 					
 					<td><%=m.getReviewName() %></td>
 					
-					<td colspan="3"><a href="/reviewdetail.do?reviewSeqNo=<%=m.getReviewSeqNo() %>"><%=m.getTitle() %></a></td>
-					
-					
+					<td colspan="2"><a href="/reviewdetail.do?reviewSeqNo=<%=m.getReviewSeqNo() %>"><%=m.getTitle() %></a></td>
 					
 					<td><%=m.getUserName() %></td>
+					<td><%=m.getChgDt() %></td>
 					
 				</tr>
 				<% } %> 

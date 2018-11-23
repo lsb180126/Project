@@ -45,15 +45,19 @@ public class SellService implements ISellService{
 	}
 
 	@Override
-	public int sellrevise(SellDTO sDTO) throws Exception {
+	public int sellrevise(SellDTO sDTO, FileDTO fDTO) throws Exception {
 		
-		return sellMapper.sellrevise(sDTO);
+		int a = sellMapper.sellrevise(sDTO);
+		int b = sellMapper.filerevise(fDTO);
+		return a*b;
 	}
 
 	@Override
-	public int selldelete(SellDTO sDTO) throws Exception {
+	public int selldelete(SellDTO sDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return sellMapper.selldelete(sDTO);
+		int a = sellMapper.selldelete(sDTO);
+		int b = sellMapper.filedelete(fDTO);
+		return a*b;
 	}
 
 	@Override

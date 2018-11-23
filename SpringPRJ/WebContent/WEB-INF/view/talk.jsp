@@ -160,11 +160,7 @@
 					
 					<td>磊蜡 配农</td>
 					<td>
-						<select>
-							<option>力格</option>
-							<option>累己磊</option>
-							<option>累己老</option>
-						</select>
+						
 					</td>
 					
 					<td></td>
