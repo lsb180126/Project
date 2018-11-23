@@ -2,8 +2,9 @@
 <%@page import="java.util.List"%>
 <%@page import="poly.dto.MemDTO"%>
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 
@@ -20,7 +21,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		
 		
 
@@ -119,23 +120,23 @@
           
             
             <li class="nav-item">
-              <a class="nav-link" href="#">º´¿ø Ã£±â</a>
+              <a class="nav-link" href="#">ë³‘ì› ì°¾ê¸°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">¾à±¹Ã£±â</a>
+              <a class="nav-link" href="#">ì•½êµ­ì°¾ê¸°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="review.do">¸®ºä</a>
+              <a class="nav-link" href="review.do">ë¦¬ë·°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">ÀÚÀ¯ ÅäÅ©</a>
+              <a class="nav-link" href="talk.do">ìžìœ  í† í¬</a>
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="useful.do">À¯¿ëÇÑ Á¤º¸</a>
+              <a class="nav-link" href="useful.do">ìœ ìš©í•œ ì •ë³´</a>
             </li>
             
               
@@ -147,17 +148,17 @@
             </li>
             <%} else { %>
              <li class="nav-item active">
-              <a class="nav-link" href="logout.do"><%=id + "´Ô È¯¿µÇÕ´Ï´Ù." %> &nbsp; Logout
+              <a class="nav-link" href="logout.do"><%=id + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤." %> &nbsp; Logout
              	 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">¸¶ÀÌÆäÀÌÁö
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë§ˆì´íŽ˜ì´ì§€
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist.do">È¸¿øÁ¤º¸</a>
-	              <a class="dropdown-item" href="writelist.do">±Û ÀÛ¼º ¸ñ·Ï</a>
+	              <a class="dropdown-item" href="mylist.do">íšŒì›ì •ë³´</a>
+	              <a class="dropdown-item" href="writelist.do">ê¸€ ìž‘ì„± ëª©ë¡</a>
               </div>
             </li>
              <%  }  %>
@@ -182,14 +183,14 @@
 			<table class="table">
 				<tr>
 					
-					<td>¸®ºä Á¤º¸</td>
+					<td>ë¦¬ë·° ì •ë³´</td>
 					<td>
 						
 					</td>
 					
 					<td></td>
 					<td>
-						<form class="example" action="/reviewsearch.do">
+						<form class="example" action="/reviewsearch.do" method="POST">
 						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
 						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
@@ -198,17 +199,17 @@
 					</td>
 					
 					<td>
-						<a href="reviewregister.do"><input type="submit" value="µî·Ï"></a>
+						<a href="reviewregister.do"><input type="submit" value="ë“±ë¡"></a>
 					</td>
 				</tr>
 			
 				<tr>
 					
-						<th>¹øÈ£</th>
-						<th>ÀÌ¸§(º´¿ø/¾à±¹)</th>
-						<th colspan="2">Á¦¸ñ</th>
-						<th>ÀÛ¼ºÀÚ</th>
-						<th>ÀÛ¼ºÀÏ</th>
+						<th>ë²ˆí˜¸</th>
+						<th>ì´ë¦„(ë³‘ì›/ì•½êµ­)</th>
+						<th colspan="2">ì œëª©</th>
+						<th>ìž‘ì„±ìž</th>
+						<th>ìž‘ì„±ì¼</th>
 					
 				</tr>
 				

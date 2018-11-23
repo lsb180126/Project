@@ -67,6 +67,12 @@ public class TalkService implements ITalkService{
 		return talkMapper.mylistdelete(userId);
 	}
 
+	@Override
+	public List<TalkDTO> getTalkList3(String keyword) throws Exception {
+		
+		return talkMapper.getTalkList3(keyword);
+	}
+
 	
 	
 

@@ -61,6 +61,32 @@ public class TalkController {
 		return "/talk";
 	}
 	
+	@RequestMapping(value="talksearch")
+	public String Talksearch(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		response.setCharacterEncoding("UTF-8");
+		
+		log.info("welcome talksearch");
+		
+		String keyword = request.getParameter("keyword");
+		
+		
+		log.info(keyword);
+		
+		List<TalkDTO> tList = talkService.getTalkList3(keyword);
+		
+		for(TalkDTO t : tList) {
+			log.info("talkSeqNo : " +t.getTalkSeqNo());
+			log.info("title : " +t.getTitle());
+			log.info("userId : " +t.getUserId());
+			log.info("chgDt : " +t.getChgDt());
+		}
+		
+		model.addAttribute("tList", tList);
+		 
+		return "/talksearch";
+	}
+	
 	@RequestMapping(value="talkregister")
 	public String Talkregister(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {

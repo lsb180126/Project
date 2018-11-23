@@ -30,6 +30,8 @@ public interface TalkMapper  {
 
 	int filedelete(FileDTO fDTO) throws Exception;
 
+	List<TalkDTO> getTalkList3(String keyword) throws Exception;
+
 	
 
 	

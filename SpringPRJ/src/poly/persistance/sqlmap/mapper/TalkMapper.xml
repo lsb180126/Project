@@ -120,5 +120,20 @@
 		DELETE FROM TALK_INFO
 		WHERE USER_ID = #{userId}
 	</delete>
+	
+	<select id="getTalkList3" resultType="TalkDTO" parameterType="string" >
+		 SELECT TI.TALK_SEQ_NO as talkSeqNo,
+				TI.TITLE as title,
+				TI.TALK_CONTENTS as talkContents,
+				TI.REG_DT as regDt,
+				TI.CHG_DT as chgDt,
+				TI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM TALK_INFO TI, USER_INFO UI
+		 WHERE TI.USER_ID = UI.USER_ID
+		 AND TI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR TI.TALK_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+	</select>
 			
 </mapper>

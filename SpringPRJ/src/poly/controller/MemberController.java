@@ -67,6 +67,7 @@ public class MemberController {
 	@RequestMapping(value="reviewsearch")
 	public String Reviewsearch(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
+		response.setCharacterEncoding("UTF-8");
 		
 		log.info("welcome reviewsearch");
 		

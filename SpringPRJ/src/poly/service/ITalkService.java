@@ -22,6 +22,8 @@ public interface ITalkService {
 
 	int mylistdelete(String userId) throws Exception;
 
+	List<TalkDTO> getTalkList3(String keyword) throws Exception;
+
 	
 	
 	
