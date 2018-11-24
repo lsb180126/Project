@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
 	    
@@ -85,15 +85,15 @@
 			                    <form action="/loginProc.do" method="POST" id="f1">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">id</label>
-			                        	<input type="text" name="id" placeholder="æ∆¿Ãµ" class="form-username form-control" id="id">
+			                        	<input type="text" name="id" placeholder="ÏïÑÏù¥Îîî" class="form-username form-control" id="id">
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">password</label>
-			                        	<input type="password" name="password" placeholder="∫Òπ–π¯»£" class="form-password form-control" id="password">
+			                        	<input type="password" name="password" placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏" class="form-password form-control" id="password">
 			                        </div>
-			                        <button type="submit" class="btn" id="hi">∑Œ±◊¿Œ</button> &nbsp;
-			                        <a href="idfind.do"><button type="button" class="btn">ID√£±‚</button></a> &nbsp;
-			                        <a href="pwfind.do"><button type="button" class="btn">PASSWORD√£±‚</button></a>
+			                        <button type="submit" class="btn" id="hi">Î°úÍ∑∏Ïù∏</button> &nbsp;
+			                        <a href="idfind.do"><button type="button" class="btn">IDÏ∞æÍ∏∞</button></a> &nbsp;
+			                        <a href="pwfind.do"><button type="button" class="btn">PASSWORDÏ∞æÍ∏∞</button></a>
 			                        <a href="index.do">HOME</a>
 			                    </form>
 		                    </div>

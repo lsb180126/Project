@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
-	//ÀÌ jsp´Â ¹®ÀÚ¿­ 2°³¸¦ Àü¼Û ¹ÞÀ½ 
-	//1°³´Â °æ°íÃ¢ ¹®±¸
-	//´Ù¸¥ 1°³´Â °æ°íÃ¢À» ¶ç¿îµÚ ÀÌµ¿ÇÒ Controller
-	String msg = (String)request.getAttribute("msg");//°æ°íÃ¢ ¹®±¸
-	String url = (String)request.getAttribute("url");//°æ°íÃ¢À» ¶ç¿îµÚ ÀÌµ¿ÇÒ Controller
+	//ì´ jspëŠ” ë¬¸ìžì—´ 2ê°œë¥¼ ì „ì†¡ ë°›ìŒ 
+	//1ê°œëŠ” ê²½ê³ ì°½ ë¬¸êµ¬
+	//ë‹¤ë¥¸ 1ê°œëŠ” ê²½ê³ ì°½ì„ ë„ìš´ë’¤ ì´ë™í•  Controller
+	String msg = (String)request.getAttribute("msg");//ê²½ê³ ì°½ ë¬¸êµ¬
+	String url = (String)request.getAttribute("url");//ê²½ê³ ì°½ì„ ë„ìš´ë’¤ ì´ë™í•  Controller
 %>
 <script type="text/javascript">
 	alert("<%=msg%>");

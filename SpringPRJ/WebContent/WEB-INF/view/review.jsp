@@ -7,7 +7,6 @@
 
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-
 %>
 <%
 	
@@ -90,7 +89,7 @@
 				   var keyword = $("#keyword").val();
 				   
 				   console.log(keyword);
-				   location.href="reviewsearch.do?keyword=" + keyword;
+				   location.href="reviewsearch.do?keyword=" + encodeURI(encodeURIComponent(keyword));
 				   
 				   
 			   })

@@ -1,10 +1,9 @@
 <%@page import="poly.dto.BeautyDTO"%>
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-
 %>
 <%
 	BeautyDTO bDTO = (BeautyDTO)request.getAttribute("bDTO");
@@ -12,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		<title>beauty detail</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,23 +54,23 @@
           	
             
             <li class="nav-item">
-              <a class="nav-link" href="#">º´¿ø Ã£±â</a>
+              <a class="nav-link" href="#">ë³‘ì› ì°¾ê¸°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">¾à±¹Ã£±â</a>
+              <a class="nav-link" href="#">ì•½êµ­ì°¾ê¸°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="review.do">¸®ºä</a>
+              <a class="nav-link" href="review.do">ë¦¬ë·°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">ÀÚÀ¯ ÅäÅ©</a>
+              <a class="nav-link" href="talk.do">ìžìœ  í† í¬</a>
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="useful.do">À¯¿ëÇÑ Á¤º¸</a>
+              <a class="nav-link" href="useful.do">ìœ ìš©í•œ ì •ë³´</a>
             </li>
             
              <%if("".equals(id) || id == null) { %>
@@ -82,17 +81,17 @@
             </li>
             <%} else { %>
              <li class="nav-item active">
-              <a class="nav-link" href="logout.do"><%=id + "´Ô È¯¿µÇÕ´Ï´Ù." %> &nbsp; Logout
+              <a class="nav-link" href="logout.do"><%=id + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤." %> &nbsp; Logout
              	 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">¸¶ÀÌÆäÀÌÁö
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë§ˆì´íŽ˜ì´ì§€
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist.do">È¸¿øÁ¤º¸</a>
-	              <a class="dropdown-item" href="writelist.do">±Û ÀÛ¼º ¸ñ·Ï</a>
+	              <a class="dropdown-item" href="mylist.do">íšŒì›ì •ë³´</a>
+	              <a class="dropdown-item" href="writelist.do">ê¸€ ìž‘ì„± ëª©ë¡</a>
               </div>
             </li>
              <%  }  %>
@@ -118,7 +117,7 @@
 				
 				<tr>
 					
-					<th>¹Ì¿ë Á¤º¸</th>
+					<th>ë¯¸ìš© ì •ë³´</th>
 					<td>
 						
 					</td>
@@ -130,7 +129,7 @@
 						
 					</td>
 					<td>
-						<a href="beauty.do"><input type="button" value="¸ñ·Ï"></a>
+						<a href="beauty.do"><input type="button" value="ëª©ë¡"></a>
 					</td>
 					
 					
@@ -139,7 +138,7 @@
 				<tr>
 					<td>
 						<div class="my-box">
-							ÀÛ¼ºÀÚ
+							ìž‘ì„±ìž
 						</div>	
 					</td>
 					<td>
@@ -154,7 +153,7 @@
 					
 					<td>
 						<div class="my-box">
-						ÀÛ¼ºÀÏ
+						ìž‘ì„±ì¼
 						</div>
 					</td>
 					
@@ -171,7 +170,7 @@
 					<tr>
 						<td>
 							<div class="my-box">
-								Á¦¸ñ
+								ì œëª©
 							</div>
 						</td>
 						<td colspan="5">

@@ -1,14 +1,13 @@
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-
 %>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		<title>homegoods register</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,23 +47,23 @@
           	
             
             <li class="nav-item">
-              <a class="nav-link" href="#">º´¿ø Ã£±â</a>
+              <a class="nav-link" href="#">ë³‘ì› ì°¾ê¸°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">¾à±¹Ã£±â</a>
+              <a class="nav-link" href="#">ì•½êµ­ì°¾ê¸°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="review.do">¸®ºä</a>
+              <a class="nav-link" href="review.do">ë¦¬ë·°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">ÀÚÀ¯ ÅäÅ©</a>
+              <a class="nav-link" href="talk.do">ìžìœ  í† í¬</a>
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="useful.do">À¯¿ëÇÑ Á¤º¸</a>
+              <a class="nav-link" href="useful.do">ìœ ìš©í•œ ì •ë³´</a>
             </li>
             
             <%if("".equals(id) || id == null) { %>
@@ -75,17 +74,17 @@
             </li>
             <%} else { %>
              <li class="nav-item active">
-              <a class="nav-link" href="logout.do"><%=id + "´Ô È¯¿µÇÕ´Ï´Ù." %> &nbsp; Logout
+              <a class="nav-link" href="logout.do"><%=id + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤." %> &nbsp; Logout
              	 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">¸¶ÀÌÆäÀÌÁö
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë§ˆì´íŽ˜ì´ì§€
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist.do">È¸¿øÁ¤º¸</a>
-	              <a class="dropdown-item" href="#">±Û ÀÛ¼º ¸ñ·Ï</a>
+	              <a class="dropdown-item" href="mylist.do">íšŒì›ì •ë³´</a>
+	              <a class="dropdown-item" href="#">ê¸€ ìž‘ì„± ëª©ë¡</a>
               </div>
             </li>
              <%  }  %>
@@ -109,7 +108,7 @@
         	
 			<table class="table">
 				<tr>
-					<th>»ýÈ°¿ëÇ° Á¤º¸ µî·Ï</th>
+					<th>ìƒí™œìš©í’ˆ ì •ë³´ ë“±ë¡</th>
 					<td>
 						
 					</td>
@@ -118,10 +117,10 @@
 						
 					</td>
 					<td>
-						<input type="submit" value="µî·Ï">
+						<input type="submit" value="ë“±ë¡">
 					</td>
 					<td>
-						<a href="homegoods.do"><input type="button" value="¸ñ·Ï"></a>
+						<a href="homegoods.do"><input type="button" value="ëª©ë¡"></a>
 					</td>
 				</tr>
 				
@@ -130,13 +129,13 @@
 						<td colspan="6">
 							<div class="form-group">
 				           		<label class="sr-only" for="exampletext"></label>
-				           		<input type="text" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä." class="form-control" id="exampletext" name="title">
+				           		<input type="text" placeholder="ì œëª©ì„ ìž…ë ¥í•´ ì£¼ì„¸ìš”." class="form-control" id="exampletext" name="title">
 				        	</div>
 				        </td>
 				     </tr>
 				     <tr>
 				     	<td colspan="6">
-				     		<textarea class="form-control"  rows="20" cols="100" placeholder="³»¿ëÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä." name="content"></textarea>
+				     		<textarea class="form-control"  rows="20" cols="100" placeholder="ë‚´ìš©ì„ ìž…ë ¥í•´ ì£¼ì„¸ìš”." name="content"></textarea>
 				     	</td>
 			     	</tr>
 			     	<tr>

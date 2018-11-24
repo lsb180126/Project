@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-
 %>
 <!DOCTYPE html>
 <html>

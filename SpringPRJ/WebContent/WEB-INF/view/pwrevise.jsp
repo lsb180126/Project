@@ -1,6 +1,6 @@
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 	String password = (String) request.getAttribute("password");
@@ -14,10 +14,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>PASSWORD º¯°æ</title>
+        <title>PASSWORD ë³€ê²½</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -62,7 +62,7 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>PASSWORD º¯°æ</h3>
+                        			<h3>PASSWORD ë³€ê²½</h3>
                             		<p>Enter your new password and new password check:</p>
                         		</div>
                         		<div class="form-top-right">
@@ -73,15 +73,15 @@
 			                    <form role="form" action="/pwrevise2.do" method="POST" class="login-form" >
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-password">new password</label>
-			                        	<input type="password" name="password" placeholder="»õ ºñ¹Ğ¹øÈ£" class="form-password form-control" id="password" >
+			                        	<input type="password" name="password" placeholder="ìƒˆ ë¹„ë°€ë²ˆí˜¸" class="form-password form-control" id="password" >
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">new password check</label>
-			                        	<input type="password" name="passwordcheck" placeholder="»õ ºñ¹Ğ¹øÈ£ È®ÀÎ" class="form-password form-control" id="passwordcheck">
+			                        	<input type="password" name="passwordcheck" placeholder="ìƒˆ ë¹„ë°€ë²ˆí˜¸ í™•ì¸" class="form-password form-control" id="passwordcheck">
 			                        </div>
 			                        <input type="hidden" name="userId" value="<%=pwid%>">
-			                        <button type="submit" class="btn" id="ok">PASSWORD º¯°æ</button> &nbsp;
-			                        <a href="login.do"><button type="button" class="btn">·Î±×ÀÎ</button></a>
+			                        <button type="submit" class="btn" id="ok">PASSWORD ë³€ê²½</button> &nbsp;
+			                        <a href="login.do"><button type="button" class="btn">ë¡œê·¸ì¸</button></a>
 			                    </form>
 		                    </div>
                         </div>
@@ -111,15 +111,15 @@
 		      			var passwordcheck  = $("#passwordcheck").val();
 		      			
 		      			if(password == "") {
-		      				alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		      				alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		      				return false;
 		      			}
 		      			
 		      			if(passwordcheck == "") {
-		      				alert("ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä");
+		      				alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”");
 		      				return false;
 		      			} else if(passwordcheck != password) {
-		      				alert("ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+		      				alert("ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		      				return false;
 		      			} 
 		      		})

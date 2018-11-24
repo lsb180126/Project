@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ID √£±‚</title>
+        <title>ID Ï∞æÍ∏∞</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -54,7 +54,7 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>ID √£±‚</h3>
+                        			<h3>ID Ï∞æÍ∏∞</h3>
                             		<p>Enter your name and email to find id:</p>       
                         		</div>
                         		<div class="form-top-right">
@@ -66,14 +66,14 @@
 			                    <form role="form" action="/idfind2.do" method="POST" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="r-form-1-email">name</label>
-			                        	<input type="text" name="name" placeholder="¿Ã∏ß" class="r-form-1-email form-control" id="name">
+			                        	<input type="text" name="name" placeholder="Ïù¥Î¶Ñ" class="r-form-1-email form-control" id="name">
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="r-form-1-email">email</label>
-			                        	<input type="text" name="email" placeholder="¿Ã∏ﬁ¿œ" class="r-form-1-email form-control" id="email">
+			                        	<input type="text" name="email" placeholder="Ïù¥Î©îÏùº" class="r-form-1-email form-control" id="email">
 			                        </div>
-			                        <button type="submit" class="btn">ID √£±‚</button> &nbsp;
-			                        <a href="login.do"><button type="button" class="btn">∑Œ±◊¿Œ</button></a>
+			                        <button type="submit" class="btn">ID Ï∞æÍ∏∞</button> &nbsp;
+			                        <a href="login.do"><button type="button" class="btn">Î°úÍ∑∏Ïù∏</button></a>
 			                    </form>
 		                    </div>
 		                    

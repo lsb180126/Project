@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>register</title>
@@ -44,12 +44,12 @@
       				success:function(data) {
       					
       					if(data==0) {
-      						alert("»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+      						alert("ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.");
       						
       						check = true;
       					}
       					else {
-      						alert("Áßº¹µÇ´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+      						alert("ì¤‘ë³µë˜ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
       						
       						
       					}
@@ -81,38 +81,38 @@
       			var gender = $('input[name="gender"]:checked').val(); 
       				
       			if(id == "") {
-      				alert("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+      				alert("ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
       				return;
       			}else if(id.length <5) {
-      				alert("id¸¦ 5ÀÚ¸®ÀÌ»ó ÀÔ·ÂÇØÁÖ¼¼¿ä");
+      				alert("idë¥¼ 5ìë¦¬ì´ìƒ ì…ë ¥í•´ì£¼ì„¸ìš”");
       				return;
       			}
       			
       			if(password == "") {
-      				alert("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+      				alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
       				return;
       			}
       			
       			if(passwordcheck == "") {
-      				alert("ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä");
+      				alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”");
       				return;
       			} else if(passwordcheck != password) {
-      				alert("ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+      				alert("ë¹„ë°€ë²ˆí˜¸ê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.");
       				return;
       			} 
       			
       			if(name == "") {
-      				alert("ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+      				alert("ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
       				return;
       			}
       			
       			if(email == "") {
-      				alert("ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+      				alert("ì´ë©”ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
       				return;
       			}
       			
       			if(gender == null) {
-      				alert("¼ºº°À» ¼±ÅÃÇØÁÖ¼¼¿ä.");
+      				alert("ì„±ë³„ì„ ì„ íƒí•´ì£¼ì„¸ìš”.");
       				return;
       			}
       				
@@ -150,7 +150,7 @@
 					<div class="col-sm-6 col-sm-offset-3 r-form-1-box wow fadeInUp">
 						<div class="r-form-1-top">
 							<div class="r-form-1-top-left">
-								<h3>È¸¿ø°¡ÀÔ</h3>
+								<h3>íšŒì›ê°€ì…</h3>
 								<p>Fill in the form below to get instant access:</p>
 							</div>
 							<div class="r-form-1-top-right">
@@ -161,36 +161,36 @@
 							<form  action="/rc.do" method="POST" id="form">
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-first-name">id</label>
-									<input type="text" name="id" placeholder="¾ÆÀÌµğ" class="r-form-1-first-name form-control" id="idcheck" >
+									<input type="text" name="id" placeholder="ì•„ì´ë””" class="r-form-1-first-name form-control" id="idcheck" >
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn" id="check">Áßº¹È®ÀÎ</button>
+									<button type="button" class="btn" id="check">ì¤‘ë³µí™•ì¸</button>
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-last-name">password</label>
-									<input type="text" name="password" placeholder="ºñ¹Ğ¹øÈ£" class="r-form-1-last-name form-control" id="password">
+									<input type="text" name="password" placeholder="ë¹„ë°€ë²ˆí˜¸" class="r-form-1-last-name form-control" id="password">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-last-name">passwordcheck</label>
-									<input type="text" name="passwordcheck" placeholder="ºñ¹Ğ¹øÈ£È®ÀÎ" class="r-form-1-last-name form-control" id="passwordcheck">
+									<input type="text" name="passwordcheck" placeholder="ë¹„ë°€ë²ˆí˜¸í™•ì¸" class="r-form-1-last-name form-control" id="passwordcheck">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-email">name</label>
-									<input type="text" name="name" placeholder="ÀÌ¸§" class="r-form-1-email form-control" id="name">
+									<input type="text" name="name" placeholder="ì´ë¦„" class="r-form-1-email form-control" id="name">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-email">email</label>
-									<input type="text" name="email" placeholder="ÀÌ¸ŞÀÏ" class="r-form-1-email form-control" id="email">
+									<input type="text" name="email" placeholder="ì´ë©”ì¼" class="r-form-1-email form-control" id="email">
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn" id="emailcheck">ÀÌ¸ŞÀÏ ÀÎÁõ</button>
+									<button type="button" class="btn" id="emailcheck">ì´ë©”ì¼ ì¸ì¦</button>
 								</div>
     							<div class="">
-									<input type="radio" name="gender" value="man">³²ÀÚ
-									<input type="radio" name="gender" value="woman">¿©ÀÚ
+									<input type="radio" name="gender" value="man">ë‚¨ì
+									<input type="radio" name="gender" value="woman">ì—¬ì
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn" id="ok">µî·Ï</button>
+									<button type="button" class="btn" id="ok">ë“±ë¡</button>
 									<a href="index.do">HOME</a>
 								</div>
 								

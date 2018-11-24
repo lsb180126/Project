@@ -1,6 +1,6 @@
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		
 		
 
@@ -242,23 +242,23 @@
           	
             
             <li class="nav-item">
-              <a class="nav-link" href="#">º´¿ø Ã£±â</a>
+              <a class="nav-link" href="#">ë³‘ì› ì°¾ê¸°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">¾à±¹Ã£±â</a>
+              <a class="nav-link" href="#">ì•½êµ­ì°¾ê¸°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="review.do">¸®ºä</a>
+              <a class="nav-link" href="review.do">ë¦¬ë·°</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">ÀÚÀ¯ ÅäÅ©</a>
+              <a class="nav-link" href="talk.do">ììœ  í† í¬</a>
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="useful.do">À¯¿ëÇÑ Á¤º¸</a>
+              <a class="nav-link" href="useful.do">ìœ ìš©í•œ ì •ë³´</a>
             </li>
             
               <%if("".equals(id) || id == null) { %>
@@ -269,17 +269,17 @@
             </li>
             <%} else { %>
              <li class="nav-item active">
-              <a class="nav-link" href="logout.do"><%=id + "´Ô È¯¿µÇÕ´Ï´Ù." %> &nbsp; Logout
+              <a class="nav-link" href="logout.do"><%=id + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤." %> &nbsp; Logout
              	 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">¸¶ÀÌÆäÀÌÁö
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ë§ˆì´í˜ì´ì§€
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist.do">È¸¿øÁ¤º¸</a>
-	              <a class="dropdown-item" href="writelist.do">±Û ÀÛ¼º ¸ñ·Ï</a>
+	              <a class="dropdown-item" href="mylist.do">íšŒì›ì •ë³´</a>
+	              <a class="dropdown-item" href="writelist.do">ê¸€ ì‘ì„± ëª©ë¡</a>
               </div>
             </li>
              <%  }  %>
@@ -304,7 +304,7 @@
 			<table class="type01" >
 			
 			    <tr>
-			        <th scope="row">Å°¿öµå</th>
+			        <th scope="row">í‚¤ì›Œë“œ</th>
 			        <td></td>
 			        <td></td>
 			        <td></td>
@@ -316,22 +316,22 @@
 			    	
 			        <th scope="row" height="300">
 			        	<div class="wrap">
-			        		<a href="eat.do" class="button1">&nbsp;&nbsp;&nbsp;°£½Ä&nbsp;&nbsp;&nbsp;</a>
+			        		<a href="eat.do" class="button1">&nbsp;&nbsp;&nbsp;ê°„ì‹&nbsp;&nbsp;&nbsp;</a>
 		        		</div>
 			        </th>
 			        <th scope="row">
 			        	<div class="wrap2">
-			        		<a href="sell.do" class="button2">&nbsp;&nbsp;&nbsp;ºĞ¾ç&nbsp;&nbsp;&nbsp;</a>
+			        		<a href="sell.do" class="button2">&nbsp;&nbsp;&nbsp;ë¶„ì–‘&nbsp;&nbsp;&nbsp;</a>
 		        		</div>
 			        </th>
 			        <th scope="row">
 			        	<div class="wrap3">
-			        		<a href="beauty.do" class="button3">&nbsp;&nbsp;&nbsp;¹Ì¿ë&nbsp;&nbsp;&nbsp;</a>
+			        		<a href="beauty.do" class="button3">&nbsp;&nbsp;&nbsp;ë¯¸ìš©&nbsp;&nbsp;&nbsp;</a>
 		        		</div>
 			        </th>
 			        <th scope="row">
 			        	<div class="wrap4">
-			        		<a href="homegoods.do" class="button4">»ıÈ°¿ëÇ°</a>
+			        		<a href="homegoods.do" class="button4">ìƒí™œìš©í’ˆ</a>
 		        		</div>
 			        </th>
 			    </tr>

@@ -1,7 +1,7 @@
 <%@page import="poly.util.CmmUtil"%>
 <%@page import="poly.dto.UserDTO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 %>
@@ -11,10 +11,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ID ã�� ȭ��</title>
+        <title>ID 찾기 화면</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -57,15 +57,15 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3><%=uDTO.getUserName() %> ���� ���̵��</h3>
-                            		<h3>"<%=uDTO.getUserId() %>" �Դϴ�.</h3>s
+                        			<h3><%=uDTO.getUserName() %> 님의 아이디는</h3>
+                            		<h3>"<%=uDTO.getUserId() %>" 입니다.</h3>s
                         		</div>
                             </div>
                             <div class="form-bottom">
 			                    <form role="form" action="" method="POST" class="login-form">
 			                    	
-			                        <a href="pwfind.do"><button type="button" class="btn">PASSWORD ã��</button></a> &nbsp;
-			                        <a href="login.do"><button type="button" class="btn">�α���</button></a>
+			                        <a href="pwfind.do"><button type="button" class="btn">PASSWORD 찾기</button></a> &nbsp;
+			                        <a href="login.do"><button type="button" class="btn">로그인</button></a>
 			                    </form>
 		                    </div>
                         </div>

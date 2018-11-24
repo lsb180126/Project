@@ -1,8 +1,8 @@
 <%@page import="poly.dto.FileDTO"%>
 <%@page import="poly.dto.MemDTO"%>
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String) session.getAttribute("id"));
 %>
@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>write detail</title>
 
 <meta name="viewport"
@@ -55,18 +55,18 @@
 
 
 
-					<li class="nav-item"><a class="nav-link" href="#">º´¿ø Ã£±â</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">ë³‘ì› ì°¾ê¸°</a></li>
 
-					<li class="nav-item"><a class="nav-link" href="#">¾à±¹Ã£±â</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">ì•½êµ­ì°¾ê¸°</a></li>
 
-					<li class="nav-item"><a class="nav-link" href="review.do">¸®ºä</a>
+					<li class="nav-item"><a class="nav-link" href="review.do">ë¦¬ë·°</a>
 					</li>
 
-					<li class="nav-item"><a class="nav-link" href="talk.do">ÀÚÀ¯
-							ÅäÅ©</a></li>
+					<li class="nav-item"><a class="nav-link" href="talk.do">ìžìœ 
+							í† í¬</a></li>
 
-					<li class="nav-item"><a class="nav-link" href="useful.do">À¯¿ëÇÑ
-							Á¤º¸</a></li>
+					<li class="nav-item"><a class="nav-link" href="useful.do">ìœ ìš©í•œ
+							ì •ë³´</a></li>
 
 					<%
 						if ("".equals(id) || id == null) {
@@ -78,17 +78,17 @@
 						} else {
 					%>
 					<li class="nav-item active"><a class="nav-link"
-						href="logout.do"><%=id + "´Ô È¯¿µÇÕ´Ï´Ù."%> &nbsp; Logout <span
+						href="logout.do"><%=id + "ë‹˜ í™˜ì˜í•©ë‹ˆë‹¤."%> &nbsp; Logout <span
 							class="sr-only">(current)</span> </a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">¸¶ÀÌÆäÀÌÁö <span
+						aria-haspopup="true" aria-expanded="false">ë§ˆì´íŽ˜ì´ì§€ <span
 							class="sr-only">(current)</span>
 					</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a class="dropdown-item" href="mylist.do">È¸¿øÁ¤º¸</a> <a
-								class="dropdown-item" href="writelist.do">±Û ÀÛ¼º ¸ñ·Ï</a>
+							<a class="dropdown-item" href="mylist.do">íšŒì›ì •ë³´</a> <a
+								class="dropdown-item" href="writelist.do">ê¸€ ìž‘ì„± ëª©ë¡</a>
 						</div></li>
 					<%
 						}
@@ -113,25 +113,25 @@
 
 						<tr>
 
-							<th>¸®ºä</th>
+							<th>ë¦¬ë·°</th>
 							<td></td>
 							<td></td>
 
 							<td><a
 								href="/writerevise.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>"><input
-									type="button" value="¼öÁ¤"></a></td>
+									type="button" value="ìˆ˜ì •"></a></td>
 							<td><a
 								href="/writedelete.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>&fileSeq=<%=mDTO.getFileSeq()%>"><input
-									type="button" value="»èÁ¦"></a></td>
+									type="button" value="ì‚­ì œ"></a></td>
 							<td><a href="writelist.do"><input type="button"
-									value="¸ñ·Ï"></a></td>
+									value="ëª©ë¡"></a></td>
 
 
 						</tr>
 
 						<tr>
 							<td>
-								<div class="my-box">ÀÌ¸§(º´¿ø/¾à±¹)</div>
+								<div class="my-box">ì´ë¦„(ë³‘ì›/ì•½êµ­)</div>
 							</td>
 							<td colspan="5">
 
@@ -145,7 +145,7 @@
 
 						<tr>
 							<td>
-								<div class="my-box">ÀÛ¼ºÀÚ</div>
+								<div class="my-box">ìž‘ì„±ìž</div>
 							</td>
 							<td>
 
@@ -158,7 +158,7 @@
 
 
 							<td>
-								<div class="my-box">ÀÛ¼ºÀÏ</div>
+								<div class="my-box">ìž‘ì„±ì¼</div>
 							</td>
 
 							<td></td>
@@ -176,7 +176,7 @@
 
 						<tr>
 							<td>
-								<div class="my-box">Á¦¸ñ</div>
+								<div class="my-box">ì œëª©</div>
 							</td>
 							<td colspan="5">
 								<div class="my-box">

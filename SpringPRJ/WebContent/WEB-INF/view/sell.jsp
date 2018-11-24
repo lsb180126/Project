@@ -2,14 +2,12 @@
 <%@page import="java.util.List"%>
 <%@page import="poly.dto.SellDTO"%>
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-
 %>
 <%
-
 	List<SellDTO> sList = (List<SellDTO>)request.getAttribute("sList");
 	
 	if (sList==null){
@@ -20,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="EUC-KR">
+		<meta charset="UTF-8">
 		
 		
 
@@ -78,7 +76,32 @@
 	    
 	    
 	    </style>
-	    
+	   <script src="vendor/jquery/jquery.min.js"></script> 
+	   <script>
+	   
+		   $(function(){
+			   
+			   $("#search").click(function() {
+				   
+				   var keyword = $("#keyword").val();
+				   
+				   console.log(keyword);
+				   location.href="sellsearch.do?keyword=" + encodeURI(encodeURIComponent(keyword));
+				   
+				   
+			   })
+			   
+		   })
+	   
+	   
+	   
+	   
+	   
+	   
+	   </script>
+	   
+	   
+	   
 	   
 	    
 	</head>
@@ -96,23 +119,23 @@
           	
           	
             <li class="nav-item">
-              <a class="nav-link" href="#">∫¥ø¯ √£±‚</a>
+              <a class="nav-link" href="#">Î≥ëÏõê Ï∞æÍ∏∞</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">æ‡±π√£±‚</a>
+              <a class="nav-link" href="#">ÏïΩÍµ≠Ï∞æÍ∏∞</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="review.do">∏Æ∫‰</a>
+              <a class="nav-link" href="review.do">Î¶¨Î∑∞</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">¿⁄¿Ø ≈‰≈©</a>
+              <a class="nav-link" href="talk.do">ÏûêÏú† ÌÜ†ÌÅ¨</a>
             </li>
             
              <li class="nav-item">
-              <a class="nav-link" href="useful.do">¿ØøÎ«— ¡§∫∏</a>
+              <a class="nav-link" href="useful.do">Ïú†Ïö©Ìïú Ï†ïÎ≥¥</a>
             </li>
             
             <%if("".equals(id) || id == null) { %>
@@ -123,17 +146,17 @@
             </li>
             <%} else { %>
              <li class="nav-item active">
-              <a class="nav-link" href="logout.do"><%=id + "¥‘ »Øøµ«’¥œ¥Ÿ." %> &nbsp; Logout
+              <a class="nav-link" href="logout.do"><%=id + "Îãò ÌôòÏòÅÌï©ÎãàÎã§." %> &nbsp; Logout
              	 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">∏∂¿Ã∆‰¿Ã¡ˆ
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ÎßàÏù¥ÌéòÏù¥ÏßÄ
               	 <span class="sr-only">(current)</span>
            	  </a>
               <div class="dropdown-menu dropdown-menu-right">
-	              <a class="dropdown-item" href="mylist.do">»∏ø¯¡§∫∏</a>
-	              <a class="dropdown-item" href="writelist.do">±€ ¿€º∫ ∏Ò∑œ</a>
+	              <a class="dropdown-item" href="mylist.do">ÌöåÏõêÏ†ïÎ≥¥</a>
+	              <a class="dropdown-item" href="writelist.do">Í∏Ä ÏûëÏÑ± Î™©Î°ù</a>
               </div>
             </li>
              <%  }  %>
@@ -158,37 +181,33 @@
 			<table class="table">
 				<tr>
 					
-					<td>∫–æÁ ¡§∫∏</td>
+					<td>Î∂ÑÏñë Ï†ïÎ≥¥</td>
 					<td>
-						<select>
-							<option>¡¶∏Ò</option>
-							<option>¿€º∫¿⁄</option>
-							<option>¿€º∫¿œ</option>
-						</select>
+						
 					</td>
 					
 					<td></td>
 					<td>
-						<form class="example" action="action_page.php">
-						  <input type="text" placeholder="Search.." name="search">
-						  <button type="submit"><i class="fa fa-search"></i></button>
+						<form class="example" action="/sellsearch.do" method="POST"  >
+						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
+						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
 					</td>
 					<td>
 					</td>
 					
 					<td>
-						<a href="sellregister.do"><input type="button" value="µÓ∑œ"></a>
+						<a href="sellregister.do"><input type="button" value="Îì±Î°ù"></a>
 					</td>
 				</tr>
 				
 				<tr>
 				<div>
 					
-					<th>π¯»£</th>
-					<th colspan="3">¡¶∏Ò</th>
-					<th>¿€º∫¿⁄</th>
-					<th>¿€º∫¿œ</th>
+					<th>Î≤àÌò∏</th>
+					<th colspan="3">Ï†úÎ™©</th>
+					<th>ÏûëÏÑ±Ïûê</th>
+					<th>ÏûëÏÑ±Ïùº</th>
 				</div>
 				</tr>
 				
@@ -232,7 +251,7 @@
     
 
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>

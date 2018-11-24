@@ -1,6 +1,6 @@
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String msg = CmmUtil.nvl((String)request.getAttribute("msg"));
 	String url = CmmUtil.nvl((String)request.getAttribute("url"));

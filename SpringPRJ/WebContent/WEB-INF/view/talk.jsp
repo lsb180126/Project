@@ -6,10 +6,8 @@
     pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-
 %>
 <%
-
 	List<TalkDTO> tList = (List<TalkDTO>)request.getAttribute("tList");
 	
 	if (tList==null){
@@ -89,7 +87,7 @@
 				   var keyword = $("#keyword").val();
 				   
 				   console.log(keyword);
-				   location.href="talksearch.do?keyword=" + keyword;
+				   location.href="talksearch.do?keyword=" + encodeURI(encodeURIComponent(keyword));
 				   
 				   
 			   })
@@ -189,7 +187,7 @@
 					
 					<td></td>
 					<td>
-						<form class="example" action="/talksearch.do" method="POST">
+						<form class="example" action="/talksearch.do" method="POST"  >
 						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
 						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
