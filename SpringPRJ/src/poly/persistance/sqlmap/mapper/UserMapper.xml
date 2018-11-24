@@ -51,10 +51,12 @@
 				EMAIL as email,
 				GENDER as gender,
 				REG_DATE as regDate,
-				CHG_DATE as chgDate
+				CHG_DATE as chgDate,
+				EMAIL_CONFIRM as emailConfirm
 		 FROM USER_INFO
 		 WHERE USER_ID = #{userId}
 		   AND PASSWORD = #{password}
+		   AND EMAIL_CONFIRM = 'Y'
 	</select>
 	
 	<select id="getmyList" parameterType="UserDTO" resultType="UserDTO">
@@ -129,5 +131,19 @@
 		SET PASSWORD = #{password}
 		WHERE USER_ID = #{userId}
 	</update>
+	
+	<select id="getUserInfo" parameterType="UserDTO" resultType="UserDTO">
+		SELECT  USER_SEQ_NO as userSeqNo
+		 FROM USER_INFO
+		 WHERE USER_NAME = #{userName}
+		   AND USER_ID = #{userId} 
+	</select>
+			
+	<update id="EmailConfirm" parameterType="UserDTO">
+		UPDATE USER_INFO
+		SET EMAIL_CONFIRM = 'Y'
+		WHERE USER_SEQ_NO = #{userSeqNo}
+	</update>
+			
 			
 </mapper>

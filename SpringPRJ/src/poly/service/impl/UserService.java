@@ -84,4 +84,16 @@ public class UserService implements IUserService{
 		return userMapper.pwrevise(uDTO);
 	}
 
+	@Override
+	public UserDTO getUserInfo(UserDTO uDTO) throws Exception {
+		
+		return userMapper.getUserInfo(uDTO);
+	}
+
+	@Override
+	public int EmailConfirm(UserDTO uDTO) throws Exception {
+		
+		return userMapper.EmailConfirm(uDTO);
+	}
+
 }

@@ -119,5 +119,21 @@
 		DELETE FROM HOMEGOODS_INFO
 		WHERE USER_ID = #{userId}
 	</delete>
-		
+	
+	<select id="getHomegoodsList3" resultType="HomegoodsDTO" parameterType="string" >
+		 SELECT HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
+				HI.TITLE as title,
+				HI.HOMEGOODS_CONTENTS as homegoodsContents,
+				HI.REG_DT as regDt,
+				HI.CHG_DT as chgDt,
+				HI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM HOMEGOODS_INFO HI, USER_INFO UI
+		 WHERE HI.USER_ID = UI.USER_ID
+		 AND HI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR HI.HOMEGOODS_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR HI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+	</select>
+	
 </mapper>

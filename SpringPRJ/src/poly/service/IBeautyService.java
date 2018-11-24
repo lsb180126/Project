@@ -20,6 +20,8 @@ public interface IBeautyService {
 	int beautydelete(BeautyDTO bDTO, FileDTO fDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	List<BeautyDTO> getBeautyList3(String keyword) throws Exception;
 	
 	
 

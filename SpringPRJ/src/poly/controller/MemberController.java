@@ -1,5 +1,6 @@
 package poly.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +72,7 @@ public class MemberController {
 		
 		log.info("welcome reviewsearch");
 		
-		String keyword = request.getParameter("keyword");
+		String keyword = URLDecoder.decode(request.getParameter("keyword"),"UTF-8");
 		
 		
 		log.info(keyword);

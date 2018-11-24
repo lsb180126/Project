@@ -29,5 +29,7 @@ public interface BeautyMapper  {
 
 	int filedelete(FileDTO fDTO) throws Exception;
 
+	List<BeautyDTO> getBeautyList3(String keyword) throws Exception;
+
 	
 }

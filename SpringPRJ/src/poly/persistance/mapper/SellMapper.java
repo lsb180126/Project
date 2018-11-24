@@ -29,5 +29,7 @@ public interface SellMapper  {
 
 	int filedelete(FileDTO fDTO) throws Exception;
 
+	List<SellDTO> getSellList3(String keyword) throws Exception;
+
 	
 }

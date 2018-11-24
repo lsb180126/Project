@@ -9,6 +9,7 @@ public class UserDTO {
 	private String gender;
 	private String regDate;
 	private String chgDate;
+	private String emailConfirm;
 	
 	public String getUserSeqNo() {
 		return userSeqNo;
@@ -57,6 +58,12 @@ public class UserDTO {
 	}
 	public void setChgDate(String chgDate) {
 		this.chgDate = chgDate;
+	}
+	public String getEmailConfirm() {
+		return emailConfirm;
+	}
+	public void setEmailConfirm(String emailConfirm) {
+		this.emailConfirm = emailConfirm;
 	}
 	
 	

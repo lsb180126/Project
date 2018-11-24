@@ -33,11 +33,13 @@ import poly.service.IUserService;
 import poly.service.impl.UserService;
 
 import poly.util.CmmUtil;
+import poly.util.MailUtil;
 
 
 @Controller
 public class UserController {
 	private Logger log = Logger.getLogger(this.getClass());
+	private static String connectIP = "http://192.168.170.210:8182/"; //자기 ip 쓰기 (이메일 보내기 url)
 	
 	@Resource(name = "UserService")
 	private IUserService userService;
@@ -60,7 +62,7 @@ public class UserController {
 	@Resource(name = "BeautyService")
 	private IBeautyService beautyService;
 	
-	@RequestMapping(value="rc")
+	@RequestMapping(value="rc", method=RequestMethod.POST)
 	public String RC(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -87,14 +89,62 @@ public class UserController {
 		
 		int result = userService.insertMember(uDTO);
 		
+		UserDTO uDTO2 = userService.getUserInfo(uDTO);
+		String userNo = uDTO2.getUserSeqNo();
+		log.info(userNo);
+		
+		String url =connectIP+"emailConfirm.do";
+		String parameter ="?userNo="+userNo;
+		String body ="<a href='"+url+parameter+"'>인증 하기</a>";
+		MailUtil.sendMail(email, "우리동네 상권분석 인증메일입니다.", body);
+		
+		
+		
 		model.addAttribute("msg", "회원가입이 완료되었습니다.");
 		model.addAttribute("url", "/register.do");
 		
-
+		
 		return "/redirect";
 	}
 	
-	
+
+
+
+	@RequestMapping(value="/emailConfirm", method=RequestMethod.GET)
+	public String emailConfirm(HttpServletRequest request, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome emailConfirm");
+		
+		String userNo = request.getParameter("userNo");
+		
+		log.info(userNo);
+		
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUserSeqNo(userNo);
+		
+		
+		
+		int result = userService.EmailConfirm(uDTO);
+		log.info(result);
+		
+		String msg;
+		String url;
+		if(result == 1) {
+			model.addAttribute("msg", "이메일 인증되었습니다.");
+			model.addAttribute("url", "/index.do");
+			
+		}else{
+			model.addAttribute("msg", "이메일 인증되지않았습니다.");
+			/*model.addAttribute("url", "/index.do");*/
+		}
+		
+		
+		return "/redirect2";
+		
+	}
+
+
 	
 	@RequestMapping(value="/ajaxTest", method=RequestMethod.POST)
 	public @ResponseBody int ajaxTest(
@@ -125,6 +175,7 @@ public class UserController {
 		String password = request.getParameter("password");
 		
 		
+		
 		log.info("id : " + id);
 		log.info("password : " + password);
 		
@@ -136,11 +187,15 @@ public class UserController {
 		uDTO.setPassword(password);
 		
 		
+		
+		
 		uDTO=userService.getLoginInfo(uDTO);
 		
+		
+		
 		if(uDTO == null) {
-			
 			model.addAttribute("msg", "로그인이 실패하였습니다.");
+			model.addAttribute("msg", "이메일 인증을 해주세요");
 			
 		} else {
 			session.setAttribute("id", uDTO.getUserId());
@@ -453,8 +508,4 @@ public class UserController {
 	}
 	
 	
-}	
-	
-	
-	
-		
+}

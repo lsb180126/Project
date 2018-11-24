@@ -1,5 +1,6 @@
 package poly.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +68,34 @@ public class EatController {
 		
 		 
 		return "/eatregister";
+	}
+	
+	@RequestMapping(value="eatsearch")
+	public String Eatsearch(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		response.setCharacterEncoding("UTF-8");
+		
+		log.info("welcome eatsearch");
+		
+		String keyword = URLDecoder.decode(request.getParameter("keyword"),"UTF-8");
+
+		
+		
+		log.info(keyword);
+		
+		List<EatDTO> eList = eatService.getEatList3(keyword);
+		
+		for(EatDTO e : eList) {
+			log.info("eatSeqNo : " +e.getEatSeqNo());
+			log.info("title : " +e.getTitle());
+			log.info("userId : " +e.getUserId());
+			log.info("chgDt : " +e.getChgDt());
+		}
+		
+		model.addAttribute("eList", eList);
+		 
+		return "/eat";
 	}
 	
 	@RequestMapping(value="eatdetail")

@@ -29,6 +29,10 @@ public interface IUserService {
 
 	int pwrevise(UserDTO uDTO) throws Exception;
 
+	UserDTO getUserInfo(UserDTO uDTO) throws Exception;
+
+	int EmailConfirm(UserDTO uDTO) throws Exception;
+
 	
 
 }

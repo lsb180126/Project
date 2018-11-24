@@ -29,5 +29,7 @@ public interface HomegoodsMapper  {
 
 	int filedelete(FileDTO fDTO) throws Exception;
 
+	List<HomegoodsDTO> getHomegoodsList3(String keyword) throws Exception;
+
 	
 }

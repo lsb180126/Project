@@ -1,5 +1,6 @@
 package poly.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import poly.dto.BeautyDTO;
+import poly.dto.EatDTO;
 import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
 import poly.dto.SellDTO;
@@ -71,6 +73,34 @@ public class HomegoodsController {
 		
 		 
 		return "/homegoodsregister";
+	}
+	
+	@RequestMapping(value="homegoodssearch")
+	public String Eatsearch(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		response.setCharacterEncoding("UTF-8");
+		
+		log.info("welcome homegoodssearch");
+		
+		String keyword = URLDecoder.decode(request.getParameter("keyword"),"UTF-8");
+
+		
+		
+		log.info(keyword);
+		
+		List<HomegoodsDTO> hList = homegoodsService.getHomegoodsList3(keyword);
+		
+		for(HomegoodsDTO h : hList) {
+			log.info("homegoodsSeqNo : " +h.getHomegoodsSeqNo());
+			log.info("title : " +h.getTitle());
+			log.info("userId : " +h.getUserId());
+			log.info("chgDt : " +h.getChgDt());
+		}
+		
+		model.addAttribute("hList", hList);
+		 
+		return "/homegoods";
 	}
 	
 	@RequestMapping(value="homegoodslist", method=RequestMethod.POST) 

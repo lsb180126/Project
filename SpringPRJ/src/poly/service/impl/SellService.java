@@ -66,4 +66,10 @@ public class SellService implements ISellService{
 		return sellMapper.mylistdelete(userId);
 	}
 
+	@Override
+	public List<SellDTO> getSellList3(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return sellMapper.getSellList3(keyword);
+	}
+
 }

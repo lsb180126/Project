@@ -20,6 +20,8 @@ public interface IHomegoodsService {
 	List<HomegoodsDTO> getHomegoodsList2(HomegoodsDTO hDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	List<HomegoodsDTO> getHomegoodsList3(String keyword) throws Exception;
 	
 	
 

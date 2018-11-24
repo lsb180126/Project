@@ -20,6 +20,8 @@ public interface IEatService {
 	int eatdelete(EatDTO eDTO, FileDTO fDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	List<EatDTO> getEatList3(String keyword) throws Exception;
 	
 	
 

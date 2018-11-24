@@ -29,5 +29,7 @@ public interface EatMapper  {
 
 	int filedelete(FileDTO fDTO) throws Exception;
 
+	List<EatDTO> getEatList3(String keyword) throws Exception;
+
 	
 }

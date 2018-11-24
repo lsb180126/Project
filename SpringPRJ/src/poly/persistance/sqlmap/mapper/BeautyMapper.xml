@@ -119,5 +119,21 @@
 		DELETE FROM BEAUTY_INFO
 		WHERE USER_ID = #{userId}
 	</delete>
+		
+	<select id="getBeautyList3" resultType="BeautyDTO" parameterType="string" >
+		 SELECT BI.BEAUTY_SEQ_NO as beautySeqNo,
+				BI.TITLE as title,
+				BI.BEAUTY_CONTENTS as beautyContents,
+				BI.REG_DT as regDt,
+				BI.CHG_DT as chgDt,
+				BI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM BEAUTY_INFO BI, USER_INFO UI
+		 WHERE BI.USER_ID = UI.USER_ID
+		 AND BI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR BI.BEAUTY_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR BI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+	</select>	
 			
 </mapper>

@@ -20,6 +20,8 @@ public interface ISellService {
 	int selldelete(SellDTO sDTO, FileDTO fDTO) throws Exception;
 
 	int mylistdelete(String userId) throws Exception;
+
+	List<SellDTO> getSellList3(String keyword) throws Exception;
 	
 	
 

@@ -119,5 +119,21 @@
 		DELETE FROM EAT_INFO
 		WHERE USER_ID = #{userId}
 	</delete>
+	
+	<select id="getEatList3" resultType="EatDTO" parameterType="string" >
+		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
+				EI.TITLE as title,
+				EI.EAT_CONTENTS as eatContents,
+				EI.REG_DT as regDt,
+				EI.CHG_DT as chgDt,
+				EI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM EAT_INFO EI, USER_INFO UI
+		 WHERE EI.USER_ID = UI.USER_ID
+		 AND EI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR EI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+	</select>
 		
 </mapper>

@@ -110,6 +110,22 @@
 		WHERE SELL_SEQ_NO = #{sellSeqNo}
 	</delete>
 	
+	<select id="getSellList3" resultType="SellDTO" parameterType="string" >
+		 SELECT SI.SELL_SEQ_NO as sellSeqNo,
+				SI.TITLE as title,
+				SI.SELL_CONTENTS as sellContents,
+				SI.REG_DT as regDt,
+				SI.CHG_DT as chgDt,
+				SI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM SELL_INFO SI, USER_INFO UI
+		 WHERE SI.USER_ID = UI.USER_ID
+		 AND SI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR SI.SELL_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR SI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+	</select>
+	
 	<delete id="filedelete" parameterType="FileDTO">
 		DELETE FROM FILE_INFO
 		WHERE FILE_SEQ = #{fileSeq}

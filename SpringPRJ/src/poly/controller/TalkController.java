@@ -1,5 +1,6 @@
 package poly.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,11 +65,13 @@ public class TalkController {
 	@RequestMapping(value="talksearch")
 	public String Talksearch(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
+		
 		response.setCharacterEncoding("UTF-8");
 		
 		log.info("welcome talksearch");
 		
-		String keyword = request.getParameter("keyword");
+		String keyword = URLDecoder.decode(request.getParameter("keyword"),"UTF-8");
+
 		
 		
 		log.info(keyword);
@@ -84,7 +87,7 @@ public class TalkController {
 		
 		model.addAttribute("tList", tList);
 		 
-		return "/talksearch";
+		return "/talk";
 	}
 	
 	@RequestMapping(value="talkregister")

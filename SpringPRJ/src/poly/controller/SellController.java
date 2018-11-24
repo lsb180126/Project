@@ -1,5 +1,6 @@
 package poly.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +70,34 @@ public class SellController {
 		
 		 
 		return "/sellregister";
+	}
+	
+	@RequestMapping(value="sellsearch")
+	public String Sellsearch(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		response.setCharacterEncoding("UTF-8");
+		
+		log.info("welcome eatsearch");
+		
+		String keyword = URLDecoder.decode(request.getParameter("keyword"),"UTF-8");
+
+		
+		
+		log.info(keyword);
+		
+		List<SellDTO> sList = sellService.getSellList3(keyword);
+		
+		for(SellDTO s : sList) {
+			log.info("sellSeqNo : " +s.getSellSeqNo());
+			log.info("title : " +s.getTitle());
+			log.info("userId : " +s.getUserId());
+			log.info("chgDt : " +s.getChgDt());
+		}
+		
+		model.addAttribute("sList", sList);
+		 
+		return "/sell";
 	}
 	
 	@RequestMapping(value="selllist", method=RequestMethod.POST) 

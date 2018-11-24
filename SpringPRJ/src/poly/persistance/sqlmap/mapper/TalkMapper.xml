@@ -134,6 +134,7 @@
 		 AND TI.TITLE LIKE '%'|| #{keyword} ||'%'
 		 OR TI.TALK_SEQ_NO LIKE '%'|| #{keyword} ||'%'
 		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR TI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 			
 </mapper>

@@ -1,5 +1,6 @@
 package poly.controller;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import poly.dto.BeautyDTO;
+import poly.dto.EatDTO;
 import poly.dto.FileDTO;
 import poly.dto.SellDTO;
 import poly.dto.TalkDTO;
@@ -69,6 +71,34 @@ public class BeautyController {
 		
 		 
 		return "/beautyregister";
+	}
+	
+	@RequestMapping(value="beautysearch")
+	public String Beautysearch(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		response.setCharacterEncoding("UTF-8");
+		
+		log.info("welcome beautysearch");
+		
+		String keyword = URLDecoder.decode(request.getParameter("keyword"),"UTF-8");
+
+		
+		
+		log.info(keyword);
+		
+		List<BeautyDTO> bList = beautyService.getBeautyList3(keyword);
+		
+		for(BeautyDTO b : bList) {
+			log.info("beautySeqNo : " +b.getBeautySeqNo());
+			log.info("title : " +b.getTitle());
+			log.info("userId : " +b.getUserId());
+			log.info("chgDt : " +b.getChgDt());
+		}
+		
+		model.addAttribute("bList", bList);
+		 
+		return "/beauty";
 	}
 	
 	@RequestMapping(value="beautylist", method=RequestMethod.POST) 
