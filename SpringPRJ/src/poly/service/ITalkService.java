@@ -3,11 +3,12 @@ package poly.service;
 import java.util.List;
 
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.dto.TalkDTO;
 
 public interface ITalkService {
 
-	List<TalkDTO> getTalkList() throws Exception;
+	List<TalkDTO> getTalkList(PagingDTO paging) throws Exception;
 
 	int insertMember(TalkDTO tDTO, FileDTO fDTO) throws Exception;
 
@@ -23,6 +24,8 @@ public interface ITalkService {
 	int mylistdelete(String userId) throws Exception;
 
 	List<TalkDTO> getTalkList3(String keyword) throws Exception;
+
+	int getTalkListTotalCount() throws Exception;
 
 	
 	

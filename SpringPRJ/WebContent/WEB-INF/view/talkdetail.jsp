@@ -180,12 +180,18 @@
 				        </td>
 				     </tr>
 				     <tr>
+				     	<td><%=tDTO.getTalkContents() %></td>
+				     </tr>
+				   
+				     <tr>
+				     <% if(!(CmmUtil.nvl(tDTO.getChgName())).equals("") ) { %>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
 				     		<img src="/upload/<%=tDTO.getChgName()%>" height="200" width="200" >
-				     			<%=tDTO.getTalkContents() %>
+				     			
 				     		</div>	
 				     	</td>
+				     <% }%>
 			     	</tr>
 			     	<tr>
 			     		<td></td>

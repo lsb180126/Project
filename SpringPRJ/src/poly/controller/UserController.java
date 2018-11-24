@@ -39,7 +39,7 @@ import poly.util.MailUtil;
 @Controller
 public class UserController {
 	private Logger log = Logger.getLogger(this.getClass());
-	private static String connectIP = "http://192.168.170.210:8182/"; //자기 ip 쓰기 (이메일 보내기 url)
+	private static String connectIP = "http://192.168.170.123:8111/"; //자기 ip 쓰기 (이메일 보내기 url)
 	
 	@Resource(name = "UserService")
 	private IUserService userService;

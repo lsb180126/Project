@@ -45,7 +45,7 @@ public class MemberController {
 	private IMemService memberService;
 	
 	
-	@RequestMapping(value="/review")
+	@RequestMapping(value="review")
 	public String Review(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		

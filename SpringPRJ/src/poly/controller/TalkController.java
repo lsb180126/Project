@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import poly.dto.FileDTO;
 import poly.dto.MemDTO;
+import poly.dto.PagingDTO;
 import poly.dto.TalkDTO;
 
 
@@ -48,7 +49,22 @@ public class TalkController {
 		
 		log.info("welcome talk");
 		
-		List<TalkDTO> tList = talkService.getTalkList();
+		log.info(this.getClass().getName() + ".talk start!");
+		
+		int totalCount = talkService.getTalkListTotalCount();
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		
+		List<TalkDTO> tList = talkService.getTalkList(paging);
 		
 		for(TalkDTO t : tList) {
 			log.info("talkSeqNo : " +t.getTalkSeqNo());
@@ -58,6 +74,12 @@ public class TalkController {
 		}
 		
 		model.addAttribute("tList", tList);
+		
+		model.addAttribute("paging", paging);
+		
+		tList = null;
+		
+		log.info(this.getClass().getName() + ".talk end!");
 		 
 		return "/talk";
 	}

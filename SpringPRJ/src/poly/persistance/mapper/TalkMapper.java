@@ -4,12 +4,13 @@ import java.util.List;
 
 import config.Mapper;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.dto.TalkDTO;
 
 @Mapper("TalkMapper")
 public interface TalkMapper  {
 
-	List<TalkDTO> getTalkList()throws Exception;
+	List<TalkDTO> getTalkList(PagingDTO paging)throws Exception;
 	
 	int insertMember(TalkDTO tDTO) throws Exception;
 
@@ -31,6 +32,8 @@ public interface TalkMapper  {
 	int filedelete(FileDTO fDTO) throws Exception;
 
 	List<TalkDTO> getTalkList3(String keyword) throws Exception;
+
+	int getTalkListTotalCount() throws Exception;
 
 	
 

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.dto.TalkDTO;
 import poly.persistance.mapper.TalkMapper;
 
@@ -19,9 +20,9 @@ public class TalkService implements ITalkService{
 	private TalkMapper talkMapper;
 
 	@Override
-	public List<TalkDTO> getTalkList() throws Exception {
+	public List<TalkDTO> getTalkList(PagingDTO paging) throws Exception {
 		
-		return talkMapper.getTalkList();
+		return talkMapper.getTalkList(paging);
 	}
 
 	@Override
@@ -71,6 +72,12 @@ public class TalkService implements ITalkService{
 	public List<TalkDTO> getTalkList3(String keyword) throws Exception {
 		
 		return talkMapper.getTalkList3(keyword);
+	}
+
+	@Override
+	public int getTalkListTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return talkMapper.getTalkListTotalCount();
 	}
 
 	

@@ -80,7 +80,10 @@
 				  display: table;
 				}
 	    
+	    .layer {text-align:center; }
 	    
+
+
 	    </style>
 	    <script src="vendor/jquery/jquery.min.js"></script>
 	    
@@ -104,7 +107,8 @@
 	   </script>
 	   
 	   <script type="text/javascript">
-		//상세보기 이동
+		
+		
 		function goPage(page){
 			var pageCount = <%=paging.getPage_count()%>;
 			location.href="/review.do?pageCount="+pageCount+"&pageNum="+page;
@@ -242,13 +246,17 @@
 					
 				
 			</table>
-			</div>
-			</div>
-			</div>
-			<%=
-				fnPaging(paging.getPage_count(), 10, paging.getPage_num(), paging.getTotal_count())
-			%>
 			
+			</div>
+			</div>
+			</div>
+			<div class="layer">
+				
+				<%=
+					fnPaging(paging.getPage_count(), 10, paging.getPage_num(), paging.getTotal_count())
+				%>
+				
+			</div>
      <!-- Bootstrap core JavaScript -->
     
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
