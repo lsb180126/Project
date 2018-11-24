@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import poly.dto.FileDTO;
 import poly.dto.MemDTO;
+import poly.dto.PagingDTO;
 import poly.persistance.mapper.MemMapper;
 
 import poly.service.IMemService;
@@ -50,9 +51,9 @@ public class MemberService implements IMemService{
 	}
 
 	@Override
-	public List<MemDTO> getReviewList() throws Exception {
+	public List<MemDTO> getReviewList(PagingDTO paging) throws Exception {
 		
-		return memMapper.getReviewList();
+		return memMapper.getReviewList(paging);
 	}
 
 	@Override
@@ -73,6 +74,13 @@ public class MemberService implements IMemService{
 	public List<MemDTO> getReviewList2(String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return memMapper.getReviewList2(keyword);
+	}
+
+
+	@Override
+	public int getMemberListTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return memMapper.getMemberListTotalCount();
 	}
 
 	

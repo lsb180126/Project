@@ -1,46 +1,38 @@
-<%@page import="poly.dto.UserDTO"%>
 <%@page import="poly.util.CmmUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-%>
-<%
-	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
+
 %>
 <!DOCTYPE html>
 <html>
+
 	<head>
-		<meta charset="UTF-8">
-		<title>mypage revise</title>
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	    <meta name="description" content="">
-	    <meta name="author" content="">
-	    
-	     <!-- Bootstrap core CSS -->
-	    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	    
-	    <!-- starRev CSS -->
-	    <link href="css/starRev.css" rel="stylesheet">
-	    
-	    <style>
-	    .my-box { border:1px solid; padding: 5px;  }
-	    
-		
-	    
-	    </style>
-	    
-	    <script>
-		   
-	    
-	    </script>
-	    
-	</head>
-	<body>
 	
+		<meta charset="UTF-8">
+		<title>hospital find</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    	<meta name="description" content="">
+    	<meta name="author" content="">
+    	
+    	<!-- Bootstrap core CSS -->
+    	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    	<!-- Custom styles for this template -->
+    	<link href="css/small-business.css" rel="stylesheet">
+		
+		
+		
+		
+		
+		
+	</head>
+	
+<body>
+
 	<!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
         <a class="navbar-brand" href="index.do">pet clinic</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,30 +40,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-          	
-          	
+           
+           
             
             <li class="nav-item">
-              <a class="nav-link" href="#">병원 찾기</a>
+              <a class="nav-link" href="hospitalfind.do">병원 찾기</a>
             </li>
-            
             <li class="nav-item">
-              <a class="nav-link" href="#">약국찾기</a>
+              <a class="nav-link" href="#">약국 찾기</a>
             </li>
-            
             <li class="nav-item">
-              <a class="nav-link" href="review.do">리뷰</a>
+              <a class="nav-link" href="review.do">리뷰 </a>
             </li>
-            
             <li class="nav-item">
-              <a class="nav-link" href="talk.do">자유 토크</a>
+              <a class="nav-link" href="talk.do">자유 토크 </a>
             </li>
-            
-             <li class="nav-item">
-              <a class="nav-link" href="#">유용한 정보</a>
+            <li class="nav-item">
+              <a class="nav-link" href="useful.do">유용한 정보 </a>
             </li>
-            
-             <%if("".equals(id) || id == null) { %>
+             
+            <%if("".equals(id) || id == null) { %>
             <li class="nav-item active">
               <a class="nav-link" href="login.do">Login
              	 <span class="sr-only">(current)</span>
@@ -99,76 +87,71 @@
               </a>
             </li>
             
+             
           </ul>
         </div>
       </div>
     </nav>
 	
+	<!-- Page Content -->
+    <div class="container">
+    
+    
+
+      <!-- Heading Row -->
+      <div class="row my-4">
+      
+        <div id="map" style="width:1100px;height:400px;"></div>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0a4413e4e0e67bc463b4de3edc57e890"></script>
+       	<script>
+			var container = document.getElementById('map');
+			var options = {
+				center: new daum.maps.LatLng(37.549868, 126.842262),
+				level: 3
+			};
 	
-	<div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
+			var map = new daum.maps.Map(container, options);
+			
+			var markerPosition  = new daum.maps.LatLng(37.549868, 126.842262); 
+
+			// 마커를 생성합니다
+			var marker = new daum.maps.Marker({
+			    position: markerPosition
+			});
+
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
+
+			// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+			// marker.setMap(null);      
+			
+		</script>
+		
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=LIBRARY"></script>
         
-        
-        	<form>
-			<table class="table">
-				
-				<tr>
-					
-					<th><%=id + "님의 회원정보" %></th>
-					<td>
-					</td>
-					
-				</tr>
-					
-				<tr>
-					
-					<td>아이디</td>
-					<td><%=id %></td>
-					
-					
-				</tr>
-				<tr>
-				
-					<td>이름</td>
-					<td><%=uDTO.getUserName()%></td>
-					
-				</tr>
-				<tr>
-				     <td>성별</td>
-					 <td><%=uDTO.getGender()%></td>	
-				     	
-			    </tr>
-			    <tr>
-			     	<td>이메일</td>
-					<td><%=uDTO.getEmail()%></td>		
-		     	</tr>
-		     	
-		     	<tr>
-					<td>
-						<a href="/mylistrevise.do?email=<%=uDTO.getEmail()%>"><input type="button" value="수정"></a>
-					</td>
-					<td>
-						<a href="/mylistdelete.do?userId=<%=uDTO.getUserId()%>"><input type="button" value="탈퇴"></a>
-					</td>
-				</tr>
-				</table>
-				</form>
-				
-					
-			</div>
-		</div>
-	</div>
-	
-	
-	<!-- Bootstrap core JavaScript -->
+        <!-- services 라이브러리 불러오기 -->
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+		
+		<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+       
+      </div>
+     
+      
+
+      
+
+      </div>
+
+    
+
+    <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
-    <!--starRev JavaScript -->
-    <script type="text/javascript" src="javascript/starRev.jsp"></script>
-    
-    
-	
-	</body>
+  
+
+
+
+</body>
 </html>

@@ -42,7 +42,7 @@
            
             
             <li class="nav-item">
-              <a class="nav-link" href="#">병원 찾기</a>
+              <a class="nav-link" href="hospitalfind.do">병원 찾기</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">약국 찾기</a>

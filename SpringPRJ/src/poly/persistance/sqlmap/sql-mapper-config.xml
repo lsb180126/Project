@@ -14,5 +14,6 @@
 	    <typeAlias type="poly.dto.BeautyDTO" alias="BeautyDTO"/>
 	    <typeAlias type="poly.dto.HomegoodsDTO" alias="HomegoodsDTO"/>
 	    <typeAlias type="poly.dto.FileDTO" alias="FileDTO"/>
+	    <typeAlias type="poly.dto.PagingDTO" alias="PagingDTO"/>
     </typeAliases>
 </configuration>

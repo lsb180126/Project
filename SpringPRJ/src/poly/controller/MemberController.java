@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import poly.dto.ComDTO;
 import poly.dto.FileDTO;
 import poly.dto.MemDTO;
+import poly.dto.PagingDTO;
 import poly.dto.UserDTO;
 import poly.service.IMemService;
 
@@ -44,13 +45,31 @@ public class MemberController {
 	private IMemService memberService;
 	
 	
-	@RequestMapping(value="review")
+	@RequestMapping(value="/review")
 	public String Review(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
 		log.info("welcome review");
 		
-		List<MemDTO> mList = memberService.getReviewList();
+		log.info(this.getClass().getName() + ".review start!");
+		
+		int totalCount = memberService.getMemberListTotalCount();
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		
+		
+		
+		
+		List<MemDTO> mList = memberService.getReviewList(paging);
 		
 		for(MemDTO m : mList) {
 			log.info("reviewSeqNo : " +m.getReviewSeqNo());
@@ -60,8 +79,18 @@ public class MemberController {
 			log.info("chgDt : " +m.getChgDt());
 		}
 		
+		//조회된 리스트 결과값 넣어주기
 		model.addAttribute("mList", mList);
-		 
+		
+		// 페이징 정보 전달.
+		model.addAttribute("paging", paging);
+		
+		//변수 초기화(메모리 효율화 시키기 위해 사용함)
+		mList = null;
+		
+		//로그 찍기(추후 찍은 로그를 통해 이 함수 호출이 끝났는지 파악하기 용이하다.)
+		log.info(this.getClass().getName() + ".review end!");
+		
 		return "/review";
 	}
 	

@@ -18,6 +18,7 @@ public class MemDTO {
 	private String brdKind;
 	private String filePath;
 	private String extension;
+	private String rowNum;
 	
 	public String getReviewSeqNo() {
 		return reviewSeqNo;
@@ -114,6 +115,12 @@ public class MemDTO {
 	}
 	public void setExtension(String extension) {
 		this.extension = extension;
+	}
+	public String getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(String rowNum) {
+		this.rowNum = rowNum;
 	}
 	
 	

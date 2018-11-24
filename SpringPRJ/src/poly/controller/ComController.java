@@ -44,6 +44,17 @@ public class ComController {
 		return "/index";
 	}
 	
+	@RequestMapping(value="hospitalfind")
+	public String hospitalfind(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		
+		
+		log.info("welcome hospitalfind");
+		
+		
+		return "/hospitalfind";
+	}
+	
 	
 	@RequestMapping(value="login")
 	public String Login(HttpServletRequest request, HttpServletResponse response, 

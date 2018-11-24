@@ -5,6 +5,7 @@ import java.util.List;
 import config.Mapper;
 import poly.dto.FileDTO;
 import poly.dto.MemDTO;
+import poly.dto.PagingDTO;
 
 @Mapper("MemMapper")
 public interface MemMapper  {
@@ -17,7 +18,7 @@ public interface MemMapper  {
 
 	int writerevise(MemDTO mDTO) throws Exception;
 
-	List<MemDTO> getReviewList() throws Exception;
+	List<MemDTO> getReviewList(PagingDTO paging) throws Exception;
 
 	int writedelete(MemDTO mDTO) throws Exception;
 
@@ -30,6 +31,8 @@ public interface MemMapper  {
 	int filerevise(FileDTO fDTO) throws Exception;
 
 	int filedelete(FileDTO fDTO) throws Exception;
+
+	int getMemberListTotalCount() throws Exception;
 
 	
 
