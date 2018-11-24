@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.BeautyMapper">
+
+	<insert id="insertMember" parameterType="BeautyDTO">
+		INSERT INTO BEAUTY_INFO (
+			BEAUTY_SEQ_NO,
+			TITLE,
+			BEAUTY_CONTENTS,
+			REG_DT,
+			CHG_DT,
+			USER_ID
+		)VALUES (
+			BEAUTY_INFO_SEQ.NEXTVAL,
+			#{title},
+			#{beautyContents},
+			SYSDATE,
+			SYSDATE,
+			#{userId}
+		)
+	</insert>
+		
+	<insert id="insertFile" parameterType="FileDTO">
+		INSERT INTO FILE_INFO (
+			FILE_SEQ,
+			BRD_SEQ_NO,
+			USER_NO,
+			ORI_NAME,
+			CHG_NAME,
+			FILE_SIZE,
+			FILE_PATH,
+			EXTENSION,
+			REG_DT,
+			BRD_KIND
+		) VALUES (
+			FILE_SEQ.NEXTVAL,
+			(SELECT MAX(BEAUTY_SEQ_NO) FROM BEAUTY_INFO),
+			#{userNo},
+			#{oriName},
+			#{chgName},
+			#{fileSize},
+			#{filePath},
+			#{extension},
+			SYSDATE,
+			#{brdKind}
+		) 
+	</insert>	
+		
+	<select id="getBeautyList" resultType="BeautyDTO">
+		 SELECT BI.BEAUTY_SEQ_NO as beautySeqNo,
+				BI.TITLE as title,
+				BI.BEAUTY_CONTENTS as beautyContents,
+				BI.REG_DT as regDt,
+				BI.CHG_DT as chgDt,
+				BI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM BEAUTY_INFO BI
+		 INNER JOIN USER_INFO UI ON BI.USER_ID = UI.USER_ID
+	</select>
+		
+	<select id="getBeautydetail" resultType="BeautyDTO">
+		 SELECT BI.BEAUTY_SEQ_NO as beautySeqNo,
+				BI.TITLE as title,
+				BI.BEAUTY_CONTENTS as beautyContents,
+				BI.REG_DT as regDt,
+				BI.CHG_DT as chgDt,
+				BI.USER_ID as userId,
+				UI.USER_NAME as userName,
+				FI.CHG_NAME as chgName,
+				FI.FILE_SEQ as fileSeq
+		 FROM BEAUTY_INFO BI, FILE_INFO FI, USER_INFO UI
+		 WHERE BI.USER_ID = UI.USER_ID
+		 AND BI.BEAUTY_SEQ_NO = #{beautySeqNo}
+		 AND BI.BEAUTY_SEQ_NO = FI.BRD_SEQ_NO
+		 AND FI.BRD_KIND = 'beauty'
+	</select>
+	
+	<select id="getBeautyList2" resultType="BeautyDTO" parameterType="BeautyDTO">
+		 SELECT BI.BEAUTY_SEQ_NO as beautySeqNo,
+				BI.TITLE as title,
+				BI.BEAUTY_CONTENTS as beautyContents,
+				BI.REG_DT as regDt,
+				BI.CHG_DT as chgDt,
+				BI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM BEAUTY_INFO BI
+		 INNER JOIN USER_INFO UI ON BI.USER_ID = UI.USER_ID
+		 WHERE BI.USER_ID = #{userId}
+	</select>
+	
+	<update id="beautyrevise" parameterType="BeautyDTO">
+		UPDATE BEAUTY_INFO
+		SET TITLE = #{title}, BEAUTY_CONTENTS = #{beautyContents}, CHG_DT = SYSDATE
+		WHERE BEAUTY_SEQ_NO = #{beautySeqNo}
+	</update>
+	
+	<update id="filerevise" parameterType="FileDTO">
+		UPDATE FILE_INFO 
+		SET CHG_NAME = #{chgName}, 
+			ORI_NAME = #{oriName}, 
+			FILE_SIZE = #{fileSize}, 
+			FILE_PATH = #{filePath},
+			EXTENSION = #{extension}
+		WHERE FILE_SEQ = #{fileSeq}
+	</update>
+	
+	<delete id="beautydelete" parameterType="BeautyDTO">
+		DELETE FROM BEAUTY_INFO
+		WHERE BEAUTY_SEQ_NO = #{beautySeqNo}
+	</delete>
+	
+	<delete id="filedelete" parameterType="FileDTO">
+		DELETE FROM FILE_INFO
+		WHERE FILE_SEQ = #{fileSeq}
+	</delete>
+	
+	<delete id="mylistdelete" parameterType="BeautyDTO">
+		DELETE FROM BEAUTY_INFO
+		WHERE USER_ID = #{userId}
+	</delete>
+		
+	<select id="getBeautyList3" resultType="BeautyDTO" parameterType="string" >
+		 SELECT BI.BEAUTY_SEQ_NO as beautySeqNo,
+				BI.TITLE as title,
+				BI.BEAUTY_CONTENTS as beautyContents,
+				BI.REG_DT as regDt,
+				BI.CHG_DT as chgDt,
+				BI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM BEAUTY_INFO BI, USER_INFO UI
+		 WHERE BI.USER_ID = UI.USER_ID
+		 AND BI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR BI.BEAUTY_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR BI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+	</select>	
+			
+</mapper>

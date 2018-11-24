@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.MemMapper">
+
+	<insert id="insertMember" parameterType="MemDTO">
+		INSERT INTO REVIEW_INFO (
+			REVIEW_SEQ_NO,
+			TITLE,
+			REVIEW_CONTENTS,
+			REG_DT,
+			CHG_DT,
+			REVIEW_NAME,
+			USER_ID
+		) VALUES (
+			MEM_INFO_SEQ.NEXTVAL,
+			#{title},
+			#{reviewContents},
+			SYSDATE,
+			SYSDATE,
+			#{reviewName},
+			#{userId}
+		) 
+	</insert>
+	
+	<insert id="insertFile" parameterType="FileDTO">
+		INSERT INTO FILE_INFO (
+			FILE_SEQ,
+			BRD_SEQ_NO,
+			USER_NO,
+			ORI_NAME,
+			CHG_NAME,
+			FILE_SIZE,
+			FILE_PATH,
+			EXTENSION,
+			REG_DT,
+			BRD_KIND
+		) VALUES (
+			FILE_SEQ.NEXTVAL,
+			(SELECT MAX(REVIEW_SEQ_NO) FROM REVIEW_INFO),
+			#{userNo},
+			#{oriName},
+			#{chgName},
+			#{fileSize},
+			#{filePath},
+			#{extension},
+			SYSDATE,
+			#{brdKind}
+		) 
+	</insert>
+	
+	<select id="getMemberList" parameterType="MemDTO" resultType="MemDTO">
+		 SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM REVIEW_INFO RI
+		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
+		 WHERE RI.USER_ID = #{userId}
+		 
+	</select>	
+	
+	<select id="getMemberdetail" resultType="MemDTO">
+		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName,
+				FI.CHG_NAME as chgName,
+				FI.FILE_SEQ as fileSeq
+		 FROM REVIEW_INFO RI, FILE_INFO FI, USER_INFO UI
+		 WHERE RI.USER_ID = UI.USER_ID
+		 AND RI.REVIEW_SEQ_NO = #{reviewSeqNo}
+		 AND RI.REVIEW_SEQ_NO = FI.BRD_SEQ_NO
+		 AND FI.BRD_KIND = 'review'
+	</select>	
+	
+	<select id="getReviewList" resultType="MemDTO">
+		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM REVIEW_INFO RI
+		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
+	</select>
+	
+	<select id="getReviewList2" resultType="MemDTO" parameterType="string" >
+		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM REVIEW_INFO RI, USER_INFO UI
+		 WHERE RI.USER_ID = UI.USER_ID
+		 AND RI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+	</select>
+	
+	
+	
+	
+	<update id="writerevise" parameterType="MemDTO">
+		UPDATE REVIEW_INFO 
+		SET TITLE = #{title}, 
+			REVIEW_CONTENTS = #{reviewContents}, 
+			REVIEW_NAME = #{reviewName}, 
+			CHG_DT = SYSDATE
+		WHERE REVIEW_SEQ_NO = #{reviewSeqNo}
+	</update>
+	
+	<update id="filerevise" parameterType="FileDTO">
+		UPDATE FILE_INFO 
+		SET CHG_NAME = #{chgName}, 
+			ORI_NAME = #{oriName}, 
+			FILE_SIZE = #{fileSize}, 
+			FILE_PATH = #{filePath},
+			EXTENSION = #{extension}
+		WHERE FILE_SEQ = #{fileSeq}
+	</update>
+	
+	
+	<delete id="writedelete" parameterType="MemDTO">
+		DELETE FROM REVIEW_INFO
+		WHERE REVIEW_SEQ_NO = #{reviewSeqNo}
+	</delete>
+	
+	<delete id="filedelete" parameterType="FileDTO">
+		DELETE FROM FILE_INFO
+		WHERE FILE_SEQ = #{fileSeq}
+	</delete>
+	
+	<delete id="mylistdelete" parameterType="MemDTO">
+		DELETE FROM REVIEW_INFO
+		WHERE USER_ID = #{userId}
+	</delete>
+	
+	
+</mapper>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.EatMapper">
+
+	<insert id="insertMember" parameterType="EatDTO">
+		INSERT INTO EAT_INFO (
+			EAT_SEQ_NO,
+			TITLE,
+			EAT_CONTENTS,
+			REG_DT,
+			CHG_DT,
+			USER_ID
+		)VALUES (
+			EAT_INFO_SEQ.NEXTVAL,
+			#{title},
+			#{eatContents},
+			SYSDATE,
+			SYSDATE,
+			#{userId}
+		)
+	</insert>
+	
+	<insert id="insertFile" parameterType="FileDTO">
+		INSERT INTO FILE_INFO (
+			FILE_SEQ,
+			BRD_SEQ_NO,
+			USER_NO,
+			ORI_NAME,
+			CHG_NAME,
+			FILE_SIZE,
+			FILE_PATH,
+			EXTENSION,
+			REG_DT,
+			BRD_KIND
+		) VALUES (
+			FILE_SEQ.NEXTVAL,
+			(SELECT MAX(EAT_SEQ_NO) FROM EAT_INFO),
+			#{userNo},
+			#{oriName},
+			#{chgName},
+			#{fileSize},
+			#{filePath},
+			#{extension},
+			SYSDATE,
+			#{brdKind}
+		) 
+	</insert>
+	
+	<select id="getEatList" resultType="EatDTO">
+		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
+				EI.TITLE as title,
+				EI.EAT_CONTENTS as eatContents,
+				EI.REG_DT as regDt,
+				EI.CHG_DT as chgDt,
+				EI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM EAT_INFO EI
+		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
+	</select>
+	
+	<select id="getEatdetail" resultType="EatDTO">
+		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
+				EI.TITLE as title,
+				EI.EAT_CONTENTS as eatContents,
+				EI.REG_DT as regDt,
+				EI.CHG_DT as chgDt,
+				EI.USER_ID as userId,
+				UI.USER_NAME as userName,
+				FI.CHG_NAME as chgName,
+				FI.FILE_SEQ as fileSeq
+		 FROM EAT_INFO EI, FILE_INFO FI, USER_INFO UI
+		 WHERE EI.USER_ID = UI.USER_ID
+		 AND EI.EAT_SEQ_NO = #{eatSeqNo}
+		 AND EI.EAT_SEQ_NO = FI.BRD_SEQ_NO
+		 AND FI.BRD_KIND = 'eat'
+	</select>	
+	
+	<select id="getEatList2" resultType="EatDTO">
+		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
+				EI.TITLE as title,
+				EI.EAT_CONTENTS as eatContents,
+				EI.REG_DT as regDt,
+				EI.CHG_DT as chgDt,
+				EI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM EAT_INFO EI
+		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
+		 WHERE EI.USER_ID = #{userId}
+	</select>
+	
+	<update id="eatrevise" parameterType="EatDTO">
+		UPDATE EAT_INFO 
+		SET TITLE = #{title}, EAT_CONTENTS = #{eatContents}, CHG_DT = SYSDATE
+		WHERE EAT_SEQ_NO = #{eatSeqNo}
+	</update>
+	
+	<update id="filerevise" parameterType="FileDTO">
+		UPDATE FILE_INFO 
+		SET CHG_NAME = #{chgName}, 
+			ORI_NAME = #{oriName}, 
+			FILE_SIZE = #{fileSize}, 
+			FILE_PATH = #{filePath},
+			EXTENSION = #{extension}
+		WHERE FILE_SEQ = #{fileSeq}
+	</update>
+	
+	<delete id="eatdelete" parameterType="EatDTO">
+		DELETE FROM EAT_INFO
+		WHERE EAT_SEQ_NO = #{eatSeqNo}
+	</delete>
+	
+	<delete id="filedelete" parameterType="FileDTO">
+		DELETE FROM FILE_INFO
+		WHERE FILE_SEQ = #{fileSeq}
+	</delete>
+	
+	<delete id="mylistdelete" parameterType="EatDTO">
+		DELETE FROM EAT_INFO
+		WHERE USER_ID = #{userId}
+	</delete>
+	
+	<select id="getEatList3" resultType="EatDTO" parameterType="string" >
+		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
+				EI.TITLE as title,
+				EI.EAT_CONTENTS as eatContents,
+				EI.REG_DT as regDt,
+				EI.CHG_DT as chgDt,
+				EI.USER_ID as userId,
+				UI.USER_NAME as userName
+		 FROM EAT_INFO EI, USER_INFO UI
+		 WHERE EI.USER_ID = UI.USER_ID
+		 AND EI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR EI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+	</select>
+		
+</mapper>
