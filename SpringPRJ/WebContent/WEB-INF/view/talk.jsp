@@ -9,6 +9,7 @@
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 %>
 <%
+	String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
 	List<TalkDTO> tList = (List<TalkDTO>)request.getAttribute("tList");
 
 	PagingDTO paging = (PagingDTO) request.getAttribute("paging");
@@ -91,7 +92,7 @@
 				   var keyword = $("#keyword").val();
 				   
 				   console.log(keyword);
-				   location.href="talksearch.do?keyword=" + encodeURI(encodeURIComponent(keyword));
+				   location.href="talk.do?keyword=" + keyword;
 				   
 				   
 			   })
@@ -105,7 +106,7 @@
 		
 		function goPage(page){
 			var pageCount = <%=paging.getPage_count()%>;
-			location.href="/talk.do?pageCount="+pageCount+"&pageNum="+page;
+			location.href="/talk.do?pageCount="+pageCount+"&pageNum="+page+"&keyword="+"<%=keyword%>";
 		}
 	   
 	   
@@ -197,7 +198,7 @@
 					
 					<td></td>
 					<td>
-						<form class="example" action="/talksearch.do" method="POST"  >
+						<form class="example" action="/talk.do" method="POST"  >
 						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
 						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
@@ -224,7 +225,7 @@
 				<tr>
 					
 					<td><%=t.getTalkSeqNo() %></td>
-					<td colspan="3"><a href="/talkdetail.do?talkSeqNo=<%=t.getTalkSeqNo() %>"><%=t.getTitle() %></a></td>
+					<td colspan="3"><a href="/talkdetail.do?talkSeqNo=<%=t.getTalkSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>&keyword=<%=keyword%>"><%=t.getTitle() %></a></td>
 					<td><%=t.getUserName() %></td>
 					<td><%=t.getChgDt() %></td>
 				</tr>

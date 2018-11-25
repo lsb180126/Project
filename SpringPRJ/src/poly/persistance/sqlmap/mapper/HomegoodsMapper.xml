@@ -47,16 +47,36 @@
 		) 
 	</insert>
 	
-	<select id="getHomegoodsList" resultType="HomegoodsDTO">
-		 SELECT HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
-				HI.TITLE as title,
-				HI.HOMEGOODS_CONTENTS as homegoodsContents,
-				HI.REG_DT as regDt,
-				HI.CHG_DT as chgDt,
-				HI.USER_ID as userId,
-				UI.USER_NAME as userName
-		 FROM HOMEGOODS_INFO HI
+	<select id="getHomegoodsList" resultType="HomegoodsDTO" parameterType="PagingDTO">
+		 SELECT 
+		 	A.HN,
+		 	A.*
+		 FROM
+		 	( SELECT
+			 		ROWNUM HN,
+			 		HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
+					HI.TITLE as title,
+					HI.HOMEGOODS_CONTENTS as homegoodsContents,
+					HI.REG_DT as regDt,
+					HI.CHG_DT as chgDt,
+					HI.USER_ID as userId,
+					UI.USER_NAME as userName
+				FROM
+					( SELECT
+						HI2.*
+					  FROM
+					  	HOMEGOODS_INFO HI2
+					  ORDER BY
+					  	HOMEGOODS_SEQ_NO DESC
+					  	) HI
 		 INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
+		 WHERE HI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR HI.HOMEGOODS_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR HI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+		   ) A
+		 WHERE A.HN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
+		 ORDER BY A.HN
 	</select>
 	
 	<select id="getHomegoodsdetail" resultType="HomegoodsDTO">
@@ -69,11 +89,26 @@
 				UI.USER_NAME as userName,
 				FI.CHG_NAME as chgName,
 				FI.FILE_SEQ as fileSeq
-		 FROM HOMEGOODS_INFO HI, FILE_INFO FI, USER_INFO UI
-		 WHERE HI.USER_ID = UI.USER_ID
-		 AND HI.HOMEGOODS_SEQ_NO = #{homegoodsSeqNo}
-		 AND HI.HOMEGOODS_SEQ_NO = FI.BRD_SEQ_NO
-		 AND FI.BRD_KIND = 'homegoods'
+		 FROM HOMEGOODS_INFO HI
+		 LEFT JOIN ( SELECT BRD_KIND,
+				 			CHG_NAME, 
+		                    FILE_SEQ, 
+		                    BRD_SEQ_NO 
+		             FROM FILE_INFO 
+                     WHERE BRD_KIND = 'homegoods'	
+		           )FI ON HI.HOMEGOODS_SEQ_NO = FI.BRD_SEQ_NO
+		 INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
+		 WHERE HI.HOMEGOODS_SEQ_NO = #{homegoodsSeqNo}
+	</select>
+	
+	<select id="getHomegoodsListTotalCount" resultType="integer" parameterType="string">
+		SELECT COUNT(0) AS CNT 
+		FROM HOMEGOODS_INFO HI
+		INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
+		WHERE HI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR HI.HOMEGOODS_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR HI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<update id="homegoodsrevise" parameterType="HomegoodsDTO">

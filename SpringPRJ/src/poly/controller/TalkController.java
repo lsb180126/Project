@@ -50,8 +50,12 @@ public class TalkController {
 		log.info("welcome talk");
 		
 		log.info(this.getClass().getName() + ".talk start!");
+		String keyword = CmmUtil.nvl((String)request.getParameter("keyword"),"");
 		
-		int totalCount = talkService.getTalkListTotalCount();
+		log.info(keyword);
+		log.info("TEST"+keyword +"TEST");
+		
+		int totalCount = talkService.getTalkListTotalCount(keyword);
 		int pageNum = 1;
 		int pageCount = 10;
 		
@@ -63,6 +67,7 @@ public class TalkController {
 		paging.setPage_num(pageNum);
 		paging.setPage_count(pageCount);
 		paging.setTotal_count(totalCount);
+		paging.setKeyword(keyword);
 		
 		List<TalkDTO> tList = talkService.getTalkList(paging);
 		
@@ -84,7 +89,7 @@ public class TalkController {
 		return "/talk";
 	}
 	
-	@RequestMapping(value="talksearch")
+	/*@RequestMapping(value="talksearch")
 	public String Talksearch(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -110,7 +115,7 @@ public class TalkController {
 		model.addAttribute("tList", tList);
 		 
 		return "/talk";
-	}
+	}*/
 	
 	@RequestMapping(value="talkregister")
 	public String Talkregister(HttpServletRequest request, HttpServletResponse response, 
@@ -131,6 +136,17 @@ public class TalkController {
 		TalkDTO tDTO = new TalkDTO();
 		
 		String talkSeqNo = request.getParameter("talkSeqNo");
+		String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		
+		int totalCount = talkService.getTalkListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		
 		tDTO.setTalkSeqNo(talkSeqNo);
 		
@@ -140,10 +156,13 @@ public class TalkController {
 		log.info(tDTO.getTitle());
 		log.info(tDTO.getTalkContents());
 		
-		
-		
-		
 		model.addAttribute("tDTO",tDTO); 
+		
+		model.addAttribute("pageCount", pageCount);
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		model.addAttribute("keyword", keyword);
 		
 		return "/talkdetail";
 	}

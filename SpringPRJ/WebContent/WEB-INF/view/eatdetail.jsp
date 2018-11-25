@@ -6,6 +6,9 @@
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 %>
 <%
+	String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+	int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+	int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
 	EatDTO eDTO = (EatDTO)request.getAttribute("eDTO");
 %>
 <!DOCTYPE html>
@@ -31,12 +34,16 @@
 	    
 	    </style>
 	    
-	    <script>
-	    
-		    
-	    
-	    
-	    </script>
+	    <script type="text/javascript">
+				
+				
+				function goPage(){
+					var pageCount = '<%=pageCount%>';
+					location.href="/eat.do?pageCount="+pageCount+"&pageNum="+<%=pageNum%> +"&keyword="+"<%=keyword%>";
+				}
+			   
+			   
+		</script>
 	    
 	</head>
 	<body>
@@ -129,7 +136,7 @@
 						
 					</td>
 					<td>
-						<a href="eat.do"><input type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input type="button" value="목록"></a>
 					</td>
 					
 					
@@ -180,12 +187,19 @@
 				        </td>
 				     </tr>
 				     <tr>
+				     	<td><%=eDTO.getEatContents() %></td>
+				     </tr>
+				     
+				     
+				     <tr>
+				     <% if(!(CmmUtil.nvl(eDTO.getChgName())).equals("") ) { %>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
 				     		<img src="/upload/<%=eDTO.getChgName()%>" height="200" width="200" >
-				     			<%=eDTO.getEatContents() %>
+				     			
 				     		</div>	
 				     	</td>
+				      <% }%>	
 			     	</tr>
 			     	<tr>
 			     		<td></td>

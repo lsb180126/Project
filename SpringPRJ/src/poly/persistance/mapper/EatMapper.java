@@ -5,11 +5,12 @@ import java.util.List;
 import config.Mapper;
 import poly.dto.EatDTO;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 
 @Mapper("EatMapper")
 public interface EatMapper  {
 
-	List<EatDTO> getEatList()throws Exception;
+	List<EatDTO> getEatList(PagingDTO paging)throws Exception;
 	
 	int insertMember(EatDTO eDTO) throws Exception;
 
@@ -30,6 +31,8 @@ public interface EatMapper  {
 	int filedelete(FileDTO fDTO) throws Exception;
 
 	List<EatDTO> getEatList3(String keyword) throws Exception;
+
+	int getEatListTotalCount(String keyword) throws Exception;
 
 	
 }

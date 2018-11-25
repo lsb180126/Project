@@ -47,16 +47,36 @@
 		) 
 	</insert>
 	
-	<select id="getEatList" resultType="EatDTO">
-		 SELECT EI.EAT_SEQ_NO as eatSeqNo,
-				EI.TITLE as title,
-				EI.EAT_CONTENTS as eatContents,
-				EI.REG_DT as regDt,
-				EI.CHG_DT as chgDt,
-				EI.USER_ID as userId,
-				UI.USER_NAME as userName
-		 FROM EAT_INFO EI
-		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
+	<select id="getEatList" resultType="EatDTO" parameterType="PagingDTO">
+		 SELECT 
+		 		A.EN,
+		 		A.*
+		 FROM
+		 	( SELECT
+			 		ROWNUM EN,
+					EI.EAT_SEQ_NO as eatSeqNo,
+					EI.TITLE as title,
+					EI.EAT_CONTENTS as eatContents,
+					EI.REG_DT as regDt,
+					EI.CHG_DT as chgDt,
+					EI.USER_ID as userId,
+					UI.USER_NAME as userName
+		 	FROM 
+		 		( SELECT
+		 			EI2.*
+		 		  FROM
+		 		  	EAT_INFO EI2
+		 		  ORDER BY
+		 		  	EAT_SEQ_NO DESC
+		 		  ) EI
+		 	INNER JOIN USER_INFO UI ON UI.USER_ID = EI.USER_ID
+		 	WHERE EI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 	OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+			OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 	OR EI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+		 		) A
+		 	WHERE A.EN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
+		 	ORDER BY A.EN
 	</select>
 	
 	<select id="getEatdetail" resultType="EatDTO">
@@ -69,11 +89,16 @@
 				UI.USER_NAME as userName,
 				FI.CHG_NAME as chgName,
 				FI.FILE_SEQ as fileSeq
-		 FROM EAT_INFO EI, FILE_INFO FI, USER_INFO UI
-		 WHERE EI.USER_ID = UI.USER_ID
-		 AND EI.EAT_SEQ_NO = #{eatSeqNo}
-		 AND EI.EAT_SEQ_NO = FI.BRD_SEQ_NO
-		 AND FI.BRD_KIND = 'eat'
+		 FROM EAT_INFO EI
+		 LEFT JOIN ( SELECT BRD_KIND,
+		 			CHG_NAME, 
+                    FILE_SEQ, 
+                    BRD_SEQ_NO 
+                    FROM FILE_INFO 
+                    WHERE BRD_KIND = 'eat'	
+                   )FI ON EI.EAT_SEQ_NO = FI.BRD_SEQ_NO
+		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
+		 WHERE EI.EAT_SEQ_NO = #{eatSeqNo}
 	</select>	
 	
 	<select id="getEatList2" resultType="EatDTO">
@@ -87,6 +112,16 @@
 		 FROM EAT_INFO EI
 		 INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
 		 WHERE EI.USER_ID = #{userId}
+	</select>
+	
+	<select id="getEatListTotalCount" resultType="integer" parameterType="string">
+		SELECT COUNT(0) AS CNT 
+		FROM EAT_INFO EI
+		INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
+		WHERE EI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR EI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<update id="eatrevise" parameterType="EatDTO">

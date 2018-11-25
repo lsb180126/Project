@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import poly.dto.EatDTO;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.persistance.mapper.EatMapper;
 
 import poly.service.IEatService;
@@ -19,9 +20,9 @@ public class EatService implements IEatService{
 	private EatMapper eatMapper;
 
 	@Override
-	public List<EatDTO> getEatList() throws Exception {
+	public List<EatDTO> getEatList(PagingDTO paging) throws Exception {
 		
-		return eatMapper.getEatList();
+		return eatMapper.getEatList(paging);
 	}
 
 	@Override
@@ -71,5 +72,15 @@ public class EatService implements IEatService{
 		// TODO Auto-generated method stub
 		return eatMapper.getEatList3(keyword);
 	}
+
+	@Override
+	public int getEatListTotalCount(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return eatMapper.getEatListTotalCount(keyword);
+	}
+	
+	
+	
+	
 
 }

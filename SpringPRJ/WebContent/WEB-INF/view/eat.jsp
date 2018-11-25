@@ -1,3 +1,4 @@
+<%@page import="poly.dto.PagingDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="poly.dto.EatDTO"%>
@@ -8,7 +9,10 @@
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 %>
 <%
+	String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
 	List<EatDTO> eList = (List<EatDTO>)request.getAttribute("eList");
+	
+	PagingDTO paging = (PagingDTO) request.getAttribute("paging");
 	
 	if (eList==null){
 		eList = new ArrayList<EatDTO>();
@@ -74,6 +78,7 @@
 				  display: table;
 				}
 	    
+	    .layer {text-align:center; }
 	    
 	    </style>
 	    
@@ -87,12 +92,22 @@
 				   var keyword = $("#keyword").val();
 				   
 				   console.log(keyword);
-				   location.href="eatsearch.do?keyword=" + encodeURI(encodeURIComponent(keyword));
+				   location.href="eat.do?keyword=" + keyword;
 				   
 				   
 			   })
 			   
 		   })
+	   
+	   </script>
+	   
+	    <script type="text/javascript">
+		
+		
+		function goPage(page){
+			var pageCount = <%=paging.getPage_count()%>;
+			location.href="/eat.do?pageCount="+pageCount+"&pageNum="+page+"&keyword="+"<%=keyword%>";
+		}
 	   
 	   
 	   </script>
@@ -183,7 +198,7 @@
 					
 					<td></td>
 					<td>
-						<form class="example" action="/eatsearch.do" method="POST"  >
+						<form class="example" action="/eat.do" method="POST"  >
 						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
 						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
@@ -210,7 +225,7 @@
 				<tr>
 					
 					<td><%=e.getEatSeqNo() %></td>
-					<td colspan="3"><a href="/eatdetail.do?eatSeqNo=<%=e.getEatSeqNo() %>"><%=e.getTitle() %></a></td>
+					<td colspan="3"><a href="/eatdetail.do?eatSeqNo=<%=e.getEatSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>&keyword=<%=keyword%>"><%=e.getTitle() %></a></td>
 					<td><%=e.getUserName() %></td>
 					<td><%=e.getChgDt() %></td>
 				</tr>
@@ -219,30 +234,18 @@
 					
 		
 			</table>
-			<hr/>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-				 <li class="page-item">
-		      		<a class="page-link" href="#" aria-label="Previous" >
-		        		<span aria-hidden="true">&laquo;</span>
-		        		<span class="sr-only">Previous</span>
-		      		</a>
-		   		 </li> 
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item">
-		      			<a class="page-link" href="#" aria-label="Next">
-		        			<span aria-hidden="true">&raquo;</span>
-		        			<span class="sr-only">Next</span>
-		      			</a>
-		    		</li>
-				</ul>
-			</nav>
+			
 	 	</div>
       </div>
     </div>
+    <div class="layer">
+				
+	<%=
+		fnPaging(paging.getPage_count(), 10, paging.getPage_num(), paging.getTotal_count())
+	%>
+				
+	</div>
+    
     
 
     <!-- Bootstrap core JavaScript -->
@@ -251,3 +254,56 @@
 
   </body>
 </html>
+
+<%!
+	//페이지num, 전체Data count만 전달받아 출력.
+	private String fnPaging(int pageNum, int totalCount){
+		int pageCount = 10; // 페이지별 출력 row 수
+	 int blockCount = 10; // 화면에 출력할 block 수
+	 return fnPaging(pageCount, blockCount, pageNum, totalCount);
+	}
+	//pageCount, blockCount, pageNum, totalCount 를 전달받아 출력.
+	private String fnPaging(int pageCount, int blockCount, int pageNum, int totalCount){
+		
+		String pagingStr = "";
+		
+		// 전체 페이지수
+		int totalPageCount = totalCount / pageCount; // 전체 페이지 수
+		if(totalCount % pageCount > 0) totalPageCount ++ ; // 전체 페이지수+1 (나머지가 있을 경우.)
+		
+		// 전체 블럭수
+		int totalBlockCount = totalPageCount / blockCount; // 전체 블럭수
+		if(totalBlockCount % blockCount > 0) totalBlockCount ++ ; // 전체 블럭수+1 (나머지가 있을 경우.)
+		
+		// 현재 블럭의 시작 페이지
+		int startPage = pageNum / blockCount * blockCount + 1;
+		if(pageNum % blockCount == 0) startPage -= blockCount;
+		
+		// 현재 블럭의 마지막 페이지.
+		int endPage = startPage + blockCount - 1;
+		if(endPage > totalPageCount) endPage = totalPageCount;
+		
+		//만약 현재 블럭의 시작 페이지가 1보다 크다면. 이전 블럭 . 처음 블럭 버튼 생성.
+		if(startPage > 1){
+			//pagingStr = "[<<1][<"+(startPage-1)+"]";
+			pagingStr =  "<input type=button value=<< onclick='goPage(1);'>";
+			pagingStr += "<input type=button value=<  onclick='goPage("+(startPage-1)+");'>";
+		}
+		
+		for(int i = startPage ; i <= endPage ; i++){
+			
+			if(i == pageNum )pagingStr += "[현재]";
+			//else pagingStr += "["+i+"]";
+			else pagingStr += "<input type=button value="+i+" onclick='goPage("+i+");'>";
+		}
+		
+		//만약 현재 블럭의 마지막 페이지가 전체 마지막 페이지보다 작다면. 다음블럭, 마지막 블럭 버튼 생성. 
+		if(endPage < totalPageCount){
+			//pagingStr += "[>"+(endPage+1)+"][>>"+totalPageCount+"]";
+			pagingStr += "<input type=button value='>'  onclick='goPage("+(endPage+1)+");'>";
+			pagingStr += "<input type=button value='>>' onclick='goPage("+totalPageCount+");'>";
+		}
+		
+		return pagingStr;
+	}
+%>

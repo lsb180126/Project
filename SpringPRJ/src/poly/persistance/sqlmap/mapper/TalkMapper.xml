@@ -49,26 +49,34 @@
 	
 	<select id="getTalkList" resultType="TalkDTO" parameterType="PagingDTO">
 		 SELECT 
-		 TI.TN,
-		 		TI.TALK_SEQ_NO as talkSeqNo,
-				TI.TITLE as title,
-				TI.TALK_CONTENTS as talkContents,
-				TI.REG_DT as regDt,
-				TI.CHG_DT as chgDt,
-				TI.USER_ID as userId,
-				UI.USER_NAME as userName
-		 FROM 
-		 ( SELECT
-		 	ROWNUM TN
-		 	,TI2.*
-	 	   FROM
-	 	   	TALK_INFO TI2
-	 	   ORDER BY
-	 	   	TALK_SEQ_NO DESC
-		 	) TI
+		 		A.TN,
+		 		A.*
+		 FROM
+		 	(SELECT
+					ROWNUM TN,
+			 		TI.TALK_SEQ_NO as talkSeqNo,
+					TI.TITLE as title,
+					TI.TALK_CONTENTS as talkContents,
+					TI.REG_DT as regDt,
+					TI.CHG_DT as chgDt,
+					TI.USER_ID as userId,
+					UI.USER_NAME as userName
+			 FROM 
+				 ( SELECT
+				 	 TI2.*
+			 	   FROM
+			 	   	TALK_INFO TI2
+			 	   ORDER BY
+			 	   	TALK_SEQ_NO DESC
+				 	) TI
 		 INNER JOIN USER_INFO UI ON UI.USER_ID = TI.USER_ID
-		 	WHERE TI.TN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-		 ORDER BY TI.TN ASC
+		 WHERE TI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR TI.TALK_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR TI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+		 	) A
+		 WHERE A.TN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
+		 ORDER BY A.TN
 	</select>
 	
 	<select id="getTalkdetail" resultType="TalkDTO">
@@ -93,9 +101,14 @@
 		 WHERE TI.TALK_SEQ_NO = #{talkSeqNo}
 	</select>
 	
-	<select id="getTalkListTotalCount" resultType="integer">
+	<select id="getTalkListTotalCount" resultType="integer" parameterType="string">
 		SELECT COUNT(0) AS CNT 
-		FROM TALK_INFO
+		FROM TALK_INFO TI
+		INNER JOIN USER_INFO UI ON UI.USER_ID = TI.USER_ID
+		WHERE TI.TITLE LIKE '%'|| #{keyword} ||'%'
+		 OR TI.TALK_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		 OR TI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<select id="getTalkList2" resultType="TalkDTO" parameterType="TalkDTO">

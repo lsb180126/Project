@@ -4,10 +4,11 @@ import java.util.List;
 
 import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
+import poly.dto.PagingDTO;
 
 public interface IHomegoodsService {
 
-	List<HomegoodsDTO> getHomegoodsList() throws Exception;
+	List<HomegoodsDTO> getHomegoodsList(PagingDTO paging) throws Exception;
 
 	int insertMember(HomegoodsDTO hDTO, FileDTO fDTO) throws Exception;
 
@@ -22,6 +23,8 @@ public interface IHomegoodsService {
 	int mylistdelete(String userId) throws Exception;
 
 	List<HomegoodsDTO> getHomegoodsList3(String keyword) throws Exception;
+
+	int getHomegoodsListTotalCount(String keyword) throws Exception;
 	
 	
 

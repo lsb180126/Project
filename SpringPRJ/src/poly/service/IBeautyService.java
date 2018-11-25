@@ -4,12 +4,13 @@ import java.util.List;
 
 import poly.dto.BeautyDTO;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 
 public interface IBeautyService {
 
 	int insertMember(BeautyDTO bDTO, FileDTO fDTO) throws Exception;
 
-	List<BeautyDTO> getBeautyList() throws Exception;
+	List<BeautyDTO> getBeautyList(PagingDTO paging) throws Exception;
 
 	BeautyDTO getBeautydetail(BeautyDTO bDTO) throws Exception;
 
@@ -22,6 +23,8 @@ public interface IBeautyService {
 	int mylistdelete(String userId) throws Exception;
 
 	List<BeautyDTO> getBeautyList3(String keyword) throws Exception;
+
+	int getBeautyListTotalCount(String keyword) throws Exception;
 	
 	
 

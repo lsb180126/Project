@@ -5,7 +5,11 @@
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 %>
-<%
+<%	
+	String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+	int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+	int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+	
 	HomegoodsDTO hDTO = (HomegoodsDTO)request.getAttribute("hDTO");
 %>
 <!DOCTYPE html>
@@ -31,12 +35,16 @@
 	    
 	    </style>
 	    
-	    <script>
-	    
-		    
-	    
-	    
-	    </script>
+	    <script type="text/javascript">
+				
+				
+				function goPage(){
+					var pageCount = '<%=pageCount%>';
+					location.href="/homegoods.do?pageCount="+pageCount+"&pageNum="+<%=pageNum%> +"&keyword="+"<%=keyword%>";
+				}
+			   
+			   
+		</script>
 	    
 	</head>
 	<body>
@@ -129,7 +137,7 @@
 						
 					</td>
 					<td>
-						<a href="homegoods.do"><input type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input type="button" value="목록"></a>
 					</td>
 					
 					
@@ -179,13 +187,19 @@
 				        	</div>
 				        </td>
 				     </tr>
+				      <tr>
+				     	<td><%=hDTO.getHomegoodsContents() %></td>
+				     </tr>
+				     
 				     <tr>
+				     <% if(!(CmmUtil.nvl(hDTO.getChgName())).equals("") ) { %>
 				     	<td colspan="6" height="500px">
 				     		<div class="my-box" style="height:600px;">
 				     		<img src="/upload/<%=hDTO.getChgName()%>" height="200" width="200" >
-				     			<%=hDTO.getHomegoodsContents() %>
+				     			
 				     		</div>	
 				     	</td>
+				     <% }%>	
 			     	</tr>
 			     	<tr>
 			     		<td></td>

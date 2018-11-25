@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import poly.dto.EatDTO;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.dto.SellDTO;
 import poly.dto.TalkDTO;
 import poly.service.IEatService;
@@ -46,8 +47,27 @@ public class SellController {
 			ModelMap model) throws Exception {
 		
 		log.info("welcome sell");
+		log.info(this.getClass().getName() + ".sell start!");
+		String keyword = CmmUtil.nvl((String)request.getParameter("keyword"),"");
 		
-		List<SellDTO> sList = sellService.getSellList();
+		log.info(keyword);
+		log.info("TEST"+keyword +"TEST");
+		
+		int totalCount = sellService.getSellListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		paging.setKeyword(keyword);
+		
+		List<SellDTO> sList = sellService.getSellList(paging);
 		
 		for(SellDTO s : sList) {
 			log.info("sellSeqNo : " +s.getSellSeqNo());
@@ -57,6 +77,12 @@ public class SellController {
 		}
 		
 		model.addAttribute("sList", sList);
+		
+		model.addAttribute("paging", paging);
+		
+		sList = null;
+		
+		log.info(this.getClass().getName() + ".sell end!");
 		
 		return "/sell";
 	}
@@ -72,7 +98,7 @@ public class SellController {
 		return "/sellregister";
 	}
 	
-	@RequestMapping(value="sellsearch")
+	/*@RequestMapping(value="sellsearch")
 	public String Sellsearch(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -98,7 +124,7 @@ public class SellController {
 		model.addAttribute("sList", sList);
 		 
 		return "/sell";
-	}
+	}*/
 	
 	@RequestMapping(value="selllist", method=RequestMethod.POST) 
 	public String Selllist(HttpServletRequest request, HttpServletResponse response, 
@@ -172,6 +198,17 @@ public class SellController {
 		SellDTO sDTO = new SellDTO();
 		
 		String sellSeqNo = request.getParameter("sellSeqNo");
+		String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		
+		int totalCount = sellService.getSellListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		
 		sDTO.setSellSeqNo(sellSeqNo);
 		
@@ -183,6 +220,12 @@ public class SellController {
 		
 		
 		model.addAttribute("sDTO",sDTO); 
+		
+		model.addAttribute("pageCount", pageCount);
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		model.addAttribute("keyword", keyword);
 		
 		return "/selldetail";
 	}

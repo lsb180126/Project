@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
+import poly.dto.PagingDTO;
 import poly.persistance.mapper.HomegoodsMapper;
 
 import poly.service.IHomegoodsService;
@@ -19,9 +20,9 @@ public class HomegoodsService implements IHomegoodsService{
 	private HomegoodsMapper homegoodsMapper;
 
 	@Override
-	public List<HomegoodsDTO> getHomegoodsList() throws Exception {
+	public List<HomegoodsDTO> getHomegoodsList(PagingDTO paging) throws Exception {
 		
-		return homegoodsMapper.getHomegoodsList();
+		return homegoodsMapper.getHomegoodsList(paging);
 	}
 
 	@Override
@@ -70,6 +71,12 @@ public class HomegoodsService implements IHomegoodsService{
 	public List<HomegoodsDTO> getHomegoodsList3(String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return homegoodsMapper.getHomegoodsList3(keyword);
+	}
+
+	@Override
+	public int getHomegoodsListTotalCount(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return homegoodsMapper.getHomegoodsListTotalCount(keyword);
 	}
 
 }

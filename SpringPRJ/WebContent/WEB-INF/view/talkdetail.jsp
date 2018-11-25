@@ -6,6 +6,10 @@
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 %>
 <%
+	String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+	int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+	int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+	
 	TalkDTO tDTO = (TalkDTO)request.getAttribute("tDTO");
 %>
 <!DOCTYPE html>
@@ -31,12 +35,16 @@
 	    
 	    </style>
 	    
-	    <script>
-	    
-		    
-	    
-	    
-	    </script>
+	   <script type="text/javascript">
+				
+				
+				function goPage(){
+					var pageCount = '<%=pageCount%>';
+					location.href="/talk.do?pageCount="+pageCount+"&pageNum="+<%=pageNum%> +"&keyword="+"<%=keyword%>";
+				}
+			   
+			   
+		</script>
 	    
 	</head>
 	<body>
@@ -129,7 +137,7 @@
 						
 					</td>
 					<td>
-						<a href="talk.do"><input type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input type="button" value="목록"></a>
 					</td>
 					
 					

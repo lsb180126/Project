@@ -5,11 +5,12 @@ import java.util.List;
 import config.Mapper;
 import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
+import poly.dto.PagingDTO;
 
 @Mapper("HomegoodsMapper")
 public interface HomegoodsMapper  {
 
-	List<HomegoodsDTO> getHomegoodsList()throws Exception;
+	List<HomegoodsDTO> getHomegoodsList(PagingDTO paging)throws Exception;
 	
 	int insertMember(HomegoodsDTO hDTO) throws Exception;
 
@@ -30,6 +31,8 @@ public interface HomegoodsMapper  {
 	int filedelete(FileDTO fDTO) throws Exception;
 
 	List<HomegoodsDTO> getHomegoodsList3(String keyword) throws Exception;
+
+	int getHomegoodsListTotalCount(String keyword) throws Exception;
 
 	
 }

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.dto.SellDTO;
 import poly.persistance.mapper.SellMapper;
 
@@ -19,9 +20,9 @@ public class SellService implements ISellService{
 	private SellMapper sellMapper;
 
 	@Override
-	public List<SellDTO> getSellList() throws Exception {
+	public List<SellDTO> getSellList(PagingDTO paging) throws Exception {
 		
-		return sellMapper.getSellList();
+		return sellMapper.getSellList(paging);
 	}
 
 	@Override
@@ -70,6 +71,12 @@ public class SellService implements ISellService{
 	public List<SellDTO> getSellList3(String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return sellMapper.getSellList3(keyword);
+	}
+
+	@Override
+	public int getSellListTotalCount(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return sellMapper.getSellListTotalCount(keyword);
 	}
 
 }

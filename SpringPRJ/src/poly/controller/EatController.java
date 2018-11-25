@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import poly.dto.EatDTO;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.dto.TalkDTO;
 import poly.service.IEatService;
 import poly.service.ITalkService;
@@ -45,7 +46,28 @@ public class EatController {
 		
 		log.info("welcome eat");
 		
-		List<EatDTO> eList = eatService.getEatList();
+		log.info(this.getClass().getName() + ".eat start!");
+		String keyword = CmmUtil.nvl((String)request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		log.info("TEST"+keyword +"TEST");
+		
+		int totalCount = eatService.getEatListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		paging.setKeyword(keyword);
+		
+		
+		List<EatDTO> eList = eatService.getEatList(paging);
 		
 		for(EatDTO e : eList) {
 			log.info("eatSeqNo : " +e.getEatSeqNo());
@@ -55,6 +77,12 @@ public class EatController {
 		}
 		
 		model.addAttribute("eList", eList);
+		
+		model.addAttribute("paging", paging);
+		
+		eList = null;
+		
+		log.info(this.getClass().getName() + ".eat end!");
 		 
 		return "/eat";
 	}
@@ -70,7 +98,7 @@ public class EatController {
 		return "/eatregister";
 	}
 	
-	@RequestMapping(value="eatsearch")
+	/*@RequestMapping(value="eatsearch")
 	public String Eatsearch(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -96,7 +124,7 @@ public class EatController {
 		model.addAttribute("eList", eList);
 		 
 		return "/eat";
-	}
+	}*/
 	
 	@RequestMapping(value="eatdetail")
 	public String Eatdetail(HttpServletRequest request, HttpServletResponse response, 
@@ -107,6 +135,17 @@ public class EatController {
 		EatDTO eDTO = new EatDTO();
 		
 		String eatSeqNo = request.getParameter("eatSeqNo");
+		String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		
+		int totalCount = eatService.getEatListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		
 		eDTO.setEatSeqNo(eatSeqNo);
 		
@@ -118,6 +157,12 @@ public class EatController {
 		
 		
 		model.addAttribute("eDTO",eDTO); 
+		
+		model.addAttribute("pageCount", pageCount);
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		model.addAttribute("keyword", keyword);
 		
 		return "/eatdetail";
 	}

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import poly.dto.BeautyDTO;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.persistance.mapper.BeautyMapper;
 
 import poly.service.IBeautyService;
@@ -27,9 +28,9 @@ public class BeautyService implements IBeautyService{
 	}
 
 	@Override
-	public List<BeautyDTO> getBeautyList() throws Exception {
+	public List<BeautyDTO> getBeautyList(PagingDTO paging) throws Exception {
 		
-		return beautyMapper.getBeautyList();
+		return beautyMapper.getBeautyList(paging);
 	}
 
 	@Override
@@ -70,6 +71,12 @@ public class BeautyService implements IBeautyService{
 	public List<BeautyDTO> getBeautyList3(String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return beautyMapper.getBeautyList3(keyword);
+	}
+
+	@Override
+	public int getBeautyListTotalCount(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return beautyMapper.getBeautyListTotalCount(keyword);
 	}
 
 }

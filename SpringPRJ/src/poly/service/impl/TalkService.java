@@ -75,9 +75,9 @@ public class TalkService implements ITalkService{
 	}
 
 	@Override
-	public int getTalkListTotalCount() throws Exception {
+	public int getTalkListTotalCount(String keyword) throws Exception {
 		// TODO Auto-generated method stub
-		return talkMapper.getTalkListTotalCount();
+		return talkMapper.getTalkListTotalCount(keyword);
 	}
 
 	

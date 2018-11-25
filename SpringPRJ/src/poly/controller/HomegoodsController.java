@@ -26,6 +26,7 @@ import poly.dto.BeautyDTO;
 import poly.dto.EatDTO;
 import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
+import poly.dto.PagingDTO;
 import poly.dto.SellDTO;
 import poly.dto.TalkDTO;
 import poly.service.IBeautyService;
@@ -49,7 +50,27 @@ public class HomegoodsController {
 		
 		log.info("welcome homegoods");
 		
-		List<HomegoodsDTO> hList = homegoodsService.getHomegoodsList();
+		log.info(this.getClass().getName() + ".homegoods start!");
+		String keyword = CmmUtil.nvl((String)request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		log.info("TEST"+keyword +"TEST");
+		
+		int totalCount = homegoodsService.getHomegoodsListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		paging.setKeyword(keyword);
+		
+		List<HomegoodsDTO> hList = homegoodsService.getHomegoodsList(paging);
 		
 		for(HomegoodsDTO h : hList) {
 			log.info("homegoodsSeqNo : " +h.getHomegoodsSeqNo());
@@ -59,6 +80,12 @@ public class HomegoodsController {
 		}
 		
 		model.addAttribute("hList", hList); 
+		
+		model.addAttribute("paging", paging);
+		
+		hList = null;
+		
+		log.info(this.getClass().getName() + ".homegoods end!");
 		
 		
 		return "/homegoods";
@@ -75,7 +102,7 @@ public class HomegoodsController {
 		return "/homegoodsregister";
 	}
 	
-	@RequestMapping(value="homegoodssearch")
+	/*@RequestMapping(value="homegoodssearch")
 	public String Eatsearch(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -101,7 +128,7 @@ public class HomegoodsController {
 		model.addAttribute("hList", hList);
 		 
 		return "/homegoods";
-	}
+	}*/
 	
 	@RequestMapping(value="homegoodslist", method=RequestMethod.POST) 
 	public String Homegoodslist(HttpServletRequest request, HttpServletResponse response, 
@@ -175,6 +202,17 @@ public class HomegoodsController {
 		HomegoodsDTO hDTO = new HomegoodsDTO();
 		
 		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
+		String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		
+		int totalCount = homegoodsService.getHomegoodsListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		
 		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
 		
@@ -186,6 +224,12 @@ public class HomegoodsController {
 		
 		
 		model.addAttribute("hDTO",hDTO); 
+		
+		model.addAttribute("pageCount", pageCount);
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		model.addAttribute("keyword", keyword);
 		
 		return "/homegoodsdetail";
 	}

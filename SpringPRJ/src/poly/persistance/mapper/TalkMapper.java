@@ -33,7 +33,7 @@ public interface TalkMapper  {
 
 	List<TalkDTO> getTalkList3(String keyword) throws Exception;
 
-	int getTalkListTotalCount() throws Exception;
+	int getTalkListTotalCount(String keyword) throws Exception;
 
 	
 

@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import poly.dto.BeautyDTO;
 import poly.dto.EatDTO;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 import poly.dto.SellDTO;
 import poly.dto.TalkDTO;
 import poly.service.IBeautyService;
@@ -48,7 +49,27 @@ public class BeautyController {
 		
 		log.info("welcome beauty");
 		
-		List<BeautyDTO> bList = beautyService.getBeautyList();
+		log.info(this.getClass().getName() + ".beauty start!");
+		String keyword = CmmUtil.nvl((String)request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		log.info("TEST"+keyword +"TEST");
+		
+		int totalCount = beautyService.getBeautyListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		paging.setKeyword(keyword);
+		
+		List<BeautyDTO> bList = beautyService.getBeautyList(paging);
 		
 		for(BeautyDTO b : bList) {
 			log.info("beautySeqNo : " +b.getBeautySeqNo());
@@ -58,6 +79,12 @@ public class BeautyController {
 		}
 		
 		model.addAttribute("bList", bList);
+		
+		model.addAttribute("paging", paging);
+		
+		bList = null;
+		
+		log.info(this.getClass().getName() + ".beauty end!");
 		
 		return "/beauty";
 	}
@@ -73,7 +100,7 @@ public class BeautyController {
 		return "/beautyregister";
 	}
 	
-	@RequestMapping(value="beautysearch")
+	/*@RequestMapping(value="beautysearch")
 	public String Beautysearch(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
@@ -99,7 +126,7 @@ public class BeautyController {
 		model.addAttribute("bList", bList);
 		 
 		return "/beauty";
-	}
+	}*/
 	
 	@RequestMapping(value="beautylist", method=RequestMethod.POST) 
 	public String Beautylist(HttpServletRequest request, HttpServletResponse response,
@@ -174,6 +201,17 @@ public class BeautyController {
 		BeautyDTO bDTO = new BeautyDTO();
 		
 		String beautySeqNo = request.getParameter("beautySeqNo");
+		String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		
+		int totalCount = beautyService.getBeautyListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		
 		bDTO.setBeautySeqNo(beautySeqNo);
 		
@@ -185,6 +223,12 @@ public class BeautyController {
 		
 		
 		model.addAttribute("bDTO",bDTO); 
+		
+		model.addAttribute("pageCount", pageCount);
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		model.addAttribute("keyword", keyword);
 		
 		return "/beautydetail";
 	}

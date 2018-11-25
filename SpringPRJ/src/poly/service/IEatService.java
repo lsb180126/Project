@@ -4,10 +4,11 @@ import java.util.List;
 
 import poly.dto.EatDTO;
 import poly.dto.FileDTO;
+import poly.dto.PagingDTO;
 
 public interface IEatService {
 
-	List<EatDTO> getEatList() throws Exception;
+	List<EatDTO> getEatList(PagingDTO paging) throws Exception;
 
 	int insertMember(EatDTO uDTO, FileDTO fDTO) throws Exception;
 
@@ -22,6 +23,8 @@ public interface IEatService {
 	int mylistdelete(String userId) throws Exception;
 
 	List<EatDTO> getEatList3(String keyword) throws Exception;
+
+	int getEatListTotalCount(String keyword) throws Exception;
 	
 	
 
