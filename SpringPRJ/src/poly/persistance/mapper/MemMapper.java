@@ -26,13 +26,15 @@ public interface MemMapper  {
 
 	int insertFile(FileDTO fDTO) throws Exception;
 
-	List<MemDTO> getReviewList2(String keyword) throws Exception;
+	List<MemDTO> getReviewList2(PagingDTO paging) throws Exception;
 
 	int filerevise(FileDTO fDTO) throws Exception;
 
 	int filedelete(FileDTO fDTO) throws Exception;
 
-	int getMemberListTotalCount() throws Exception;
+	int getMemberListTotalCount(String keyword) throws Exception;
+
+	
 
 	
 

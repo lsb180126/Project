@@ -52,8 +52,12 @@ public class MemberController {
 		log.info("welcome review");
 		
 		log.info(this.getClass().getName() + ".review start!");
+		String keyword = CmmUtil.nvl((String)request.getParameter("keyword"),"");
 		
-		int totalCount = memberService.getMemberListTotalCount();
+		log.info(keyword);
+		log.info("TEST"+keyword +"TEST");
+		
+		int totalCount = memberService.getMemberListTotalCount(keyword);
 		int pageNum = 1;
 		int pageCount = 10;
 		
@@ -65,7 +69,7 @@ public class MemberController {
 		paging.setPage_num(pageNum);
 		paging.setPage_count(pageCount);
 		paging.setTotal_count(totalCount);
-		
+		paging.setKeyword(keyword);
 		
 		
 		
@@ -94,19 +98,37 @@ public class MemberController {
 		return "/review";
 	}
 	
-	@RequestMapping(value="reviewsearch")
+	/*@RequestMapping(value="reviewsearch")
 	public String Reviewsearch(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
+		
 		response.setCharacterEncoding("UTF-8");
 		
 		log.info("welcome reviewsearch");
 		
-		String keyword = URLDecoder.decode(request.getParameter("keyword"),"UTF-8");
-		
+		//String keyword = URLDecoder.decode(request.getParameter("keyword"),"UTF-8");
+		String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
 		
 		log.info(keyword);
 		
-		List<MemDTO> mList = memberService.getReviewList2(keyword);
+		int totalCount = memberService.getMemberListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		paging.setKeyword(keyword);
+		
+		List<MemDTO> mList = memberService.getReviewList2(paging);
+		
+		
 		
 		for(MemDTO m : mList) {
 			log.info("reviewSeqNo : " +m.getReviewSeqNo());
@@ -116,10 +138,15 @@ public class MemberController {
 		}
 		
 		model.addAttribute("mList", mList);
+		
+		model.addAttribute("paging", paging);
+        
+		model.addAttribute("keyword", keyword);
+		mList = null;
 		 
 		return "/review";
 	}
-	
+	*/
 	
 	@RequestMapping(value="reviewregister")
 	public String Reviewregister(HttpServletRequest request, HttpServletResponse response, 
@@ -143,6 +170,17 @@ public class MemberController {
 		MemDTO mDTO = new MemDTO();
 		
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
+		String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		
+		int totalCount = memberService.getMemberListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		
 		
 		
@@ -157,6 +195,11 @@ public class MemberController {
 		
 		model.addAttribute("mDTO",mDTO);
 		
+		model.addAttribute("pageCount", pageCount);
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		model.addAttribute("keyword", keyword);
 		
 		return "/reviewdetail";
 	}

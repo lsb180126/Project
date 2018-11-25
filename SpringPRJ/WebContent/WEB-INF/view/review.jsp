@@ -10,7 +10,7 @@
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 %>
 <%
-	
+	String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
 	List<MemDTO> mList = (List<MemDTO>)request.getAttribute("mList");
 	
 	PagingDTO paging = (PagingDTO) request.getAttribute("paging");
@@ -81,8 +81,8 @@
 				}
 	    
 	    .layer {text-align:center; }
-	    
-
+	   
+		
 
 	    </style>
 	    <script src="vendor/jquery/jquery.min.js"></script>
@@ -96,7 +96,7 @@
 				   var keyword = $("#keyword").val();
 				   
 				   console.log(keyword);
-				   location.href="reviewsearch.do?keyword=" + encodeURI(encodeURIComponent(keyword));
+				   location.href="review.do?keyword=" + keyword;
 				   
 				   
 			   })
@@ -111,7 +111,7 @@
 		
 		function goPage(page){
 			var pageCount = <%=paging.getPage_count()%>;
-			location.href="/review.do?pageCount="+pageCount+"&pageNum="+page;
+			location.href="/review.do?pageCount="+pageCount+"&pageNum="+page +"&keyword="+"<%=keyword%>";
 		}
 	   
 	   
@@ -204,7 +204,7 @@
 					
 					<td></td>
 					<td>
-						<form class="example" action="/reviewsearch.do" method="POST">
+						<form class="example" action="/review.do" method="POST">
 						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
 						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
@@ -234,7 +234,7 @@
 					
 					<td><%=m.getReviewName() %></td>
 					
-					<td colspan="2"><a href="/reviewdetail.do?reviewSeqNo=<%=m.getReviewSeqNo() %>"><%=m.getTitle() %></a></td>
+					<td colspan="2"><a href="/reviewdetail.do?reviewSeqNo=<%=m.getReviewSeqNo()%>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>&keyword=<%=keyword%>"><%=m.getTitle() %></a></td>
 					
 					<td><%=m.getUserName() %></td>
 					<td><%=m.getChgDt() %></td>

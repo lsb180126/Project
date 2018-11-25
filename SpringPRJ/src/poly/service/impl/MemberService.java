@@ -71,16 +71,16 @@ public class MemberService implements IMemService{
 	}
 
 	@Override
-	public List<MemDTO> getReviewList2(String keyword) throws Exception {
+	public List<MemDTO> getReviewList2(PagingDTO paging) throws Exception {
 		// TODO Auto-generated method stub
-		return memMapper.getReviewList2(keyword);
+		 return memMapper.getReviewList2(paging);
 	}
 
 
 	@Override
-	public int getMemberListTotalCount() throws Exception {
+	public int getMemberListTotalCount(String keyword) throws Exception {
 		// TODO Auto-generated method stub
-		return memMapper.getMemberListTotalCount();
+		return memMapper.getMemberListTotalCount(keyword);
 	}
 
 	

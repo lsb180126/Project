@@ -23,9 +23,9 @@ public interface IMemService {
 
 	int mylistdelete(String userId) throws Exception;
 
-	List<MemDTO> getReviewList2(String keyword) throws Exception;
+	List<MemDTO> getReviewList2(PagingDTO paging) throws Exception;
 
-	int getMemberListTotalCount() throws Exception;
+	int getMemberListTotalCount(String keyword) throws Exception;
 
 	
 

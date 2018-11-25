@@ -87,66 +87,53 @@
 		 WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
 	</select>	
 	
-	<select id="getMemberListTotalCount" resultType="integer">
+	<select id="getMemberListTotalCount" resultType="integer" parameterType="string">
 		SELECT COUNT(0) AS CNT 
-		FROM REVIEW_INFO
+		FROM REVIEW_INFO RI
+		INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
+		WHERE RI.TITLE LIKE '%'|| #{keyword} ||'%'
+       OR RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+       OR RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
+       OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<select id="getReviewList" resultType="MemDTO" parameterType="PagingDTO">
-		SELECT 
-        RI.RN,
-				RI.REVIEW_SEQ_NO as reviewSeqNo,
-				RI.TITLE as title,
-				RI.REVIEW_CONTENTS as reviewContents,
-				RI.REG_DT as regDt,
-				RI.CHG_DT as chgDt,
-				RI.REVIEW_NAME as reviewName,
-				RI.USER_ID as userId,
-				UI.USER_NAME as userName
-		 FROM 
-        ( SELECT 
-            ROWNUM RN
-            ,RI2.*
-          FROM 
-            REVIEW_INFO RI2
-          ORDER BY
-            REVIEW_SEQ_NO DESC
-          ) RI
-      INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
-		  WHERE RI.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-      ORDER BY RI.RN ASC
-	</select>
-	
-	<select id="getReviewList2" resultType="MemDTO" parameterType="string" >
-		SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
-				RI.TITLE as title,
-				RI.REVIEW_CONTENTS as reviewContents,
-				RI.REG_DT as regDt,
-				RI.CHG_DT as chgDt,
-				RI.REVIEW_NAME as reviewName,
-				RI.USER_ID as userId,
-				UI.USER_NAME as userName
-		 FROM 
-		 ( SELECT 
-			 ROWNUM RN
-	         ,RI2.*
-	       FROM 
-	         REVIEW_INFO RI2
-	       ORDER BY
-	         REVIEW_SEQ_NO DESC
-		 ) RI
-		 INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
-		 WHERE RI.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-		 AND RI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 ORDER BY RI.RN ASC
+		SELECT
+			  A.RN,
+			  A.*
+		FROM
+		  (SELECT 
+		          ROWNUM RN,
+		          RI.REVIEW_SEQ_NO as reviewSeqNo,
+		          RI.TITLE as title,
+		          RI.REVIEW_CONTENTS as reviewContents,
+		          RI.REG_DT as regDt,
+		          RI.CHG_DT as chgDt,
+		          RI.REVIEW_NAME as reviewName,
+		          RI.USER_ID as userId,
+		          UI.USER_NAME as userName
+		       FROM 
+		          ( SELECT 
+		              RI2.*
+		            FROM 
+		              REVIEW_INFO RI2
+		            ORDER BY
+		              REVIEW_SEQ_NO DESC
+		            ) RI
+        INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
+         WHERE RI.TITLE LIKE '%'|| #{keyword} ||'%'
+       OR RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+       OR RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
+       OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+        ) A 
+      WHERE A.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
+      ORDER BY A.RN  
 	</select>
 	
 	
 	
 	
+		
 	<update id="writerevise" parameterType="MemDTO">
 		UPDATE REVIEW_INFO 
 		SET TITLE = #{title}, 
