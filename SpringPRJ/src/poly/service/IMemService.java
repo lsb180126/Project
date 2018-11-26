@@ -2,6 +2,7 @@ package poly.service;
 
 import java.util.List;
 
+import poly.dto.AllDTO;
 import poly.dto.FileDTO;
 import poly.dto.MemDTO;
 import poly.dto.PagingDTO;
@@ -26,6 +27,10 @@ public interface IMemService {
 	List<MemDTO> getReviewList2(PagingDTO paging) throws Exception;
 
 	int getMemberListTotalCount(String keyword) throws Exception;
+
+	List<AllDTO> getAllList(PagingDTO paging) throws Exception;
+
+	int getMemberListTotalCount2(String userId) throws Exception;
 
 	
 

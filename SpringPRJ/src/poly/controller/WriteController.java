@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import poly.dto.AllDTO;
 import poly.dto.BeautyDTO;
 import poly.dto.EatDTO;
 import poly.dto.FileDTO;
 import poly.dto.HomegoodsDTO;
 import poly.dto.MemDTO;
+import poly.dto.PagingDTO;
 import poly.dto.SellDTO;
 import poly.dto.TalkDTO;
 import poly.dto.UserDTO;
@@ -67,82 +69,41 @@ public class WriteController {
 			ModelMap model) throws Exception {
 		
 		log.info("welcome writelist");
-		
-		MemDTO mDTO = new MemDTO();
-		TalkDTO tDTO = new TalkDTO();
-		EatDTO eDTO = new EatDTO();
-		SellDTO sDTO = new SellDTO();
-		BeautyDTO bDTO = new BeautyDTO();
-		HomegoodsDTO hDTO = new HomegoodsDTO();
-		
 		String userId = (String)session.getAttribute("id");
-		mDTO.setUserId(userId);
-		tDTO.setUserId(userId);
-		eDTO.setUserId(userId);
-		sDTO.setUserId(userId);
-		bDTO.setUserId(userId);
-		hDTO.setUserId(userId);
+		
+		
+		int totalCount = memberService.getMemberListTotalCount2(userId);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		paging.setUserId(userId);
+		AllDTO aDTO = new AllDTO();
 		
 		
 		
-		List<MemDTO> mList = memberService.getMemberList(mDTO);
-		List<TalkDTO> tList = talkService.getTalkList2(tDTO);
-		List<EatDTO> eList = eatService.getEatList2(eDTO);
-		List<SellDTO> sList = sellService.getSellList2(sDTO);
-		List<BeautyDTO> bList = beautyService.getBeautyList2(bDTO);
-		List<HomegoodsDTO> hList = homegoodsService.getHomegoodsList2(hDTO);
 		
+		List<AllDTO> aList = memberService.getAllList(paging);
 		
-		
-		for(MemDTO m : mList) {
-			log.info("reviewSeqNo : " +m.getReviewSeqNo());
-			log.info("reviewName : " +m.getReviewName());
-			log.info("title : " +m.getTitle());
-			log.info("userId : " +m.getUserId());
-			log.info("chgDt : " +m.getChgDt());
+		for(AllDTO a : aList) {
+			log.info("boardName : " +a.getBoardName());
+			log.info("reviewSeqNo : " +a.getReviewSeqNo());
+			log.info("reviewContents : " +a.getReviewContents());
+			log.info("title : " +a.getTitle());
+			log.info("regDt : " +a.getRegDt());
+			log.info("chgDt : " +a.getChgDt());
+			log.info("reviewName : " +a.getReviewName());
 		}
 		
-		for(TalkDTO t : tList) {
-			log.info("talkSeqNo : " +t.getTalkSeqNo());
-			log.info("title : " +t.getTitle());
-			log.info("userId : " +t.getUserId());
-			log.info("chgDt : " +t.getChgDt());
-		}
-		
-		for(EatDTO e : eList) {
-			log.info("eatSeqNo : " +e.getEatSeqNo());
-			log.info("title : " +e.getTitle());
-			log.info("userId : " +e.getUserId());
-			log.info("chgDt : " +e.getChgDt());
-		}
-		
-		for(SellDTO s : sList) {
-			log.info("sellSeqNo : " +s.getSellSeqNo());
-			log.info("title : " +s.getTitle());
-			log.info("userId : " +s.getUserId());
-			log.info("chgDt : " +s.getChgDt());
-		}
-		
-		for(BeautyDTO b : bList) {
-			log.info("beautySeqNo : " +b.getBeautySeqNo());
-			log.info("title : " +b.getTitle());
-			log.info("userId : " +b.getUserId());
-			log.info("chgDt : " +b.getChgDt());
-		}
-		
-		for(HomegoodsDTO h : hList) {
-			log.info("homegoodsSeqNo : " +h.getHomegoodsSeqNo());
-			log.info("title : " +h.getTitle());
-			log.info("userId : " +h.getUserId());
-			log.info("chgDt : " +h.getChgDt());
-		}
-		
-		model.addAttribute("mList", mList);
-		model.addAttribute("tList", tList);
-		model.addAttribute("eList", eList);
-		model.addAttribute("sList", sList); 
-		model.addAttribute("bList", bList);
-		model.addAttribute("hList", hList);
+		model.addAttribute("aList", aList);
+		model.addAttribute("paging", paging);
 		
 		return "/writelist";
 	}

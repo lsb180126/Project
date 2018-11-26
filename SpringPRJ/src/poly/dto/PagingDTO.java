@@ -10,6 +10,7 @@ public class PagingDTO {
 	private int total_count; // total row count
 	private int page_count; // 페이지별 출력될 row수.
 	private String keyword;
+	private String userId;
 	
 	public int getPage_num() {
 		return page_num;
@@ -35,6 +36,14 @@ public class PagingDTO {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
+	
 	
 	
 }

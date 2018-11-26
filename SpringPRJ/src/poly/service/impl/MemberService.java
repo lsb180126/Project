@@ -10,7 +10,7 @@ import poly.dto.FileDTO;
 import poly.dto.MemDTO;
 import poly.dto.PagingDTO;
 import poly.persistance.mapper.MemMapper;
-
+import poly.dto.AllDTO;
 import poly.service.IMemService;
 
 @Service("MemberService")
@@ -81,6 +81,18 @@ public class MemberService implements IMemService{
 	public int getMemberListTotalCount(String keyword) throws Exception {
 		// TODO Auto-generated method stub
 		return memMapper.getMemberListTotalCount(keyword);
+	}
+
+	@Override
+	public List<AllDTO> getAllList(PagingDTO paging) throws Exception {
+		// TODO Auto-generated method stub
+		return memMapper.getAllList(paging);
+	}
+
+	@Override
+	public int getMemberListTotalCount2(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return memMapper.getMemberListTotalCount2(userId);
 	}
 
 	
