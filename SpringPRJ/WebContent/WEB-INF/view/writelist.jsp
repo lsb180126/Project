@@ -9,6 +9,7 @@
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
 	PagingDTO paging = (PagingDTO) request.getAttribute("paging");
+	
 %>
 <%
 	
@@ -240,7 +241,7 @@
 				<tr>
 					<td><%=a.getBoardName() %></td>
 					<td><%=a.getReviewSeqNo() %></td>
-					<td colspan="2"><a href="/writedetail.do?reviewSeqNo=<%=a.getReviewSeqNo() %>"><%=a.getReviewContents() %></a></td>
+					<td colspan="2"><a href="/writedetail.do?reviewSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>"><%=a.getReviewContents() %></a></td>
 					<td><%=a.getTitle() %></td>
 					<td><%=a.getChgDt() %></td>
 					<td><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%></td>

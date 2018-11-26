@@ -8,6 +8,9 @@ public class AllDTO {
 	private String regDt;
 	private String chgDt;
 	private String reviewName;
+	private String chgName;
+	private String fileSeq;
+	
 	
 	public String getBoardName() {
 		return boardName;
@@ -51,7 +54,18 @@ public class AllDTO {
 	public void setReviewName(String reviewName) {
 		this.reviewName = reviewName;
 	}
-	
+	public String getChgName() {
+		return chgName;
+	}
+	public void setChgName(String chgName) {
+		this.chgName = chgName;
+	}
+	public String getFileSeq() {
+		return fileSeq;
+	}
+	public void setFileSeq(String fileSeq) {
+		this.fileSeq = fileSeq;
+	}
 	
 	
 	

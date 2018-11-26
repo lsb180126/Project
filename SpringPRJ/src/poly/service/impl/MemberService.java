@@ -95,6 +95,12 @@ public class MemberService implements IMemService{
 		return memMapper.getMemberListTotalCount2(userId);
 	}
 
+	@Override
+	public AllDTO getAlldetail(AllDTO aDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return memMapper.getAlldetail(aDTO);
+	}
+
 	
 
 	

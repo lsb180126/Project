@@ -174,7 +174,7 @@
 			          A.*
 			  FROM
 			  (SELECT 
-			          '리뷰게시판' AS boardName,
+			          '리뷰' AS boardName,
 			          RI.REVIEW_SEQ_NO as reviewSeqNo,
 			          RI.TITLE as title,
 			          RI.REVIEW_CONTENTS as reviewContents,
@@ -278,6 +278,29 @@
 		          HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo
 		       FROM HOMEGOODS_INFO HI
 		       WHERE HI.USER_ID = #{userId}) A
+	</select>
+	
+	<select id="getAlldetail" resultType="AllDTO" parameterType="string">
+	SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
+				RI.TITLE as title,
+				RI.REVIEW_CONTENTS as reviewContents,
+				RI.REG_DT as regDt,
+				RI.CHG_DT as chgDt,
+				RI.REVIEW_NAME as reviewName,
+				RI.USER_ID as userId,
+				UI.USER_NAME as userName,
+				FI.CHG_NAME as chgName,
+				FI.FILE_SEQ as fileSeq
+		 FROM REVIEW_INFO RI
+        LEFT JOIN ( SELECT BRD_KIND, 
+                    CHG_NAME, 
+                    FILE_SEQ, 
+                    BRD_SEQ_NO 
+                    FROM FILE_INFO 
+                    WHERE BRD_KIND = 'review'
+                  )FI  ON RI.REVIEW_SEQ_NO = FI.BRD_SEQ_NO 
+        INNER JOIN USER_INFO UI ON UI.USER_ID = RI.USER_ID
+		 WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
 	</select>
 	
 	

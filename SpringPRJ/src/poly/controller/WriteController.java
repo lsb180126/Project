@@ -115,7 +115,7 @@ public class WriteController {
 		log.info("welcome writedetail");
 		
 		
-		MemDTO mDTO = new MemDTO();
+		AllDTO aDTO = new AllDTO();
 		
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
 		
@@ -123,20 +123,20 @@ public class WriteController {
 		log.info(reviewSeqNo);
 		
 		
-		mDTO.setReviewSeqNo(reviewSeqNo);
+		aDTO.setReviewSeqNo(reviewSeqNo);
 		
 		
-		mDTO=memberService.getMemberdetail(mDTO);
+		aDTO=memberService.getAlldetail(aDTO);
 		
-		log.info(mDTO.getReviewName());
-		log.info(mDTO.getTitle());
-		log.info(mDTO.getReviewContents());
-		log.info(mDTO.getChgName());
-		log.info(mDTO.getFileSeq());
+		log.info(aDTO.getReviewName());
+		log.info(aDTO.getTitle());
+		log.info(aDTO.getReviewContents());
+		log.info(aDTO.getChgName());
+		log.info(aDTO.getFileSeq());
 		
 		
 		
-		model.addAttribute("mDTO",mDTO);
+		model.addAttribute("aDTO", aDTO);
 		
 		
 		

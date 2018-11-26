@@ -32,6 +32,8 @@ public interface IMemService {
 
 	int getMemberListTotalCount2(String userId) throws Exception;
 
+	AllDTO getAlldetail(AllDTO aDTO) throws Exception;
+
 	
 
 	
