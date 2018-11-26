@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import poly.dto.ComDTO;
 import poly.dto.MemDTO;
+import poly.dto.PagingDTO;
 import poly.dto.UserDTO;
 import poly.service.IBeautyService;
 import poly.service.IEatService;
@@ -229,6 +230,219 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value="/userlist")
+	public String userlist(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome userlist");
+		
+		log.info(this.getClass().getName() + ".userlist start!");
+		String keyword = CmmUtil.nvl((String)request.getParameter("keyword"),"");
+		
+		log.info(keyword);
+		log.info("TEST"+keyword +"TEST");
+		
+		int totalCount = userService.getUserListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		// 페이징 Dto 생성
+		PagingDTO paging = new PagingDTO();
+		paging.setPage_num(pageNum);
+		paging.setPage_count(pageCount);
+		paging.setTotal_count(totalCount);
+		paging.setKeyword(keyword);
+		
+		
+		
+		List<UserDTO> uList = userService.getUserList(paging);
+		
+		for(UserDTO u : uList) {
+			log.info("userId : " +u.getUserId());
+			log.info("userName : " +u.getUserName());
+			log.info("gender : " +u.getGender());
+			log.info("email : " +u.getEmail());
+		}
+		
+		//조회된 리스트 결과값 넣어주기
+		model.addAttribute("uList", uList);
+		
+		// 페이징 정보 전달.
+		model.addAttribute("paging", paging);
+		
+		//변수 초기화(메모리 효율화 시키기 위해 사용함)
+		uList = null;
+		
+		//로그 찍기(추후 찍은 로그를 통해 이 함수 호출이 끝났는지 파악하기 용이하다.)
+		log.info(this.getClass().getName() + ".userlist end!");
+		
+		
+		
+		
+		return "/userlist";
+		
+	}
+	
+	@RequestMapping(value="userdetail")
+	public String userdetail(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome userdetail");
+		
+		String id = (String)session.getAttribute("id");
+		
+		UserDTO uDTO = new UserDTO();
+		
+		String userSeqNo = request.getParameter("userSeqNo");
+		String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+		
+		log.info(userSeqNo);
+		log.info(keyword);
+		
+		int totalCount = userService.getUserListTotalCount(keyword);
+		int pageNum = 1;
+		int pageCount = 10;
+		
+		pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
+		System.out.println(totalCount +"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		
+		uDTO.setUserId(id);
+		uDTO.setUserSeqNo(userSeqNo);
+		
+		uDTO=userService.getUserdetail(uDTO);
+		
+		log.info(uDTO.getUserId());
+		log.info(uDTO.getEmail());
+		log.info(uDTO.getGender());
+		log.info(uDTO.getUserName());
+		
+		
+		model.addAttribute("uDTO",uDTO);
+		
+		model.addAttribute("pageCount", pageCount);
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		model.addAttribute("keyword", keyword);
+		
+		return "/userdetail";
+		
+	}
+	
+	@RequestMapping(value="userrevise")
+	public String userrevise(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome userrevise");
+		
+		
+		String userSeqNo = request.getParameter("userSeqNo");
+		
+		log.info(userSeqNo);
+		
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUserSeqNo(userSeqNo);
+		
+		uDTO=userService.getUserdetail(uDTO);
+		log.info(uDTO.getUserId());
+		log.info(uDTO.getEmail());
+		log.info(uDTO.getGender());
+		log.info(uDTO.getUserName());
+		
+		
+		
+		model.addAttribute("uDTO",uDTO);
+		
+		return "/userrevise";
+		
+	}
+	
+	@RequestMapping(value="userrevise2")
+	public String userrevise2(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome userrevise2");
+		
+		String email = request.getParameter("email");
+		String userSeqNo = request.getParameter("userSeqNo");
+		
+		
+		log.info(email);
+		log.info(userSeqNo);
+		
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setEmail(email);
+		uDTO.setUserSeqNo(userSeqNo);
+		
+		
+		int result = userService.userrevise(uDTO);
+		log.info(result);
+		
+		
+		String url;
+		String msg;
+		if(result == 1) {
+			model.addAttribute("msg", "수정되었습니다.");
+			model.addAttribute("url", "/userlist.do");
+		} else {
+			model.addAttribute("msg", "실패하였습니다.");
+			model.addAttribute("url", "/index.do");
+		}
+		
+		model.addAttribute("email", email);
+		
+		
+		
+		return "/alert";
+		
+	}
+	
+	@RequestMapping(value="userdelete")
+	public String userdelete(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			ModelMap model) throws Exception {
+		
+		log.info("welcome userdelete");
+		
+		
+		String userSeqNo = request.getParameter("userSeqNo");
+		log.info(userSeqNo);
+		
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setUserSeqNo(userSeqNo);
+		
+		int result = userService.userdelete(uDTO);
+		
+		
+		log.info(result);
+		
+
+
+		String url;
+		String msg;
+		if(result == 1) {
+			model.addAttribute("msg", "탈퇴되었습니다.");
+			model.addAttribute("url", "/index.do");
+		} else {
+			model.addAttribute("msg", "실패하였습니다.");
+			model.addAttribute("url", "/userdetail.do?userSeqNo=" +uDTO.getUserSeqNo());
+		}
+		
+		
+		
+		
+		
+		return "/alert";
+		
+	}
+	
 	@RequestMapping(value="mylist")
 	public String mylist(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
@@ -280,6 +494,7 @@ public class UserController {
 		String email = request.getParameter("email");
 		String userId = (String)session.getAttribute("id");
 		log.info(email);
+		log.info(userId);
 		
 		UserDTO uDTO = new UserDTO();
 		

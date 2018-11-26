@@ -3,6 +3,7 @@ package poly.service;
 
 import java.util.List;
 
+import poly.dto.PagingDTO;
 import poly.dto.UserDTO;
 
 public interface IUserService {
@@ -32,6 +33,16 @@ public interface IUserService {
 	UserDTO getUserInfo(UserDTO uDTO) throws Exception;
 
 	int EmailConfirm(UserDTO uDTO) throws Exception;
+
+	int getUserListTotalCount(String keyword) throws Exception;
+
+	List<UserDTO> getUserList(PagingDTO paging) throws Exception;
+
+	UserDTO getUserdetail(UserDTO uDTO) throws Exception;
+
+	int userrevise(UserDTO uDTO) throws Exception;
+
+	int userdelete(UserDTO uDTO) throws Exception;
 
 	
 

@@ -83,6 +83,8 @@ public class WriteController {
 		bDTO.setUserId(userId);
 		hDTO.setUserId(userId);
 		
+		
+		
 		List<MemDTO> mList = memberService.getMemberList(mDTO);
 		List<TalkDTO> tList = talkService.getTalkList2(tDTO);
 		List<EatDTO> eList = eatService.getEatList2(eDTO);
@@ -658,7 +660,7 @@ public class WriteController {
 		String msg;
 		if(result == 1) {
 			model.addAttribute("msg", "수정되었습니다.");
-			model.addAttribute("url", "/writelist.do");
+			model.addAttribute("url", "/index.do");
 		} else {
 			model.addAttribute("msg", "실패하였습니다.");
 			model.addAttribute("url", "/index.do");

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import poly.dto.PagingDTO;
 import poly.dto.UserDTO;
 import poly.persistance.mapper.UserMapper;
 
@@ -94,6 +95,36 @@ public class UserService implements IUserService{
 	public int EmailConfirm(UserDTO uDTO) throws Exception {
 		
 		return userMapper.EmailConfirm(uDTO);
+	}
+
+	@Override
+	public int getUserListTotalCount(String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.getUserListTotalCount(keyword);
+	}
+
+	@Override
+	public List<UserDTO> getUserList(PagingDTO paging) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.getUserList(paging);
+	}
+
+	@Override
+	public UserDTO getUserdetail(UserDTO uDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.getUserdetail(uDTO);
+	}
+
+	@Override
+	public int userrevise(UserDTO uDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.userrevise(uDTO);
+	}
+
+	@Override
+	public int userdelete(UserDTO uDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.userdelete(uDTO);
 	}
 
 }

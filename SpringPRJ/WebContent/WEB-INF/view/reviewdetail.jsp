@@ -158,11 +158,11 @@
       </div>
     </nav>
 	
-	
+
 	<div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-        
+       
         	<form action="/reviewlist.do" method="POST">
         	
 			<table class="table">
@@ -174,17 +174,22 @@
 						
 					</td>
 					<td></td>
+					
+					<%if(id.equals("33333")) { %> 
 					<td>
-						
+						<a href="/writerevise.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>"><input type="button" value="수정"></a>
 					</td>
 					<td>
-						
+						<a href="/writedelete.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>&fileSeq=<%=mDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input type="button" value="목록"></a>
 					</td>
-					
-					
+					<%} else { %>
+					<td>
+						<a href="javascript:goPage();"><input type="button" value="목록"></a>
+					</td>
+					<%  }  %>
 				</tr>
 				
 				<tr>

@@ -63,7 +63,7 @@
             
             <%if(id.equals("33333")) { %> 
             	<li class="nav-item">
-	              <a class="nav-link" href="#">회원 관리</a>
+	              <a class="nav-link" href="userlist.do">회원 관리</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="hospitalfind.do">병원 찾기 관리</a>

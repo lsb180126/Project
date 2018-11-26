@@ -34,9 +34,7 @@
 }
 </style>
 
-<script>
-	
-</script>
+
 
 </head>
 <body>
@@ -168,9 +166,11 @@
 							<td><a
 								href="/writedelete.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>&fileSeq=<%=mDTO.getFileSeq()%>"><input
 									type="button" value="삭제"></a></td>
-							<td><a href="writelist.do"><input type="button"
-									value="목록"></a></td>
-
+							<%if(id.equals("33333")) { %> 		
+							<td><a href="review.do"><input type="button" value="목록"></a></td>
+							<%} else { %>
+							<td><a href="writelist.do"><input type="button" value="목록"></a></td>
+							<%  }  %>
 
 						</tr>
 

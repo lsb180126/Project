@@ -144,6 +144,72 @@
 		SET EMAIL_CONFIRM = 'Y'
 		WHERE USER_SEQ_NO = #{userSeqNo}
 	</update>
+	
+	<select id="getUserList" resultType="UserDTO" parameterType="PagingDTO">
+		SELECT
+			  A.UN,
+			  A.*
+		FROM
+		  (SELECT 
+		          ROWNUM UN,
+			      UI.USER_SEQ_NO as userSeqNo,
+				  UI.USER_ID as userId,
+				  UI.USER_NAME as userName,
+				  UI.PASSWORD as password,
+				  UI.EMAIL as email,
+				  UI.GENDER as gender,
+				  UI.REG_DATE as regDate,
+				  UI.CHG_DATE as chgDate
+		       FROM 
+		          ( SELECT 
+		              UI2.*
+		            FROM 
+		              USER_INFO UI2
+		            ORDER BY
+		              USER_SEQ_NO DESC
+		            ) UI
+         WHERE UI.USER_ID LIKE '%'|| #{keyword} ||'%'
+       OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+       OR UI.GENDER LIKE '%'|| #{keyword} ||'%'
+       OR UI.EMAIL LIKE '%'|| #{keyword} ||'%'
+        ) A 
+      WHERE A.UN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
+      ORDER BY A.UN  
+	</select>
+	
+	<select id="getUserListTotalCount" resultType="integer" parameterType="string">
+		SELECT COUNT(0) AS CNT 
+		FROM USER_INFO UI
+		WHERE UI.USER_ID LIKE '%'|| #{keyword} ||'%'
+       OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+       OR UI.GENDER LIKE '%'|| #{keyword} ||'%'
+       OR UI.EMAIL LIKE '%'|| #{keyword} ||'%'
+	</select>
+	
+	<select id="getUserdetail" parameterType="UserDTO" resultType="UserDTO">
+		SELECT  UI.USER_SEQ_NO as userSeqNo,
+				UI.USER_ID as userId,
+				UI.USER_NAME as userName,
+				UI.PASSWORD as password,
+				UI.EMAIL as email,
+				UI.GENDER as gender,
+				UI.REG_DATE as regDate,
+				UI.CHG_DATE as chgDate
+		 FROM USER_INFO UI
+		 WHERE UI.USER_SEQ_NO = #{userSeqNo}
+	</select>
+	
+	<update id="userrevise" parameterType="UserDTO">
+		UPDATE USER_INFO 
+		SET EMAIL = #{email}
+		WHERE USER_SEQ_NO = #{userSeqNo}
+	</update>
+	
+	<delete id="userdelete" parameterType="UserDTO">
+		DELETE FROM USER_INFO
+		WHERE USER_SEQ_NO = #{userSeqNo}
+	</delete>
+	
 			
 			
 </mapper>

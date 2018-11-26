@@ -1,22 +1,24 @@
-<%@page import="poly.dto.FileDTO"%>
-<%@page import="poly.dto.MemDTO"%>
+<%@page import="poly.dto.PagingDTO"%>
+<%@page import="poly.dto.UserDTO"%>
 <%@page import="poly.util.CmmUtil"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
+	
+	
 %>
 <%
-	MemDTO mDTO = (MemDTO)request.getAttribute("mDTO");
-%>
-<%
-	FileDTO fDTO = (FileDTO)request.getAttribute("fDTO");
+	String keyword = CmmUtil.nvl( request.getParameter("keyword"),"");
+	
+	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
 %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>write revise</title>
+		<title>user revise</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="description" content="">
@@ -35,12 +37,7 @@
 	    
 	    </style>
 	    
-	    <script>
-	    	
-		    
 	    
-	    
-	    </script>
 	    
 	</head>
 	<body>
@@ -154,99 +151,52 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-        	<form action="/writerevise2.do" method="POST" enctype="multipart/form-data">
+        <form action="/userrevise2.do" method="POST" id="cup">
         	
 			<table class="table">
 				
 				<tr>
 					
-					<th>리뷰 수정</th>
+					<th><%=uDTO.getUserId() + "님의 회원정보" %></th>
 					<td>
-						
 					</td>
-					<td></td>
 					
-					<td>
-						
-					</td>
-					<td>
-						
-						
-						<input type="hidden" value="<%=mDTO.getReviewSeqNo()%>" name="reviewSeqNo">
-						<input type="submit" value="수정">
-					</td>
-					<td>
-						<a href="/writedetail.do?reviewSeqNo=<%=mDTO.getReviewSeqNo() %>"><input type="button" value="이전"></a>
-					</td>
+				</tr>
+					
+				<tr>
+					
+					<td>아이디</td>
+					<td><%=uDTO.getUserId() %></td>
 					
 					
 				</tr>
-				
 				<tr>
+				
+					<td>이름</td>
+					<td><%=uDTO.getUserName()%></td>
+					
+				</tr>
+				<tr>
+				     <td>성별</td>
+					 <td><%=uDTO.getGender()%></td>	
+				     	
+			    </tr>
+			    <tr>
+			     	<td>이메일</td>
+					<td><input type="text" name="email" value="<%=uDTO.getEmail()%>"></td>		
+		     	</tr>
+		     	<tr>
+		     		
 					<td>
-						<div class="my-box">
-							이름(병원/약국)
-						</div>	
+						<input type="hidden" value="<%=uDTO.getUserSeqNo()%>" name="userSeqNo">
+						<input type = "submit" value = "수정"/>
+					
 					</td>
-					<td colspan="5">
-						 
-				         <input type="text" class="form-control" id="examplename" name="name" value="<%=mDTO.getReviewName() %>">
-				     
-				           
-					</td>
-					
-					
-					</tr>
-					
-					
-					
-					
-					<tr>
-						<td>
-							<div class="my-box">
-								제목
-							</div>
-						</td>
-						<td colspan="5">
-							
-				           		<input type="text" class="form-control" id="exampletext" name="title" value="<%=mDTO.getTitle() %>">
-				        	
-				        </td>
-				     </tr>
-				     <tr>
-				     	<td colspan="6">
-				     		
-				     		<textarea class="form-control"  rows="20" cols="100" name="content"><%=mDTO.getReviewContents() %></textarea>
-				     		
-				     	</td>
-			     	</tr>
-			     	<tr>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td>
-			     			
-			     		</td>
-		     		</tr>
-
-
+					<td><a href="/userdetail.do?userSeqNo=<%=uDTO.getUserSeqNo()%>"><input type = "button" value = "이전"/></a></td>
+				</tr>
 				</table>
-					<img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200" id="chgName">
-					<input type="file" name="file" id="file" >
-					<input type="hidden" value="review" name="kind">
-					<input type="hidden" value="<%=mDTO.getOriName()%>" name="oriName">
-					<input type="hidden" value="<%=mDTO.getFileSize()%>" name="fileSize">
-					<input type="hidden" value="<%=mDTO.getFileSeq()%>" name="fileSeq">
-				    <input type="hidden" value="<%=mDTO.getChgName()%>" name="chgName">
-				    <input type="hidden" value="<%=mDTO.getFilePath()%>" name="path">
-				    <input type="hidden" value="<%=mDTO.getExtension()%>" name="extension"> 
+				
 				</form>
-					
-			     	<br/>
-			     	<br/>
-			     	<br/>
 			</div>
 		</div>
 	</div>
