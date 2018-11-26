@@ -167,17 +167,24 @@
 					<td>
 						
 					</td>
-					<td></td>
 					<td>
-						
+					
+					</td>
+					<%if(id.equals("33333")) { %>
+					<td>
+						<a href="/talkrevise.do?talkSeqNo=<%=tDTO.getTalkSeqNo()%>"><input type="button" value="수정"></a>
 					</td>
 					<td>
-						
+						<a href="/talkdelete.do?talkSeqNo=<%=tDTO.getTalkSeqNo()%>&fileSeq=<%=tDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input type="button" value="목록"></a>
 					</td>
-					
+					<%} else { %>
+					<td>
+						<a href="javascript:goPage();"><input type="button" value="목록"></a>
+					</td>
+					<%  }  %>
 					
 				</tr>
 				

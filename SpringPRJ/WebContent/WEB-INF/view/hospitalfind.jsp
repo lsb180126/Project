@@ -162,7 +162,7 @@
 	
 			var map = new daum.maps.Map(container, options);
 			
-			var geocoder = new daum.maps.services.Geocoder(), // 좌표계 변환 객체를 생성합니다
+			var geocoder = new daum.maps.services.Geocoder();  // 좌표계 변환 객체를 생성합니다
 		    
 			//마커를 미리 생성
 		    var marker = new daum.maps.Marker({

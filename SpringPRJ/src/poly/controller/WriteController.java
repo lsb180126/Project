@@ -92,6 +92,8 @@ public class WriteController {
 		List<BeautyDTO> bList = beautyService.getBeautyList2(bDTO);
 		List<HomegoodsDTO> hList = homegoodsService.getHomegoodsList2(hDTO);
 		
+		
+		
 		for(MemDTO m : mList) {
 			log.info("reviewSeqNo : " +m.getReviewSeqNo());
 			log.info("reviewName : " +m.getReviewName());
@@ -767,7 +769,7 @@ public class WriteController {
 		String msg;
 		if(result == 1) {
 			model.addAttribute("msg", "수정되었습니다.");
-			model.addAttribute("url", "/writelist.do");
+			model.addAttribute("url", "/index.do");
 		} else {
 			model.addAttribute("msg", "실패하였습니다.");
 			model.addAttribute("url", "/index.do");
