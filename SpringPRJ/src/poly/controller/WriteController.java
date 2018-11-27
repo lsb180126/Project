@@ -108,46 +108,44 @@ public class WriteController {
 		return "/writelist";
 	}
 	
-	@RequestMapping(value="writedetail2")
-	public String writedetail2(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	@RequestMapping(value="writedetail")
+	public String writedetail(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
 		
-		log.info("welcome writedetail2");
+		log.info("welcome writedetail");
 		
 		
-		AllDTO aDTO = new AllDTO();
+		MemDTO mDTO = new MemDTO();
 		
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
-		
+		int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
 		
 		
 		log.info(reviewSeqNo);
 		
 		
+		mDTO.setReviewSeqNo(reviewSeqNo);
 		
 		
 		
-		aDTO.setReviewSeqNo(reviewSeqNo);
+		mDTO=memberService.getMemberdetail(mDTO);
+		
+
+		log.info(mDTO.getReviewName());
+		log.info(mDTO.getTitle());
+		log.info(mDTO.getReviewContents());
+		log.info(mDTO.getChgName());
+		log.info(mDTO.getFileSeq());
 		
 		
 		
-		aDTO=memberService.getAlldetail(aDTO);
-		
-		log.info(aDTO.getBoardName());
-		log.info(aDTO.getReviewName());
-		log.info(aDTO.getChgDt());
-		log.info(aDTO.getTitle());
-		log.info(aDTO.getReviewContents());
-		log.info(aDTO.getChgName());
-		log.info(aDTO.getFileSeq());
+		model.addAttribute("mDTO", mDTO);
+		model.addAttribute("pageCount", pageCount); 
+		model.addAttribute("pageNum", pageNum); 
 		
 		
-		
-		model.addAttribute("aDTO", aDTO);
-		
-		
-		
-		return "/writedetail2";
+		return "/writedetail";
 		
 		
 	}
@@ -162,6 +160,8 @@ public class WriteController {
 		TalkDTO tDTO = new TalkDTO();
 		
 		String talkSeqNo = request.getParameter("talkSeqNo");
+		int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
 		
 		tDTO.setTalkSeqNo(talkSeqNo);
 		
@@ -174,6 +174,8 @@ public class WriteController {
 		log.info(tDTO.getFileSeq());
 		
 		model.addAttribute("tDTO",tDTO); 
+		model.addAttribute("pageCount", pageCount); 
+		model.addAttribute("pageNum", pageNum); 
 		
 		
 		
@@ -192,6 +194,8 @@ public class WriteController {
 		EatDTO eDTO = new EatDTO();
 		
 		String eatSeqNo = request.getParameter("eatSeqNo");
+		int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
 		
 		eDTO.setEatSeqNo(eatSeqNo);
 		
@@ -204,7 +208,8 @@ public class WriteController {
 		log.info(eDTO.getFileSeq());
 		
 		model.addAttribute("eDTO",eDTO);
-		
+		model.addAttribute("pageCount", pageCount); 
+		model.addAttribute("pageNum", pageNum); 
 		
 		
 		return "/eatdetail2";
@@ -221,6 +226,8 @@ public class WriteController {
 		SellDTO sDTO = new SellDTO();
 		
 		String sellSeqNo = request.getParameter("sellSeqNo");
+		int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
 		
 		sDTO.setSellSeqNo(sellSeqNo);
 		
@@ -234,6 +241,8 @@ public class WriteController {
 		
 		
 		model.addAttribute("sDTO",sDTO); 
+		model.addAttribute("pageCount", pageCount); 
+		model.addAttribute("pageNum", pageNum); 
 		
 		
 		
@@ -251,6 +260,8 @@ public class WriteController {
 		BeautyDTO bDTO = new BeautyDTO();
 		
 		String beautySeqNo = request.getParameter("beautySeqNo");
+		int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
 		
 		bDTO.setBeautySeqNo(beautySeqNo);
 		
@@ -263,7 +274,9 @@ public class WriteController {
 		log.info(bDTO.getFileSeq());
 		
 		
-		model.addAttribute("bDTO",bDTO);  
+		model.addAttribute("bDTO",bDTO);
+		model.addAttribute("pageCount", pageCount); 
+		model.addAttribute("pageNum", pageNum); 
 		
 		
 		
@@ -281,6 +294,8 @@ public class WriteController {
 		HomegoodsDTO hDTO = new HomegoodsDTO();
 		
 		String homegoodsSeqNo = request.getParameter("homegoodsSeqNo");
+		int pageCount = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageCount"),"10"));
+		int pageNum = Integer.parseInt(CmmUtil.nvl(request.getParameter("pageNum"),"1"));
 		
 		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
 		
@@ -294,7 +309,8 @@ public class WriteController {
 		
 		
 		model.addAttribute("hDTO",hDTO);  
-		
+		model.addAttribute("pageCount", pageCount); 
+		model.addAttribute("pageNum", pageNum);
 		
 		
 		return "/homegoodsdetail2";

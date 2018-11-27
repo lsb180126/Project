@@ -169,7 +169,7 @@
 							<%if(id.equals("33333")) { %> 		
 							<td><a href="review.do"><input type="button" value="목록"></a></td>
 							<%} else { %>
-							<td><a href="writelist.do"><input type="button" value="목록"></a></td>
+							<td><a href="writelist.do?pageCount=${pageCount}&pageNum=${pageNum}"><input type="button" value="목록"></a></td>
 							<%  }  %>
 
 						</tr>

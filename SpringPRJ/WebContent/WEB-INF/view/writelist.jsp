@@ -241,7 +241,23 @@
 				<tr>
 					<td><%=a.getBoardName() %></td>
 					<td><%=a.getReviewSeqNo() %></td>
-					<td colspan="2"><a href="/writedetail2.do?reviewSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>"><%=a.getReviewContents() %></a></td>
+					<td colspan="2">
+						<%if(("리뷰").equals(a.getBoardName())) { %>
+							<a href="/writedetail.do?reviewSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("자유토크").equals(a.getBoardName())) { %>
+							<a href="/talkdetail2.do?talkSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("간식").equals(a.getBoardName())) { %>
+							<a href="/eatdetail2.do?eatSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("분양").equals(a.getBoardName())) { %>
+							<a href="/selldetail2.do?sellSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("미용").equals(a.getBoardName())) { %>
+							<a href="/beautydetail2.do?beautySeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("생활용품").equals(a.getBoardName())) { %>
+							<a href="/homegoodsdetail2.do?homegoodsSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} %>
+						<%=a.getReviewContents() %>
+						</a>
+					</td>
 					<td><%=a.getTitle() %></td>
 					<td><%=a.getChgDt() %></td>
 					<td><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%></td>

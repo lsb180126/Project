@@ -174,7 +174,7 @@
 					</td>
 					<%} else { %>
 					<td>
-						<a href="writelist.do"><input type="button" value="목록"></a>
+						<a href="writelist.do?pageCount=${pageCount}&pageNum=${pageNum}"><input type="button" value="목록"></a>
 					</td>
 					<%  }  %>
 					

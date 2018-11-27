@@ -16,5 +16,6 @@
 	    <typeAlias type="poly.dto.FileDTO" alias="FileDTO"/>
 	    <typeAlias type="poly.dto.PagingDTO" alias="PagingDTO"/>
 	    <typeAlias type="poly.dto.AllDTO" alias="AllDTO"/>
+	    <typeAlias type="poly.dto.HospitalDTO" alias="HospitalDTO"/>
     </typeAliases>
 </configuration>
