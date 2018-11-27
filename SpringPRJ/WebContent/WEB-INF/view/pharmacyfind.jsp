@@ -1,3 +1,4 @@
+<%@page import="poly.dto.PharmacyDTO"%>
 <%@page import="poly.dto.HospitalDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="poly.util.CmmUtil"%>
@@ -5,7 +6,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-	List<HospitalDTO> hList = (List<HospitalDTO>)request.getAttribute("hList"); 
+	List<PharmacyDTO> pList = (List<PharmacyDTO>)request.getAttribute("pList"); 
 
 %>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
 	<head>
 	
 		<meta charset="UTF-8">
-		<title>hospital find</title>
+		<title>pharmacy find</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     	<meta name="description" content="">
     	<meta name="author" content="">
@@ -162,7 +163,7 @@
 
       <!-- Heading Row -->
       <div class="row my-4">
-      <form action="/hospitalSearch.do" method="post">
+      <form action="/pharmacySearch.do" method="post">
 	      <input type="text" name="address" placeholder="주소">
 		  <input type="submit" value="주소 검색"><br>
 	  </form>
@@ -180,15 +181,15 @@
        
       </div>
      
-      <% for (HospitalDTO hDTO : hList) {%>
+      <% for (PharmacyDTO pDTO : pList) {%>
       
-      <br/><%=hDTO.getHospitalAllAddress() %> 
-      <br/><%=hDTO.getHospitalName() %>
-      <br/><%=hDTO.getHospitalPhone() %>
-      <br/><%=hDTO.getHospitalPosition1() %>
-      <br/><%=hDTO.getHospitalPosition2() %>
-      <br/><%=hDTO.getHospitalRodAddress() %>
-      <br/><%=hDTO.getHospitalSituation() %>
+      <br/><%=pDTO.getPharmacyAllAddress() %> 
+      <br/><%=pDTO.getPharmacyName() %>
+      <br/><%=pDTO.getPharmacyPhone() %>
+      <br/><%=pDTO.getPharmacyPosition1() %>
+      <br/><%=pDTO.getPharmacyPosition2() %>
+      <br/><%=pDTO.getPharmacyRodAddress() %>
+      <br/><%=pDTO.getPharmacySituation() %>
       
       <hr/>
       
@@ -216,8 +217,8 @@
 		
 		
 		//////////////////////////////////////////////////////////
-		<% for (int i = 0; i < hList.size(); i++) { %>
-			var coords<%=i%> = new daum.maps.Coords(<%=hList.get(i).getHospitalPosition1()%> * 2.5, <%=hList.get(i).getHospitalPosition2()%> * 2.5);
+		<% for (int i = 0; i < pList.size(); i++) { %>
+			var coords<%=i%> = new daum.maps.Coords(<%=pList.get(i).getPharmacyPosition1()%> * 2.5, <%=pList.get(i).getPharmacyPosition2()%> * 2.5);
 		<%}%>
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
@@ -232,9 +233,9 @@
 		
 		// 마커를 표시할 위치와 title 객체 배열입니다 
 		var positions = [
-			<% for (int i = 0; i < hList.size(); i++) { %>
+			<% for (int i = 0; i < pList.size(); i++) { %>
 		    {
-		        title: '<%=hList.get(i).getHospitalName()%>', 
+		        title: '<%=pList.get(i).getPharmacyName()%>', 
 		        latlng: new daum.maps.Coords(coords<%=i%>.getX(),  coords<%=i%>.getY())
 		    },
 		    <% } %>

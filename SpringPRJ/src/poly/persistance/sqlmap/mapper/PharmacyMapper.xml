@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.PharmacyMapper">
+
+	<select id="getPharmacyList" resultType="PharmacyDTO" parameterType="string">
+		SELECT 	SEQ_NO as seqNo,
+				PHARMACY_NAME as pharmacyName,
+				PHARMACY_ALLADDRESS as pharmacyAllAddress,
+				PHARMACY_RODADDRESS as pharmacyRodAddress,
+				PHARMACY_PHONE as pharmacyPhone,
+				PHARMACY_POSITION1 as pharmacyPosition1,
+				PHARMACY_POSITION2 as pharmacyPosition2,
+				PHARMACY_SITUATION as pharmacySituation
+		FROM PHARMACY
+		WHERE (PHARMACY_ALLADDRESS LIKE '%' || #{address} || '%'
+		OR PHARMACY_RODADDRESS LIKE '%' || #{address} || '%')
+		AND
+     	(PHARMACY_POSITION1 IS NOT NULL AND PHARMACY_POSITION2 IS NOT NULL)
+	</select>
+			
+			
+</mapper>

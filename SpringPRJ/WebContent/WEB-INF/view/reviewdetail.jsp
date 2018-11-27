@@ -71,10 +71,10 @@
 	              <a class="nav-link" href="userlist.do">회원 관리</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="hospitalfind.do">병원 찾기 관리</a>
+	              <a class="nav-link" href="hospitalSearch.do">병원 찾기 관리</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="#">약국 찾기 관리</a>
+	              <a class="nav-link" href="pharmacySearch.do">약국 찾기 관리</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="review.do">리뷰 관리</a>
@@ -108,10 +108,10 @@
             
             <%} else { %>
 	            <li class="nav-item">
-	              <a class="nav-link" href="hospitalfind.do">병원 찾기</a>
+	              <a class="nav-link" href="hospitalSearch.do">병원 찾기</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="#">약국 찾기</a>
+	              <a class="nav-link" href="pharmacySearch.do">약국 찾기</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="review.do">리뷰 </a>
