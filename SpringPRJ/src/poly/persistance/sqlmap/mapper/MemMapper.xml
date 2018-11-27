@@ -280,27 +280,125 @@
 		       WHERE HI.USER_ID = #{userId}) A
 	</select>
 	
-	<select id="getAlldetail" resultType="AllDTO" parameterType="string">
-	SELECT RI.REVIEW_SEQ_NO as reviewSeqNo,
-				RI.TITLE as title,
-				RI.REVIEW_CONTENTS as reviewContents,
-				RI.REG_DT as regDt,
-				RI.CHG_DT as chgDt,
-				RI.REVIEW_NAME as reviewName,
-				RI.USER_ID as userId,
-				UI.USER_NAME as userName,
-				FI.CHG_NAME as chgName,
-				FI.FILE_SEQ as fileSeq
-		 FROM REVIEW_INFO RI
-        LEFT JOIN ( SELECT BRD_KIND, 
-                    CHG_NAME, 
-                    FILE_SEQ, 
-                    BRD_SEQ_NO 
-                    FROM FILE_INFO 
-                    WHERE BRD_KIND = 'review'
-                  )FI  ON RI.REVIEW_SEQ_NO = FI.BRD_SEQ_NO 
-        INNER JOIN USER_INFO UI ON UI.USER_ID = RI.USER_ID
-		 WHERE RI.REVIEW_SEQ_NO = #{reviewSeqNo}
+	<select id="getAlldetail" resultType="AllDTO">
+		  SELECT
+		  			A.*
+		  FROM (
+	      SELECT 
+                  '리뷰게시판' AS boardName,
+                  RI.REVIEW_SEQ_NO as reviewSeqNo,
+                  RI.TITLE as title,
+                  RI.REVIEW_CONTENTS as reviewContents,
+                  RI.REG_DT as regDt,
+                  RI.CHG_DT as chgDt,
+                  RI.REVIEW_NAME as reviewName,
+                  FI.CHG_NAME as chgName,
+                  FI.FILE_SEQ as fileSeq
+          FROM    REVIEW_INFO RI
+          LEFT JOIN ( SELECT BRD_KIND, 
+                              CHG_NAME, 
+                              FILE_SEQ, 
+                              BRD_SEQ_NO 
+                      FROM FILE_INFO 
+                      WHERE BRD_KIND = 'review'
+                  )FI  ON RI.REVIEW_SEQ_NO = FI.BRD_SEQ_NO
+		UNION
+		  SELECT 
+			    '자유토크',
+			    TI.TALK_SEQ_NO as talkSeqNo,
+			    TI.TITLE as title,
+			    TI.TALK_CONTENTS as talkContents,
+			    TI.REG_DT as regDt,
+			    TI.CHG_DT as chgDt,
+			    NULL,
+                FI.CHG_NAME as chgName,
+                FI.FILE_SEQ as fileSeq
+		 FROM TALK_INFO TI
+         LEFT JOIN ( SELECT BRD_KIND,
+                            CHG_NAME, 
+                            FILE_SEQ, 
+                            BRD_SEQ_NO 
+                            FROM FILE_INFO 
+                            WHERE BRD_KIND = 'talk'	
+                     )FI ON TI.TALK_SEQ_NO = FI.BRD_SEQ_NO
+		UNION
+			SELECT
+	            '간식',
+	            EI.EAT_SEQ_NO as eatSeqNo,
+	            EI.TITLE as title,
+	            EI.EAT_CONTENTS as eatContents,
+	            EI.REG_DT as regDt,
+	            EI.CHG_DT as chgDt,
+	            NULL,
+                FI.CHG_NAME as chgName,
+                FI.FILE_SEQ as fileSeq
+			 FROM EAT_INFO EI
+             LEFT JOIN ( SELECT BRD_KIND,
+                                CHG_NAME, 
+                                FILE_SEQ, 
+                                BRD_SEQ_NO 
+                                FROM FILE_INFO 
+                                WHERE BRD_KIND = 'eat'	
+                       )FI ON EI.EAT_SEQ_NO = FI.BRD_SEQ_NO
+		UNION
+			  SELECT
+	            '분양',
+	            SI.SELL_SEQ_NO as sellSeqNo,
+	            SI.TITLE as title,
+	            SI.SELL_CONTENTS as sellContents,
+	            SI.REG_DT as regDt,
+	            SI.CHG_DT as chgDt,
+	            NULL,
+                FI.CHG_NAME as chgName,
+                FI.FILE_SEQ as fileSeq
+			 FROM SELL_INFO SI
+             LEFT JOIN ( SELECT BRD_KIND,
+                                CHG_NAME, 
+                                FILE_SEQ, 
+                                BRD_SEQ_NO 
+                                FROM FILE_INFO 
+                                WHERE BRD_KIND = 'sell'
+                        ) FI ON SI.SELL_SEQ_NO = FI.BRD_SEQ_NO
+		UNION     
+			   SELECT
+	            '미용',
+	            BI.BEAUTY_SEQ_NO as beautySeqNo,
+	            BI.TITLE as title,
+	            BI.BEAUTY_CONTENTS as beautyContents,
+	            BI.REG_DT as regDt,
+	            BI.CHG_DT as chgDt,
+	            NULL,
+                FI.CHG_NAME as chgName,
+                FI.FILE_SEQ as fileSeq
+			 FROM BEAUTY_INFO BI
+             LEFT JOIN ( SELECT BRD_KIND,
+                                CHG_NAME, 
+                                FILE_SEQ, 
+                                BRD_SEQ_NO 
+                                FROM FILE_INFO 
+                                WHERE BRD_KIND = 'beauty'	
+                        )FI ON BI.BEAUTY_SEQ_NO = FI.BRD_SEQ_NO 
+		UNION
+			   SELECT
+	           '생활용품',
+	            HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
+	            HI.TITLE as title,
+	            HI.HOMEGOODS_CONTENTS as homegoodsContents,
+	            HI.REG_DT as regDt,
+	            HI.CHG_DT as chgDt,
+	            NULL,
+                FI.CHG_NAME as chgName,
+                FI.FILE_SEQ as fileSeq
+			 FROM HOMEGOODS_INFO HI
+             LEFT JOIN ( SELECT BRD_KIND,
+                                CHG_NAME, 
+                                FILE_SEQ, 
+                                BRD_SEQ_NO 
+                                FROM FILE_INFO 
+                                WHERE BRD_KIND = 'homegoods'	
+                      )FI ON HI.HOMEGOODS_SEQ_NO = FI.BRD_SEQ_NO
+		) A 
+		    
 	</select>
 	
 	

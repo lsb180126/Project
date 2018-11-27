@@ -168,17 +168,24 @@
 					<td>
 						
 					</td>
-					<td></td>
 					<td>
-						
+					
+					</td>
+					<%if(id.equals("33333")) { %>
+					<td>
+						<a href="/beautyrevise.do?beautySeqNo=<%=bDTO.getBeautySeqNo()%>"><input type="button" value="수정"></a>
 					</td>
 					<td>
-						
+						<a href="/beautydelete.do?beautySeqNo=<%=bDTO.getBeautySeqNo()%>&fileSeq=<%=bDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input type="button" value="목록"></a>
 					</td>
-					
+					<%} else { %>
+					<td>
+						<a href="javascript:goPage();"><input type="button" value="목록"></a>
+					</td>
+					<%  }  %>
 					
 				</tr>
 				

@@ -167,9 +167,15 @@
 					<td>
 						<a href="/eatdelete.do?eatSeqNo=<%=eDTO.getEatSeqNo() %>&fileSeq=<%=eDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
 					</td> 
+					<%if(id.equals("33333")) { %> 
+					<td>
+						<a href="eat.do"><input type="button" value="목록"></a>
+					</td>
+					<%} else { %>
 					<td>
 						<a href="writelist.do"><input type="button" value="목록"></a>
 					</td>
+					<%  }  %>
 					
 					
 				</tr>

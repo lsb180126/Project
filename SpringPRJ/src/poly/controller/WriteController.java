@@ -108,11 +108,11 @@ public class WriteController {
 		return "/writelist";
 	}
 	
-	@RequestMapping(value="writedetail")
-	public String writedetail(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	@RequestMapping(value="writedetail2")
+	public String writedetail2(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			ModelMap model) throws Exception {
 		
-		log.info("welcome writedetail");
+		log.info("welcome writedetail2");
 		
 		
 		AllDTO aDTO = new AllDTO();
@@ -120,15 +120,22 @@ public class WriteController {
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
 		
 		
+		
 		log.info(reviewSeqNo);
+		
+		
+		
 		
 		
 		aDTO.setReviewSeqNo(reviewSeqNo);
 		
 		
+		
 		aDTO=memberService.getAlldetail(aDTO);
 		
+		log.info(aDTO.getBoardName());
 		log.info(aDTO.getReviewName());
+		log.info(aDTO.getChgDt());
 		log.info(aDTO.getTitle());
 		log.info(aDTO.getReviewContents());
 		log.info(aDTO.getChgName());
@@ -140,7 +147,7 @@ public class WriteController {
 		
 		
 		
-		return "/writedetail";
+		return "/writedetail2";
 		
 		
 	}
@@ -833,7 +840,7 @@ public class WriteController {
 		String msg;
 		if(result == 1) {
 			model.addAttribute("msg", "수정되었습니다.");
-			model.addAttribute("url", "/writelist.do");
+			model.addAttribute("url", "/index.do");
 		} else {
 			model.addAttribute("msg", "실패하였습니다.");
 			model.addAttribute("url", "/index.do");
@@ -936,7 +943,7 @@ public class WriteController {
 		String msg;
 		if(result == 1) {
 			model.addAttribute("msg", "수정되었습니다.");
-			model.addAttribute("url", "/writelist.do");
+			model.addAttribute("url", "/index.do");
 		} else {
 			model.addAttribute("msg", "실패하였습니다.");
 			model.addAttribute("url", "/index.do");
@@ -1039,7 +1046,7 @@ public class WriteController {
 		String msg;
 		if(result == 1) {
 			model.addAttribute("msg", "수정되었습니다.");
-			model.addAttribute("url", "/writelist.do");
+			model.addAttribute("url", "/index.do");
 		} else {
 			model.addAttribute("msg", "실패하였습니다.");
 			model.addAttribute("url", "/index.do");
@@ -1142,7 +1149,7 @@ public class WriteController {
 		String msg;
 		if(result == 1) {
 			model.addAttribute("msg", "수정되었습니다.");
-			model.addAttribute("url", "/writelist.do");
+			model.addAttribute("url", "/index.do");
 		} else {
 			model.addAttribute("msg", "실패하였습니다.");
 			model.addAttribute("url", "/index.do");

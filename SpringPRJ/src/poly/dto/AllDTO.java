@@ -10,7 +10,11 @@ public class AllDTO {
 	private String reviewName;
 	private String chgName;
 	private String fileSeq;
-	
+	private String talkSeqNo;
+	private String eatSeqNo;
+	private String sellSeqNo;
+	private String beautySeqNo;
+	private String homegoodsSeqNo;
 	
 	public String getBoardName() {
 		return boardName;
@@ -66,6 +70,38 @@ public class AllDTO {
 	public void setFileSeq(String fileSeq) {
 		this.fileSeq = fileSeq;
 	}
+	public String getTalkSeqNo() {
+		return talkSeqNo;
+	}
+	public void setTalkSeqNo(String talkSeqNo) {
+		this.talkSeqNo = talkSeqNo;
+	}
+	public String getEatSeqNo() {
+		return eatSeqNo;
+	}
+	public void setEatSeqNo(String eatSeqNo) {
+		this.eatSeqNo = eatSeqNo;
+	}
+	public String getSellSeqNo() {
+		return sellSeqNo;
+	}
+	public void setSellSeqNo(String sellSeqNo) {
+		this.sellSeqNo = sellSeqNo;
+	}
+	public String getBeautySeqNo() {
+		return beautySeqNo;
+	}
+	public void setBeautySeqNo(String beautySeqNo) {
+		this.beautySeqNo = beautySeqNo;
+	}
+	public String getHomegoodsSeqNo() {
+		return homegoodsSeqNo;
+	}
+	public void setHomegoodsSeqNo(String homegoodsSeqNo) {
+		this.homegoodsSeqNo = homegoodsSeqNo;
+	}
+	
+	
 	
 	
 	

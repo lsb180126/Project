@@ -161,12 +161,17 @@
 							<td></td>
 							<td></td>
 
-							<td><a
-								href="/writerevise.do?reviewSeqNo=<%=aDTO.getReviewSeqNo()%>"><input
-									type="button" value="수정"></a></td>
-							<td><a
-								href="/writedelete.do?reviewSeqNo=<%=aDTO.getReviewSeqNo()%>&fileSeq=<%=aDTO.getFileSeq()%>"><input
-									type="button" value="삭제"></a></td>
+							<td>
+							
+								<a href="/writerevise.do?reviewSeqNo=<%=aDTO.getReviewSeqNo()%>">
+									<input type="button" value="수정">
+								</a>
+							</td>
+							<td>
+								<a href="/writedelete.do?reviewSeqNo=<%=aDTO.getReviewSeqNo()%>&fileSeq=<%=aDTO.getFileSeq()%>">
+									<input type="button" value="삭제">
+								</a>
+							</td>
 							<%if(id.equals("33333")) { %> 		
 							<td><a href="review.do"><input type="button" value="목록"></a></td>
 							<%} else { %>
@@ -176,7 +181,11 @@
 						</tr>
 
 						<tr>
-						<%if(id.equals("33333")) { %>
+						<%if(aDTO.getReviewName() == null) { %>
+							<td>
+							
+							</td>
+						<%} else { %>
 							<td>
 								<div class="my-box">이름(병원/약국)</div>
 							</td>
@@ -188,8 +197,7 @@
 
 
 							</td>
-						<%} else { %>
-						
+						<%  }  %>
 						</tr>
 
 						<tr>
@@ -258,8 +266,7 @@
 
 
 					</table>
-					<input type="hidden" name="fileSeq" id="fileSeq" value="<%=aDTO.getFileSeq()%>"
-						>
+					<input type="hidden" name="fileSeq" id="fileSeq" value="<%=aDTO.getFileSeq()%>">
 				</form>
 
 				<br /> <br /> <br />

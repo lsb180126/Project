@@ -59,7 +59,7 @@
             
             <%if(id.equals("33333")) { %> 
             	<li class="nav-item">
-	              <a class="nav-link" href="#">회원 관리</a>
+	              <a class="nav-link" href="userlist.do">회원 관리</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="hospitalfind.do">병원 찾기 관리</a>
@@ -205,7 +205,7 @@
 			     		
 		     		</tr>
 				</table>
-				<img src="/upload/<%=bDTO.getChgName()%>" height="200" width="200" id="chgName">
+				<%-- <img src="/upload/<%=bDTO.getChgName()%>" height="200" width="200" id="chgName"> --%>
 					<input type="file" name="file" id="file" >
 					<input type="hidden" value="beauty" name="kind">
 					<input type="hidden" value="<%=bDTO.getOriName()%>" name="oriName">

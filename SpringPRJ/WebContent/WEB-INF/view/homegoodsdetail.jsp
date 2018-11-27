@@ -62,7 +62,7 @@
           	
              <%if(id.equals("33333")) { %> 
             	<li class="nav-item">
-	              <a class="nav-link" href="#">회원 관리</a>
+	              <a class="nav-link" href="userlist.do">회원 관리</a>
 	            </li>
 	            <li class="nav-item">
 	              <a class="nav-link" href="hospitalfind.do">병원 찾기 관리</a>
@@ -167,17 +167,24 @@
 					<td>
 						
 					</td>
-					<td></td>
 					<td>
-						
+					
+					</td>
+					<%if(id.equals("33333")) { %>
+					<td>
+						<a href="/homegoodsrevise.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo()%>"><input type="button" value="수정"></a>
 					</td>
 					<td>
-						
+						<a href="/homegoodsdelete.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo()%>&fileSeq=<%=hDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input type="button" value="목록"></a>
 					</td>
-					
+					<%} else { %>
+					<td>
+						<a href="javascript:goPage();"><input type="button" value="목록"></a>
+					</td>
+					<%  }  %>
 					
 				</tr>
 				
