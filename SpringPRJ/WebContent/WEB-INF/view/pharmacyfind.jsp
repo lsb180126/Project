@@ -164,8 +164,8 @@
       <!-- Heading Row -->
       <div class="row my-4">
       <form action="/pharmacySearch.do" method="post">
-	      <input type="text" name="address" placeholder="주소">
-		  <input type="submit" value="주소 검색"><br>
+	      <input type="text" name="address" placeholder="주소검색" style="width:500px;">
+		  <input type="submit" value="검색"><br><br/>
 	  </form>
 	  
 	  <div id="map" style="width:100%;height:350px;"></div>
