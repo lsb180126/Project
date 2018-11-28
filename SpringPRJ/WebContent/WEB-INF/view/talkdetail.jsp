@@ -25,8 +25,7 @@
 	     <!-- Bootstrap core CSS -->
 	    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	    
-	    <!-- starRev CSS -->
-	    <link href="css/starRev.css" rel="stylesheet">
+	    
 	    
 	    <style>
 	    .my-box { border:1px solid; padding: 5px;  }
@@ -194,7 +193,7 @@
 							작성자
 						</div>	
 					</td>
-					<td>
+					<td colspan="2">
 					
 						<div class="my-box">
 				           		<%=tDTO.getUserName() %>
@@ -210,7 +209,7 @@
 						</div>
 					</td>
 					
-					<td></td>
+					
 				
 					<td colspan="2">
 						<div class="my-box">
@@ -232,17 +231,22 @@
 				        	</div>
 				        </td>
 				     </tr>
-				     <tr>
-				     	<td><%=tDTO.getTalkContents() %></td>
-				     </tr>
+				    
 				   
 				     <tr>
 				     <% if(!(CmmUtil.nvl(tDTO.getChgName())).equals("") ) { %>
 				     	<td colspan="6" height="500px">
+				     	
 				     		<div class="my-box" style="height:600px;">
-				     		<img src="/upload/<%=tDTO.getChgName()%>" height="200" width="200" >
+				     		<br/>
+				     		<img src="/upload/<%=tDTO.getChgName()%>" height="200" width="200" ><br/><br/>
+				     			<%=tDTO.getTalkContents() %>
 				     			
 				     		</div>	
+				     	</td>
+				     <% } else { %>
+				     	<td colspan="6" height="500px">
+				     		<%=tDTO.getTalkContents() %>
 				     	</td>
 				     <% }%>
 			     	</tr>

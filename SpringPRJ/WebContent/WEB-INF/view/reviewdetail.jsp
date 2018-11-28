@@ -267,7 +267,7 @@
 				     	</td>
 				     <%} else { %>
 				     	<td colspan="6" height="500px">
-				     		<%=mDTO.getTitle() %>
+				     		<%=mDTO.getReviewContents() %>
 				     	</td>
 				    <% }%>
 			     	</tr>

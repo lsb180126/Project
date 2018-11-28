@@ -29,7 +29,12 @@ public class EatService implements IEatService{
 	public int insertMember(EatDTO eDTO, FileDTO fDTO) throws Exception {
 		
 		int a = eatMapper.insertMember(eDTO);
-		int b = eatMapper.insertFile(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = eatMapper.insertFile(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 
@@ -49,7 +54,12 @@ public class EatService implements IEatService{
 	public int eatrevise(EatDTO eDTO, FileDTO fDTO) throws Exception {
 		
 		int a = eatMapper.eatrevise(eDTO);
-		int b = eatMapper.filerevise(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = eatMapper.filerevise(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 

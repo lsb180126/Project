@@ -81,6 +81,20 @@
 				}
 	    
 	    .layer {text-align:center; }
+	    
+	    .row > .col-3, .row > .col-2 {
+		    text-overflow: ellipsis;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    font-size: 17px;
+	    }
+	    
+	    .row > .col-1 {
+	    	font-size: 12px;
+	    }
+	    .row {
+	    	padding: 10px 0;
+	    }
 	    </style>
 	    
 	     <script type="text/javascript">
@@ -209,8 +223,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-			<table class="table">
-				<tr>
+				<!-- <div class="row">
 					<td>작성 목록</td>
 					<td>
 						
@@ -227,21 +240,22 @@
 					<td>
 						
 					</td>
-				</tr>
+				</div> -->
 				
+				
+				<div class="row">
+					<div class="col-1">게시판 이름</div>
+					<div class="col-1">게시판 번호</div>
+					<div class="col-3">제목</div>
+					<div class="col-3">내용</div>
+					<div class="col-2">작성일</div>
+					<div class="col-2">이름(병원/약국)</div>
+				</div>
 				<% for(AllDTO a : aList) { %>
-				<tr>
-					<th>게시판 이름</th>
-					<th>게시판 번호</th>
-					<th colspan="2">제목</th>
-					<th>내용</th>
-					<th>작성일</th>
-					<th>이름(병원/약국)</th>
-				</tr>
-				<tr>
-					<td><%=a.getBoardName() %></td>
-					<td><%=a.getReviewSeqNo() %></td>
-					<td colspan="2">
+				<div class="row">
+					<div class="col-1"><%=a.getBoardName() %></div>
+					<div class="col-1"><%=a.getReviewSeqNo() %></div>
+					<div class="col-3">
 						<%if(("리뷰").equals(a.getBoardName())) { %>
 							<a href="/writedetail.do?reviewSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
 						<%} else if( ("자유토크").equals(a.getBoardName())) { %>
@@ -255,13 +269,13 @@
 						<%} else if( ("생활용품").equals(a.getBoardName())) { %>
 							<a href="/homegoodsdetail2.do?homegoodsSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
 						<%} %>
-						<%=a.getReviewContents() %>
+						<%=a.getTitle() %>
 						</a>
-					</td>
-					<td><%=a.getTitle() %></td>
-					<td><%=a.getChgDt() %></td>
-					<td><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%></td>
-				</tr>
+					</div>
+					<div class="col-3"><%=a.getReviewContents() %></div>
+					<div class="col-2"><%=a.getChgDt() %></div>
+					<div class="col-2"><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%></div>
+				</div>
 				<% } %> 
 				
 				
@@ -273,11 +287,11 @@
       </div>
     </div>
     <div class="layer">
-				
+    	<div class="btn-group">
 		<%=
 			fnPaging(paging.getPage_count(), 10, paging.getPage_num(), paging.getTotal_count())
 		 %>
-				
+		 </div>
 	</div>
     
     <!-- Bootstrap core JavaScript -->
@@ -318,22 +332,22 @@
 		//만약 현재 블럭의 시작 페이지가 1보다 크다면. 이전 블럭 . 처음 블럭 버튼 생성.
 		if(startPage > 1){
 			//pagingStr = "[<<1][<"+(startPage-1)+"]";
-			pagingStr =  "<input type=button value=<< onclick='goPage(1);'>";
-			pagingStr += "<input type=button value=<  onclick='goPage("+(startPage-1)+");'>";
+			pagingStr =  "<input class='btn' type=button value=<< onclick='goPage(1);'>";
+			pagingStr += "<input class='btn' type=button value=<  onclick='goPage("+(startPage-1)+");'>";
 		}
 		
 		for(int i = startPage ; i <= endPage ; i++){
 			
-			if(i == pageNum )pagingStr += "[현재]";
+			if(i == pageNum )pagingStr += "<input class='btn' type='button' value='현재'>";
 			//else pagingStr += "["+i+"]";
-			else pagingStr += "<input type=button value="+i+" onclick='goPage("+i+");'>";
+			else pagingStr += "<input class='btn' type='button' value="+i+" onclick='goPage("+i+");'>";
 		}
 		
 		//만약 현재 블럭의 마지막 페이지가 전체 마지막 페이지보다 작다면. 다음블럭, 마지막 블럭 버튼 생성. 
 		if(endPage < totalPageCount){
 			//pagingStr += "[>"+(endPage+1)+"][>>"+totalPageCount+"]";
-			pagingStr += "<input type=button value='>'  onclick='goPage("+(endPage+1)+");'>";
-			pagingStr += "<input type=button value='>>' onclick='goPage("+totalPageCount+");'>";
+			pagingStr += "<input class='btn' type=button value='>'  onclick='goPage("+(endPage+1)+");'>";
+			pagingStr += "<input class='btn' type=button value='>>' onclick='goPage("+totalPageCount+");'>";
 		}
 		
 		return pagingStr;

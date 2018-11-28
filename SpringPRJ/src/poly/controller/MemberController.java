@@ -234,10 +234,8 @@ public class MemberController {
 		mDTO.setUserId(userId);
 		
 		FileDTO fDTO = new FileDTO();//DTO에 파일 정보 담기
-		fDTO.setUserNo(userSeqNo);
-		fDTO.setBrdKind(kind);
 		
-		if(file != null) {
+		if(!"".equals(CmmUtil.nvl(file.getOriginalFilename()))) {
 			
 			log.info("welcome to fileUpload");
 			
@@ -254,7 +252,8 @@ public class MemberController {
 			String path = fileInfo.get("path").toString();
 			String fileSize = fileInfo.get("fileSize").toString();
 			
-			
+			fDTO.setUserNo(userSeqNo);
+			fDTO.setBrdKind(kind);
 			fDTO.setOriName((String)fileInfo.get("originalFileName"));
 			fDTO.setChgName((String)fileInfo.get("fileName"));
 			fDTO.setExtension((String)fileInfo.get("extension"));
@@ -263,9 +262,11 @@ public class MemberController {
 			
 		
 		} else {
+			fDTO = null;
 			mDTO.setReviewName(name);
 			mDTO.setTitle(title);
 			mDTO.setReviewContents(content);
+			
 		}
 		
 		int result = memberService.insertMember(mDTO, fDTO);//파일 등서비스

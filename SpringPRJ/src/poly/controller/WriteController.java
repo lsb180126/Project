@@ -627,12 +627,7 @@ public class WriteController {
 			
 		//
 		}else {
-			fDTO.setOriName(oriName);
-			fDTO.setChgName(chgName);
-			fDTO.setExtension(extension);
-			fDTO.setFilePath(path);
-			fDTO.setFileSize(fileSize);
-			
+			fDTO = null;
 			
 		}
 		
@@ -735,11 +730,8 @@ public class WriteController {
 				
 			//
 			}else {
-				fDTO.setOriName(oriName);
-				fDTO.setChgName(chgName);
-				fDTO.setExtension(extension);
-				fDTO.setFilePath(path);
-				fDTO.setFileSize(fileSize);
+				fDTO = null;
+				
 				
 				
 			}
@@ -838,11 +830,7 @@ public class WriteController {
 				
 			//
 			}else {
-				fDTO.setOriName(oriName);
-				fDTO.setChgName(chgName);
-				fDTO.setExtension(extension);
-				fDTO.setFilePath(path);
-				fDTO.setFileSize(fileSize);
+				fDTO = null;
 				
 				
 			}
@@ -1192,12 +1180,18 @@ public class WriteController {
 		log.info("fileSeq :"+fileSeq);
 		
 		
+		
 		MemDTO mDTO = new MemDTO();
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		
 		
 		FileDTO fDTO = new FileDTO();
 		fDTO.setFileSeq(fileSeq);
+		
+		
+		if(fDTO.getFileSeq() == null) {
+			fDTO = null;
+		}
 		
 		int result = memberService.writedelete(mDTO, fDTO);
 		log.info(result);

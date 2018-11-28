@@ -165,83 +165,91 @@
 	</delete>
 	
 	<select id="getAllList" resultType="AllDTO" parameterType="PagingDTO">
-		SELECT 
-			  B.RN,
-			  B.*
-		FROM
-			  (SELECT
-			          ROWNUM RN,
-			          A.*
-			  FROM
-			  (SELECT 
-			          '리뷰' AS boardName,
-			          RI.REVIEW_SEQ_NO as reviewSeqNo,
-			          RI.TITLE as title,
-			          RI.REVIEW_CONTENTS as reviewContents,
-			          RI.REG_DT as regDt,
-			          RI.CHG_DT as chgDt,
-			          RI.REVIEW_NAME as reviewName
-			       FROM REVIEW_INFO RI
-			       WHERE RI.USER_ID = #{userId}
-			  UNION
-			       SELECT 
-			          '자유토크',
-			          TI.TALK_SEQ_NO as talkSeqNo,
-			          TI.TITLE as title,
-			          TI.TALK_CONTENTS as talkContents,
-			          TI.REG_DT as regDt,
-			          TI.CHG_DT as chgDt,
-			          NULL
-			       FROM TALK_INFO TI
-			       WHERE TI.USER_ID = #{userId}
-			  UNION
-			        SELECT
-			          '간식',
-			          EI.EAT_SEQ_NO as eatSeqNo,
-			          EI.TITLE as title,
-			          EI.EAT_CONTENTS as eatContents,
-			          EI.REG_DT as regDt,
-			          EI.CHG_DT as chgDt,
-			          NULL
-			       FROM EAT_INFO EI
-			       WHERE EI.USER_ID = #{userId}
-			  UNION
-			        SELECT
-			          '분양',
-			          SI.SELL_SEQ_NO as sellSeqNo,
-			          SI.TITLE as title,
-			          SI.SELL_CONTENTS as sellContents,
-			          SI.REG_DT as regDt,
-			          SI.CHG_DT as chgDt,
-			          NULL
-			       FROM SELL_INFO SI
-			       WHERE SI.USER_ID = #{userId}
-			  UNION     
-			        SELECT
-			          '미용',
-			          BI.BEAUTY_SEQ_NO as beautySeqNo,
-			          BI.TITLE as title,
-			          BI.BEAUTY_CONTENTS as beautyContents,
-			          BI.REG_DT as regDt,
-			          BI.CHG_DT as chgDt,
-			          NULL
-			       FROM BEAUTY_INFO BI
-			       WHERE BI.USER_ID = #{userId}
-			  UNION
-			        SELECT
-			          '생활용품',
-			          HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
-			          HI.TITLE as title,
-			          HI.HOMEGOODS_CONTENTS as homegoodsContents,
-			          HI.REG_DT as regDt,
-			          HI.CHG_DT as chgDt,
-			          NULL
-			       FROM HOMEGOODS_INFO HI
-			       WHERE HI.USER_ID = #{userId}
-			       ) A 
-			       ORDER BY A.CHGDT DESC, A.REVIEWSEQNO DESC
-		       ) B
-			WHERE B.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
+		SELECT
+		    C.RN
+		    ,C.*
+		FROM (
+  
+				SELECT 
+			          ROWNUM AS RN,
+			          B.*
+		 		FROM
+		          	(SELECT
+		                  	A.*
+		  		FROM
+		          	(SELECT 
+			                  '리뷰' AS boardName,
+			                  RI.REVIEW_SEQ_NO as reviewSeqNo,
+			                  RI.TITLE as title,
+			                  RI.REVIEW_CONTENTS as reviewContents,
+			                  RI.REG_DT as regDt,
+			                  RI.CHG_DT as chgDt,
+			                  RI.REVIEW_NAME as reviewName
+			               FROM REVIEW_INFO RI
+			               WHERE RI.USER_ID = #{userId}
+			          UNION ALL
+			               SELECT 
+			                  '자유토크',
+			                  TI.TALK_SEQ_NO as talkSeqNo,
+			                  TI.TITLE as title,
+			                  TI.TALK_CONTENTS as talkContents,
+			                  TI.REG_DT as regDt,
+			                  TI.CHG_DT as chgDt,
+			                  NULL
+			               FROM TALK_INFO TI
+			               WHERE TI.USER_ID = #{userId}
+			          UNION ALL
+			                SELECT
+			                  '간식',
+			                  EI.EAT_SEQ_NO as eatSeqNo,
+			                  EI.TITLE as title,
+			                  EI.EAT_CONTENTS as eatContents,
+			                  EI.REG_DT as regDt,
+			                  EI.CHG_DT as chgDt,
+			                  NULL
+			               FROM EAT_INFO EI
+			               WHERE EI.USER_ID = #{userId}
+			          UNION ALL
+			                SELECT
+			                  '분양',
+			                  SI.SELL_SEQ_NO as sellSeqNo,
+			                  SI.TITLE as title,
+			                  SI.SELL_CONTENTS as sellContents,
+			                  SI.REG_DT as regDt,
+			                  SI.CHG_DT as chgDt,
+			                  NULL
+			               FROM SELL_INFO SI
+			               WHERE SI.USER_ID = #{userId}
+			          UNION ALL    
+			                SELECT
+			                  '미용',
+			                  BI.BEAUTY_SEQ_NO as beautySeqNo,
+			                  BI.TITLE as title,
+			                  BI.BEAUTY_CONTENTS as beautyContents,
+			                  BI.REG_DT as regDt,
+			                  BI.CHG_DT as chgDt,
+			                  NULL
+			               FROM BEAUTY_INFO BI
+			               WHERE BI.USER_ID = #{userId}
+			          UNION ALL
+			                SELECT
+			                  '생활용품',
+			                  HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
+			                  HI.TITLE as title,
+			                  HI.HOMEGOODS_CONTENTS as homegoodsContents,
+			                  HI.REG_DT as regDt,
+			                  HI.CHG_DT as chgDt,
+			                  NULL
+			               FROM HOMEGOODS_INFO HI
+			               WHERE HI.USER_ID = #{userId}
+			               ) A 
+			               ORDER BY A.CHGDT DESC, A.REVIEWSEQNO DESC
+			             ) B
+			          ) C
+						WHERE C.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
+						
+     
+     
 			
 	</select>
 	

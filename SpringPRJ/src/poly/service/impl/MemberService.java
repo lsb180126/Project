@@ -23,9 +23,14 @@ public class MemberService implements IMemService{
 	@Override
 	public int insertMember(MemDTO mDTO, FileDTO fDTO) throws Exception {
 		
-		
 		int a = memMapper.insertMember(mDTO);
-		int b = memMapper.insertFile(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = memMapper.insertFile(fDTO);
+		}else {
+			b =1;
+		}
+		
 		return a*b;
 	}
 
@@ -41,7 +46,12 @@ public class MemberService implements IMemService{
 	public int writerevise(MemDTO mDTO, FileDTO fDTO) throws Exception {
 		
 		int a = memMapper.writerevise(mDTO);
-		int b = memMapper.filerevise(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = memMapper.filerevise(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 
@@ -60,7 +70,12 @@ public class MemberService implements IMemService{
 	public int writedelete(MemDTO mDTO, FileDTO fDTO) throws Exception {
 		
 		int a = memMapper.writedelete(mDTO);
-		int b = memMapper.filedelete(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = memMapper.filedelete(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 

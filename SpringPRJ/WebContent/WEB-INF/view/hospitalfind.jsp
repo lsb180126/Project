@@ -36,7 +36,7 @@
 			.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
 			.info .close:hover {cursor: pointer;}
 			.info .body {position: relative;overflow: hidden;}
-			.info .desc {position: relative; margin: 27px 0px; height: 37px;}
+			.info .desc {position: relative; margin: 27px 0px; height: 37px; white-space: normal; word-break: keep-all; padding: 0 18px;}
 			.desc .ellipsis {overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
 			.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
 			.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
@@ -208,11 +208,11 @@
 	    </tr>
 	    <tr>
 	        <th scope="row">전화번호</th>
-	        <td><%=hDTO.getHospitalPhone() %></td>
+	        <td><%= hDTO.getHospitalPhone() == null ? "전화번호가 없습니다." : hDTO.getHospitalPhone() %></td>
 	    </tr>
 	    <tr>
 	        <th scope="row">주소</th>
-	        <td><%= "".equals(hDTO.getHospitalAllAddress()) ? hDTO.getHospitalRodAddress() : hDTO.getHospitalAllAddress() %></td>
+	        <td><%= hDTO.getHospitalAllAddress() == null ? hDTO.getHospitalRodAddress() : hDTO.getHospitalAllAddress() %></td>
 	    </tr>
 	</table> 
       

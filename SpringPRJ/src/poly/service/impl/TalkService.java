@@ -29,7 +29,13 @@ public class TalkService implements ITalkService{
 	public int insertMember(TalkDTO tDTO, FileDTO fDTO) throws Exception {
 		
 		int a = talkMapper.insertMember(tDTO);
-		int b = talkMapper.insertFile(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = talkMapper.insertFile(fDTO);
+		}else {
+			b =1;
+		}
+		
 		return a*b;
 	}
 
@@ -50,7 +56,12 @@ public class TalkService implements ITalkService{
 	public int talkrevise(TalkDTO tDTO, FileDTO fDTO) throws Exception {
 		
 		int a = talkMapper.talkrevise(tDTO);
-		int b = talkMapper.filerevise(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = talkMapper.filerevise(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 
@@ -58,7 +69,12 @@ public class TalkService implements ITalkService{
 	public int talkdelete(TalkDTO tDTO, FileDTO fDTO) throws Exception {
 		
 		int a = talkMapper.talkdelete(tDTO);
-		int b = talkMapper.filedelete(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = talkMapper.filedelete(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 

@@ -194,7 +194,7 @@
 							작성자
 						</div>	
 					</td>
-					<td>
+					<td colspan="2">
 					
 						<div class="my-box">
 				           		<%=eDTO.getUserName() %>
@@ -210,7 +210,7 @@
 						</div>
 					</td>
 					
-					<td></td>
+					
 				
 					<td colspan="2">
 						<div class="my-box">
@@ -232,20 +232,26 @@
 				        	</div>
 				        </td>
 				     </tr>
-				     <tr>
-				     	<td><%=eDTO.getEatContents() %></td>
-				     </tr>
+				     
 				     
 				     
 				     <tr>
 				     <% if(!(CmmUtil.nvl(eDTO.getChgName())).equals("") ) { %>
 				     	<td colspan="6" height="500px">
+				     	
 				     		<div class="my-box" style="height:600px;">
-				     		<img src="/upload/<%=eDTO.getChgName()%>" height="200" width="200" >
+				     		<br/>
+				     		<img src="/upload/<%=eDTO.getChgName()%>" height="200" width="200" ><br/><br/>
+				     			<%=eDTO.getEatContents() %>
 				     			
 				     		</div>	
 				     	</td>
-				      <% }%>	
+				      <%} else { %>
+				      	<td colspan="6" height="500px">
+				      		<%=eDTO.getEatContents() %>
+				      	</td>
+				      <% }%>
+				      	
 			     	</tr>
 			     	<tr>
 			     		<td></td>

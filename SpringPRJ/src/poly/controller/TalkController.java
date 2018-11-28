@@ -179,6 +179,7 @@ public class TalkController {
 		
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
+		content = content.replace("\r\n", "<br>");
 		String userId= (String)session.getAttribute("id");
 		String userSeqNo = (String)session.getAttribute("userSeqNo");
 		String kind = request.getParameter("kind");
@@ -186,6 +187,9 @@ public class TalkController {
 		
 		log.info("title : " + title);
 		log.info("content : " + content);
+		log.info(userId);
+		log.info(userSeqNo);
+		log.info(kind);
 		
 		TalkDTO tDTO = new TalkDTO();
 		
@@ -193,30 +197,40 @@ public class TalkController {
 		tDTO.setTalkContents(content);
 		tDTO.setUserId(userId);
 		
-		log.info("welcome to fileUpload");
-		
-		log.info("------file info------");
-		log.info(file);
-		
-		FileUpload fileUpload = new FileUpload();
-		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
-		
-		for( String key : fileInfo.keySet() ){
-            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
-        }
-		
-		String path = fileInfo.get("path").toString();
-		String fileSize = fileInfo.get("fileSize").toString();
-		
 		FileDTO fDTO = new FileDTO();
 		
-		fDTO.setOriName((String)fileInfo.get("originalFileName"));
-		fDTO.setChgName((String)fileInfo.get("fileName"));
-		fDTO.setExtension((String)fileInfo.get("extension"));
-		fDTO.setFilePath(path);
-		fDTO.setFileSize(fileSize);
-		fDTO.setUserNo(userSeqNo);
-		fDTO.setBrdKind(kind);
+		if(!"".equals(CmmUtil.nvl(file.getOriginalFilename()))) {
+			log.info("welcome to fileUpload");
+			
+			log.info("------file info------");
+			log.info(file);
+			
+			FileUpload fileUpload = new FileUpload();
+			Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);
+			
+			for( String key : fileInfo.keySet() ){
+	            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+	        }
+			
+			String path = fileInfo.get("path").toString();
+			String fileSize = fileInfo.get("fileSize").toString();
+			
+			
+			
+			fDTO.setOriName((String)fileInfo.get("originalFileName"));
+			fDTO.setChgName((String)fileInfo.get("fileName"));
+			fDTO.setExtension((String)fileInfo.get("extension"));
+			fDTO.setFilePath(path);
+			fDTO.setFileSize(fileSize);
+			fDTO.setUserNo(userSeqNo);
+			fDTO.setBrdKind(kind);
+			
+		} else {
+			fDTO = null;
+			tDTO.setTitle(title);
+			tDTO.setTalkContents(content);
+			
+		}
 		
 		int result = talkService.insertMember(tDTO, fDTO);
 		
