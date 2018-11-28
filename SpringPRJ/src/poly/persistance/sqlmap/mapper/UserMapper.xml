@@ -136,7 +136,7 @@
 		SELECT  USER_SEQ_NO as userSeqNo
 		 FROM USER_INFO
 		 WHERE USER_NAME = #{userName}
-		   AND USER_ID = #{userId} 
+		 AND USER_ID = #{userId} 
 	</select>
 			
 	<update id="EmailConfirm" parameterType="UserDTO">

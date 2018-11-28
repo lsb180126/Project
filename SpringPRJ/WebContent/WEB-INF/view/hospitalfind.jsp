@@ -5,8 +5,8 @@
     pageEncoding="UTF-8"%>
 <%
 	String id = CmmUtil.nvl((String)session.getAttribute("id"));
-	List<HospitalDTO> hList = (List<HospitalDTO>)request.getAttribute("hList"); 
-
+	List<HospitalDTO> hList = (List<HospitalDTO>)request.getAttribute("hList");
+	
 %>
 <!DOCTYPE html>
 
@@ -32,16 +32,35 @@
 			.wrap * {padding: 0;margin: 0;}
 			.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
 			.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-			.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+			.info .title {padding: 5px 0 0 10px;height: 36px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
 			.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
 			.info .close:hover {cursor: pointer;}
 			.info .body {position: relative;overflow: hidden;}
-			.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-			.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+			.info .desc {position: relative; margin: 27px 0px; height: 37px;}
+			.desc .ellipsis {overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
 			.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
 			.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
 			.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 			.info .link {color: #5085BB;}
+			table.type01 {
+			    border-collapse: collapse;
+			    text-align: left;
+			    line-height: 1.5;
+			    margin : 20px 10px;
+			}
+			table.type01 th {
+			    width: 150px;
+			    padding: 10px;
+			    font-weight: bold;
+			    vertical-align: top;
+			    border: 1px solid #ccc;
+			}
+			table.type01 td {
+			    width: 900px;
+			    padding: 10px;
+			    vertical-align: top;
+			    border: 1px solid #ccc;
+			}
 		</style>
 		
 	</head>
@@ -180,30 +199,41 @@
        
       </div>
      
-      <% for (HospitalDTO hDTO : hList) {%>
+     <% for (HospitalDTO hDTO : hList) {%>
       
-      <br/><%=hDTO.getHospitalAllAddress() %> 
+      <table class="type01">
+	    <tr>
+	        <th scope="row">병원 이름</th>
+	        <td><%=hDTO.getHospitalName() %></td>
+	    </tr>
+	    <tr>
+	        <th scope="row">전화번호</th>
+	        <td><%=hDTO.getHospitalPhone() %></td>
+	    </tr>
+	    <tr>
+	        <th scope="row">주소</th>
+	        <td><%= "".equals(hDTO.getHospitalAllAddress()) ? hDTO.getHospitalRodAddress() : hDTO.getHospitalAllAddress() %></td>
+	    </tr>
+	</table> 
+      
+      <%-- <br/><%=hDTO.getHospitalAllAddress() %> 
       <br/><%=hDTO.getHospitalName() %>
       <br/><%=hDTO.getHospitalPhone() %>
       <br/><%=hDTO.getHospitalPosition1() %>
       <br/><%=hDTO.getHospitalPosition2() %>
       <br/><%=hDTO.getHospitalRodAddress() %>
-      <br/><%=hDTO.getHospitalSituation() %>
+      <br/><%=hDTO.getHospitalSituation() %> --%>
       
       <hr/>
       
       
-      <% } %>
+     <% } %> 
 
       
-
+	  
       </div>
 
     
-
-    
-
-
 
 </body>
 
@@ -234,7 +264,8 @@
 		var positions = [
 			<% for (int i = 0; i < hList.size(); i++) { %>
 		    {
-		        title: '<%=hList.get(i).getHospitalName()%>', 
+		        title: '<%=hList.get(i).getHospitalName()%>',
+		        address: '<%= "".equals(hList.get(i).getHospitalAllAddress()) ? hList.get(i).getHospitalRodAddress() : hList.get(i).getHospitalAllAddress() %>',
 		        latlng: new daum.maps.Coords(coords<%=i%>.getX(),  coords<%=i%>.getY())
 		    },
 		    <% } %>
@@ -243,6 +274,97 @@
 		// 마커 이미지의 이미지 주소입니다
 		var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
 		
+
+		positions.forEach(function(pos) {
+
+			  // 중략
+	
+			 var marker = new daum.maps.Marker({
+	
+			        map: map, // 마커를 표시할 지도
+	
+			        position: pos.latlng // 마커의 위치
+	
+			    });
+	
+			  var customOverlay = new daum.maps.CustomOverlay({
+	
+			    position: pos.latlng
+	
+			  });
+	
+			    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+	
+			    daum.maps.event.addListener(marker, 'click', function() {
+	
+			        customOverlay.setMap(map);
+	
+			    });
+	
+	
+			  var wrap = document.createElement('div');
+	
+			  wrap.classList.add("wrap");
+	
+			  var info = document.createElement('div');
+	
+			  info.classList.add("info");
+	
+			  wrap.appendChild(info);
+	
+	
+			  var title = document.createElement('div');
+	
+			  title.classList.add("title");
+	
+			  info.appendChild(title);
+	
+			  title.appendChild(document.createTextNode(pos.title));  
+	
+	
+			  var body = document.createElement('div');
+	
+			  body.classList.add("body");
+	
+			  info.appendChild(body);
+	
+	
+			  var desc = document.createElement('div');
+			  
+			  desc.classList.add("desc");
+	
+			  body.appendChild(desc);
+	
+			    
+			  var ellipsis = document.createElement('div');
+	
+			  ellipsis.classList.add("desc");
+	
+			  ellipsis.appendChild(document.createTextNode(pos.address));  
+			  
+			  desc.appendChild(ellipsis);
+	
+	
+			  var close = document.createElement('div');
+	
+			  close.classList.add("close");
+	
+			  close.onclick = function() { customOverlay.setMap(null); };
+	
+	
+			  title.appendChild(close);
+	
+			  
+			  customOverlay.setContent(wrap);
+	
+			  customOverlay.setMap(map);
+
+
+			});
+
+		    
+		
+		 <%--
 		for (var i = 0; i < positions.length; i ++) {
 		    
 		    // 마커 이미지의 이미지 크기 입니다
@@ -302,8 +424,8 @@
 		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
 		function closeOverlay() {
 		    overlay.setMap(null);     
-		}
+		} 
 		
-		
+		--%>		
 		</script>
 </html>

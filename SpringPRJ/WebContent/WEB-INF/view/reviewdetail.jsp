@@ -29,7 +29,7 @@
 	    <link href="css/starRev.css" rel="stylesheet">
 	    
 	    <style>
-	    .my-box { border:1px solid; padding: 5px;  }
+	    .my-box { border:1px solid; padding: 5px;}
 	    
 		
 	    
@@ -213,7 +213,7 @@
 							작성자
 						</div>	
 					</td>
-					<td>
+					<td colspan="2">
 					
 						<div class="my-box">
 				           		<%=mDTO.getUserName() %>
@@ -223,13 +223,14 @@
 					</td>
 					
 					
+					
 					<td>
 						<div class="my-box">
 						작성일
 						</div>
 					</td>
 					
-					<td></td>
+					
 				
 					<td colspan="2">
 						<div class="my-box">
@@ -252,18 +253,21 @@
 				        	</div>
 				        </td>
 				     </tr>
-				     <tr>
-				     	<td><%=mDTO.getReviewContents() %></td>
-				     </tr>
+				     
 				     <tr>
 				     <% if(!(CmmUtil.nvl(mDTO.getChgName())).equals("") ) { %>
 				     	<td colspan="6" height="500px">
 				     
 				     		<div class="my-box" style="height:600px;">
-				     			<img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200">
-				     			
+				     			<br/>
+				     			<img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200"><br/><br/>
+				     			<%=mDTO.getReviewContents() %>
 				     			
 				     		</div>	
+				     	</td>
+				     <%} else { %>
+				     	<td colspan="6" height="500px">
+				     		<%=mDTO.getTitle() %>
 				     	</td>
 				    <% }%>
 			     	</tr>

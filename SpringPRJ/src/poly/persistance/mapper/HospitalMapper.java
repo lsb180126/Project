@@ -13,6 +13,8 @@ public interface HospitalMapper  {
 	List<HospitalDTO> getHospitalList(String address) throws Exception;
 
 	
+
+	
 	
 
 	

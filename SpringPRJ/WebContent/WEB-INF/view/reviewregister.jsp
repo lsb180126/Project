@@ -213,11 +213,12 @@
 						
 
 				</table>
-					<input type="file" name="file" id="file" >
+					
+					<input type="file" name="file" id="file">
 					<input type="hidden" value="review" name="kind">
 					
 				</form>
-				
+						
 				     		
 				     		
 				     	

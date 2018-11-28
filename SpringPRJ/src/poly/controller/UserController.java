@@ -97,7 +97,7 @@ public class UserController {
 		String url =connectIP+"emailConfirm.do";
 		String parameter ="?userNo="+userNo;
 		String body ="<a href='"+url+parameter+"'>인증 하기</a>";
-		MailUtil.sendMail(email, "우리동네 상권분석 인증메일입니다.", body);
+		MailUtil.sendMail(email, "pet clinic 인증메일입니다.", body);
 		
 		
 		
@@ -105,7 +105,7 @@ public class UserController {
 		model.addAttribute("url", "/register.do");
 		
 		
-		return "/redirect";
+		return "/redirect2";
 	}
 	
 
@@ -125,19 +125,20 @@ public class UserController {
 		uDTO.setUserSeqNo(userNo);
 		
 		
+		int uDTO2 = userService.EmailConfirm(uDTO);
+		log.info(uDTO2);
 		
-		int result = userService.EmailConfirm(uDTO);
-		log.info(result);
+		
 		
 		String msg;
 		String url;
-		if(result == 1) {
-			model.addAttribute("msg", "이메일 인증되었습니다.");
+		if(uDTO == null) {
+			model.addAttribute("msg", "이메일 인증되지않았습니다.");
 			model.addAttribute("url", "/index.do");
 			
 		}else{
-			model.addAttribute("msg", "이메일 인증되지않았습니다.");
-			/*model.addAttribute("url", "/index.do");*/
+			model.addAttribute("msg", "이메일 인증되었습니다.");
+			model.addAttribute("url", "/index.do");
 		}
 		
 		
@@ -176,18 +177,15 @@ public class UserController {
 		String password = request.getParameter("password");
 		
 		
-		
 		log.info("id : " + id);
 		log.info("password : " + password);
 		
 		
 		UserDTO uDTO = new UserDTO();
 		
-
+		
 		uDTO.setUserId(id);
 		uDTO.setPassword(password);
-		
-		
 		
 		
 		uDTO=userService.getLoginInfo(uDTO);

@@ -234,7 +234,7 @@
 				        </td>
 				     </tr>
 				     <tr>
-				     	<td><%=bDTO.getBeautyContents() %></td>
+				     	<td><%=bDTO.getBeautyContents()%></td>
 				     </tr>
 				     
 				     <tr>

@@ -217,6 +217,7 @@ public class MemberController {
 		String name = request.getParameter("name");
 		String title = request.getParameter("title");
 		String content= request.getParameter("content");
+		content = content.replace("\r\n", "<br>");
 		String userId= (String)session.getAttribute("id");
 		String userSeqNo = (String)session.getAttribute("userSeqNo");
 		String kind = request.getParameter("kind");
@@ -232,31 +233,40 @@ public class MemberController {
 		mDTO.setReviewContents(content);
 		mDTO.setUserId(userId);
 		
-		
-		
-		log.info("welcome to fileUpload");
-		
-		log.info("------file info------");
-		log.info(file);
-		
-		FileUpload fileUpload = new FileUpload();
-		Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
-		
-		for( String key : fileInfo.keySet() ){//파일 정보 로그
-            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
-        }
-		
-		String path = fileInfo.get("path").toString();
-		String fileSize = fileInfo.get("fileSize").toString();
-		
 		FileDTO fDTO = new FileDTO();//DTO에 파일 정보 담기
-		fDTO.setOriName((String)fileInfo.get("originalFileName"));
-		fDTO.setChgName((String)fileInfo.get("fileName"));
-		fDTO.setExtension((String)fileInfo.get("extension"));
-		fDTO.setFilePath(path);
-		fDTO.setFileSize(fileSize);
 		fDTO.setUserNo(userSeqNo);
 		fDTO.setBrdKind(kind);
+		
+		if(file != null) {
+			
+			log.info("welcome to fileUpload");
+			
+			log.info("------file info------");
+			log.info(file);
+			
+			FileUpload fileUpload = new FileUpload();
+			Map<String,Object> fileInfo = fileUpload.fileUpload(mhsr, file);//파일업로드
+			
+			for( String key : fileInfo.keySet() ){ //파일 정보 로그
+	            log.info( "key: "+key+"  value: "+ fileInfo.get(key) );
+	        }
+			
+			String path = fileInfo.get("path").toString();
+			String fileSize = fileInfo.get("fileSize").toString();
+			
+			
+			fDTO.setOriName((String)fileInfo.get("originalFileName"));
+			fDTO.setChgName((String)fileInfo.get("fileName"));
+			fDTO.setExtension((String)fileInfo.get("extension"));
+			fDTO.setFilePath(path);
+			fDTO.setFileSize(fileSize);
+			
+		
+		} else {
+			mDTO.setReviewName(name);
+			mDTO.setTitle(title);
+			mDTO.setReviewContents(content);
+		}
 		
 		int result = memberService.insertMember(mDTO, fDTO);//파일 등서비스
 		

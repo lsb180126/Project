@@ -80,5 +80,29 @@ public class HospitalController {
 		return "/hospitalfind";
 	}
 	
-
+	/*@RequestMapping(value="hospitalview")
+	public String hospitalview(HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model) throws Exception {
+		log.info("welcome hospitalview");
+		
+		String address = CmmUtil.nvl((String)request.getParameter("address"));
+		
+		log.info("address : " +address);
+		
+		
+		
+		List<HospitalDTO> hList = hospitalService.getHospitalList(address);
+		
+		log.info(hList.get(0).getHospitalAllAddress());
+		log.info(hList.get(0).getHospitalRodAddress());
+		
+		
+		model.addAttribute("hList",hList);
+		
+		
+		return "/hospitalview";
+	}*/
+	
+	
+	
 }

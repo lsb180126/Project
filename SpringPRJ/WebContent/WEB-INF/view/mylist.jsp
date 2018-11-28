@@ -150,10 +150,10 @@
         
         
         	<form>
-			<table class="table">
+			<table class="table" >
 				
 				<tr>
-					
+					<br />
 					<th><%=id + "님의 회원정보" %></th>
 					<td>
 					</td>

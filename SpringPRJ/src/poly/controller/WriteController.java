@@ -637,8 +637,6 @@ public class WriteController {
 		}
 		
 		
-		
-		
 		int result = memberService.writerevise(mDTO, fDTO);
 		log.info(result);
 		
