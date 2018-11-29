@@ -67,7 +67,12 @@ public class EatService implements IEatService{
 	public int eatdelete(EatDTO eDTO, FileDTO fDTO) throws Exception {
 		
 		int a = eatMapper.eatdelete(eDTO);
-		int b = eatMapper.filedelete(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = eatMapper.filedelete(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 

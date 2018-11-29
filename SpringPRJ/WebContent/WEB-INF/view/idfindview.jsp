@@ -58,7 +58,7 @@
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3><%=uDTO.getUserName() %> 님의 아이디는</h3>
-                            		<h3>"<%=uDTO.getUserId() %>" 입니다.</h3>s
+                            		<h3>"<%=uDTO.getUserId() %>" 입니다.</h3>
                         		</div>
                             </div>
                             <div class="form-bottom">

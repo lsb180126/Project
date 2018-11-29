@@ -31,7 +31,31 @@
 	    <style>
 	    .my-box { border:1px solid; padding: 5px;}
 	    
+		table.type03 {
+		    border-collapse: collapse;
+		    text-align: left;
+		    line-height: 1.5;
+		    border-top: 1px solid #ccc;
+		    border-left: 3px solid #369;
+		  margin : 20px 10px;
+		}
+		table.type03 th {
+		    width: 147px;
+		    padding: 10px;
+		    font-weight: bold;
+		    vertical-align: top;
+		    color: #153d73;
+		    border-right: 1px solid #ccc;
+		    border-bottom: 1px solid #ccc;
 		
+		}
+		table.type03 td {
+		    width: 349px;
+		    padding: 10px;
+		    vertical-align: top;
+		    border-right: 1px solid #ccc;
+		    border-bottom: 1px solid #ccc;
+		}
 	    
 	    </style>
 	    
@@ -165,102 +189,65 @@
        
         	<form action="/reviewlist.do" method="POST">
         	
-			<table class="table">
+			<table class="type03">
 				
 				<tr>
 					
-					<th>리뷰</th>
-					<td>
+					<th scope="row">리뷰</th>
+					<td colspan="5">
 						
 					</td>
-					<td></td>
 					
-					<%if(id.equals("33333")) { %> 
-					<td>
-						<a href="/writerevise.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>"><input type="button" value="수정"></a>
-					</td>
-					<td>
-						<a href="/writedelete.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>&fileSeq=<%=mDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
-					</td>
-					<td>
-						<a href="javascript:goPage();"><input type="button" value="목록"></a>
-					</td>
-					<%} else { %>
-					<td>
-						<a href="javascript:goPage();"><input type="button" value="목록"></a>
-					</td>
-					<%  }  %>
+					
+					
 				</tr>
 				
 				<tr>
-					<td>
-						<div class="my-box">
+					<th scope="row">
+						
 							이름(병원/약국)
-						</div>	
-					</td>
+							
+					</th>
 					<td colspan="5">
-					
-						<div class="my-box">
-				           		<%=mDTO.getReviewName() %>
-				        </div>
-				           
-				           
+				           <%=mDTO.getReviewName() %>
 					</td>
-					</tr>
-					<tr>
-					<td>
-						<div class="my-box">
-							작성자
-						</div>	
-					</td>
+				</tr>
+				<tr>
+					<th scope="row">
+						작성자
+					</th>
 					<td colspan="2">
-					
-						<div class="my-box">
-				           		<%=mDTO.getUserName() %>
-				        </div>
-				           
-				           
+				           <%=mDTO.getUserName() %>
 					</td>
 					
-					
-					
-					<td>
-						<div class="my-box">
+					<th scope="row">
 						작성일
-						</div>
-					</td>
+					</th>
 					
-					
-				
 					<td colspan="2">
-						<div class="my-box">
 							<%=mDTO.getChgDt() %>
-						</div>
 					</td>
 					
 					
-					</tr>
-					
-					<tr>
-						<td>
-							<div class="my-box">
-								제목
-							</div>
-						</td>
-						<td colspan="5">
-							<div class="my-box">
-				           		<%=mDTO.getTitle() %>
-				        	</div>
-				        </td>
-				     </tr>
+				</tr>
+				<tr>
+					<th scope="row">
+						제목
+							
+					</th>
+					<td colspan="5">
+				           <%=mDTO.getTitle() %>
+				        	
+				    </td>
+				 </tr>
 				     
 				     <tr>
 				     <% if(!(CmmUtil.nvl(mDTO.getChgName())).equals("") ) { %>
 				     	<td colspan="6" height="500px">
 				     
-				     		<div class="my-box" style="height:600px;">
+				     		<div style="height:600px;">
 				     			<br/>
-				     			<img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200"><br/><br/>
+				     			<img src="/upload/<%=mDTO.getChgName()%>" height="400" width="900"><br/><br/>
 				     			<%=mDTO.getReviewContents() %>
 				     			
 				     		</div>	
@@ -271,21 +258,27 @@
 				     	</td>
 				    <% }%>
 			     	</tr>
-			     	<tr>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td>
-			     			
-			     		</td>
-		     		</tr>
+			     	
 
 
 				</table>
 					
 					
+					<%if(id.equals("33333")) { %> 
+					<td>
+						<a href="/writerevise.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>"><input class="btn btn-primary" type="button" value="수정"></a>
+					</td>
+					<td>
+						<a href="/writedelete.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>&fileSeq=<%=mDTO.getFileSeq()%>"><input class="btn btn-primary" type="button" value="삭제"></a>
+					</td>
+					<td>
+						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
+					</td>
+					<%} else { %>
+					<td>
+						<a href="javascript:goPage();"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록"></a>
+					</td>
+					<%  }  %>
 				</form>
 					
 			     	<br/>

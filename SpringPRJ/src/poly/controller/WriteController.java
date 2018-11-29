@@ -95,7 +95,6 @@ public class WriteController {
 		for(AllDTO a : aList) {
 			log.info("boardName : " +a.getBoardName());
 			log.info("reviewSeqNo : " +a.getReviewSeqNo());
-			log.info("reviewContents : " +a.getReviewContents());
 			log.info("title : " +a.getTitle());
 			log.info("regDt : " +a.getRegDt());
 			log.info("chgDt : " +a.getChgDt());
@@ -929,11 +928,7 @@ public class WriteController {
 				
 			//
 			}else {
-				fDTO.setOriName(oriName);
-				fDTO.setChgName(chgName);
-				fDTO.setExtension(extension);
-				fDTO.setFilePath(path);
-				fDTO.setFileSize(fileSize);
+				fDTO = null;
 				
 				
 			}
@@ -1032,11 +1027,7 @@ public class WriteController {
 				
 			//
 			}else {
-				fDTO.setOriName(oriName);
-				fDTO.setChgName(chgName);
-				fDTO.setExtension(extension);
-				fDTO.setFilePath(path);
-				fDTO.setFileSize(fileSize);
+				fDTO = null;
 				
 				
 			}
@@ -1135,11 +1126,7 @@ public class WriteController {
 				
 			//
 			}else {
-				fDTO.setOriName(oriName);
-				fDTO.setChgName(chgName);
-				fDTO.setExtension(extension);
-				fDTO.setFilePath(path);
-				fDTO.setFileSize(fileSize);
+				fDTO = null;
 				
 				
 			}
@@ -1184,13 +1171,11 @@ public class WriteController {
 		MemDTO mDTO = new MemDTO();
 		mDTO.setReviewSeqNo(reviewSeqNo);
 		
+		FileDTO fDTO = null;
 		
-		FileDTO fDTO = new FileDTO();
-		fDTO.setFileSeq(fileSeq);
-		
-		
-		if(fDTO.getFileSeq() == null) {
-			fDTO = null;
+		if(!fileSeq.equals("null")) {
+			fDTO = new FileDTO();
+			fDTO.setFileSeq(fileSeq);
 		}
 		
 		int result = memberService.writedelete(mDTO, fDTO);
@@ -1230,8 +1215,14 @@ public class WriteController {
 		
 		tDTO.setTalkSeqNo(talkSeqNo);
 		
-		FileDTO fDTO = new FileDTO();
-		fDTO.setFileSeq(fileSeq);
+		FileDTO fDTO = null;
+		
+		if(!fileSeq.equals("null")) {
+			fDTO = new FileDTO();
+			fDTO.setFileSeq(fileSeq);
+		}
+		
+		
 		
 		int result = talkService.talkdelete(tDTO, fDTO);
 		log.info(result);
@@ -1270,8 +1261,14 @@ public class WriteController {
 		
 		eDTO.setEatSeqNo(eatSeqNo);
 		
-		FileDTO fDTO = new FileDTO();
-		fDTO.setFileSeq(fileSeq);
+		FileDTO fDTO = null;
+		
+		if(!fileSeq.equals("null")) {
+			fDTO = new FileDTO();
+			fDTO.setFileSeq(fileSeq);
+		}
+		
+		
 		
 		int result = eatService.eatdelete(eDTO, fDTO);
 		log.info(result);
@@ -1310,8 +1307,12 @@ public class WriteController {
 		
 		sDTO.setSellSeqNo(sellSeqNo);
 		
-		FileDTO fDTO = new FileDTO();
-		fDTO.setFileSeq(fileSeq);
+		FileDTO fDTO = null;
+		
+		if(!fileSeq.equals("null")) {
+			fDTO = new FileDTO();
+			fDTO.setFileSeq(fileSeq);
+		}
 		
 		int result = sellService.selldelete(sDTO, fDTO);
 		log.info(result);
@@ -1351,8 +1352,12 @@ public class WriteController {
 		
 		bDTO.setBeautySeqNo(beautySeqNo);
 		
-		FileDTO fDTO = new FileDTO();
-		fDTO.setFileSeq(fileSeq);
+		FileDTO fDTO = null;
+		
+		if(!fileSeq.equals("null")) {
+			fDTO = new FileDTO();
+			fDTO.setFileSeq(fileSeq);
+		}
 		
 		int result = beautyService.beautydelete(bDTO, fDTO);
 		log.info(result);
@@ -1391,8 +1396,12 @@ public class WriteController {
 		
 		hDTO.setHomegoodsSeqNo(homegoodsSeqNo);
 		
-		FileDTO fDTO = new FileDTO();
-		fDTO.setFileSeq(fileSeq);
+		FileDTO fDTO = null;
+		
+		if(!fileSeq.equals("null")) {
+			fDTO = new FileDTO();
+			fDTO.setFileSeq(fileSeq);
+		}
 		
 		int result = homegoodsService.homegoodsdelete(hDTO, fDTO);
 		log.info(result);

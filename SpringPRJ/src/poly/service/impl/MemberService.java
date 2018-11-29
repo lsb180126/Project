@@ -73,8 +73,10 @@ public class MemberService implements IMemService{
 		int b;
 		if(fDTO !=null) {
 			b = memMapper.filedelete(fDTO);
+			System.out.println("writeDelete service b :"+b);
 		}else {
 			b =1;
+			System.out.println("writeDelete service b :"+b);
 		}
 		return a*b;
 	}

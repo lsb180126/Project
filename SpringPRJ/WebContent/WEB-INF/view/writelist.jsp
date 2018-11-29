@@ -223,38 +223,75 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-				<!-- <div class="row">
-					<td>작성 목록</td>
-					<td>
+				<table class="table table-hover">
+					<tr>
+						<th scope="row" colspan="2">작성 목록</th>
+						<td>
+							
+						</td>
 						
-					</td>
-					
-					<td></td>
-					<td>
 						
-					</td>
-					<td>
+						<td>
+							
+						</td>
+						<td>
+							
+						</td>
 						
-					</td>
-					
-					<td>
-						
-					</td>
-				</div> -->
+						<td>
+							
+						</td>
+				</tr>
 				
+				<tr style="border-bottom:2px solid #dee2e6;">
 				
-				<div class="row">
-					<div class="col-1">게시판 이름</div>
-					<div class="col-1">게시판 번호</div>
-					<div class="col-3">제목</div>
-					<div class="col-3">내용</div>
-					<div class="col-2">작성일</div>
-					<div class="col-2">이름(병원/약국)</div>
-				</div>
+						<th>게시판 이름</th>
+						<th>게시판 번호</th>
+						<th colspan="2">제목</th>
+						<th>작성일</th>
+						<th>이름(병원/약국)</th>
+						
+				</tr>
+				
 				<% for(AllDTO a : aList) { %>
+				<tr>
+					<td><%=a.getBoardName() %></td>
+					<td><%=a.getReviewSeqNo() %></td>
+					<td colspan="2">
+						<%if(("리뷰").equals(a.getBoardName())) { %>
+							<a href="/writedetail.do?reviewSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("자유토크").equals(a.getBoardName())) { %>
+							<a href="/talkdetail2.do?talkSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("간식").equals(a.getBoardName())) { %>
+							<a href="/eatdetail2.do?eatSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("분양").equals(a.getBoardName())) { %>
+							<a href="/selldetail2.do?sellSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("미용").equals(a.getBoardName())) { %>
+							<a href="/beautydetail2.do?beautySeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} else if( ("생활용품").equals(a.getBoardName())) { %>
+							<a href="/homegoodsdetail2.do?homegoodsSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
+						<%} %>
+						<%=a.getTitle() %>
+						
+					</td>
+					
+					<td><%=a.getChgDt() %></td>
+					<td><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%><td>
+				</tr>
+				<% } %> 
+						
+				<!-- <div class="row">
+					<div class="col-2">게시판 이름</div>
+					<div class="col-2">게시판 번호</div>
+					<div class="col-3">제목</div>
+					
+					<div class="col-2">작성일</div>
+					<div class="col-3">이름(병원/약국)</div>
+				</div> -->
+				<%-- <% for(AllDTO a : aList) { %>
 				<div class="row">
-					<div class="col-1"><%=a.getBoardName() %></div>
-					<div class="col-1"><%=a.getReviewSeqNo() %></div>
+					<div class="col-2"><%=a.getBoardName() %></div>
+					<div class="col-2"><%=a.getReviewSeqNo() %></div>
 					<div class="col-3">
 						<%if(("리뷰").equals(a.getBoardName())) { %>
 							<a href="/writedetail.do?reviewSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
@@ -272,11 +309,11 @@
 						<%=a.getTitle() %>
 						</a>
 					</div>
-					<div class="col-3"><%=a.getReviewContents() %></div>
+					
 					<div class="col-2"><%=a.getChgDt() %></div>
-					<div class="col-2"><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%></div>
+					<div class="col-3"><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%></div>
 				</div>
-				<% } %> 
+				<% } %>  --%>
 				
 				
 				
@@ -297,7 +334,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+	<br/>
   </body>
 </html>
 
@@ -332,22 +369,22 @@
 		//만약 현재 블럭의 시작 페이지가 1보다 크다면. 이전 블럭 . 처음 블럭 버튼 생성.
 		if(startPage > 1){
 			//pagingStr = "[<<1][<"+(startPage-1)+"]";
-			pagingStr =  "<input class='btn' type=button value=<< onclick='goPage(1);'>";
-			pagingStr += "<input class='btn' type=button value=<  onclick='goPage("+(startPage-1)+");'>";
+			pagingStr =  "<input class='btn btn-outline-dark' type=button value=<< onclick='goPage(1);'>";
+			pagingStr += "<input class='btn btn-outline-dark' type=button value=<  onclick='goPage("+(startPage-1)+");'>";
 		}
 		
 		for(int i = startPage ; i <= endPage ; i++){
 			
-			if(i == pageNum )pagingStr += "<input class='btn' type='button' value='현재'>";
+			if(i == pageNum )pagingStr += "<input class='btn btn-outline-dark' type='button' value='현재'>";
 			//else pagingStr += "["+i+"]";
-			else pagingStr += "<input class='btn' type='button' value="+i+" onclick='goPage("+i+");'>";
+			else pagingStr += "<input class='btn btn-outline-dark' type='button' value="+i+" onclick='goPage("+i+");'>";
 		}
 		
 		//만약 현재 블럭의 마지막 페이지가 전체 마지막 페이지보다 작다면. 다음블럭, 마지막 블럭 버튼 생성. 
 		if(endPage < totalPageCount){
 			//pagingStr += "[>"+(endPage+1)+"][>>"+totalPageCount+"]";
-			pagingStr += "<input class='btn' type=button value='>'  onclick='goPage("+(endPage+1)+");'>";
-			pagingStr += "<input class='btn' type=button value='>>' onclick='goPage("+totalPageCount+");'>";
+			pagingStr += "<input class='btn btn-outline-dark' type=button value='>'  onclick='goPage("+(endPage+1)+");'>";
+			pagingStr += "<input class='btn btn-outline-dark' type=button value='>>' onclick='goPage("+totalPageCount+");'>";
 		}
 		
 		return pagingStr;

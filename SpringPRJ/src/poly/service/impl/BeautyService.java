@@ -23,7 +23,12 @@ public class BeautyService implements IBeautyService{
 	public int insertMember(BeautyDTO bDTO, FileDTO fDTO) throws Exception {
 		
 		int a = beautyMapper.insertMember(bDTO);
-		int b = beautyMapper.insertFile(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = beautyMapper.insertFile(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 
@@ -49,7 +54,12 @@ public class BeautyService implements IBeautyService{
 	public int beautyrevise(BeautyDTO bDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
 		int a = beautyMapper.beautyrevise(bDTO);
-		int b = beautyMapper.filerevise(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = beautyMapper.filerevise(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 
@@ -57,7 +67,12 @@ public class BeautyService implements IBeautyService{
 	public int beautydelete(BeautyDTO bDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
 		int a = beautyMapper.beautydelete(bDTO);
-		int b = beautyMapper.filedelete(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = beautyMapper.filedelete(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 

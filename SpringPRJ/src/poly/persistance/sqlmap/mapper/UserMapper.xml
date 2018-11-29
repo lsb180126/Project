@@ -109,6 +109,7 @@
 		 FROM USER_INFO
 		 WHERE USER_NAME = #{userName}
 		   AND EMAIL = #{email}
+		   AND 
 	</select>
 	
 	<select id="getPWfind" parameterType="UserDTO" resultType="UserDTO">

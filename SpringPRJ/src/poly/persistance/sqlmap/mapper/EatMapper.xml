@@ -48,35 +48,40 @@
 	</insert>
 	
 	<select id="getEatList" resultType="EatDTO" parameterType="PagingDTO">
-		 SELECT 
-		 		A.EN,
-		 		A.*
-		 FROM
-		 	( SELECT
-			 		ROWNUM EN,
-					EI.EAT_SEQ_NO as eatSeqNo,
-					EI.TITLE as title,
-					EI.EAT_CONTENTS as eatContents,
-					EI.REG_DT as regDt,
-					EI.CHG_DT as chgDt,
-					EI.USER_ID as userId,
-					UI.USER_NAME as userName
-		 	FROM 
-		 		( SELECT
-		 			EI2.*
-		 		  FROM
-		 		  	EAT_INFO EI2
-		 		  ORDER BY
-		 		  	EAT_SEQ_NO DESC
-		 		  ) EI
-		 	INNER JOIN USER_INFO UI ON UI.USER_ID = EI.USER_ID
-		 	WHERE EI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 	OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-			OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 	OR EI.CHG_DT LIKE '%'|| #{keyword} ||'%'
-		 		) A
-		 	WHERE A.EN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-		 	ORDER BY A.EN
+		 SELECT
+			    B.RN,
+			    B.*
+		FROM
+		  (
+		  SELECT 
+		          ROWNUM AS RN,
+		          A.*
+		  FROM
+		        ( 
+		          SELECT
+		              EI.EAT_SEQ_NO as eatSeqNo,
+		              EI.TITLE as title,
+		              EI.EAT_CONTENTS as eatContents,
+		              EI.REG_DT as regDt,
+		              EI.CHG_DT as chgDt,
+		              EI.USER_ID as userId,
+		              UI.USER_NAME as userName
+		          FROM 
+		          ( 
+		            SELECT
+		              EI2.*
+		            FROM
+		              EAT_INFO EI2
+		          ) EI
+		        INNER JOIN USER_INFO UI ON UI.USER_ID = EI.USER_ID
+		        WHERE EI.TITLE LIKE '%'|| #{keyword} ||'%'
+		        OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
+		        OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+		        ORDER BY 
+		          EI.EAT_SEQ_NO DESC
+		          ) A
+		  ) B
+		 	WHERE B.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
 	</select>
 	
 	<select id="getEatdetail" resultType="EatDTO">

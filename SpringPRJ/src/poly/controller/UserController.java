@@ -594,6 +594,7 @@ public class UserController {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		
+		
 		log.info("name : " + name);
 		log.info("email : " + email);
 		
@@ -638,6 +639,7 @@ public class UserController {
 		uDTO.setUserId(id);
 		
 		uDTO=userService.getPWfind(uDTO);
+		
 		
 		
 		String msg;

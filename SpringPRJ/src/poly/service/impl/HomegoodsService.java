@@ -29,7 +29,12 @@ public class HomegoodsService implements IHomegoodsService{
 	public int insertMember(HomegoodsDTO hDTO, FileDTO fDTO) throws Exception {
 		
 		int a = homegoodsMapper.insertMember(hDTO);
-		int b = homegoodsMapper.insertFile(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = homegoodsMapper.insertFile(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 
@@ -43,7 +48,12 @@ public class HomegoodsService implements IHomegoodsService{
 	public int homegoodsrevise(HomegoodsDTO hDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
 		int a = homegoodsMapper.homegoodsrevise(hDTO);
-		int b = homegoodsMapper.filerevise(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = homegoodsMapper.filerevise(fDTO);
+		}else {
+			b =1;
+		}	
 		return a*b;
 	}
 
@@ -51,7 +61,12 @@ public class HomegoodsService implements IHomegoodsService{
 	public int homegoodsdelete(HomegoodsDTO hDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
 		int a = homegoodsMapper.homegoodsdelete(hDTO);
-		int b = homegoodsMapper.filedelete(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = homegoodsMapper.filedelete(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 

@@ -37,7 +37,7 @@
 			.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
 			.info .close:hover {cursor: pointer;}
 			.info .body {position: relative;overflow: hidden;}
-			.info .desc {position: relative; margin: 27px 0px; height: 37px;}
+			.info .desc {position: relative; margin: 27px 0px; height: 37px; white-space: normal; word-break: keep-all; padding: 0 18px;}
 			.desc .ellipsis {overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
 			.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
 			.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
@@ -183,8 +183,8 @@
       <!-- Heading Row -->
       <div class="row my-4">
       <form action="/pharmacySearch.do" method="post">
-	      <input type="text" name="address" placeholder="주소검색" style="width:500px;">
-		  <input type="submit" value="검색"><br><br/>
+	      <input type="text" name="address" placeholder="주소검색" style="width:500px;height:35px;">
+		  <input class="btn btn-outline-primary" type="submit" value="검색"><br><br/>
 	  </form>
 	  
 	  <div id="map" style="width:100%;height:350px;"></div>
@@ -209,11 +209,11 @@
 	    </tr>
 	    <tr>
 	        <th scope="row">전화번호</th>
-	        <td><%=pDTO.getPharmacyPhone() %></td>
+	        <td><%=pDTO.getPharmacyPhone() == null ? "전화번호가 없습니다." : pDTO.getPharmacyPhone() %></td>
 	    </tr>
 	    <tr>
 	        <th scope="row">주소</th>
-	        <td><%= "".equals(pDTO.getPharmacyAllAddress()) ? pDTO.getPharmacyRodAddress() : pDTO.getPharmacyAllAddress() %></td>
+	        <td><%=pDTO.getPharmacyAllAddress() == null ? pDTO.getPharmacyRodAddress() : pDTO.getPharmacyAllAddress() %></td>
 	    </tr>
 	</table> 
       

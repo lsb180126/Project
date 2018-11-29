@@ -29,7 +29,12 @@ public class SellService implements ISellService{
 	public int insertMember(SellDTO sDTO, FileDTO fDTO) throws Exception {
 		
 		int a = sellMapper.insertMember(sDTO);
-		int b = sellMapper.insertFile(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = sellMapper.insertFile(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 
@@ -49,7 +54,12 @@ public class SellService implements ISellService{
 	public int sellrevise(SellDTO sDTO, FileDTO fDTO) throws Exception {
 		
 		int a = sellMapper.sellrevise(sDTO);
-		int b = sellMapper.filerevise(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = sellMapper.filerevise(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 
@@ -57,7 +67,12 @@ public class SellService implements ISellService{
 	public int selldelete(SellDTO sDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
 		int a = sellMapper.selldelete(sDTO);
-		int b = sellMapper.filedelete(fDTO);
+		int b;
+		if(fDTO !=null) {
+			b = sellMapper.filedelete(fDTO);
+		}else {
+			b =1;
+		}
 		return a*b;
 	}
 

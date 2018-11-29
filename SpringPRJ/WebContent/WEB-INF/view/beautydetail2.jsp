@@ -27,7 +27,31 @@
 	    <style>
 	    .my-box { border:1px solid; padding: 5px;  }
 	    
+		table.type03 {
+		    border-collapse: collapse;
+		    text-align: left;
+		    line-height: 1.5;
+		    border-top: 1px solid #ccc;
+		    border-left: 3px solid #369;
+		  margin : 20px 10px;
+		}
+		table.type03 th {
+		    width: 147px;
+		    padding: 10px;
+		    font-weight: bold;
+		    vertical-align: top;
+		    color: #153d73;
+		    border-right: 1px solid #ccc;
+		    border-bottom: 1px solid #ccc;
 		
+		}
+		table.type03 td {
+		    width: 349px;
+		    padding: 10px;
+		    vertical-align: top;
+		    border-right: 1px solid #ccc;
+		    border-bottom: 1px solid #ccc;
+		}
 	    
 	    </style>
 	    
@@ -152,98 +176,95 @@
         
         	<form action="/writelist.do" method="POST">
         	
-			<table class="table">
+			<table class="type03">
 				
 				<tr>
 					
-					<th>미용 정보</th>
-					<td>
-						
-					</td>
-					<td>
-						<a href="/beautyrevise.do?beautySeqNo=<%=bDTO.getBeautySeqNo() %>"><input type="button" value="수정"></a>
-					</td>
-					<td>
-						<a href="/beautydelete.do?beautySeqNo=<%=bDTO.getBeautySeqNo() %>&fileSeq=<%=bDTO.getFileSeq()%>"><input type="button" value="삭제"></a>
-					</td> 
-					<%if(id.equals("33333")) { %>
-					<td>
-						<a href="beauty.do"><input type="button" value="목록"></a>
-					</td>
-					<%} else { %>
-					<td>
-						<a href="writelist.do?pageCount=${pageCount}&pageNum=${pageNum}"><input type="button" value="목록"></a>
-					</td>
-					<%  }  %>
+					<th scope="row">미용 정보</th>
+						<td colspan="5">
+							
+						</td>
+					
 					
 					
 				</tr>
 				
 				<tr>
-					<td>
-						<div class="my-box">
+					<th scope="row">
+						
 							작성자
-						</div>	
-					</td>
-					<td>
+							
+					</th>
+					<td colspan="2">
 					
-						<div class="my-box">
+						
 				           		<%=bDTO.getUserName() %>
-				        </div>
+				        
 				           
 				           
 					</td>
 					
 					
-					<td>
-						<div class="my-box">
+					<th scope="row">
+						
 						작성일
-						</div>
+						
 					</td>
 					
-					<td></td>
+					
 				
 					<td colspan="2">
-						<div class="my-box">
+						
 							<%=bDTO.getChgDt() %>
-						</div>
+						
 					</td>
 					
 					
 					</tr>
 					<tr>
-						<td>
-							<div class="my-box">
+						<th scope="row">
+							
 								제목
-							</div>
-						</td>
+							
+						</th>
 						<td colspan="5">
-							<div class="my-box">
+							
 				           		<%=bDTO.getTitle() %>
-				        	</div>
+				        	
 				        </td>
 				     </tr>
 				     <tr>
 				     	<td colspan="6" height="500px">
-				     		<div class="my-box" style="height:600px;">
-				     		<img src="/upload/<%=bDTO.getChgName()%>" height="200" width="200" >
+				     		<div style="height:600px;">
+				     		<% if(bDTO.getChgName() != null) {%>
+				     		<br/>
+				     		<img src="/upload/<%=bDTO.getChgName()%>" height="400" width="900" >
+				     		<%} %>
+				     		<br/><br/>
 				     			<%=bDTO.getBeautyContents() %>
 				     		</div>	
 				     	</td>
 			     	</tr>
-			     	<tr>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td></td>
-			     		<td>
-			     			
-			     		</td>
-		     		</tr>
+			     	
 
 
 				</table>
+				
+				<td>
+						<a href="/beautyrevise.do?beautySeqNo=<%=bDTO.getBeautySeqNo() %>"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="수정"></a>
+					</td>
+					<td>
+						<a href="/beautydelete.do?beautySeqNo=<%=bDTO.getBeautySeqNo() %>&fileSeq=<%=bDTO.getFileSeq()%>"><input class="btn btn-primary" style="float: right; margin-right: 70px; " type="button" value="삭제"></a>
+					</td> 
+					<%if(id.equals("33333")) { %>
+					<td>
+						<a href="beauty.do"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록"></a>
+					</td>
+					<%} else { %>
+					<td>
+						<a href="writelist.do?pageCount=${pageCount}&pageNum=${pageNum}"><input class="btn btn-primary" style="float: right; margin-right: 50px; " type="button" value="목록"></a>
+					</td>
+					<%  }  %>
 					
 				</form>
 				

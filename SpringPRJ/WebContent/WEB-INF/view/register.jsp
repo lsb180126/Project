@@ -25,7 +25,29 @@
         <![endif]-->
 
       <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+	<style>
+		#password, #passwordcheck {
+			height: 50px;
+			border-radius: 0px;
+		    font-size: 15px;
+		    padding-left: 21px;
+		}
+		::selection {
+		    background: #e36da1;
+		    color: #fff;
+		    text-shadow: none;
+		    border: 3px solid #e36da1;
+		}
+		#password:focus, #passwordcheck:foucs {
+			border: 3px solid #e36da1;
+		}
+		
+		label {
+		    padding: 10px 24px; 
+		    color: #999999;
+		    font-weight:normal;
+		}
+		</style>
 		
       <script>
       	 $(function() {
@@ -79,7 +101,13 @@
       			var name  = $("#name").val();
       			var email  = $("#email").val();
       			var gender = $('input[name="gender"]:checked').val(); 
-      				
+      			
+      			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      			
+      			  // 검증에 사용할 정규식 변수 regExp에 저장
+      			var passwordregExp = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
+
+      			  
       			if(id == "") {
       				alert("아이디를 입력해주세요");
       				return;
@@ -90,6 +118,15 @@
       			
       			if(password == "") {
       				alert("비밀번호를 입력해주세요");
+      				return;
+      			}else if(password.length <2) {
+      				alert("비밀번호를 2자리 이상 입력해주세요");
+      				return;
+      			}
+      			
+      			
+      			if(!password.match(passwordregExp) ) {
+      				alert("비밀번호를 6~20 영문 대소문자와 최소 1개의 숫자 혹은 특수 문자를 포함해야합니다");
       				return;
       			}
       			
@@ -106,8 +143,12 @@
       				return;
       			}
       			
+      			
       			if(email == "") {
       				alert("이메일을 입력해주세요");
+      				return;
+      			}else if(!email.match(regExp)) {
+      				alert("이메일을 올바르게 입력해주세요");
       				return;
       			}
       			
@@ -168,11 +209,11 @@
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-last-name">password</label>
-									<input type="text" name="password" placeholder="비밀번호" class="r-form-1-last-name form-control" id="password">
+									<input type="password" name="password" placeholder="비밀번호" class="r-form-1-last-name form-control" id="password">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-last-name">passwordcheck</label>
-									<input type="text" name="passwordcheck" placeholder="비밀번호확인" class="r-form-1-last-name form-control" id="passwordcheck">
+									<input type="password" name="passwordcheck" placeholder="비밀번호확인" class="r-form-1-last-name form-control" id="passwordcheck">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-email">name</label>
@@ -182,9 +223,13 @@
 									<label class="sr-only" for="r-form-1-email">email</label>
 									<input type="text" name="email" placeholder="이메일" class="r-form-1-email form-control" id="email">
 								</div>
-    							<div class="">
-									<input type="radio" name="gender" value="man">남자
-									<input type="radio" name="gender" value="woman">여자
+    							<div class="" id="labelMan" style="color:black; font-size:16px; height:50px; background:#fff; margin-bottom: 15px;">
+									<input type="radio" class="gender" name="gender" value="man" id="man" style="display:none;">
+									<label  for="man" style=" width:100%">남자</label>
+								</div>
+    							<div class="" id="labelWoman" style="color:black; font-size:16px; height:50px; background:#fff; margin-bottom: 15px;">
+									<input type="radio" class="gender" name="gender" value="woman" id="woman" style="display:none;">
+									<label for="woman" style=" width:100%; ">여자</label>
 								</div>
 								<div class="form-group">
 									<button type="button" class="btn" id="ok">등록</button>
@@ -216,5 +261,24 @@
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
+        
+        <script>
+        	$('.gender').change(function() {
+        		if($('#man').prop('checked')) {
+        			$('#labelMan').css('background', '#e36da1');
+        			$('#labelMan>label').css('color', 'white');
+        			
+        			$('#labelWoman').css('background', 'white');
+        			$('#labelWoman>label').css('color', '#999999');
+        		} else {
+        			$('#labelMan').css('background', 'white');
+        			$('#labelWoman>label').css('color', 'white');
+        			
+        			$('#labelWoman').css('background', '#e36da1');
+        			$('#labelMan>label').css('color', '#999999');
+        		};
+        		
+        	})
+        </script>
 	</body>
 </html>
