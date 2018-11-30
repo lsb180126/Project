@@ -50,13 +50,13 @@
 		</style>
 		
       <script>
+      //아이디 중복
       	 $(function() {
       		
       		var check = false;
       		 
       		$("#check").click(function(){
       			var id  = $("#idcheck").val();
-      			alert (id);
       			
       			$.ajax({
       				data:{"id":id},
@@ -72,6 +72,46 @@
       					}
       					else {
       						alert("중복되는 아이디입니다.");
+      						
+      						
+      					}
+      					
+      					
+      					
+      				},
+      				error:function(error) {
+      					console.log(error);
+      				}
+      				
+      			})
+      				
+      			
+      		})
+      		
+      	})	
+      //이름, 이메일 중복
+      	 $(function() {
+      		
+      		var check = false;
+      		 
+      		$("#checkIdEmail").click(function(){
+      			var name  = $("#name").val();
+      			var email = $("#email").val();
+      			
+      			$.ajax({
+      				data:{"name":name, "email":email},
+      				url:"/checkIdEmail.do",
+      				type:"POST",
+      				dataType:"json",
+      				success:function(data) {
+      					
+      					if(data==0) {
+      						alert("사용 가능한 이름 및 이메일입니다.");
+      						
+      						check = true;
+      					}
+      					else {
+      						alert("중복된 이름 및 이메일입니다.");
       						
       						
       					}
@@ -111,8 +151,8 @@
       			if(id == "") {
       				alert("아이디를 입력해주세요");
       				return;
-      			}else if(id.length <5) {
-      				alert("id를 5자리이상 입력해주세요");
+      			}else if(id.length <4) {
+      				alert("id를 4자리이상 입력해주세요");
       				return;
       			}
       			
@@ -223,6 +263,9 @@
 									<label class="sr-only" for="r-form-1-email">email</label>
 									<input type="text" name="email" placeholder="이메일" class="r-form-1-email form-control" id="email">
 								</div>
+								<div class="form-group">
+									<button type="button" class="btn" id="checkIdEmail">이메일, 이름 중복확인</button>
+								</div>
     							<div class="" id="labelMan" style="color:black; font-size:16px; height:50px; background:#fff; margin-bottom: 15px;">
 									<input type="radio" class="gender" name="gender" value="man" id="man" style="display:none;">
 									<label  for="man" style=" width:100%">남자</label>
@@ -233,7 +276,10 @@
 								</div>
 								<div class="form-group">
 									<button type="button" class="btn" id="ok">등록</button>
-									<a href="index.do">[HOME]</a>
+									
+								</div>
+								<div class="form-group">
+									<a href="index.do"><button type="button" class="btn" id="home">HOME</button></a>
 								</div>
 								
 							</form>

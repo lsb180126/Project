@@ -199,7 +199,7 @@
 							작성자
 					</th>
 					<td colspan="2">
-				           	<%=bDTO.getUserName() %>
+				           	<%=CmmUtil.nvl(bDTO.getUserName()) %>
 					</td>
 					
 					
@@ -209,7 +209,7 @@
 					
 				
 					<td colspan="2">
-							<%=bDTO.getChgDt() %>
+							<%=CmmUtil.nvl(bDTO.getChgDt()) %>
 					</td>
 					
 					
@@ -219,7 +219,7 @@
 								제목
 					</th>
 					<td colspan="5">
-				           	<%=bDTO.getTitle() %>
+				           	<%=CmmUtil.nvl(bDTO.getTitle()) %>
 				    </td>
 				</tr>
 				     
@@ -230,16 +230,16 @@
 				     	
 				     		<div style="height:600px;">
 				     		<br/>
-				     		<img src="/upload/<%=bDTO.getChgName()%>" height="400" width="900" ><br/><br/>
-				     			<%=bDTO.getBeautyContents()%>
+				     		<img src="/upload/<%=CmmUtil.nvl(bDTO.getChgName())%>" height="400" width="900" ><br/><br/>
+				     			
 				     			
 				     		</div>	
 				     	</td>
-				     <% } else { %>
-				     	<td colspan="6" height="500px">
-				     		<%=bDTO.getBeautyContents()%>
+				      <% }%>
+				     	<td colspan="6" height="500px" id="contents" style="white-space: pre-wrap">
+				     		
 				     	</td>
-				     <% }%>
+				    
 			     	</tr>
 			     	
 
@@ -248,10 +248,10 @@
 				
 				<%if(id.equals("33333")) { %>
 					<td>
-						<a href="/beautyrevise.do?beautySeqNo=<%=bDTO.getBeautySeqNo()%>"><input class="btn btn-primary" type="button" value="수정"></a>
+						<a href="/beautyrevise.do?beautySeqNo=<%=CmmUtil.nvl(bDTO.getBeautySeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/beautydelete.do?beautySeqNo=<%=bDTO.getBeautySeqNo()%>&fileSeq=<%=bDTO.getFileSeq()%>"><input class="btn btn-primary" type="button" value="삭제"></a>
+						<a href="/beautydelete.do?beautySeqNo=<%=CmmUtil.nvl(bDTO.getBeautySeqNo())%>&fileSeq=<%=CmmUtil.nvl(bDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
@@ -279,7 +279,10 @@
     <!--starRev JavaScript -->
     <script type="text/javascript" src="javascript/starRev.jsp"></script>
     
-    
+     <script>
+		var temp = '<%=bDTO.getBeautyContents().replace("\"","\\\"").replace("'","\\\'").replace("<br>","\\r\\n") %>';
+		$('#contents').text(temp);
+	</script>
 	
 	</body>
 </html>

@@ -223,7 +223,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         
-				<table class="table table-hover">
+				<table class="table table-hover" style="table-layout-fixed">
 					<tr>
 						<th scope="row" colspan="2">작성 목록</th>
 						<td>
@@ -256,8 +256,8 @@
 				<% for(AllDTO a : aList) { %>
 				<tr>
 					<td><%=a.getBoardName() %></td>
-					<td><%=a.getReviewSeqNo() %></td>
-					<td colspan="2">
+					<td width="100" style="text-overflow:ellipsis; overflow:hidden; width: 110px;"><%=a.getReviewSeqNo() %></td>
+					<td colspan="2" width="100" style="text-overflow:ellipsis; overflow:hidden">
 						<%if(("리뷰").equals(a.getBoardName())) { %>
 							<a href="/writedetail.do?reviewSeqNo=<%=a.getReviewSeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>">
 						<%} else if( ("자유토크").equals(a.getBoardName())) { %>
@@ -276,7 +276,7 @@
 					</td>
 					
 					<td><%=a.getChgDt() %></td>
-					<td><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%><td>
+					<td width="100" style="text-overflow:ellipsis; overflow:hidden;  width: 140px;"><%=( (a.getReviewName() == null) ? " " : a.getReviewName())%><td>
 				</tr>
 				<% } %> 
 						
@@ -390,4 +390,3 @@
 		return pagingStr;
 	}
 %>
-

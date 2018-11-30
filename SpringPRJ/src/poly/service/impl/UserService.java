@@ -127,4 +127,20 @@ public class UserService implements IUserService{
 		return userMapper.userdelete(uDTO);
 	}
 
+	@Override
+	public void getLoginInfo2(UserDTO uDTO3) throws Exception {
+		// TODO Auto-generated method stub
+		userMapper.getLoginInfo2(uDTO3);
+	}
+
+	@Override
+	public int checkDuplicationEmail(String email) throws Exception {
+		return userMapper.checkDuplicationEmail(email);
+	}
+
+	@Override
+	public int checkDuplicationName(String name) throws Exception {
+		return userMapper.checkDuplicationName(name);
+	}
+
 }

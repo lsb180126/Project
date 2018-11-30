@@ -200,7 +200,7 @@
 							작성자
 					</th>
 					<td colspan="2">
-				           	<%=sDTO.getUserName() %>
+				           	<%=CmmUtil.nvl(sDTO.getUserName()) %>
 					</td>
 
 					<th scope="row">
@@ -208,7 +208,7 @@
 					</th>
 					
 					<td colspan="2">
-							<%=sDTO.getChgDt() %>
+							<%=CmmUtil.nvl(sDTO.getChgDt()) %>
 					</td>
 					
 					
@@ -218,7 +218,7 @@
 							제목
 					</th>
 					<td colspan="5">
-				           	<%=sDTO.getTitle() %>
+				           	<%=CmmUtil.nvl(sDTO.getTitle()) %>
 				        	
 				    </td>
 				</tr>
@@ -230,16 +230,16 @@
 				     	
 				     		<div style="height:600px;">
 				     		<br/>
-				     		<img src="/upload/<%=sDTO.getChgName()%>" height="400" width="900" ><br/><br/>
-				     			<%=sDTO.getSellContents() %>
+				     		<img src="/upload/<%=CmmUtil.nvl(sDTO.getChgName())%>" height="400" width="900" ><br/><br/>
+				     			
 				     			
 				     		</div>	
 				     	</td>
-				      <% } else { %>
-				     	<td colspan="6" height="500px">
-				     		<%=sDTO.getSellContents() %>
-				     	</td>
 				     <% }%>	
+				     	<td colspan="6" height="500px" id="contents" style="white-space: pre-wrap">
+				     		
+				     	</td>
+				     
 			     	</tr>
 			     	
 
@@ -248,10 +248,10 @@
 				
 				<%if(id.equals("33333")) { %>
 					<td>
-						<a href="/sellrevise.do?sellSeqNo=<%=sDTO.getSellSeqNo()%>"><input class="btn btn-primary" type="button" value="수정"></a>
+						<a href="/sellrevise.do?sellSeqNo=<%=CmmUtil.nvl(sDTO.getSellSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/selldelete.do?sellSeqNo=<%=sDTO.getSellSeqNo()%>&fileSeq=<%=sDTO.getFileSeq()%>"><input class="btn btn-primary" type="button" value="삭제"></a>
+						<a href="/selldelete.do?sellSeqNo=<%=CmmUtil.nvl(sDTO.getSellSeqNo())%>&fileSeq=<%=CmmUtil.nvl(sDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
@@ -279,7 +279,10 @@
     <!--starRev JavaScript -->
     <script type="text/javascript" src="javascript/starRev.jsp"></script>
     
-    
+     <script>
+		var temp = '<%=sDTO.getSellContents().replace("\"","\\\"").replace("'","\\\'").replace("<br>","\\r\\n") %>';
+		$('#contents').text(temp);
+	</script>
 	
 	</body>
 </html>

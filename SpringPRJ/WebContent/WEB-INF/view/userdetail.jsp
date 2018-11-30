@@ -31,7 +31,42 @@
 	    <style>
 	    .my-box { border:1px solid; padding: 5px;  }
 	    
+		table.type03 {
+		    border-collapse: collapse;
+		    text-align: left;
+		    line-height: 1.5;
+		    border-top: 1px solid #ccc;
+		    border-left: 3px solid #369;
+		  margin : 20px 10px;
+		}
+		table.type03 th {
+		    width: 147px;
+		    padding: 10px;
+		    font-weight: bold;
+		    vertical-align: top;
+		    color: #153d73;
+		    border-right: 1px solid #ccc;
+		    border-bottom: 1px solid #ccc;
 		
+		}
+		table.type03 td {
+		    width: 349px;
+		    padding: 10px;
+		    vertical-align: top;
+		    border-right: 1px solid #ccc;
+		    border-bottom: 1px solid #ccc;
+		}
+		
+		table.type03 th{
+			font-size:20px;
+		}
+	    .btn {
+	    	font-size: 20px;
+   			width: 14%;
+	    }
+	    table.type03 td {
+	    	font-size:20px;
+	    }
 	    
 	    </style>
 	    
@@ -153,58 +188,60 @@
     </nav>
 	
 	
-	<div class="container">
+	<div class="container" style="margin-top:48px;">
       <div class="row">
         <div class="col-lg-12 text-center">
         
         	<form>
-			<table class="table">
+			<table class="type03 table">
 				
 				<tr>
 					
-					<th><%=uDTO.getUserId() + "님의 회원정보" %></th>
-					<td colspan="2">
+					<th scope="row" colspan="3"><%=uDTO.getUserId() + "님의 회원정보" %></th>
+					<td colspan="3">
+					
 					</td>
 					
 				</tr>
 					
 				<tr>
 					
-					<td>아이디</td>
-					<td colspan="2"><%=uDTO.getUserId() %></td>
+					<th scope="row" colspan="3">아이디</th>
+					<td colspan="3"><%=uDTO.getUserId() %></td>
 					
 					
 				</tr>
 				<tr>
 				
-					<td>이름</td>
-					<td colspan="2"><%=uDTO.getUserName()%></td>
+					<th scope="row" colspan="3">이름</th>
+					<td colspan="3"><%=uDTO.getUserName()%></td>
 					
 				</tr>
 				<tr>
-				     <td>성별</td>
-					 <td colspan="2"><%=uDTO.getGender()%></td>	
+				     <th scope="row" colspan="3">성별</th>
+					 <td colspan="3"><%=uDTO.getGender()%></td>	
 				     	
 			    </tr>
 			    <tr>
-			     	<td>이메일</td>
-					<td colspan="2"><%=uDTO.getEmail()%></td>
+			     	<th scope="row" colspan="3">이메일</th>
+					<td colspan="3"><%=uDTO.getEmail()%></td>
 		     	</tr>
 		     	
 		     	
-		     	<tr>
+		     	
+				</table>
+				
 					<td>
 						<input type="hidden" value="<%=uDTO.getUserSeqNo()%>" name="userSeqNo">
-						<a href="/userrevise.do?userSeqNo=<%=uDTO.getUserSeqNo()%>"><input type="button" value="수정"></a>
+						<a href="/userrevise.do?userSeqNo=<%=uDTO.getUserSeqNo()%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/userdelete.do?userSeqNo=<%=uDTO.getUserSeqNo()%>"><input type="button" value="탈퇴"></a>
+						<a href="/userdelete.do?userSeqNo=<%=uDTO.getUserSeqNo()%>"><input class="btn btn-danger" type="button" value="탈퇴"></a>
 					</td>
 					<td>
-						<a href="javascript:goPage();"><input type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
 					</td>
-				</tr>
-				</table>
+				
 				</form>
 				
 			     	<br/>

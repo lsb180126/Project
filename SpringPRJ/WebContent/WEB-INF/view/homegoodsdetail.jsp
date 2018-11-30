@@ -200,7 +200,7 @@
 							작성자
 					</th>
 					<td colspan="2">
-				           	<%=hDTO.getUserName() %>
+				           	<%=CmmUtil.nvl(hDTO.getUserName()) %>
 					</td>
 					
 					
@@ -211,7 +211,7 @@
 					
 				
 					<td colspan="2">
-							<%=hDTO.getChgDt() %>
+							<%=CmmUtil.nvl(hDTO.getChgDt()) %>
 					</td>
 					
 					
@@ -221,7 +221,7 @@
 							제목
 					</th>
 					<td colspan="5">
-				           	<%=hDTO.getTitle() %>
+				           	<%=CmmUtil.nvl(hDTO.getTitle()) %>
 				    </td>
 				</tr>
 				      
@@ -232,16 +232,16 @@
 				     	
 				     		<div style="height:600px;">
 				     		<br/>
-				     		<img src="/upload/<%=hDTO.getChgName()%>" height="400" width="900" ><br/><br/>
-				     			<%=hDTO.getHomegoodsContents() %>
+				     		<img src="/upload/<%=CmmUtil.nvl(hDTO.getChgName())%>" height="400" width="900" ><br/><br/>
+				     			
 				     			
 				     		</div>	
 				     	</td>
-				     <% } else { %>
-				     	<td colspan="6" height="500px">
-				     		<%=hDTO.getHomegoodsContents() %>
-				     	</td>
 				     <% }%>	
+				     	<td colspan="6" height="500px"  id="contents" style="white-space: pre-wrap">
+				     		
+				     	</td>
+				    
 			     	</tr>
 			     	
 
@@ -250,10 +250,10 @@
 				
 					<%if(id.equals("33333")) { %>
 					<td>
-						<a href="/homegoodsrevise.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo()%>"><input class="btn btn-primary" type="button" value="수정"></a>
+						<a href="/homegoodsrevise.do?homegoodsSeqNo=<%=CmmUtil.nvl(hDTO.getHomegoodsSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/homegoodsdelete.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo()%>&fileSeq=<%=hDTO.getFileSeq()%>"><input class="btn btn-primary" type="button" value="삭제"></a>
+						<a href="/homegoodsdelete.do?homegoodsSeqNo=<%=CmmUtil.nvl(hDTO.getHomegoodsSeqNo())%>&fileSeq=<%=CmmUtil.nvl(hDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
@@ -281,7 +281,10 @@
     <!--starRev JavaScript -->
     <script type="text/javascript" src="javascript/starRev.jsp"></script>
     
-    
+    <script>
+		var temp = '<%=hDTO.getHomegoodsContents().replace("\"","\\\"").replace("'","\\\'").replace("<br>","\\r\\n") %>';
+		$('#contents').text(temp);
+	</script>
 	
 	</body>
 </html>

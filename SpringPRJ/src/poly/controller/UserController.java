@@ -134,11 +134,11 @@ public class UserController {
 		String url;
 		if(uDTO == null) {
 			model.addAttribute("msg", "이메일 인증되지않았습니다.");
-			model.addAttribute("url", "/index.do");
+			model.addAttribute("url", "/login.do");
 			
 		}else{
 			model.addAttribute("msg", "이메일 인증되었습니다.");
-			model.addAttribute("url", "/index.do");
+			model.addAttribute("url", "/login.do");
 		}
 		
 		
@@ -164,6 +164,26 @@ public class UserController {
 		return count;
 		
 	}
+	//이름, 이메일 중복  체크
+	@RequestMapping(value="/checkIdEmail", method=RequestMethod.POST)
+	public @ResponseBody int checkIdEmail(HttpServletRequest request) throws Exception {
+		
+		String name = CmmUtil.nvl(request.getParameter("name"));
+		String email = CmmUtil.nvl(request.getParameter("email"));
+		
+		log.info("welcome ajaxTest");
+		log.info("email :" + email);
+		log.info("name :" + name);
+		
+		int countEmail = userService.checkDuplicationEmail(email);
+		int countName = userService.checkDuplicationName(name);
+		
+		log.info(countEmail);
+		log.info(countName);
+		
+		return countEmail + countName;
+		
+	}
 	
 	
 	@RequestMapping(value="loginProc", method=RequestMethod.POST)
@@ -187,24 +207,32 @@ public class UserController {
 		uDTO.setUserId(id);
 		uDTO.setPassword(password);
 		
+		UserDTO uDTO3 = new UserDTO();
+	
 		
-		uDTO=userService.getLoginInfo(uDTO);
+		uDTO3=userService.getLoginInfo(uDTO);
 		
-		
-		
-		if(uDTO == null) {
+		if(uDTO3 == null) {
 			model.addAttribute("msg", "로그인이 실패하였습니다.");
-			model.addAttribute("msg", "이메일 인증을 해주세요");
+			model.addAttribute("url", "/login.do");
+			return "/redirect2";
+		}
+		String emailConfirm = uDTO3.getEmailConfirm();
+		
+		if(uDTO3 == null || ("N".equals(emailConfirm))) {
+			model.addAttribute("msg", "로그인이 실패하였습니다.");
+			model.addAttribute("url", "/login.do");
 			
 		} else {
-			session.setAttribute("id", uDTO.getUserId());
-			session.setAttribute("name", uDTO.getUserName());
-			session.setAttribute("gender", uDTO.getGender());
-			session.setAttribute("userSeqNo", uDTO.getUserSeqNo());
+			session.setAttribute("id", uDTO3.getUserId());
+			session.setAttribute("name", uDTO3.getUserName());
+			session.setAttribute("gender", uDTO3.getGender());
+			session.setAttribute("userSeqNo", uDTO3.getUserSeqNo());
 			model.addAttribute("msg", "로그인 되었습니다.");
+			model.addAttribute("url", "/index.do");
 		}
 		
-		model.addAttribute("url", "/index.do");
+		
 		
 		return "/redirect2" ;
 		
@@ -448,10 +476,14 @@ public class UserController {
 		log.info("welcome mylist");
 		
 		String id = (String)session.getAttribute("id");
+		String name = (String)session.getAttribute("name");
+		String gender = (String)session.getAttribute("gender");
 		
 		UserDTO uDTO = new UserDTO();
 		
 		uDTO.setUserId(id);
+		uDTO.setUserName(name);
+		uDTO.setGender(gender);
 		
 		uDTO=userService.getmyList(uDTO);
 		
@@ -474,10 +506,14 @@ public class UserController {
 		log.info("welcome mylistrevise");
 		
 		String email = request.getParameter("email");
+		
+		
 		log.info(email);
 		
 	
 		model.addAttribute("email", email);
+		
+		
 		
 		return "/mylistrevise";
 		
@@ -490,6 +526,8 @@ public class UserController {
 		log.info("welcome mylistrevise2");
 		
 		String email = request.getParameter("email");
+		
+		
 		String userId = (String)session.getAttribute("id");
 		log.info(email);
 		log.info(userId);
@@ -498,6 +536,8 @@ public class UserController {
 		
 		uDTO.setEmail(email);
 		uDTO.setUserId(userId);
+		
+		
 		
 		int result = userService.mylistrevise(uDTO);
 		log.info(result);

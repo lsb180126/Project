@@ -48,7 +48,7 @@
 				
 				/* Style the search field */
 				form.example input[type=text] {
-				  padding: 10px;
+				  padding: 7px;
 				  font-size: 17px;
 				  border: 1px solid grey;
 				  float: left;
@@ -60,7 +60,7 @@
 				form.example button {
 				  float: left;
 				  width: 20%;
-				  padding: 10px;
+				  padding: 7px;
 				  background: #2196F3;
 				  color: white;
 				  font-size: 17px;
@@ -229,15 +229,15 @@
       <div class="row">
         <div class="col-lg-12 text-center">
         	
-			<table class="table">
+			<table class="table table-hover">
 				<tr>
 					
-					<td>회원 정보</td>
+					<th scope="row" colspan="2">회원 정보</th>
 					<td>
 						
 					</td>
 					
-					<td></td>
+					
 					<td>
 						<form class="example" action="/userlist.do" method="POST">
 						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
@@ -252,7 +252,7 @@
 					</td>
 				</tr>
 			
-				<tr>
+				<tr style="border-bottom:2px solid #dee2e6;">
 					
 						<th colspan="2">아이디</th>
 						<th>이름</th>
@@ -284,11 +284,11 @@
 			</div>
 			</div>
 			<div class="layer">
-				
-				<%=
-					fnPaging(paging.getPage_count(), 10, paging.getPage_num(), paging.getTotal_count())
-				%>
-				
+				<div class="btn-group">
+					<%=
+						fnPaging(paging.getPage_count(), 10, paging.getPage_num(), paging.getTotal_count())
+					%>
+				</div>
 			</div>
      <!-- Bootstrap core JavaScript -->
     
@@ -328,25 +328,24 @@
 		//만약 현재 블럭의 시작 페이지가 1보다 크다면. 이전 블럭 . 처음 블럭 버튼 생성.
 		if(startPage > 1){
 			//pagingStr = "[<<1][<"+(startPage-1)+"]";
-			pagingStr =  "<input type=button value=<< onclick='goPage(1);'>";
-			pagingStr += "<input type=button value=<  onclick='goPage("+(startPage-1)+");'>";
+			pagingStr =  "<input class='btn btn-outline-dark' type=button value=<< onclick='goPage(1);'>";
+			pagingStr += "<input class='btn btn-outline-dark' type=button value=<  onclick='goPage("+(startPage-1)+");'>";
 		}
 		
 		for(int i = startPage ; i <= endPage ; i++){
 			
-			if(i == pageNum )pagingStr += "[현재]";
+			if(i == pageNum )pagingStr += "<input class='btn btn-outline-dark' type='button' value='현재'>";
 			//else pagingStr += "["+i+"]";
-			else pagingStr += "<input type=button value="+i+" onclick='goPage("+i+");'>";
+			else pagingStr += "<input class='btn btn-outline-dark' type=button value="+i+" onclick='goPage("+i+");'>";
 		}
 		
 		//만약 현재 블럭의 마지막 페이지가 전체 마지막 페이지보다 작다면. 다음블럭, 마지막 블럭 버튼 생성. 
 		if(endPage < totalPageCount){
 			//pagingStr += "[>"+(endPage+1)+"][>>"+totalPageCount+"]";
-			pagingStr += "<input type=button value='>'  onclick='goPage("+(endPage+1)+");'>";
-			pagingStr += "<input type=button value='>>' onclick='goPage("+totalPageCount+");'>";
+			pagingStr += "<input class='btn btn-outline-dark' type=button value='>'  onclick='goPage("+(endPage+1)+");'>";
+			pagingStr += "<input class='btn btn-outline-dark' type=button value='>>' onclick='goPage("+totalPageCount+");'>";
 		}
 		
 		return pagingStr;
 	}
 %>
-

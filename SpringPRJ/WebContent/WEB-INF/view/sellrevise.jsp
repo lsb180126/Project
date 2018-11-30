@@ -171,10 +171,10 @@
 					</td>
 					<td>
 						<input type="hidden" value="<%=sDTO.getSellSeqNo()%>" name="sellSeqNo">
-						<input type="submit" value="수정">
+						<input class="btn btn-outline-primary" type="submit" value="수정">
 					</td>
 					<td>
-						<a href="/selldetail2.do?sellSeqNo=<%=sDTO.getSellSeqNo() %>"><input type="button" value="이전"></a>
+						<a href="/selldetail2.do?sellSeqNo=<%=sDTO.getSellSeqNo() %>"><input class="btn btn-outline-primary" type="button" value="이전"></a>
 					</td>
 					
 					

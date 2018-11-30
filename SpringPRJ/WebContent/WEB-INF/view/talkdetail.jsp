@@ -197,7 +197,7 @@
 							작성자
 					</th>
 					<td colspan="2">
-				   		<%=tDTO.getUserName() %>    
+				   		<%=CmmUtil.nvl(tDTO.getUserName()) %>    
 					</td>
 					
 					<th scope="row">
@@ -205,7 +205,7 @@
 					</th>
 					
 					<td colspan="2">
-							<%=tDTO.getChgDt() %>
+							<%=CmmUtil.nvl(tDTO.getChgDt()) %>
 					</td>
 					
 					
@@ -215,7 +215,7 @@
 								제목
 					</th>
 					<td colspan="5">
-				           <%=tDTO.getTitle() %>
+				           <%=CmmUtil.nvl(tDTO.getTitle()) %>
 				        	
 				    </td>
 				 </tr>
@@ -227,16 +227,16 @@
 				     	
 				     		<div style="height:600px;">
 				     		<br/>
-				     		<img src="/upload/<%=tDTO.getChgName()%>" height="400" width="900" ><br/><br/>
-				     			<%=tDTO.getTalkContents() %>
+				     		<img src="/upload/<%=CmmUtil.nvl(tDTO.getChgName())%>" height="400" width="900" ><br/><br/>
+				     			
 				     			
 				     		</div>	
 				     	</td>
-				     <% } else { %>
-				     	<td colspan="6" height="500px">
-				     		<%=tDTO.getTalkContents() %>
+				      <%} %>
+				     	<td colspan="6" height="500px" id="contents" style="white-space: pre-wrap">
+				     		
 				     	</td>
-				     <% }%>
+				    
 			     	</tr>
 			     	
 
@@ -245,10 +245,10 @@
 				
 				<%if(id.equals("33333")) { %>
 					<td>
-						<a href="/talkrevise.do?talkSeqNo=<%=tDTO.getTalkSeqNo()%>"><input class="btn btn-primary" type="button" value="수정"></a>
+						<a href="/talkrevise.do?talkSeqNo=<%=CmmUtil.nvl(tDTO.getTalkSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/talkdelete.do?talkSeqNo=<%=tDTO.getTalkSeqNo()%>&fileSeq=<%=tDTO.getFileSeq()%>"><input class="btn btn-primary" type="button" value="삭제"></a>
+						<a href="/talkdelete.do?talkSeqNo=<%=CmmUtil.nvl(tDTO.getTalkSeqNo())%>&fileSeq=<%=CmmUtil.nvl(tDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
@@ -276,7 +276,10 @@
     <!--starRev JavaScript -->
     <script type="text/javascript" src="javascript/starRev.jsp"></script>
     
-    
+    <script>
+		var temp = '<%=tDTO.getTalkContents().replace("\"","\\\"").replace("'","\\\'").replace("<br>","\\r\\n") %>';
+		$('#contents').text(temp);
+	</script>
 	
 	</body>
 </html>

@@ -111,7 +111,7 @@
 		      			var passwordcheck  = $("#passwordcheck").val();
 		      			
 		      			if(password == "") {
-		      				alert("비밀번호를 입력해주세요");
+		      				alert("새 비밀번호를 입력해주세요");
 		      				return false;
 		      			}
 		      			

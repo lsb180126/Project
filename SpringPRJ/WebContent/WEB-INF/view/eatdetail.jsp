@@ -199,7 +199,7 @@
 							작성자
 					</th>
 					<td colspan="2">
-				          <%=eDTO.getUserName() %>
+				          <%=CmmUtil.nvl(eDTO.getUserName()) %>
 					</td>
 					
 					<th scope="row">
@@ -207,7 +207,7 @@
 					</th>
 					
 					<td colspan="2">
-							<%=eDTO.getChgDt() %>
+							<%=CmmUtil.nvl(eDTO.getChgDt()) %>
 					</td>
 					
 					
@@ -217,7 +217,7 @@
 							제목
 					</th>
 					<td colspan="5">
-				           <%=eDTO.getTitle() %>
+				           <%=CmmUtil.nvl(eDTO.getTitle()) %>
 				    </td>
 				</tr>
 				     
@@ -229,16 +229,16 @@
 				     	
 				     		<div style="height:600px;">
 				     		<br/>
-				     		<img src="/upload/<%=eDTO.getChgName()%>" height="400" width="900" ><br/><br/>
-				     			<%=eDTO.getEatContents() %>
+				     		<img src="/upload/<%=CmmUtil.nvl(eDTO.getChgName())%>" height="400" width="900" ><br/><br/>
+				     			
 				     			
 				     		</div>	
 				     	</td>
-				      <%} else { %>
-				      	<td colspan="6" height="500px">
-				      		<%=eDTO.getEatContents() %>
+				       <%} %>
+				      	<td colspan="6" height="500px" id="contents" style="white-space: pre-wrap">
+				      		
 				      	</td>
-				      <% }%>
+				      
 				      	
 			     	</tr>
 			     
@@ -248,10 +248,10 @@
 				
 				<%if(id.equals("33333")) { %>
 					<td>
-						<a href="/eatrevise.do?eatSeqNo=<%=eDTO.getEatSeqNo()%>"><input class="btn btn-primary" type="button" value="수정"></a>
+						<a href="/eatrevise.do?eatSeqNo=<%=CmmUtil.nvl(eDTO.getEatSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/eatdelete.do?eatSeqNo=<%=eDTO.getEatSeqNo()%>&fileSeq=<%=eDTO.getFileSeq()%>"><input class="btn btn-primary" type="button" value="삭제"></a>
+						<a href="/eatdelete.do?eatSeqNo=<%=CmmUtil.nvl(eDTO.getEatSeqNo())%>&fileSeq=<%=CmmUtil.nvl(eDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
@@ -279,7 +279,10 @@
     <!--starRev JavaScript -->
     <script type="text/javascript" src="javascript/starRev.jsp"></script>
     
-    
+    <script>
+		var temp = '<%=eDTO.getEatContents().replace("\"","\\\"").replace("'","\\\'").replace("<br>","\\r\\n") %>';
+		$('#contents').text(temp);
+	</script>
 	
 	</body>
 </html>

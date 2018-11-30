@@ -173,10 +173,10 @@
 						
 						
 						<input type="hidden" value="<%=mDTO.getReviewSeqNo()%>" name="reviewSeqNo">
-						<input type="submit" value="수정">
+						<input class="btn btn-outline-primary" type="submit" value="수정">
 					</td>
 					<td>
-						<a href="/writedetail.do?reviewSeqNo=<%=mDTO.getReviewSeqNo() %>"><input type="button" value="이전"></a>
+						<a href="/writedetail.do?reviewSeqNo=<%=mDTO.getReviewSeqNo() %>"><input class="btn btn-outline-primary" type="button" value="이전"></a>
 					</td>
 					
 					

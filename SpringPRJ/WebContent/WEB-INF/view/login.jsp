@@ -16,7 +16,12 @@
         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/form-elements.css">
         <link rel="stylesheet" href="assets/css/style.css">
-        
+     	<!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+                
         
         
         
@@ -38,10 +43,26 @@
 	
 		<script>
 		
-			
-		
-		
-		
+		 $(function() {
+	      		
+	      		var check=false;
+	      		 
+	      		$("#hi").click(function(event){
+	      			var id  = $("#id").val();
+	      			var password  = $("#password").val();
+	      			
+      			if(id == "") {
+      				alert("아이디를 입력해주세요");
+      				return;
+      			}
+      			if(password == "") {
+      				alert("비밀번호를 입력해주세요");
+      				return;
+      			}
+      			
+      			$("#f1").submit();
+	      		})
+	      		})
 		</script>
 </head>
 <body>
@@ -91,10 +112,10 @@
 			                        	<label class="sr-only" for="form-password">password</label>
 			                        	<input type="password" name="password" placeholder="비밀번호" class="form-password form-control" id="password">
 			                        </div>
-			                        <button type="submit" class="btn" id="hi">로그인</button> &nbsp;
+			                        <button type="button" class="btn" id="hi">로그인</button> &nbsp;
 			                        <a href="idfind.do"><button type="button" class="btn">ID찾기</button></a> &nbsp;
-			                        <a href="pwfind.do"><button type="button" class="btn">PASSWORD찾기</button></a>
-			                        <a href="index.do">HOME</a>
+			                        <a href="pwfind.do"><button type="button" class="btn">PASSWORD찾기</button></a>&nbsp;
+			                        <a href="index.do"><button type="button" class="btn">HOME</button></a>
 			                    </form>
 		                    </div>
                         </div>
@@ -106,12 +127,7 @@
         </div>
 
 
-        <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
-        
+   
        
         
         <!--[if lt IE 10]>

@@ -171,10 +171,10 @@
 					</td>
 					<td>
 						<input type="hidden" value="<%=hDTO.getHomegoodsSeqNo()%>" name="homegoodsSeqNo">
-						<input type="submit" value="수정">
+						<input class="btn btn-outline-primary" type="submit" value="수정">
 					</td>
 					<td>
-						<a href="/homegoodsdetail2.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo() %>"><input type="button" value="이전"></a>
+						<a href="/homegoodsdetail2.do?homegoodsSeqNo=<%=hDTO.getHomegoodsSeqNo() %>"><input class="btn btn-outline-primary" type="button" value="이전"></a>
 					</td>
 					
 					

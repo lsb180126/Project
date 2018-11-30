@@ -14,6 +14,12 @@
         <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="assets/css/form-elements.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,6 +34,35 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+        
+        <script>
+        
+        $(function() {
+      		
+      		var check=false;
+      		 
+      		$("#find2").click(function(event){
+      			var name  = $("#name").val();
+      			var id  = $("#id").val();
+      			
+  			if(name == "") {
+  				alert("이름를 입력해주세요");
+  				return;
+  			}
+  			if(id == "") {
+  				alert("아이디를 입력해주세요");
+  				return;
+  			}
+  			
+  			$("#find").submit();
+      		})
+      		})
+        
+        
+        
+        </script>
+        
+        
 	</head>
 	<body>
 		<!-- Top content -->
@@ -57,7 +92,7 @@
                         		</div>
                             </div>      
                             <div class="form-bottom">
-			                    <form role="form" action="/pwfind2.do" method="POST" class="login-form">
+			                    <form role="form" action="/pwfind2.do" method="POST" class="login-form" id="find">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="r-form-1-email">name</label>
 			                        	<input type="text" name="name" placeholder="이름" class="r-form-1-email form-control" id="name">
@@ -66,7 +101,7 @@
 			                        	<label class="sr-only" for="r-form-1-first-name">id</label>
 			                        	<input type="text" name="id" placeholder="아이디" class="r-form-1-first-name form-control" id="id" >
 			                        </div>
-			                        <button type="submit" class="btn">PASSWORD 찾기</button> &nbsp;
+			                        <button type="button" class="btn" id="find2">PASSWORD 찾기</button> &nbsp;
 			                        <a href="login.do"><button type="button" class="btn">로그인</button></a>
 			                    </form>
 		                    </div>
@@ -79,11 +114,7 @@
         </div>
 
 
-        <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
+       
         
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>

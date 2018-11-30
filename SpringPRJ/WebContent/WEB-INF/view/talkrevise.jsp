@@ -171,10 +171,10 @@
 					</td>
 					<td>
 						<input type="hidden" value="<%=tDTO.getTalkSeqNo()%>" name="talkSeqNo">
-						<input type="submit" value="수정">
+						<input class="btn btn-outline-primary" type="submit" value="수정">
 					</td>
 					<td>
-						<a href="/talkdetail2.do?talkSeqNo=<%=tDTO.getTalkSeqNo() %>"><input type="button" value="이전"></a>
+						<a href="/talkdetail2.do?talkSeqNo=<%=tDTO.getTalkSeqNo() %>"><input class="btn btn-outline-primary" type="button" value="이전"></a>
 					</td>
 					
 					

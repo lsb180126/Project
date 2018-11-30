@@ -80,6 +80,28 @@
 				
 	     .layer {text-align:center; }
 	    
+	    #hmm1 {
+		 	white-space: nowrap; 
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		}
+		#hmm2 {
+			white-space: nowrap; 
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		}
+		.row div {
+			text-overflow:ellipsis;
+			overflow:hidden;
+			white-space:nowrap;
+			padding:16px 0;
+			text-align:center;
+		}
+		.row {
+			border-bottom: 1px solid #eeeeee;
+		}
+	    
+	    
 	    </style>
 	    <script src="vendor/jquery/jquery.min.js"></script>
 	    <script>
@@ -221,66 +243,50 @@
 	
 	<br/>
 	
-	<div class="container">
+	<div class="container table-hover">
       <div class="row">
-        <div class="col-lg-12 text-center">
-        
-			<table class="table table-hover">
-				<tr>
-					
-					<th scope="row" colspan="2">미용 정보</th>
-					<td>
-						
-					</td>
-					
-					
-					<td>
+        <div class="col-md-6">미용 정보</div>
+				<div class="col-md-4">	
 						<form class="example" action="/beauty.do" method="POST"  >
 						  <input type="text" placeholder="Search.." name="keyword" id="keyword">
 						  <button type="button" id="search"><i class="fa fa-search"></i></button>
 						</form>
-					</td>
-					<td>
-					</td>
-					
-					<td>
-						<a href="beautyregister.do"><input class="btn btn-outline-primary" type="button" value="등록"></a>
-					</td>
-				</tr>
+				</div>	
+				<div class="col-md-2" style="text-align:right;"><a href="beautyregister.do"><input class="btn btn-outline-primary" type="button" value="등록"></a></div>	
+			</div>			
 				
-				<tr style="border-bottom:2px solid #dee2e6;">
+				<div class="row" style="border-top: 1px solid black; border-bottom: 1px solid #989b9e;">	
+					<div class="col-md-2">번호</div>
+					<div class="col-md-4">제목</div>
+					<div class="col-md-3">작성자</div>
+					<div class="col-md-3">작성일</div>	
+				</div>
 				
-					
-					<th>번호</th>
-					<th colspan="3">제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
 				
-				</tr>
 				
 				<% for(BeautyDTO b : bList) { %>
-				<tr>
+				<div class="row">
 					
-					<td><%=b.getBeautySeqNo() %></td>
-					<td colspan="3"><a href="/beautydetail.do?beautySeqNo=<%=b.getBeautySeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>&keyword=<%=keyword%>"><%=b.getTitle() %></a></td>
-					<td><%=b.getUserName() %></td>
-					<td><%=b.getChgDt() %></td>
-				</tr>
+					<div class="col-md-2"><%=b.getBeautySeqNo() %></div>
+					<div class="col-md-4"><a href="/beautydetail.do?beautySeqNo=<%=b.getBeautySeqNo() %>&pageCount=<%=paging.getPage_count()%>&pageNum=<%=paging.getPage_num()%>&keyword=<%=keyword%>"><%=b.getTitle() %></a></div>
+					<div class="col-md-3"><%=b.getUserName() %></div>
+					<div class="col-md-3"><%=b.getChgDt() %></div>
+				</div>
 				<% } %>
 					
-		
-			</table>
+			<div class="layer"  style="padding:10px 0;">
+					<div class="btn-group">
+						<%=
+							fnPaging(paging.getPage_count(), 10, paging.getPage_num(), paging.getTotal_count())
+						%>
+					</div>
+			</div>
+			
 			
 	 	</div>
       </div>
     </div>
-     <div class="layer">
-				<div class="btn-group">
-					<%=
-						fnPaging(paging.getPage_count(), 10, paging.getPage_num(), paging.getTotal_count())
-					%>
-				</div>
-	</div>
+     
     
     
 

@@ -68,7 +68,8 @@
 					location.href="/review.do?pageCount="+pageCount+"&pageNum="+<%=pageNum%> +"&keyword="+"<%=keyword%>";
 				}
 			   
-			   
+				
+		      			
 		</script>
 		    
 	    
@@ -209,7 +210,7 @@
 							
 					</th>
 					<td colspan="5">
-				           <%=mDTO.getReviewName() %>
+				           <%=CmmUtil.nvl(mDTO.getReviewName()) %>
 					</td>
 				</tr>
 				<tr>
@@ -217,7 +218,7 @@
 						작성자
 					</th>
 					<td colspan="2">
-				           <%=mDTO.getUserName() %>
+				           <%=CmmUtil.nvl(mDTO.getUserName()) %>
 					</td>
 					
 					<th scope="row">
@@ -225,7 +226,7 @@
 					</th>
 					
 					<td colspan="2">
-							<%=mDTO.getChgDt() %>
+							<%=CmmUtil.nvl(mDTO.getChgDt()) %>
 					</td>
 					
 					
@@ -236,7 +237,7 @@
 							
 					</th>
 					<td colspan="5">
-				           <%=mDTO.getTitle() %>
+				           <%=CmmUtil.nvl(mDTO.getTitle()) %>
 				        	
 				    </td>
 				 </tr>
@@ -245,18 +246,15 @@
 				     <% if(!(CmmUtil.nvl(mDTO.getChgName())).equals("") ) { %>
 				     	<td colspan="6" height="500px">
 				     
-				     		<div style="height:600px;">
+				     		<div style="height:600px;" >
 				     			<br/>
-				     			<img src="/upload/<%=mDTO.getChgName()%>" height="400" width="900"><br/><br/>
-				     			<%=mDTO.getReviewContents() %>
-				     			
+				     			<img src="/upload/<%=CmmUtil.nvl(mDTO.getChgName())%>" height="400" width="900"><br/><br/>
 				     		</div>	
 				     	</td>
-				     <%} else { %>
-				     	<td colspan="6" height="500px">
-				     		<%=mDTO.getReviewContents() %>
+				     <%} %>
+				     	<td colspan="6" height="500px" id="contents" style="white-space: pre-wrap">
+				     	
 				     	</td>
-				    <% }%>
 			     	</tr>
 			     	
 
@@ -266,17 +264,17 @@
 					
 					<%if(id.equals("33333")) { %> 
 					<td>
-						<a href="/writerevise.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>"><input class="btn btn-primary" type="button" value="수정"></a>
+						<a href="/writerevise.do?reviewSeqNo=<%=CmmUtil.nvl(mDTO.getReviewSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/writedelete.do?reviewSeqNo=<%=mDTO.getReviewSeqNo()%>&fileSeq=<%=mDTO.getFileSeq()%>"><input class="btn btn-primary" type="button" value="삭제"></a>
+						<a href="/writedelete.do?reviewSeqNo=<%=CmmUtil.nvl(mDTO.getReviewSeqNo())%>&fileSeq=<%=CmmUtil.nvl(mDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
 					</td>
 					<%} else { %>
 					<td>
-						<a href="javascript:goPage();"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록" id="hi"></a>
 					</td>
 					<%  }  %>
 				</form>
@@ -288,7 +286,7 @@
 		</div>
 	</div>
 	
-	
+	<%="\"" %>
 	<!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -297,6 +295,9 @@
     <script type="text/javascript" src="javascript/starRev.jsp"></script>
     
     
-	
+	<script>
+		var temp = '<%=mDTO.getReviewContents().replace("\"","\\\"").replace("'","\\\'").replace("<br>","\\r\\n") %>';
+		$('#contents').text(temp);
+	</script>
 	</body>
 </html>

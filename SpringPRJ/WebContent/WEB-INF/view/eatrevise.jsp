@@ -171,10 +171,10 @@
 					</td>
 					<td>
 						<input type="hidden" value="<%=eDTO.getEatSeqNo()%>" name="eatSeqNo">
-						<input type="submit" value="수정">
+						<input class="btn btn-outline-primary" type="submit" value="수정">
 					</td>
 					<td>
-						<a href="/eatdetail2.do?eatSeqNo=<%=eDTO.getEatSeqNo() %>"><input type="button" value="이전"></a>
+						<a href="/eatdetail2.do?eatSeqNo=<%=eDTO.getEatSeqNo() %>"><input class="btn btn-outline-primary" type="button" value="이전"></a>
 					</td>
 					
 					

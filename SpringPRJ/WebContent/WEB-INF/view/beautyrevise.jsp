@@ -171,10 +171,10 @@
 					</td>
 					<td>
 						<input type="hidden" value="<%=bDTO.getBeautySeqNo()%>" name="beautySeqNo">
-						<input type="submit" value="수정">
+						<input class="btn btn-outline-primary" type="submit" value="수정">
 					</td>
 					<td>
-						<a href="/beautydetail2.do?beautySeqNo=<%=bDTO.getBeautySeqNo() %>"><input type="button" value="이전"></a>
+						<a href="/beautydetail2.do?beautySeqNo=<%=bDTO.getBeautySeqNo() %>"><input class="btn btn-outline-primary" type="button" value="이전"></a>
 					</td>
 					
 					

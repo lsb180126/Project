@@ -45,6 +45,12 @@ public interface UserMapper  {
 
 	int userdelete(UserDTO uDTO) throws Exception;
 
+	void getLoginInfo2(UserDTO uDTO3) throws Exception;
+
+	int checkDuplicationEmail(String email) throws Exception;
+
+	int checkDuplicationName(String name) throws Exception;
+
 	
 
 	
