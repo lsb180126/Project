@@ -41,6 +41,8 @@ public interface MemMapper  {
 
 	AllDTO getAlldetail(AllDTO aDTO) throws Exception;
 
+	String getReviewSeqNo() throws Exception;
+
 	
 
 	

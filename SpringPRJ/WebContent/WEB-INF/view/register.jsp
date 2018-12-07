@@ -51,27 +51,61 @@
 		
       <script>
       //아이디 중복
+      
+   		var check = false;	
+   		checkId = function() {
+      		var id  = $("#idcheck").val();
+  			$.ajax({
+  				data:{"id":id},
+  				url:"/ajaxTest.do",
+  				type:"POST",
+  				dataType:"json",
+  				success:function(data) {
+  					
+  					if(data==0) {
+  						check = true;
+  						alert("사용 가능한 아이디입니다.");
+  						return check;
+  					}
+  					else {
+  						check = false;
+  						alert("중복되는 아이디입니다.");  
+  						return check;
+  					}
+  					
+  					
+  					
+  				},
+  				error:function(error) {
+  					console.log(error);
+  				}
+  				
+  			})  
+      	}
+      
+      
+      //이름 중복
       	 $(function() {
       		
       		var check = false;
       		 
-      		$("#check").click(function(){
-      			var id  = $("#idcheck").val();
+      		$("#checkIdName").click(function(){
+      			var name  = $("#name").val();
       			
       			$.ajax({
-      				data:{"id":id},
-      				url:"/ajaxTest.do",
+      				data:{"name":name},
+      				url:"/checkIdName.do",
       				type:"POST",
       				dataType:"json",
       				success:function(data) {
       					
       					if(data==0) {
-      						alert("사용 가능한 아이디입니다.");
+      						alert("사용 가능한 이름 입니다.");
       						
       						check = true;
       					}
       					else {
-      						alert("중복되는 아이디입니다.");
+      						alert("중복된 이름 입니다.");
       						
       						
       					}
@@ -89,29 +123,28 @@
       		})
       		
       	})	
-      //이름, 이메일 중복
-      	 $(function() {
+      //이메일 중복
+       $(function() {
       		
       		var check = false;
       		 
       		$("#checkIdEmail").click(function(){
-      			var name  = $("#name").val();
       			var email = $("#email").val();
       			
       			$.ajax({
-      				data:{"name":name, "email":email},
+      				data:{"email":email},
       				url:"/checkIdEmail.do",
       				type:"POST",
       				dataType:"json",
       				success:function(data) {
       					
       					if(data==0) {
-      						alert("사용 가능한 이름 및 이메일입니다.");
+      						alert("사용 가능한 이메일입니다.");
       						
       						check = true;
       					}
       					else {
-      						alert("중복된 이름 및 이메일입니다.");
+      						alert("중복된 이메일입니다.");
       						
       						
       					}
@@ -130,11 +163,43 @@
       		
       	})	
       
+      
       $(function() {
       		
-      		var check=false;
+      		var checkId2 = false;
       		 
       		$("#ok").click(function(event){
+      			
+      			var id  = $("#idcheck").val();
+      			$.ajax({
+      				data:{"id":id},
+      				url:"/ajaxTest.do",
+      				type:"POST",
+      				dataType:"json",
+      				success:function(data) {
+      					
+      					if(data==0) {
+      						checkId2 = true;
+      					}
+      					else {
+      						checkId2 = false;
+      						alert("중복되는 아이디입니다.");  
+      						
+      					}
+      					
+      					
+      					
+      				},
+      				error:function(error) {
+      					console.log(error);
+      				}
+      				
+      			});
+      			
+      			if(checkId2 == false) {
+      				return ;
+      			}
+      			
       			var id  = $("#idcheck").val();
       			var password  = $("#password").val();
       			var passwordcheck  = $("#passwordcheck").val();
@@ -245,7 +310,7 @@
 									<input type="text" name="id" placeholder="아이디" class="r-form-1-first-name form-control" id="idcheck" >
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn" id="check">중복확인</button>
+									<button type="button" name="check" class="btn" id="check" onclick="checkId();">중복확인</button>
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="r-form-1-last-name">password</label>
@@ -260,11 +325,14 @@
 									<input type="text" name="name" placeholder="이름" class="r-form-1-email form-control" id="name">
 								</div>
 								<div class="form-group">
+									<button type="button" class="btn" id="checkIdName">이름 중복확인</button>
+								</div>
+								<div class="form-group">
 									<label class="sr-only" for="r-form-1-email">email</label>
 									<input type="text" name="email" placeholder="이메일" class="r-form-1-email form-control" id="email">
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn" id="checkIdEmail">이메일, 이름 중복확인</button>
+									<button type="button" class="btn" id="checkIdEmail">이메일 중복확인</button>
 								</div>
     							<div class="" id="labelMan" style="color:black; font-size:16px; height:50px; background:#fff; margin-bottom: 15px;">
 									<input type="radio" class="gender" name="gender" value="man" id="man" style="display:none;">

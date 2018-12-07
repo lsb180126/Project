@@ -235,7 +235,12 @@
 				     		</div>	
 				     	</td>
 				       <%} %>
-				      	<td colspan="6" height="500px" id="contents" style="white-space: pre-wrap">
+				   </tr>
+				   <tr>
+				   		<th scope="row">
+								내용
+						</th>
+				      	<td colspan="5" height="350px" id="contents" style="white-space: pre-wrap">
 				      		
 				      	</td>
 				      

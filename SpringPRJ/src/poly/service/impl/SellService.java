@@ -29,8 +29,10 @@ public class SellService implements ISellService{
 	public int insertMember(SellDTO sDTO, FileDTO fDTO) throws Exception {
 		
 		int a = sellMapper.insertMember(sDTO);
+		String sell_seq_no = sellMapper.getSellSeqNo();
 		int b;
 		if(fDTO !=null) {
+			fDTO.setBrdSeqNo(sell_seq_no);
 			b = sellMapper.insertFile(fDTO);
 		}else {
 			b =1;
@@ -54,12 +56,17 @@ public class SellService implements ISellService{
 	public int sellrevise(SellDTO sDTO, FileDTO fDTO) throws Exception {
 		
 		int a = sellMapper.sellrevise(sDTO);
-		int b;
-		if(fDTO !=null) {
+		int b = 0;
+		if(fDTO == null) {
+			System.out.println("사진등록없음");
+			b=1;
+		}else if("null".equals(fDTO.getFileSeq())) {
+			fDTO.setBrdSeqNo(sDTO.getSellSeqNo());
+			b = sellMapper.insertFile(fDTO);
+		} else if(fDTO !=null) {
+			System.out.println("사진 업로드");
 			b = sellMapper.filerevise(fDTO);
-		}else {
-			b =1;
-		}
+		} 
 		return a*b;
 	}
 

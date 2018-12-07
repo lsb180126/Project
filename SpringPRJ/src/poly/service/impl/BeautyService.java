@@ -23,8 +23,10 @@ public class BeautyService implements IBeautyService{
 	public int insertMember(BeautyDTO bDTO, FileDTO fDTO) throws Exception {
 		
 		int a = beautyMapper.insertMember(bDTO);
+		String beauty_seq_no = beautyMapper.getBeautySeqNo();
 		int b;
 		if(fDTO !=null) {
+			fDTO.setBrdSeqNo(beauty_seq_no);
 			b = beautyMapper.insertFile(fDTO);
 		}else {
 			b =1;
@@ -54,12 +56,17 @@ public class BeautyService implements IBeautyService{
 	public int beautyrevise(BeautyDTO bDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
 		int a = beautyMapper.beautyrevise(bDTO);
-		int b;
-		if(fDTO !=null) {
+		int b = 0;
+		if(fDTO == null) {
+			System.out.println("사진등록없음");
+			b=1;
+		}else if("null".equals(fDTO.getFileSeq())) {
+			fDTO.setBrdSeqNo(bDTO.getBeautySeqNo());
+			b = beautyMapper.insertFile(fDTO);
+		} else if(fDTO !=null) {
+			System.out.println("사진 업로드");
 			b = beautyMapper.filerevise(fDTO);
-		}else {
-			b =1;
-		}
+		} 
 		return a*b;
 	}
 

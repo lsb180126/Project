@@ -29,8 +29,10 @@ public class TalkService implements ITalkService{
 	public int insertMember(TalkDTO tDTO, FileDTO fDTO) throws Exception {
 		
 		int a = talkMapper.insertMember(tDTO);
+		String talk_seq_no = talkMapper.getTalkSeqNo();
 		int b;
 		if(fDTO !=null) {
+			fDTO.setBrdSeqNo(talk_seq_no);
 			b = talkMapper.insertFile(fDTO);
 		}else {
 			b =1;
@@ -56,12 +58,20 @@ public class TalkService implements ITalkService{
 	public int talkrevise(TalkDTO tDTO, FileDTO fDTO) throws Exception {
 		
 		int a = talkMapper.talkrevise(tDTO);
-		int b;
-		if(fDTO !=null) {
+		int b = 0;
+		
+		if (fDTO == null ) {
+			System.out.println("사진등록없음");
+			b=1;
+		} else if("null".equals(fDTO.getFileSeq())) {
+			fDTO.setBrdSeqNo(tDTO.getTalkSeqNo());
+			b = talkMapper.insertFile(fDTO);
+		} else if(fDTO != null) {
+			System.out.println("사진 업로드");
 			b = talkMapper.filerevise(fDTO);
-		}else {
-			b =1;
 		}
+			
+		
 		return a*b;
 	}
 

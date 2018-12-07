@@ -12,6 +12,7 @@ import poly.dto.PagingDTO;
 import poly.persistance.mapper.MemMapper;
 import poly.dto.AllDTO;
 import poly.service.IMemService;
+import poly.util.CmmUtil;
 
 @Service("MemberService")
 public class MemberService implements IMemService{
@@ -24,8 +25,10 @@ public class MemberService implements IMemService{
 	public int insertMember(MemDTO mDTO, FileDTO fDTO) throws Exception {
 		
 		int a = memMapper.insertMember(mDTO);
+		String review_seq_no = memMapper.getReviewSeqNo();
 		int b;
 		if(fDTO !=null) {
+			fDTO.setBrdSeqNo(review_seq_no);
 			b = memMapper.insertFile(fDTO);
 		}else {
 			b =1;
@@ -46,13 +49,21 @@ public class MemberService implements IMemService{
 	public int writerevise(MemDTO mDTO, FileDTO fDTO) throws Exception {
 		
 		int a = memMapper.writerevise(mDTO);
-		int b;
-		if(fDTO !=null) {
+		
+		int b = 0;
+		if (fDTO == null ) {
+			System.out.println("사진등록없음");
+			b=1;
+		} else if("null".equals(fDTO.getFileSeq())) {
+			fDTO.setBrdSeqNo(mDTO.getReviewSeqNo());
+			b = memMapper.insertFile(fDTO);
+		} else if(fDTO !=null) {
+			System.out.println("사진 업로드");
 			b = memMapper.filerevise(fDTO);
-		}else {
-			b =1;
-		}
+		} 
+		
 		return a*b;
+		
 	}
 
 	@Override

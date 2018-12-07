@@ -246,17 +246,23 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="6" height="500px">
-								<div style="height: 600px;">
+					
 								<% if(mDTO.getChgName() != null) {%>
+									<td colspan="6" height="500px">
+									<div style="height: 600px;">
 									<br/>
 									<img src="/upload/<%=mDTO.getChgName()%>" height="400" width="900">
+								
+									</div>
+									</td>
 								<%} %>
-									<br/><br/>
-									<%=mDTO.getReviewContents()%>
-
-								</div>
-
+						</tr>
+						<tr>	
+							<th scope="row">
+								내용
+							</th>
+							<td colspan="5" height="350px" id="contents" style="white-space: pre-wrap">
+									
 
 							</td>
 
@@ -305,7 +311,8 @@
 	<script type="text/javascript" src="javascript/starRev.jsp"></script>
 
 	<script>
-		
+		var temp = '<%=mDTO.getReviewContents().replace("\"","\\\"").replace("'","\\\'").replace("<br>","\\r\\n") %>';
+		$('#contents').text(temp);
 	</script>
 
 

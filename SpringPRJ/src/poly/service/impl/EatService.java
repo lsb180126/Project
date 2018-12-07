@@ -29,8 +29,10 @@ public class EatService implements IEatService{
 	public int insertMember(EatDTO eDTO, FileDTO fDTO) throws Exception {
 		
 		int a = eatMapper.insertMember(eDTO);
+		String eat_seq_no = eatMapper.getEatSeqNo();
 		int b;
 		if(fDTO !=null) {
+			fDTO.setBrdSeqNo(eat_seq_no);
 			b = eatMapper.insertFile(fDTO);
 		}else {
 			b =1;
@@ -54,11 +56,16 @@ public class EatService implements IEatService{
 	public int eatrevise(EatDTO eDTO, FileDTO fDTO) throws Exception {
 		
 		int a = eatMapper.eatrevise(eDTO);
-		int b;
-		if(fDTO !=null) {
+		int b = 0;
+		if(fDTO ==null) {
+			System.out.println("사진등록없음");
+			b=1;
+		}else if("null".equals(fDTO.getFileSeq())) {
+			fDTO.setBrdSeqNo(eDTO.getEatSeqNo());
+			b = eatMapper.insertFile(fDTO);
+		}else if(fDTO !=null) {
+			System.out.println("사진 업로드");
 			b = eatMapper.filerevise(fDTO);
-		}else {
-			b =1;
 		}
 		return a*b;
 	}

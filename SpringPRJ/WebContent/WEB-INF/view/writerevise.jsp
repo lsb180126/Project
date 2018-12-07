@@ -233,7 +233,7 @@
 
 
 				</table>
-					<%-- <img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200" id="chgName"> --%>
+					<%-- <img src="/upload/<%=mDTO.getChgName()%>" height="200" width="200" id="chgName"> --%> 
 					<input type="file" name="file" id="file" >
 					<input type="hidden" value="review" name="kind">
 					<input type="hidden" value="<%=mDTO.getOriName()%>" name="oriName">

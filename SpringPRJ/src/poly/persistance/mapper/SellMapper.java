@@ -34,5 +34,7 @@ public interface SellMapper  {
 
 	int getSellListTotalCount(String keyword) throws Exception;
 
+	String getSellSeqNo() throws Exception;
+
 	
 }

@@ -35,6 +35,8 @@ public interface TalkMapper  {
 
 	int getTalkListTotalCount(String keyword) throws Exception;
 
+	String getTalkSeqNo() throws Exception;
+
 	
 
 	

@@ -559,7 +559,7 @@ public class WriteController {
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String reviewSeqNo = request.getParameter("reviewSeqNo");
-		String fileSeq = request.getParameter("fileSeq");
+		String fileSeq = CmmUtil.nvl((request.getParameter("fileSeq")));
 		String chgName = request.getParameter("chgName");
 		String oriName = request.getParameter("oriName");
 		String fileSize = request.getParameter("fileSize");
@@ -594,13 +594,14 @@ public class WriteController {
 		mDTO.setTitle(title);
 		mDTO.setReviewContents(content);
 		mDTO.setReviewSeqNo(reviewSeqNo);
+		
 		FileDTO fDTO = new FileDTO();
 		fDTO.setUserNo(userSeqNo);
 		fDTO.setFileSeq(fileSeq);
 		fDTO.setBrdKind(kind);
 		
 		if(!"".equals(file.getOriginalFilename())) {
-		//
+		
 			log.info("welcome to fileUpload");
 			
 			log.info("------file info------");
@@ -624,9 +625,30 @@ public class WriteController {
 			fDTO.setFilePath(path);
 			fDTO.setFileSize(fileSize);
 			
+			log.info("file sequence is : " + fDTO.getFileSeq());
+			if("null".equals(fDTO.getFileSeq())) {
+				log.info("테스트");
+				fDTO.setUserNo(userSeqNo);
+				fDTO.setBrdKind(kind);
+				fDTO.setOriName((String)fileInfo.get("originalFileName"));
+				fDTO.setChgName((String)fileInfo.get("fileName"));
+				fDTO.setExtension((String)fileInfo.get("extension"));
+				fDTO.setFilePath(path);
+				fDTO.setFileSize(fileSize);
+				log.info(fDTO.getUserNo());
+				log.info(fDTO.getBrdKind());
+				log.info(fDTO.getOriName());
+				log.info(fDTO.getChgName());
+				log.info(fDTO.getExtension());
+				log.info(fDTO.getFilePath());
+				log.info(fDTO.getFileSize());
+			}
+			
 		//
-		}else {
+		} else {
 			fDTO = null;
+			
+			log.info(fDTO == null);
 			
 		}
 		
@@ -727,10 +749,30 @@ public class WriteController {
 				fDTO.setFilePath(path);
 				fDTO.setFileSize(fileSize);
 				
+				log.info("file sequence is : " + fDTO.getFileSeq());
+				if("null".equals(fDTO.getFileSeq())) {
+					log.info("테스트");
+					fDTO.setUserNo(userSeqNo);
+					fDTO.setBrdKind(kind);
+					fDTO.setOriName((String)fileInfo.get("originalFileName"));
+					fDTO.setChgName((String)fileInfo.get("fileName"));
+					fDTO.setExtension((String)fileInfo.get("extension"));
+					fDTO.setFilePath(path);
+					fDTO.setFileSize(fileSize);
+					log.info(fDTO.getUserNo());
+					log.info(fDTO.getBrdKind());
+					log.info(fDTO.getOriName());
+					log.info(fDTO.getChgName());
+					log.info(fDTO.getExtension());
+					log.info(fDTO.getFilePath());
+					log.info(fDTO.getFileSize());
+				}
+				
 			//
 			}else {
 				fDTO = null;
 				
+				log.info(fDTO == null);
 				
 				
 			}
@@ -827,11 +869,30 @@ public class WriteController {
 				fDTO.setFilePath(path);
 				fDTO.setFileSize(fileSize);
 				
+				log.info("file sequence is : " + fDTO.getFileSeq());
+				if("null".equals(fDTO.getFileSeq())) {
+					log.info("테스트");
+					fDTO.setUserNo(userSeqNo);
+					fDTO.setBrdKind(kind);
+					fDTO.setOriName((String)fileInfo.get("originalFileName"));
+					fDTO.setChgName((String)fileInfo.get("fileName"));
+					fDTO.setExtension((String)fileInfo.get("extension"));
+					fDTO.setFilePath(path);
+					fDTO.setFileSize(fileSize);
+					log.info(fDTO.getUserNo());
+					log.info(fDTO.getBrdKind());
+					log.info(fDTO.getOriName());
+					log.info(fDTO.getChgName());
+					log.info(fDTO.getExtension());
+					log.info(fDTO.getFilePath());
+					log.info(fDTO.getFileSize());
+				}
+				
 			//
 			}else {
 				fDTO = null;
 				
-				
+				log.info(fDTO == null);
 			}
 		
 		int result = eatService.eatrevise(eDTO, fDTO);
@@ -925,6 +986,25 @@ public class WriteController {
 				fDTO.setExtension((String)fileInfo.get("extension"));
 				fDTO.setFilePath(path);
 				fDTO.setFileSize(fileSize);
+				
+				log.info("file sequence is : " + fDTO.getFileSeq());
+				if("null".equals(fDTO.getFileSeq())) {
+					log.info("테스트");
+					fDTO.setUserNo(userSeqNo);
+					fDTO.setBrdKind(kind);
+					fDTO.setOriName((String)fileInfo.get("originalFileName"));
+					fDTO.setChgName((String)fileInfo.get("fileName"));
+					fDTO.setExtension((String)fileInfo.get("extension"));
+					fDTO.setFilePath(path);
+					fDTO.setFileSize(fileSize);
+					log.info(fDTO.getUserNo());
+					log.info(fDTO.getBrdKind());
+					log.info(fDTO.getOriName());
+					log.info(fDTO.getChgName());
+					log.info(fDTO.getExtension());
+					log.info(fDTO.getFilePath());
+					log.info(fDTO.getFileSize());
+				}
 				
 			//
 			}else {

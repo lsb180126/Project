@@ -34,5 +34,7 @@ public interface BeautyMapper  {
 
 	int getBeautyListTotalCount(String keyword) throws Exception;
 
+	String getBeautySeqNo() throws Exception;
+
 	
 }

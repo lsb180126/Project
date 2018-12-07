@@ -21,6 +21,13 @@
 		)
 	</insert>
 		
+	<select id="getBeautySeqNo" resultType="string">
+		SELECT
+			MAX(BEAUTY_SEQ_NO)
+		FROM
+			BEAUTY_INFO
+	</select>	
+		
 	<insert id="insertFile" parameterType="FileDTO">
 		INSERT INTO FILE_INFO (
 			FILE_SEQ,
@@ -35,7 +42,7 @@
 			BRD_KIND
 		) VALUES (
 			FILE_SEQ.NEXTVAL,
-			(SELECT MAX(BEAUTY_SEQ_NO) FROM BEAUTY_INFO),
+			#{brdSeqNo},
 			#{userNo},
 			#{oriName},
 			#{chgName},

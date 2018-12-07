@@ -34,5 +34,7 @@ public interface EatMapper  {
 
 	int getEatListTotalCount(String keyword) throws Exception;
 
+	String getEatSeqNo() throws Exception;
+
 	
 }

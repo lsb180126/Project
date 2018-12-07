@@ -35,7 +35,7 @@
 			BRD_KIND
 		) VALUES (
 			FILE_SEQ.NEXTVAL,
-			(SELECT MAX(EAT_SEQ_NO) FROM EAT_INFO),
+			#{brdSeqNo},
 			#{userNo},
 			#{oriName},
 			#{chgName},
@@ -46,6 +46,13 @@
 			#{brdKind}
 		) 
 	</insert>
+	
+	<select id="getEatSeqNo" resultType="string">
+		SELECT
+			MAX(EAT_SEQ_NO)
+		FROM
+			EAT_INFO
+	</select>
 	
 	<select id="getEatList" resultType="EatDTO" parameterType="PagingDTO">
 		 SELECT

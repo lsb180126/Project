@@ -34,5 +34,7 @@ public interface HomegoodsMapper  {
 
 	int getHomegoodsListTotalCount(String keyword) throws Exception;
 
+	String getHomegoodsSeqNo() throws Exception;
+
 	
 }

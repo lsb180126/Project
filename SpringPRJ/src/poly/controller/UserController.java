@@ -102,7 +102,7 @@ public class UserController {
 		
 		
 		model.addAttribute("msg", "회원가입이 완료되었습니다.");
-		model.addAttribute("url", "/register.do");
+		model.addAttribute("url", "/login.do");
 		
 		
 		return "/redirect2";
@@ -164,26 +164,47 @@ public class UserController {
 		return count;
 		
 	}
-	//이름, 이메일 중복  체크
+	//이메일 중복  체크
 	@RequestMapping(value="/checkIdEmail", method=RequestMethod.POST)
 	public @ResponseBody int checkIdEmail(HttpServletRequest request) throws Exception {
 		
-		String name = CmmUtil.nvl(request.getParameter("name"));
+		
 		String email = CmmUtil.nvl(request.getParameter("email"));
 		
 		log.info("welcome ajaxTest");
 		log.info("email :" + email);
-		log.info("name :" + name);
+		
 		
 		int countEmail = userService.checkDuplicationEmail(email);
-		int countName = userService.checkDuplicationName(name);
+		
 		
 		log.info(countEmail);
-		log.info(countName);
 		
-		return countEmail + countName;
+		
+		return countEmail;
 		
 	}
+	
+	//이름 중복  체크
+		@RequestMapping(value="/checkIdName", method=RequestMethod.POST)
+		public @ResponseBody int checkIdName(HttpServletRequest request) throws Exception {
+			
+			String name = CmmUtil.nvl(request.getParameter("name"));
+			
+			
+			log.info("welcome ajaxTest");
+			
+			log.info("name :" + name);
+			
+			
+			int countName = userService.checkDuplicationName(name);
+			
+			
+			log.info(countName);
+			
+			return countName;
+			
+		}
 	
 	
 	@RequestMapping(value="loginProc", method=RequestMethod.POST)

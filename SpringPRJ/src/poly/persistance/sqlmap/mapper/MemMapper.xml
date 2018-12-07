@@ -23,6 +23,12 @@
 		) 
 	</insert>
 	
+	<select id="getReviewSeqNo" resultType="string">
+		SELECT
+			MAX(REVIEW_SEQ_NO)
+		FROM
+			REVIEW_INFO
+	</select>
 	<insert id="insertFile" parameterType="FileDTO">
 		INSERT INTO FILE_INFO (
 			FILE_SEQ,
@@ -37,7 +43,7 @@
 			BRD_KIND
 		) VALUES (
 			FILE_SEQ.NEXTVAL,
-			(SELECT MAX(REVIEW_SEQ_NO) FROM REVIEW_INFO),
+			#{brdSeqNo},
 			#{userNo},
 			#{oriName},
 			#{chgName},

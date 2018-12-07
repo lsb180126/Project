@@ -29,8 +29,10 @@ public class HomegoodsService implements IHomegoodsService{
 	public int insertMember(HomegoodsDTO hDTO, FileDTO fDTO) throws Exception {
 		
 		int a = homegoodsMapper.insertMember(hDTO);
+		String homegoods_seq_no = homegoodsMapper.getHomegoodsSeqNo();
 		int b;
 		if(fDTO !=null) {
+			fDTO.setBrdSeqNo(homegoods_seq_no);
 			b = homegoodsMapper.insertFile(fDTO);
 		}else {
 			b =1;
@@ -48,12 +50,17 @@ public class HomegoodsService implements IHomegoodsService{
 	public int homegoodsrevise(HomegoodsDTO hDTO, FileDTO fDTO) throws Exception {
 		// TODO Auto-generated method stub
 		int a = homegoodsMapper.homegoodsrevise(hDTO);
-		int b;
-		if(fDTO !=null) {
+		int b = 0;
+		if(fDTO ==null) {
+			System.out.println("사진등록없음");
+			b=1;
+		}else if("null".equals(fDTO.getFileSeq())) {
+			fDTO.setBrdSeqNo(hDTO.getHomegoodsSeqNo());
+			b = homegoodsMapper.insertFile(fDTO);
+		} else if(fDTO !=null) {
+			System.out.println("사진 업로드");
 			b = homegoodsMapper.filerevise(fDTO);
-		}else {
-			b =1;
-		}	
+		} 
 		return a*b;
 	}
 
