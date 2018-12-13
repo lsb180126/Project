@@ -844,7 +844,7 @@
 			</div>
       </div>
     </div>
-    
+    <br/>
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>

@@ -253,19 +253,20 @@
 
 				</table>
 				
-					<%if(id.equals("33333")) { %>
+					
 					<td>
 						<a href="/homegoodsrevise.do?homegoodsSeqNo=<%=CmmUtil.nvl(hDTO.getHomegoodsSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
 						<a href="/homegoodsdelete.do?homegoodsSeqNo=<%=CmmUtil.nvl(hDTO.getHomegoodsSeqNo())%>&fileSeq=<%=CmmUtil.nvl(hDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
+					<%if(id.equals("33333")) { %>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
 					</td>
 					<%} else { %>
 					<td>
-						<a href="javascript:goPage();"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input class="btn btn-primary"  type="button" value="목록"></a>
 					</td>
 					<%  }  %>
 					

@@ -191,6 +191,8 @@ public class MemberController {
 		log.info(mDTO.getReviewName());
 		log.info(mDTO.getTitle());
 		log.info(mDTO.getReviewContents());
+		log.info(mDTO.getChgName());
+		log.info(mDTO.getFileSeq());
 		
 		
 		model.addAttribute("mDTO",mDTO);

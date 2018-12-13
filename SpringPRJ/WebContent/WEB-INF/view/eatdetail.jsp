@@ -240,7 +240,7 @@
 				   		<th scope="row">
 								내용
 						</th>
-				      	<td colspan="5" height="350px" id="contents" style="white-space: pre-wrap">
+				      	<td colspan="5" height="350px" id="contents" style="white-space: pre-wrap;">
 				      		
 				      	</td>
 				      
@@ -251,19 +251,20 @@
 
 				</table>
 				
-				<%if(id.equals("33333")) { %>
+				
 					<td>
 						<a href="/eatrevise.do?eatSeqNo=<%=CmmUtil.nvl(eDTO.getEatSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
 						<a href="/eatdelete.do?eatSeqNo=<%=CmmUtil.nvl(eDTO.getEatSeqNo())%>&fileSeq=<%=CmmUtil.nvl(eDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
+					<%if(id.equals("33333")) { %>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
 					</td>
 					<%} else { %>
 					<td>
-						<a href="javascript:goPage();"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input class="btn btn-primary"  type="button" value="목록"></a>
 					</td>
 					<%  }  %>
 					

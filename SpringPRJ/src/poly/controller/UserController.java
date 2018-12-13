@@ -477,6 +477,7 @@ public class UserController {
 		if(result == 1) {
 			model.addAttribute("msg", "탈퇴되었습니다.");
 			model.addAttribute("url", "/index.do");
+			session.invalidate();
 		} else {
 			model.addAttribute("msg", "실패하였습니다.");
 			model.addAttribute("url", "/userdetail.do?userSeqNo=" +uDTO.getUserSeqNo());

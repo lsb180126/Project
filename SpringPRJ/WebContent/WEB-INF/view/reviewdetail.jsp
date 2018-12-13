@@ -243,7 +243,7 @@
 				 </tr>
 				     
 				     <tr>
-				     <% if(!(CmmUtil.nvl(mDTO.getChgName())).equals("") ) { %>
+				     <% if(mDTO.getChgName() != null) { %>
 				     	<td colspan="6" height="500px">
 				     
 				     		<div style="height:600px;" >
@@ -258,7 +258,7 @@
 								내용
 						</th>
 				     	<td colspan="5" height="350px" id="contents" style="white-space: pre-wrap">
-				     	
+				     		
 				     	</td>
 			     	</tr>
 			     	
@@ -267,21 +267,24 @@
 				</table>
 					
 					
-					<%if(id.equals("33333")) { %> 
+					
 					<td>
 						<a href="/writerevise.do?reviewSeqNo=<%=CmmUtil.nvl(mDTO.getReviewSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
 						<a href="/writedelete.do?reviewSeqNo=<%=CmmUtil.nvl(mDTO.getReviewSeqNo())%>&fileSeq=<%=CmmUtil.nvl(mDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
+					<%if(id.equals("33333")) { %> 
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
 					</td>
 					<%} else { %>
 					<td>
-						<a href="javascript:goPage();"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록" id="hi"></a>
+						<a href="javascript:goPage();"><input class="btn btn-primary"  type="button" value="목록" id="hi"></a>
 					</td>
 					<%  }  %>
+					
+					<input type="hidden" name="fileSeq" id="fileSeq" value="<%=mDTO.getFileSeq()%>">
 				</form>
 					
 			     	<br/>
@@ -291,7 +294,7 @@
 		</div>
 	</div>
 	
-	<%="\"" %>
+	
 	<!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -303,6 +306,6 @@
 	<script>
 		var temp = '<%=mDTO.getReviewContents().replace("\"","\\\"").replace("'","\\\'").replace("<br>","\\r\\n") %>';
 		$('#contents').text(temp);
-	</script>
+	</script> 
 	</body>
 </html>

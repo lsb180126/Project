@@ -55,12 +55,17 @@
 	</insert>
 	
 	<select id="getHomegoodsList" resultType="HomegoodsDTO" parameterType="PagingDTO">
-		 SELECT 
-		 	A.HN,
-		 	A.*
-		 FROM
-		 	( SELECT
-			 		ROWNUM HN,
+		  SELECT
+			    B.RN,
+			    B.*
+		FROM
+		  (
+		  SELECT 
+		          ROWNUM AS RN,
+		          A.*
+		  FROM
+		        ( 
+		         SELECT
 			 		HI.HOMEGOODS_SEQ_NO as homegoodsSeqNo,
 					HI.TITLE as title,
 					HI.HOMEGOODS_CONTENTS as homegoodsContents,
@@ -73,17 +78,14 @@
 						HI2.*
 					  FROM
 					  	HOMEGOODS_INFO HI2
-					  ORDER BY
-					  	HOMEGOODS_SEQ_NO DESC
 					  	) HI
 		 INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
 		 WHERE HI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR HI.HOMEGOODS_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR HI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+		 ORDER BY 
+		          HI.HOMEGOODS_SEQ_NO DESC
 		   ) A
-		 WHERE A.HN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-		 ORDER BY A.HN
+		 ) B
+		 WHERE B.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
 	</select>
 	
 	<select id="getHomegoodsdetail" resultType="HomegoodsDTO">
@@ -113,9 +115,6 @@
 		FROM HOMEGOODS_INFO HI
 		INNER JOIN USER_INFO UI ON HI.USER_ID = UI.USER_ID
 		WHERE HI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR HI.HOMEGOODS_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR HI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<update id="homegoodsrevise" parameterType="HomegoodsDTO">
@@ -173,9 +172,6 @@
 		 FROM HOMEGOODS_INFO HI, USER_INFO UI
 		 WHERE HI.USER_ID = UI.USER_ID
 		 AND HI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR HI.HOMEGOODS_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR HI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 </mapper>

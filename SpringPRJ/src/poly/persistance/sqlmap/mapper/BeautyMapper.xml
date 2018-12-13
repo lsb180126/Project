@@ -55,35 +55,38 @@
 	</insert>	
 		
 	<select id="getBeautyList" resultType="BeautyDTO" parameterType="PagingDTO">
-		 SELECT 
-		 		A.BN,
-		 		A.*
-		 FROM
-		 	( SELECT
-					ROWNUM BN,
-			 		BI.BEAUTY_SEQ_NO as beautySeqNo,
-					BI.TITLE as title,
-					BI.BEAUTY_CONTENTS as beautyContents,
-					BI.REG_DT as regDt,
-					BI.CHG_DT as chgDt,
-					BI.USER_ID as userId,
-					UI.USER_NAME as userName
-			  FROM
-			  	( SELECT
-			  		BI2.*
-			  	  FROM
-			  	  	BEAUTY_INFO BI2
-			  	  ORDER BY
-			  	  	BEAUTY_SEQ_NO DESC
-			  	  	) BI
+		SELECT
+			    B.RN,
+			    B.*
+		FROM
+		  (
+		  SELECT 
+		          ROWNUM AS RN,
+		          A.*
+		  FROM
+		        (
+		        	SELECT
+				 		BI.BEAUTY_SEQ_NO as beautySeqNo,
+						BI.TITLE as title,
+						BI.BEAUTY_CONTENTS as beautyContents,
+						BI.REG_DT as regDt,
+						BI.CHG_DT as chgDt,
+						BI.USER_ID as userId,
+						UI.USER_NAME as userName
+			  	FROM
+			  	( 
+			  		SELECT
+				  		BI2.*
+				  	 FROM
+				  	  	BEAUTY_INFO BI2
+				 ) BI
 		 INNER JOIN USER_INFO UI ON BI.USER_ID = UI.USER_ID
 		 WHERE BI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR BI.BEAUTY_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR BI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+		 ORDER BY 
+		     BI.BEAUTY_SEQ_NO DESC
 		 	) A
-		 WHERE A.BN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-		 ORDER BY A.BN
+		) B 	
+		 WHERE B.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
 	</select>
 		
 	<select id="getBeautydetail" resultType="BeautyDTO">
@@ -113,9 +116,6 @@
 		FROM BEAUTY_INFO BI
 		INNER JOIN USER_INFO UI ON BI.USER_ID = UI.USER_ID
 		WHERE BI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR BI.BEAUTY_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR BI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<select id="getBeautyList2" resultType="BeautyDTO" parameterType="BeautyDTO">
@@ -173,9 +173,6 @@
 		 FROM BEAUTY_INFO BI, USER_INFO UI
 		 WHERE BI.USER_ID = UI.USER_ID
 		 AND BI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR BI.BEAUTY_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR BI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>	
 			
 </mapper>

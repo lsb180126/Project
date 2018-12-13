@@ -97,18 +97,21 @@
 		FROM REVIEW_INFO RI
 		INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
 		WHERE RI.TITLE LIKE '%'|| #{keyword} ||'%'
-       OR RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
        OR RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
-       OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<select id="getReviewList" resultType="MemDTO" parameterType="PagingDTO">
 		SELECT
-			  A.RN,
-			  A.*
+			    B.RN,
+			    B.*
 		FROM
-		  (SELECT 
-		          ROWNUM RN,
+		  (
+		  SELECT 
+		          ROWNUM AS RN,
+		          A.*
+		  FROM
+		        ( 
+		        SELECT 
 		          RI.REVIEW_SEQ_NO as reviewSeqNo,
 		          RI.TITLE as title,
 		          RI.REVIEW_CONTENTS as reviewContents,
@@ -122,17 +125,15 @@
 		              RI2.*
 		            FROM 
 		              REVIEW_INFO RI2
-		            ORDER BY
-		              REVIEW_SEQ_NO DESC
 		            ) RI
         INNER JOIN USER_INFO UI ON RI.USER_ID = UI.USER_ID
          WHERE RI.TITLE LIKE '%'|| #{keyword} ||'%'
-       OR RI.REVIEW_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-       OR RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
-       OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
+       	 OR RI.REVIEW_NAME LIKE '%'|| #{keyword} ||'%'
+       	 ORDER BY 
+		          RI.REVIEW_SEQ_NO DESC
         ) A 
-      WHERE A.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-      ORDER BY A.RN  
+       ) B  
+      WHERE B.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
 	</select>
 	
 	<update id="writerevise" parameterType="MemDTO">

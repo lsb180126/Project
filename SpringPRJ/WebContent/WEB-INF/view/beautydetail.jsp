@@ -29,7 +29,7 @@
 	    <link href="css/starRev.css" rel="stylesheet">
 	    
 	    <style>
-	    .my-box { border:1px solid; padding: 5px;  }
+	    
 	    
 		table.type03 {
 		    border-collapse: collapse;
@@ -251,19 +251,20 @@
 
 				</table>
 				
-				<%if(id.equals("33333")) { %>
+				
 					<td>
 						<a href="/beautyrevise.do?beautySeqNo=<%=CmmUtil.nvl(bDTO.getBeautySeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
 						<a href="/beautydelete.do?beautySeqNo=<%=CmmUtil.nvl(bDTO.getBeautySeqNo())%>&fileSeq=<%=CmmUtil.nvl(bDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
+					<%if(id.equals("33333")) { %>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
 					</td>
 					<%} else { %>
 					<td>
-						<a href="javascript:goPage();"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input class="btn btn-primary"  type="button" value="목록"></a>
 					</td>
 					<%  }  %>
 					

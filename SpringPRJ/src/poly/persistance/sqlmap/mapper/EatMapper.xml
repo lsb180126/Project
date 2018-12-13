@@ -82,8 +82,6 @@
 		          ) EI
 		        INNER JOIN USER_INFO UI ON UI.USER_ID = EI.USER_ID
 		        WHERE EI.TITLE LIKE '%'|| #{keyword} ||'%'
-		        OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		        OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
 		        ORDER BY 
 		          EI.EAT_SEQ_NO DESC
 		          ) A
@@ -131,9 +129,6 @@
 		FROM EAT_INFO EI
 		INNER JOIN USER_INFO UI ON EI.USER_ID = UI.USER_ID
 		WHERE EI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR EI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<update id="eatrevise" parameterType="EatDTO">
@@ -178,9 +173,6 @@
 		 FROM EAT_INFO EI, USER_INFO UI
 		 WHERE EI.USER_ID = UI.USER_ID
 		 AND EI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR EI.EAT_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR EI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 		
 </mapper>

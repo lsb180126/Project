@@ -263,10 +263,10 @@
 				</table>
 				
 				<td>
-						<a href="/talkrevise.do?talkSeqNo=<%=tDTO.getTalkSeqNo() %>"><input class="btn btn-primary"	style="float: right; margin-right: 100px; " type="button" value="수정"></a>
+						<a href="/talkrevise.do?talkSeqNo=<%=tDTO.getTalkSeqNo() %>"><input class="btn btn-primary"	 type="button" value="수정"></a>
 					</td>
 					<td>
-						<a href="/talkdelete.do?talkSeqNo=<%=tDTO.getTalkSeqNo() %>&fileSeq=<%=tDTO.getFileSeq()%>"><input class="btn btn-primary"	style="float: right; margin-right: 70px; " type="button" value="삭제"></a>
+						<a href="/talkdelete.do?talkSeqNo=<%=tDTO.getTalkSeqNo() %>&fileSeq=<%=tDTO.getFileSeq()%>"><input class="btn btn-primary"	 type="button" value="삭제"></a>
 					</td> 
 					<%if(id.equals("33333")) { %> 
 					<td>
@@ -274,7 +274,7 @@
 					</td>
 					<%} else { %>
 					<td>
-						<a href="writelist.do?pageCount=${pageCount}&pageNum=${pageNum}"><input class="btn btn-primary"	style="float: right; margin-right: 50px; " type="button" value="목록"></a>
+						<a href="writelist.do?pageCount=${pageCount}&pageNum=${pageNum}"><input class="btn btn-primary"	 type="button" value="목록"></a>
 					</td>
 					<%  }  %>
 					

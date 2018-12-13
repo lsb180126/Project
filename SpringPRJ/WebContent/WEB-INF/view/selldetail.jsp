@@ -251,19 +251,20 @@
 
 				</table>
 				
-				<%if(id.equals("33333")) { %>
+				
 					<td>
 						<a href="/sellrevise.do?sellSeqNo=<%=CmmUtil.nvl(sDTO.getSellSeqNo())%>"><input class="btn btn-primary" type="button" value="수정"></a>
 					</td>
 					<td>
 						<a href="/selldelete.do?sellSeqNo=<%=CmmUtil.nvl(sDTO.getSellSeqNo())%>&fileSeq=<%=CmmUtil.nvl(sDTO.getFileSeq())%>"><input class="btn btn-primary" type="button" value="삭제"></a>
 					</td>
+					<%if(id.equals("33333")) { %>
 					<td>
 						<a href="javascript:goPage();"><input class="btn btn-primary" type="button" value="목록"></a>
 					</td>
 					<%} else { %>
 					<td>
-						<a href="javascript:goPage();"><input class="btn btn-primary" style="float: right; margin-right: 100px; " type="button" value="목록"></a>
+						<a href="javascript:goPage();"><input class="btn btn-primary"  type="button" value="목록"></a>
 					</td>
 					<%  }  %>
 					

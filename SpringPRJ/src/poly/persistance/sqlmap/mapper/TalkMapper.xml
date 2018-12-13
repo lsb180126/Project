@@ -55,12 +55,17 @@
 	</insert>
 	
 	<select id="getTalkList" resultType="TalkDTO" parameterType="PagingDTO">
-		 SELECT 
-		 		A.TN,
-		 		A.*
-		 FROM
-		 	(SELECT
-					ROWNUM TN,
+		 SELECT
+			    B.RN,
+			    B.*
+		FROM
+		  (
+		  SELECT 
+		          ROWNUM AS RN,
+		          A.*
+		  FROM
+		        (
+		        SELECT
 			 		TI.TALK_SEQ_NO as talkSeqNo,
 					TI.TITLE as title,
 					TI.TALK_CONTENTS as talkContents,
@@ -73,17 +78,14 @@
 				 	 TI2.*
 			 	   FROM
 			 	   	TALK_INFO TI2
-			 	   ORDER BY
-			 	   	TALK_SEQ_NO DESC
 				 	) TI
 		 INNER JOIN USER_INFO UI ON UI.USER_ID = TI.USER_ID
 		 WHERE TI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR TI.TALK_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR TI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+		 ORDER BY 
+		          TI.TALK_SEQ_NO DESC
 		 	) A
-		 WHERE A.TN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-		 ORDER BY A.TN
+		 ) B
+		 WHERE B.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
 	</select>
 	
 	<select id="getTalkdetail" resultType="TalkDTO">
@@ -113,9 +115,6 @@
 		FROM TALK_INFO TI
 		INNER JOIN USER_INFO UI ON UI.USER_ID = TI.USER_ID
 		WHERE TI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR TI.TALK_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR TI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<select id="getTalkList2" resultType="TalkDTO" parameterType="TalkDTO">
@@ -174,9 +173,6 @@
 		 FROM TALK_INFO TI, USER_INFO UI
 		 WHERE TI.USER_ID = UI.USER_ID
 		 AND TI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR TI.TALK_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR TI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 			
 </mapper>

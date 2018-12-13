@@ -55,11 +55,16 @@
 	</insert>
 	
 	<select id="getSellList" resultType="SellDTO" parameterType="PagingDTO">
-		 SELECT 
-		 		A.SN,
-		 		A.*
-		 FROM
-		 	(SELECT
+		SELECT
+			    B.RN,
+			    B.*
+		FROM
+		  (
+		  SELECT 
+		          ROWNUM AS RN,
+		          A.*
+		  FROM
+		        ( SELECT
 			 		ROWNUM SN,
 			 		SI.SELL_SEQ_NO as sellSeqNo,
 					SI.TITLE as title,
@@ -68,22 +73,20 @@
 					SI.CHG_DT as chgDt,
 					SI.USER_ID as userId,
 					UI.USER_NAME as userName
-			 FROM
-			 	( SELECT
+			 	FROM
+			 	(
+			 	 SELECT
 			 		SI2.*
 			 	  FROM
 			 	  	SELL_INFO SI2
-			 	  ORDER BY
-			 	   	SELL_SEQ_NO DESC
 			 	 ) SI
 		 INNER JOIN USER_INFO UI ON SI.USER_ID = UI.USER_ID
 		 WHERE SI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR SI.SELL_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR SI.CHG_DT LIKE '%'|| #{keyword} ||'%'
+		 ORDER BY 
+		          SI.SELL_SEQ_NO DESC
 		 	) A
-		 WHERE A.SN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
-		 ORDER BY A.SN
+		  ) B	
+		 WHERE B.RN BETWEEN (( #{page_num}-1) * #{page_count} + 1  ) AND ( #{page_num} * #{page_count} )
 	</select>
 	
 	<select id="getSelldetail" resultType="SellDTO">
@@ -113,9 +116,6 @@
 		FROM SELL_INFO SI
 		INNER JOIN USER_INFO UI ON SI.USER_ID = UI.USER_ID
 		WHERE SI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR SI.SELL_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR SI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<select id="getSellList2" resultType="SellDTO" parameterType="SellDTO">
@@ -163,9 +163,6 @@
 		 FROM SELL_INFO SI, USER_INFO UI
 		 WHERE SI.USER_ID = UI.USER_ID
 		 AND SI.TITLE LIKE '%'|| #{keyword} ||'%'
-		 OR SI.SELL_SEQ_NO LIKE '%'|| #{keyword} ||'%'
-		 OR UI.USER_NAME LIKE '%'|| #{keyword} ||'%'
-		 OR SI.CHG_DT LIKE '%'|| #{keyword} ||'%'
 	</select>
 	
 	<delete id="filedelete" parameterType="FileDTO">
